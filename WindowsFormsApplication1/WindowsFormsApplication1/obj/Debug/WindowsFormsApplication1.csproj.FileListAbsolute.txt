@@ -19,3 +19,6 @@ C:\Users\student\Desktop\WindowsFormsApplication1\WindowsFormsApplication1\obj\D
 C:\Users\student\Desktop\WelTec Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
 C:\Users\student\Desktop\WelTec Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 C:\Users\student\Desktop\WelTec Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb

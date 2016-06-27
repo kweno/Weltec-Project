@@ -53,7 +53,7 @@
 		<codepage>1252</codepage>
 		<title>Installation Database</title>
 		<subject></subject>
-		<author>InstallShield</author>
+		<author>##ID_STRING4##</author>
 		<keywords>Installer,MSI,Database</keywords>
 		<comments>Contact:  Your local administrator</comments>
 		<template>Intel;1033</template>
@@ -251,6 +251,7 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<row><td>ISExpHlp.dll</td><td/><td>&lt;ISRedistPlatformDependentFolder&gt;\ISExpHlp.dll</td></row>
+		<row><td>ISSELFREG.DLL</td><td/><td>&lt;ISRedistPlatformDependentFolder&gt;\isregsvr.dll</td></row>
 		<row><td>NewBinary1</td><td/><td>&lt;ISProductFolder&gt;\Support\Themes\InstallShield Blue Theme\banner.jpg</td></row>
 		<row><td>NewBinary10</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\CompleteSetupIco.ibd</td></row>
 		<row><td>NewBinary11</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\CustomSetupIco.ibd</td></row>
@@ -338,6 +339,15 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
+		<row><td>ISX_DEFAULTCOMPONENT</td><td>{66591B40-2A9C-4B9A-8CAC-ED475D6E6F33}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WindowsFormsApplication1.Content_Files</td><td>{00EC0814-D9B7-48D6-9876-F94A9952DBF8}</td><td>INSTALLDIR</td><td>2</td><td/><td>windowsformsapplication1.con</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WindowsFormsApplication1.Debug_Symbols</td><td>{63C1832D-81ED-48A3-A442-F8165EB02D20}</td><td>INSTALLDIR</td><td>2</td><td/><td>windowsformsapplication1.deb</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WindowsFormsApplication1.Documentation_Files</td><td>{89A9EA98-64AA-4191-9C70-95BC5AEA0F51}</td><td>INSTALLDIR</td><td>2</td><td/><td>windowsformsapplication1.doc</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WindowsFormsApplication1.Localized_resources</td><td>{ABDDFC5B-7CF8-48C8-97F7-38BA97F94888}</td><td>INSTALLDIR</td><td>2</td><td/><td>windowsformsapplication1.loc</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WindowsFormsApplication1.Primary_output</td><td>{3AB4BD9A-9C14-46B1-A681-78FDDD8D93C8}</td><td>INSTALLDIR</td><td>2</td><td/><td>windowsformsapplication1.pri</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WindowsFormsApplication1.Runtime_Implementation</td><td>{071B14FD-D2CB-427C-9A68-68001B49A9C5}</td><td>INSTALLDIR</td><td>2</td><td/><td>windowsformsapplication1.run</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WindowsFormsApplication1.Source_Files</td><td>{BF5B815C-B522-42B5-9391-34499C5DBF70}</td><td>INSTALLDIR</td><td>2</td><td/><td>windowsformsapplication1.sou</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WindowsFormsApplication1.XML_Serialization_Assemblies</td><td>{BF19E113-9737-4DF7-AAD9-210F6CB2C9F1}</td><td>INSTALLDIR</td><td>2</td><td/><td>windowsformsapplication1.xml</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -934,7 +944,7 @@
 		<row><td>InstallChangeFolder</td><td>Up</td><td>DirectoryListUp</td><td>0</td><td>1</td><td>0</td></row>
 		<row><td>InstallWelcome</td><td>Back</td><td>NewDialog</td><td>SplashBitmap</td><td>Display_IsBitmapDlg</td><td>0</td></row>
 		<row><td>InstallWelcome</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>0</td></row>
-		<row><td>InstallWelcome</td><td>Next</td><td>NewDialog</td><td>LicenseAgreement</td><td>1</td><td>0</td></row>
+		<row><td>InstallWelcome</td><td>Next</td><td>NewDialog</td><td>ReadyToInstall</td><td>1</td><td>0</td></row>
 		<row><td>LicenseAgreement</td><td>Back</td><td>NewDialog</td><td>InstallWelcome</td><td>1</td><td>0</td></row>
 		<row><td>LicenseAgreement</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>0</td></row>
 		<row><td>LicenseAgreement</td><td>ISPrintButton</td><td>DoAction</td><td>ISPrint</td><td>1</td><td>0</td></row>
@@ -969,7 +979,7 @@
 		<row><td>ReadmeInformation</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>1</td></row>
 		<row><td>ReadmeInformation</td><td>Next</td><td>NewDialog</td><td>CustomerInformation</td><td>1</td><td>1</td></row>
 		<row><td>ReadyToInstall</td><td>Back</td><td>NewDialog</td><td>CustomSetup</td><td>Installed OR _IsSetupTypeMin = "Custom"</td><td>2</td></row>
-		<row><td>ReadyToInstall</td><td>Back</td><td>NewDialog</td><td>LicenseAgreement</td><td>NOT Installed</td><td>1</td></row>
+		<row><td>ReadyToInstall</td><td>Back</td><td>NewDialog</td><td>InstallWelcome</td><td>NOT Installed</td><td>1</td></row>
 		<row><td>ReadyToInstall</td><td>Back</td><td>NewDialog</td><td>MaintenanceType</td><td>Installed AND _IsMaintenance = "Reinstall"</td><td>3</td></row>
 		<row><td>ReadyToInstall</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>0</td></row>
 		<row><td>ReadyToInstall</td><td>InstallNow</td><td>EndDialog</td><td>Return</td><td>OutOfNoRbDiskSpace &lt;&gt; 1</td><td>0</td></row>
@@ -1046,6 +1056,15 @@
 	<table name="CreateFolder">
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT</td></row>
+		<row><td>INSTALLDIR</td><td>WindowsFormsApplication1.Content_Files</td></row>
+		<row><td>INSTALLDIR</td><td>WindowsFormsApplication1.Debug_Symbols</td></row>
+		<row><td>INSTALLDIR</td><td>WindowsFormsApplication1.Documentation_Files</td></row>
+		<row><td>INSTALLDIR</td><td>WindowsFormsApplication1.Localized_resources</td></row>
+		<row><td>INSTALLDIR</td><td>WindowsFormsApplication1.Primary_output</td></row>
+		<row><td>INSTALLDIR</td><td>WindowsFormsApplication1.Runtime_Implementation</td></row>
+		<row><td>INSTALLDIR</td><td>WindowsFormsApplication1.Source_Files</td></row>
+		<row><td>INSTALLDIR</td><td>WindowsFormsApplication1.XML_Serialization_Assemblies</td></row>
 	</table>
 
 	<table name="CustomAction">
@@ -1058,6 +1077,10 @@
 		<row><td>ISPreventDowngrade</td><td>19</td><td/><td>[IS_PREVENT_DOWNGRADE_EXIT]</td><td/><td>Exits install when a newer version of this product is found</td></row>
 		<row><td>ISPrint</td><td>1</td><td>SetAllUsers.dll</td><td>PrintScrollableText</td><td/><td>Prints the contents of a ScrollableText control on a dialog.</td></row>
 		<row><td>ISRunSetupTypeAddLocalEvent</td><td>1</td><td>ISExpHlp.dll</td><td>RunSetupTypeAddLocalEvent</td><td/><td>Run the AddLocal events associated with the Next button on the Setup Type dialog.</td></row>
+		<row><td>ISSelfRegisterCosting</td><td>1</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterCosting</td><td/><td/></row>
+		<row><td>ISSelfRegisterFiles</td><td>3073</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterFiles</td><td/><td/></row>
+		<row><td>ISSelfRegisterFinalize</td><td>1</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterFinalize</td><td/><td/></row>
+		<row><td>ISUnSelfRegisterFiles</td><td>3073</td><td>ISSELFREG.DLL</td><td>ISUnSelfRegisterFiles</td><td/><td/></row>
 		<row><td>SetARPINSTALLLOCATION</td><td>51</td><td>ARPINSTALLLOCATION</td><td>[INSTALLDIR]</td><td/><td/></row>
 		<row><td>SetAllUsersProfileNT</td><td>51</td><td>ALLUSERSPROFILE</td><td>[%SystemRoot]\Profiles\All Users</td><td/><td/></row>
 		<row><td>ShowMsiLog</td><td>226</td><td>SystemFolder</td><td>[SystemFolder]notepad.exe "[MsiLogFileLocation]"</td><td/><td>Shows Property-driven MSI Log</td></row>
@@ -1133,8 +1156,7 @@
 		<row><td>GlobalAssemblyCache</td><td>TARGETDIR</td><td>.:Global~1|GlobalAssemblyCache</td><td/><td>0</td><td/></row>
 		<row><td>INSTALLDIR</td><td>ISMyProductDir</td><td>.</td><td/><td>0</td><td/></row>
 		<row><td>ISCommonFilesFolder</td><td>CommonFilesFolder</td><td>Instal~1|InstallShield</td><td/><td>0</td><td/></row>
-		<row><td>ISMyCompanyDir</td><td>ProgramFilesFolder</td><td>MYCOMP~1|My Company Name</td><td/><td>0</td><td/></row>
-		<row><td>ISMyProductDir</td><td>ISMyCompanyDir</td><td>MYPROD~1|My Product Name</td><td/><td>0</td><td/></row>
+		<row><td>ISMyProductDir</td><td>WELTEC_PROJECT</td><td>DATABA~1|Database Evaluator</td><td/><td>0</td><td/></row>
 		<row><td>ISYourDataBaseDir</td><td>INSTALLDIR</td><td>Database</td><td/><td>0</td><td/></row>
 		<row><td>LocalAppDataFolder</td><td>TARGETDIR</td><td>.:LocalA~1|LocalAppData</td><td/><td>0</td><td/></row>
 		<row><td>MyPicturesFolder</td><td>TARGETDIR</td><td>.:MyPict~1|MyPictures</td><td/><td>0</td><td/></row>
@@ -1156,8 +1178,11 @@
 		<row><td>TempFolder</td><td>TARGETDIR</td><td>.:Temp</td><td/><td>0</td><td/></row>
 		<row><td>TemplateFolder</td><td>TARGETDIR</td><td>.:ShellNew</td><td/><td>0</td><td/></row>
 		<row><td>USERPROFILE</td><td>TARGETDIR</td><td>.:USERPR~1|UserProfile</td><td/><td>0</td><td/></row>
+		<row><td>WELTEC_PROJECT</td><td>ProgramFilesFolder</td><td>WELTEC~1|Weltec Project</td><td/><td>0</td><td/></row>
 		<row><td>WindowsFolder</td><td>TARGETDIR</td><td>.:Windows</td><td/><td>0</td><td/></row>
 		<row><td>WindowsVolume</td><td>TARGETDIR</td><td>.:WinRoot</td><td/><td>0</td><td/></row>
+		<row><td>setup2</td><td>yourco_1_your_company_name</td><td>Setup2</td><td/><td>1</td><td/></row>
+		<row><td>yourco_1_your_company_name</td><td>ProgramMenuFolder</td><td>YOURCO~1|Your Company Name</td><td/><td>1</td><td/></row>
 	</table>
 
 	<table name="DrLocator">
@@ -1849,6 +1874,15 @@
 	<table name="FeatureComponents">
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
+		<row><td>AlwaysInstall</td><td>WindowsFormsApplication1.Content_Files</td></row>
+		<row><td>AlwaysInstall</td><td>WindowsFormsApplication1.Debug_Symbols</td></row>
+		<row><td>AlwaysInstall</td><td>WindowsFormsApplication1.Documentation_Files</td></row>
+		<row><td>AlwaysInstall</td><td>WindowsFormsApplication1.Localized_resources</td></row>
+		<row><td>AlwaysInstall</td><td>WindowsFormsApplication1.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>WindowsFormsApplication1.Runtime_Implementation</td></row>
+		<row><td>AlwaysInstall</td><td>WindowsFormsApplication1.Source_Files</td></row>
+		<row><td>AlwaysInstall</td><td>WindowsFormsApplication1.XML_Serialization_Assemblies</td></row>
 	</table>
 
 	<table name="File">
@@ -1863,6 +1897,14 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
+		<row><td>windowsformsapplication1.con</td><td>WindowsFormsApplication1.Content_Files</td><td>WindowsFormsApplication1.Content Files</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WindowsFormsApplication1&gt;|ContentFiles</td><td>3</td><td/></row>
+		<row><td>windowsformsapplication1.deb</td><td>WindowsFormsApplication1.Debug_Symbols</td><td>WindowsFormsApplication1.Debug Symbols</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WindowsFormsApplication1&gt;|Symbols</td><td>3</td><td/></row>
+		<row><td>windowsformsapplication1.doc</td><td>WindowsFormsApplication1.Documentation_Files</td><td>WindowsFormsApplication1.Documentation Files</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WindowsFormsApplication1&gt;|Documentation</td><td>3</td><td/></row>
+		<row><td>windowsformsapplication1.loc</td><td>WindowsFormsApplication1.Localized_resources</td><td>WindowsFormsApplication1.Localized resources</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WindowsFormsApplication1&gt;|LocalizedResourceDlls</td><td>3</td><td/></row>
+		<row><td>windowsformsapplication1.pri</td><td>WindowsFormsApplication1.Primary_output</td><td>WindowsFormsApplication1.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WindowsFormsApplication1&gt;|Built</td><td>3</td><td/></row>
+		<row><td>windowsformsapplication1.run</td><td>WindowsFormsApplication1.Runtime_Implementation</td><td>WindowsFormsApplication1.Runtime Implementation</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WindowsFormsApplication1&gt;|RuntimeImplementation</td><td>3</td><td/></row>
+		<row><td>windowsformsapplication1.sou</td><td>WindowsFormsApplication1.Source_Files</td><td>WindowsFormsApplication1.Source Files</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WindowsFormsApplication1&gt;|SourceFiles</td><td>3</td><td/></row>
+		<row><td>windowsformsapplication1.xml</td><td>WindowsFormsApplication1.XML_Serialization_Assemblies</td><td>WindowsFormsApplication1.XML Serialization Assemblies</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WindowsFormsApplication1&gt;|XmlSerializer</td><td>3</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2004,6 +2046,15 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
+		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_0704C7AB_03E9_4B86_92BA_11399B47150B_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WindowsFormsApplication1.Content_Files</td><td/><td/><td>_75C4793A_E002_4C50_BF47_20B52A1D06AA_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WindowsFormsApplication1.Debug_Symbols</td><td/><td/><td>_2D7AF985_04E8_461E_870A_0DDBF6C51502_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WindowsFormsApplication1.Documentation_Files</td><td/><td/><td>_274EDFAB_5E75_440E_A702_F36F3868FDEF_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WindowsFormsApplication1.Localized_resources</td><td/><td/><td>_5BAE5209_D39B_4BD8_A71B_74C24D5CDE50_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WindowsFormsApplication1.Primary_output</td><td/><td/><td>_7D00CC72_A7AF_4559_97A9_B4723F426326_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WindowsFormsApplication1.Runtime_Implementation</td><td/><td/><td>_9D38825B_8203_4338_B7D5_5187DF8798D8_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WindowsFormsApplication1.Source_Files</td><td/><td/><td>_8CD73084_3950_49C9_A1B9_C3A25D1F8ADF_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WindowsFormsApplication1.XML_Serialization_Assemblies</td><td/><td/><td>_FEBED9EA_2BCF_414D_BACA_50E18FBB05E4_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2289,6 +2340,7 @@
 		<row><td>ProgramFilesFolder</td><td/><td/><td>1</td></row>
 		<row><td>SystemFolder</td><td/><td/><td>1</td></row>
 		<row><td>WindowsFolder</td><td/><td/><td>1</td></row>
+		<row><td>WindowsFormsApplication1</td><td>WindowsFormsApplication1\WindowsFormsApplication1.csproj</td><td/><td>2</td></row>
 	</table>
 
 	<table name="ISProductConfiguration">
@@ -2591,7 +2643,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>Your Company Name</td><td>0</td><td/><td>-752598546</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>Your Company Name</td><td>0</td><td/><td>-618380878</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_OS</td><td>1033</td><td>The operating system is not adequate for running [ProductName].</td><td>0</td><td/><td>-752598546</td></row>
@@ -3403,6 +3455,10 @@
 		<row><td>IDS_PROGMSG_XML_UPDATE_FILE</td><td>1033</td><td>Updating XML file %s...</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDS_SETUPEXE_EXPIRE_MSG</td><td>1033</td><td>This setup works until %s. The setup will now exit.</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1033</td><td>This setup was built with an evaluation version of InstallShield and can only be launched from setup.exe.</td><td>0</td><td/><td>-752598546</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.exe</td><td>0</td><td/><td>-618367279</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.vshost.exe</td><td>0</td><td/><td>-618367279</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.exe</td><td>0</td><td/><td>-618342543</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME4</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.vshost.exe</td><td>0</td><td/><td>-618342543</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1033</td><td>From the list of servers below, select the database server you would like to target.</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1033</td><td>From the list of catalog names below, select the database catalog you would like to target.</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1033</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>-752598546</td></row>
@@ -3692,7 +3748,9 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td/><td>0</td><td/><td>-752598546</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>www.google.com</td><td>0</td><td/><td>-752561618</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>http://www.YourCompanyName.com</td><td>0</td><td/><td>-618380878</td></row>
+		<row><td>ID_STRING3</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.exe</td><td>0</td><td/><td>-618387438</td></row>
+		<row><td>ID_STRING4</td><td>1033</td><td>Your Company Name</td><td>0</td><td/><td>-618380878</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-752598546</td></row>
 	</table>
 
@@ -3807,6 +3865,11 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
+		<row><td>WindowsFormsApplic_253E6CFF325044289657EE1970EE97E3.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>WindowsFormsApplic_4B691A21BEF0474B9868B4A961C679AF.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>WindowsFormsApplic_D555316E71EA44B4B6F590FC53C9967D.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>WindowsFormsApplic_EC7EE64A6BBE484A9A7C749624A2BEBF.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>WindowsFormsApplic_F461E5598EC0460CB62B4BBDA6D92CCA.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -3849,6 +3912,10 @@
 		<row><td>FindRelatedProducts</td><td>NOT ISSETUPDRIVEN</td><td>420</td><td>FindRelatedProducts</td><td/></row>
 		<row><td>ISPreventDowngrade</td><td>ISFOUNDNEWERPRODUCTVERSION</td><td>450</td><td>ISPreventDowngrade</td><td/></row>
 		<row><td>ISRunSetupTypeAddLocalEvent</td><td>Not Installed And Not ISRUNSETUPTYPEADDLOCALEVENT</td><td>1050</td><td>ISRunSetupTypeAddLocalEvent</td><td/></row>
+		<row><td>ISSelfRegisterCosting</td><td/><td>2201</td><td/><td/></row>
+		<row><td>ISSelfRegisterFiles</td><td/><td>5601</td><td/><td/></row>
+		<row><td>ISSelfRegisterFinalize</td><td/><td>6601</td><td/><td/></row>
+		<row><td>ISUnSelfRegisterFiles</td><td/><td>2202</td><td/><td/></row>
 		<row><td>InstallFiles</td><td/><td>4000</td><td>InstallFiles</td><td/></row>
 		<row><td>InstallFinalize</td><td/><td>6600</td><td>InstallFinalize</td><td/></row>
 		<row><td>InstallInitialize</td><td/><td>1501</td><td>InstallInitialize</td><td/></row>
