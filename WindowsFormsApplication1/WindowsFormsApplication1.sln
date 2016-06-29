@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{8666DB24-E226-436A-9D7B-C39DDE3F24EB}"
 EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Setup2", "Setup2\Setup2.isproj", "{160C4114-BC3C-43E0-B4A6-91B257D9F42D}"
-	ProjectSection(ProjectDependencies) = postProject
-		{8666DB24-E226-436A-9D7B-C39DDE3F24EB} = {8666DB24-E226-436A-9D7B-C39DDE3F24EB}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

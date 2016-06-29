@@ -26,6 +26,7 @@ namespace WindowsFormsApplication1
             string sql = null;
             SqlDataReader dataReader;
             //connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
+            // references http://stackoverflow.com/questions/9718057/how-to-create-a-single-setup-exe-with-installshield-limited-edition
             connetionString = "Server= WIN7SP1X64VM\\SQLEXPRESS; Database= test; Integrated Security = SSPI; ";
             //connetionString = "Data Source=DESKTOP-FVFO8GL\SQLEXPRESS;Initial Catalog=test;Integrated Security=SSPI;Connection Timeout=10;" //NT Authentication
             sql = "SELECT * FROM table1";
