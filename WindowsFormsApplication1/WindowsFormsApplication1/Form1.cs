@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Xml;
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace WindowsFormsApplication1
 {
@@ -38,7 +42,7 @@ namespace WindowsFormsApplication1
                 dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    MessageBox.Show(dataReader.GetValue(0) + " - " + dataReader.GetValue(1) );
+                    MessageBox.Show(dataReader.GetValue(0) + " - " + dataReader.GetValue(1));
                 }
                 dataReader.Close();
                 command.Dispose();
@@ -48,6 +52,53 @@ namespace WindowsFormsApplication1
             {
                 MessageBox.Show("Can not open connection ! ");
             }
+
+            using (XmlWriter writer = XmlWriter.Create("SQLServer.xml"))
+            {
+                writer.WriteStartDocument();
+                writer.WriteStartElement("Instance");
+
+
+                writer.WriteStartElement("Database");
+
+                writer.WriteElementString("Name", "test");
+
+                writer.WriteEndElement();
+
+
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+            }
+
+            XmlTextReader reader = new XmlTextReader("SQLServer.xml"); //Combines the location of App_Data and the file name
+
+            // http://www.codeproject.com/Articles/686994/Create-Read-Advance-PDF-Report-using-iTextSharp-in
+            FileStream fs = new FileStream("SQLServer.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+            Document doc = new Document();
+            PdfWriter pdfwriter = PdfWriter.GetInstance(doc, fs);
+            doc.Open();            
+
+            while (reader.Read())
+            {
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        MessageBox.Show("<" + reader.Name + ">");
+                        doc.Add(new Paragraph("<" + reader.Name + ">"));
+                        break;
+                    case XmlNodeType.Text:
+                        MessageBox.Show(reader.Value);
+                        doc.Add(new Paragraph(reader.Value));
+                        break;
+                    case XmlNodeType.EndElement:
+                        MessageBox.Show("");
+                        doc.Add(new Paragraph(""));
+                        break;
+                }
+            }
+
+            doc.Close();
+
         }
     }
 }
