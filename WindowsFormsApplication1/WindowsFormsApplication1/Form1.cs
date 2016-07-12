@@ -53,6 +53,8 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Can not open connection ! ");
             }
 
+            MessageBox.Show("Current Working Directory: " + Directory.GetCurrentDirectory());
+
             using (XmlWriter writer = XmlWriter.Create("SQLServer.xml"))
             {
                 writer.WriteStartDocument();
