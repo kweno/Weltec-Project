@@ -1,0 +1,47 @@
+SQL Server Instance 
+
+1. Installation 
+
+	Default Drive Installation
+	SQL Server Version and Service Pack
+
+2. Configuration 
+	
+	Max Degree Of Parallelism
+	Memory
+	Enable Traceflag 2371, 1117 and 1118
+	Default index fill factor
+
+3. Security
+
+	Server authentication
+	SQL Server Network Port
+
+SQL Server Database
+
+1. Implemetation 
+
+	SQL *.MDF, *.NDF and *.LDF log file placement
+
+2. Configuration Options
+
+	Recovery Model
+	Compatibility Level
+	Is RCSI Enabled (Read Committed Snapshot Isolation)
+	Do all tables have clustered indexes
+	Database Auto growth
+	Auto Create Statistics
+	Auto Shrink
+	Auto Update Statistics
+
+
+3. Maintenance
+	
+	Daily Index Rebuild
+	Daily database Full backup
+
+4. Security
+
+	Blank SQL 'SA' Password 
+	Blank Server Administrator 
+	Domain Accounts used for SQL Services
