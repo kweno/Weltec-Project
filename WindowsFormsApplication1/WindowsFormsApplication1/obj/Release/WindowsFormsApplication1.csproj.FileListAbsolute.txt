@@ -8,3 +8,6 @@ C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\
 C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.csproj.GenerateResource.Cache
 C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.exe
 C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.pdb
+H:\DATA\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.exe.config
+H:\DATA\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.exe
+H:\DATA\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.pdb
