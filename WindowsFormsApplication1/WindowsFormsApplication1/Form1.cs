@@ -12,6 +12,7 @@ using System.Xml;
 using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using Microsoft.Win32;
 
 namespace WindowsFormsApplication1
 {
@@ -24,6 +25,17 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+            RegistryKey key = baseKey.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL");
+
+            foreach (string s in key.GetValueNames())
+            {
+                MessageBox.Show(s);
+            }
+
+            key.Close();
+            baseKey.Close();
+
             string connetionString = null;
             SqlConnection connection;
             SqlCommand command;
