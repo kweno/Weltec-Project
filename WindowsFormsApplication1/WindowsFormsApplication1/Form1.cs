@@ -13,20 +13,25 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.Win32;
+using System.Data.Sql;
 
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
         public Form1()
-        {
+        {            
             InitializeComponent();
+            populateDropdown();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
             RegistryKey key = baseKey.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL");
+
+
+
 
             foreach (string s in key.GetValueNames())
             {
@@ -36,17 +41,17 @@ namespace WindowsFormsApplication1
             key.Close();
             baseKey.Close();
 
-            string connetionString = null;
+            string connectionString = null;
             SqlConnection connection;
             SqlCommand command;
             string sql = null;
             SqlDataReader dataReader;
-            //connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
+            //connectionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
             // references http://stackoverflow.com/questions/9718057/how-to-create-a-single-setup-exe-with-installshield-limited-edition
-            connetionString = "Server= WIN7SP1X64VM\\SQLEXPRESS; Database= test; Integrated Security = SSPI; ";
-            //connetionString = "Data Source=DESKTOP-FVFO8GL\SQLEXPRESS;Initial Catalog=test;Integrated Security=SSPI;Connection Timeout=10;" //NT Authentication
+            connectionString = "Server= WIN7SP1X64VM\\SQLEXPRESS; Database= test; Integrated Security = SSPI; ";
+            //connectionString = "Data Source=DESKTOP-FVFO8GL\SQLEXPRESS;Initial Catalog=test;Integrated Security=SSPI;Connection Timeout=10;" //NT Authentication
             sql = "SELECT * FROM table1";
-            connection = new SqlConnection(connetionString);
+            connection = new SqlConnection(connectionString);
             try
             {
                 connection.Open();
@@ -114,5 +119,20 @@ namespace WindowsFormsApplication1
             doc.Close();
 
         }
+
+
+        private void populateDropdown()
+        {
+            // Retrieve the enumerator instance and then the data.
+            var instance = SqlDataSourceEnumerator.Instance;
+            var serverTable = instance.GetDataSources();
+            var listOfServers = from DataRow dr in serverTable.Rows select dr["ServerName"];
+            var bindingSource1 = new BindingSource();
+            bindingSource1.DataSource = listOfServers;
+            this.comboBox1.DataSource = bindingSource1;
+            //this.ResumeLayout(false);
+        }
+
+
     }
 }

@@ -1,4 +1,10 @@
-﻿namespace WindowsFormsApplication1
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Data.Sql;
+using System.Windows.Forms;
+using System.Linq;
+
+namespace WindowsFormsApplication1
 {
     partial class Form1
     {
@@ -105,6 +111,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
+
     }
 }
 
