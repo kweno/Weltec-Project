@@ -26,7 +26,7 @@ namespace WindowsFormsApplication1
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
+        {        
             RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
             RegistryKey key = baseKey.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL");
 
@@ -45,7 +45,7 @@ namespace WindowsFormsApplication1
             SqlDataReader dataReader;
             //connectionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
             // references http://stackoverflow.com/questions/9718057/how-to-create-a-single-setup-exe-with-installshield-limited-edition
-            connectionString = "Server= "+ this.serverName + "\\SQLEXPRESS; Database= test; Integrated Security = SSPI; ";
+            connectionString = "Server= "+ this.serverName + "\\"+ key.GetValueNames().FirstOrDefault() + "; Database= test; Integrated Security = SSPI; ";
             //connectionString = "Data Source=DESKTOP-FVFO8GL\SQLEXPRESS;Initial Catalog=test;Integrated Security=SSPI;Connection Timeout=10;" //NT Authentication
             sql = "SELECT * FROM table1";
             connection = new SqlConnection(connectionString);
@@ -120,6 +120,7 @@ namespace WindowsFormsApplication1
 
         private void populateDropdown()
         {
+            // https://msdn.microsoft.com/en-us/library/a6t1z9x2%28v=vs.110%29.aspx
             // Retrieve the enumerator instance and then the data.
             var instance = SqlDataSourceEnumerator.Instance;
             var serverTable = instance.GetDataSources();
