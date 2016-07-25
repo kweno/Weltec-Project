@@ -1,13 +1,3 @@
-C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.exe.config
-C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.exe
-C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.pdb
-C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\itextsharp.dll
-C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\itextsharp.xml
-C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.Form1.resources
-C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
-C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.csproj.GenerateResource.Cache
-C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.exe
-C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.pdb
 H:\DATA\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.exe.config
 H:\DATA\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.exe
 H:\DATA\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.pdb
@@ -21,3 +11,14 @@ Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\WindowsFormsAppli
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.csproj.GenerateResource.Cache
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.exe
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.pdb
+C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.exe.config
+C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.exe
+C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\WindowsFormsApplication1.pdb
+C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\itextsharp.dll
+C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Release\itextsharp.xml
+C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.Form1.resources
+C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.exe
+C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.pdb

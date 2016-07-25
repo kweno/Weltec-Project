@@ -26,17 +26,29 @@ namespace WindowsFormsApplication1
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {        
-            RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
-            RegistryKey key = baseKey.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL");
+        {
+            var localMachine = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+            //var rk = localMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
+            var rk = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
+            var instances = (String[])rk.GetValue("InstalledInstances");
 
-            foreach (string s in key.GetValueNames())
+            
+
+            foreach (string s in instances)
             {
                 MessageBox.Show(s);
             }
 
-            key.Close();
-            baseKey.Close();
+            //RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+            //RegistryKey key = baseKey.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL");
+
+            //foreach (string s in key.GetValueNames())
+            //{
+            //    MessageBox.Show(s);
+            //}
+
+            //key.Close();
+            //baseKey.Close();
 
             string connectionString = null;
             SqlConnection connection;
@@ -45,7 +57,8 @@ namespace WindowsFormsApplication1
             SqlDataReader dataReader;
             //connectionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
             // references http://stackoverflow.com/questions/9718057/how-to-create-a-single-setup-exe-with-installshield-limited-edition
-            connectionString = "Server= "+ this.serverName + "\\"+ key.GetValueNames().FirstOrDefault() + "; Database= test; Integrated Security = SSPI; ";
+            connectionString = "Server= "+ this.serverName + "\\"+ instances.FirstOrDefault() + "; Database= test; Integrated Security = SSPI; ";
+            //connectionString = "Server= " + this.serverName + "\\SQLEXPRESS; Database= test; Integrated Security = SSPI; ";
             //connectionString = "Data Source=DESKTOP-FVFO8GL\SQLEXPRESS;Initial Catalog=test;Integrated Security=SSPI;Connection Timeout=10;" //NT Authentication
             sql = "SELECT * FROM table1";
             connection = new SqlConnection(connectionString);
