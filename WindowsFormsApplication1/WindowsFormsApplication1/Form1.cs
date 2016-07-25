@@ -28,11 +28,14 @@ namespace WindowsFormsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             var localMachine = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
-            //var rk = localMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
-            var rk = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
-            var instances = (String[])rk.GetValue("InstalledInstances");
+            var rk = localMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
+            var instances = (String[])rk.GetValue("InstalledInstances");            
 
-            
+            if(instances == null)
+            {
+                rk = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
+                instances = (String[])rk.GetValue("InstalledInstances");
+            }
 
             foreach (string s in instances)
             {
