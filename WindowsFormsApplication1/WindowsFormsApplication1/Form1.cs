@@ -61,7 +61,7 @@ namespace WindowsFormsApplication1
             //connectionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
             // references http://stackoverflow.com/questions/9718057/how-to-create-a-single-setup-exe-with-installshield-limited-edition
             connectionString = "Server= "+ this.serverName + "\\"+ instances.FirstOrDefault() + "; Database= test; Integrated Security = SSPI; ";
-            connectionString = "Data Source=" + this.serverName + "\\" + instances.FirstOrDefault() + "; Initial Catalog= test; Integrated Security = SSPI; ;Connection Timeout=10;";
+            //connectionString = "Data Source=" + this.serverName + "\\" + instances.FirstOrDefault() + "; Initial Catalog= test; Integrated Security = SSPI; Connection Timeout=10;";
             //connectionString = "Server= " + this.serverName + "\\SQLEXPRESS; Database= test; Integrated Security = SSPI; ";
             //connectionString = "Data Source=DESKTOP-FVFO8GL\SQLEXPRESS;Initial Catalog=test;Integrated Security=SSPI;Connection Timeout=10;" //NT Authentication
             sql = "SELECT * FROM table1";
@@ -82,6 +82,7 @@ namespace WindowsFormsApplication1
             catch (Exception ex)
             {
                 MessageBox.Show("Can not open connection ! ");
+                MessageBox.Show(ex.ToString());
             }
 
             MessageBox.Show("Current Working Directory: " + Directory.GetCurrentDirectory());
@@ -120,11 +121,11 @@ namespace WindowsFormsApplication1
                         doc.Add(new Paragraph("<" + reader.Name + ">"));
                         break;
                     case XmlNodeType.Text:
-                        MessageBox.Show(reader.Value);
+                        //MessageBox.Show(reader.Value);
                         doc.Add(new Paragraph(reader.Value));
                         break;
                     case XmlNodeType.EndElement:
-                        MessageBox.Show("");
+                        //MessageBox.Show("");
                         doc.Add(new Paragraph(""));
                         break;
                 }
@@ -145,7 +146,7 @@ namespace WindowsFormsApplication1
             var bindingSource1 = new BindingSource();
             bindingSource1.DataSource = listOfServers;
             this.comboBox1.DataSource = bindingSource1;
-            this.ResumeLayout(false);
+            //this.ResumeLayout(false);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
