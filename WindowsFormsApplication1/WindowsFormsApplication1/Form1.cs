@@ -22,27 +22,12 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
-            populateDropdown();
+            populateServerDropdown();
+            populateInstanceDropdown();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var localMachine = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
-            var rk = localMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
-            var instances = (String[])rk.GetValue("InstalledInstances");            
-
-            if(instances == null)
-            {
-                rk = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
-                instances = (String[])rk.GetValue("InstalledInstances");
-            }
-            foreach (string s in instances)
-            {
-                MessageBox.Show(s);
-            }
-            localMachine.Close();
-            rk.Close();
-
             string connectionString = null;
             SqlConnection connection;
             SqlCommand command;
@@ -68,7 +53,7 @@ namespace WindowsFormsApplication1
             ";Initial Catalog=test;" +
             "Integrated Security=SSPI;";
             connectionString =
-            "Server=" + this.serverName + "\\" + instances.LastOrDefault() + 
+            "Server=" + this.serverName + "\\" + this.instanceName + 
             ";Initial Catalog=test;" +
             "User id=test;" +
             "Password=test;";
@@ -139,17 +124,35 @@ namespace WindowsFormsApplication1
         }
 
 
-        private void populateDropdown()
+        private void populateServerDropdown()
         {
             // https://msdn.microsoft.com/en-us/library/a6t1z9x2%28v=vs.110%29.aspx
             // Retrieve the enumerator instance and then the data.
             var instance = SqlDataSourceEnumerator.Instance;
             var serverTable = instance.GetDataSources();
-            var listOfServers = from DataRow dr in serverTable.Rows select dr["ServerName"];
+            var listOfServers = (from DataRow dr in serverTable.Rows select dr["ServerName"].ToString());
             var bindingSource1 = new BindingSource();
             bindingSource1.DataSource = listOfServers;
             this.comboBox1.DataSource = bindingSource1;
             //this.ResumeLayout(false);
+        }
+
+        private void populateInstanceDropdown()
+        {
+            var localMachine = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+            var rk = localMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
+            var instances = (String[])rk.GetValue("InstalledInstances");
+
+            if (instances == null)
+            {
+                rk = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
+                instances = (String[])rk.GetValue("InstalledInstances");
+            }
+            var bindingSource2 = new BindingSource();
+            bindingSource2.DataSource = instances;
+            this.comboBox2.DataSource = bindingSource2;
+            localMachine.Close();
+            rk.Close();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -158,8 +161,14 @@ namespace WindowsFormsApplication1
             this.serverName = (string)comboBox.SelectedItem;
         }
 
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            this.instanceName = (string)comboBox.SelectedItem;
+        }
 
         private string serverName = "";
+        private string instanceName = "";
 
 
     }
