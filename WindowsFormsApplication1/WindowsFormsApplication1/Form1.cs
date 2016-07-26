@@ -68,7 +68,7 @@ namespace WindowsFormsApplication1
             ";Initial Catalog=test;" +
             "Integrated Security=SSPI;";
             connectionString =
-            "Server=" + this.serverName + "\\" + instances.FirstOrDefault() + 
+            "Server=" + this.serverName + "\\" + instances.LastOrDefault() + 
             ";Initial Catalog=test;" +
             "User id=test;" +
             "Password=test;";
