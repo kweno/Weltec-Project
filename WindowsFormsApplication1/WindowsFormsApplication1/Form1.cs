@@ -44,12 +44,10 @@ namespace WindowsFormsApplication1
 
             //RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
             //RegistryKey key = baseKey.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL");
-
             //foreach (string s in key.GetValueNames())
             //{
             //    MessageBox.Show(s);
             //}
-
             //key.Close();
             //baseKey.Close();
 
@@ -58,13 +56,26 @@ namespace WindowsFormsApplication1
             SqlCommand command;
             string sql = null;
             SqlDataReader dataReader;
-            //connectionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
-            // references http://stackoverflow.com/questions/9718057/how-to-create-a-single-setup-exe-with-installshield-limited-edition
-            connectionString = "Server= "+ this.serverName + "\\"+ instances.FirstOrDefault() + "; Database= test; Integrated Security = SSPI; ";
+
+            // http://stackoverflow.com/questions/9718057/how-to-create-a-single-setup-exe-with-installshield-limited-edition
+            //connectionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";            
+            //connectionString = "Server= "+ this.serverName + "\\"+ instances.FirstOrDefault() + "; Database= test; Integrated Security = SSPI; ";
             //connectionString = "Data Source=" + this.serverName + "\\" + instances.FirstOrDefault() + "; Initial Catalog= test; Integrated Security = SSPI; Connection Timeout=10;";
             //connectionString = "Server= " + this.serverName + "\\SQLEXPRESS; Database= test; Integrated Security = SSPI; ";
             //connectionString = "Data Source=DESKTOP-FVFO8GL\SQLEXPRESS;Initial Catalog=test;Integrated Security=SSPI;Connection Timeout=10;" //NT Authentication
-            sql = "SELECT * FROM table1";
+
+            // http://stackoverflow.com/questions/15631602/how-to-set-sql-server-connection-string
+            connectionString =
+            "Data Source=" + this.serverName +
+            ";Initial Catalog=test;" +
+            "User id=test;" +
+            "Password=test;";
+            connectionString =
+            "Data Source=" + this.serverName +
+            ";Initial Catalog=test;" +
+            "Integrated Security=SSPI;";
+            
+            sql = "SELECT * FROM ReportServer.dbo.Roles";
             connection = new SqlConnection(connectionString);
             try
             {
@@ -91,15 +102,9 @@ namespace WindowsFormsApplication1
             {
                 writer.WriteStartDocument();
                 writer.WriteStartElement("Instance");
-
-
                 writer.WriteStartElement("Database");
-
                 writer.WriteElementString("Name", "test");
-
                 writer.WriteEndElement();
-
-
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
             }
