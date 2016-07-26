@@ -36,20 +36,12 @@ namespace WindowsFormsApplication1
                 rk = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
                 instances = (String[])rk.GetValue("InstalledInstances");
             }
-
             foreach (string s in instances)
             {
                 MessageBox.Show(s);
             }
-
-            //RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
-            //RegistryKey key = baseKey.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL");
-            //foreach (string s in key.GetValueNames())
-            //{
-            //    MessageBox.Show(s);
-            //}
-            //key.Close();
-            //baseKey.Close();
+            localMachine.Close();
+            rk.Close();
 
             string connectionString = null;
             SqlConnection connection;
@@ -75,11 +67,11 @@ namespace WindowsFormsApplication1
             "Data Source=" + this.serverName +
             ";Initial Catalog=test;" +
             "Integrated Security=SSPI;";
-            //connectionString =
-            //"Server=" + this.serverName + "\\SQL1" +
-            //";Initial Catalog=test;" +
-            //"User id=test;" +
-            //"Password=test;";
+            connectionString =
+            "Server=" + this.serverName + "\\" + instances.FirstOrDefault() + 
+            ";Initial Catalog=test;" +
+            "User id=test;" +
+            "Password=test;";
 
             sql = "SELECT * FROM master.sys.all_parameters";
             connection = new SqlConnection(connectionString);
