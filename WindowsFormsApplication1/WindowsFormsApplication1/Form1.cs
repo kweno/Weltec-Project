@@ -58,6 +58,7 @@ namespace WindowsFormsApplication1
             SqlDataReader dataReader;
 
             // http://stackoverflow.com/questions/9718057/how-to-create-a-single-setup-exe-with-installshield-limited-edition
+            // https://www.connectionstrings.com/sql-server-2012/
             //connectionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";            
             //connectionString = "Server= "+ this.serverName + "\\"+ instances.FirstOrDefault() + "; Database= test; Integrated Security = SSPI; ";
             //connectionString = "Data Source=" + this.serverName + "\\" + instances.FirstOrDefault() + "; Initial Catalog= test; Integrated Security = SSPI; Connection Timeout=10;";
@@ -74,8 +75,13 @@ namespace WindowsFormsApplication1
             "Data Source=" + this.serverName +
             ";Initial Catalog=test;" +
             "Integrated Security=SSPI;";
-            
-            sql = "SELECT * FROM ReportServer.dbo.Roles";
+            //connectionString =
+            //"Server=" + this.serverName + "\\SQL1" +
+            //";Initial Catalog=test;" +
+            //"User id=test;" +
+            //"Password=test;";
+
+            sql = "SELECT * FROM master.sys.all_parameters";
             connection = new SqlConnection(connectionString);
             try
             {
