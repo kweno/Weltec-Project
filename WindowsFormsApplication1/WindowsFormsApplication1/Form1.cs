@@ -44,17 +44,17 @@ namespace WindowsFormsApplication1
 
             // http://stackoverflow.com/questions/15631602/how-to-set-sql-server-connection-string
             connectionString =
-            "Data Source=" + this.serverName +
-            ";Initial Catalog=test;" +
+            "Data Source=" + this.serverName + ";" +
+            "Initial Catalog=test;" +
             "User id=test;" +
             "Password=test;";
             connectionString =
-            "Data Source=" + this.serverName +
-            ";Initial Catalog=test;" +
+            "Data Source=" + this.serverName + ";" +
+            //"Initial Catalog=test;" +
             "Integrated Security=SSPI;";
             //connectionString =
-            //"Server=" + this.serverName + "\\" + this.instanceName + 
-            //";Initial Catalog=test;" +
+            //"Server=" + this.serverName + "\\" + this.instanceName + ";" +
+            //"Initial Catalog=test;" +
             //"User id=test;" +
             //"Password=test;";
 
