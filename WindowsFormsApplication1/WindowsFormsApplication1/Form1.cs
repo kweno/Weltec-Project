@@ -44,19 +44,19 @@ namespace WindowsFormsApplication1
 
             // http://stackoverflow.com/questions/15631602/how-to-set-sql-server-connection-string
             connectionString =
-            "Data Source=" + this.serverName +
-            ";Initial Catalog=test;" +
+            "Data Source=" + this.serverName + ";" +
+            "Initial Catalog=test;" +
             "User id=test;" +
             "Password=test;";
             connectionString =
-            "Data Source=" + this.serverName +
-            ";Initial Catalog=test;" +
+            "Data Source=" + this.serverName + ";" +
+            //"Initial Catalog=test;" +
             "Integrated Security=SSPI;";
-            connectionString =
-            "Server=" + this.serverName + "\\" + this.instanceName + 
-            ";Initial Catalog=test;" +
-            "User id=test;" +
-            "Password=test;";
+            //connectionString =
+            //"Server=" + this.serverName + "\\" + this.instanceName + ";" +
+            //"Initial Catalog=test;" +
+            //"User id=test;" +
+            //"Password=test;";
 
             sql = "SELECT * FROM master.sys.all_parameters";
             connection = new SqlConnection(connectionString);
@@ -68,6 +68,7 @@ namespace WindowsFormsApplication1
                 while (dataReader.Read())
                 {
                     MessageBox.Show(dataReader.GetValue(0) + " - " + dataReader.GetValue(1));
+                    return;
                 }
                 dataReader.Close();
                 command.Dispose();
@@ -128,31 +129,51 @@ namespace WindowsFormsApplication1
         {
             // https://msdn.microsoft.com/en-us/library/a6t1z9x2%28v=vs.110%29.aspx
             // Retrieve the enumerator instance and then the data.
-            var instance = SqlDataSourceEnumerator.Instance;
-            var serverTable = instance.GetDataSources();
-            var listOfServers = (from DataRow dr in serverTable.Rows select dr["ServerName"].ToString());
-            var bindingSource1 = new BindingSource();
-            bindingSource1.DataSource = listOfServers;
-            this.comboBox1.DataSource = bindingSource1;
-            //this.ResumeLayout(false);
+            //var instance = SqlDataSourceEnumerator.Instance;
+            //var serverTable = instance.GetDataSources();
+            //var listOfServers = (from DataRow dr in serverTable.Rows select dr["ServerName"].ToString()).ToList();
+            //var bindingSource1 = new BindingSource();
+            //bindingSource1.DataSource = listOfServers;
+            //this.comboBox1.DataSource = bindingSource1;
+
+            
+
+            while (this.comboBox1.Items.Count <= 0)
+            {
+                // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
+                string myServer = Environment.MachineName;
+                DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
+                for (int i = 0; i < servers.Rows.Count; i++)
+                {
+                    if (myServer == servers.Rows[i]["ServerName"].ToString()) ///// used to get the servers in the local machine////
+                    {
+                        if ((servers.Rows[i]["InstanceName"] as string) != null)
+                            this.comboBox1.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
+                        else
+                            this.comboBox1.Items.Add(servers.Rows[i]["ServerName"]);
+                    }
+                }
+            }
+
+
         }
 
         private void populateInstanceDropdown()
         {
-            var localMachine = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
-            var rk = localMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
-            var instances = (String[])rk.GetValue("InstalledInstances");
+            //var localMachine = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+            //var rk = localMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
+            //var instances = (String[])rk.GetValue("InstalledInstances");
 
-            if (instances == null)
-            {
-                rk = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
-                instances = (String[])rk.GetValue("InstalledInstances");
-            }
-            var bindingSource2 = new BindingSource();
-            bindingSource2.DataSource = instances;
-            this.comboBox2.DataSource = bindingSource2;
-            localMachine.Close();
-            rk.Close();
+            //if (instances == null)
+            //{
+            //    rk = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
+            //    instances = (String[])rk.GetValue("InstalledInstances");
+            //}
+            //var bindingSource2 = new BindingSource();
+            //bindingSource2.DataSource = instances;
+            //this.comboBox2.DataSource = bindingSource2;
+            //localMachine.Close();
+            //rk.Close();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
