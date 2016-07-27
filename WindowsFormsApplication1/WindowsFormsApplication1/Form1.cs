@@ -52,11 +52,11 @@ namespace WindowsFormsApplication1
             "Data Source=" + this.serverName +
             ";Initial Catalog=test;" +
             "Integrated Security=SSPI;";
-            connectionString =
-            "Server=" + this.serverName + "\\" + this.instanceName + 
-            ";Initial Catalog=test;" +
-            "User id=test;" +
-            "Password=test;";
+            //connectionString =
+            //"Server=" + this.serverName + "\\" + this.instanceName + 
+            //";Initial Catalog=test;" +
+            //"User id=test;" +
+            //"Password=test;";
 
             sql = "SELECT * FROM master.sys.all_parameters";
             connection = new SqlConnection(connectionString);
@@ -68,6 +68,7 @@ namespace WindowsFormsApplication1
                 while (dataReader.Read())
                 {
                     MessageBox.Show(dataReader.GetValue(0) + " - " + dataReader.GetValue(1));
+                    return;
                 }
                 dataReader.Close();
                 command.Dispose();
@@ -135,19 +136,25 @@ namespace WindowsFormsApplication1
             //bindingSource1.DataSource = listOfServers;
             //this.comboBox1.DataSource = bindingSource1;
 
-            // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
-            string myServer = Environment.MachineName;
-            DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
-            for (int i = 0; i < servers.Rows.Count; i++)
+            
+
+            while (this.comboBox1.Items.Count <= 0)
             {
-                if (myServer == servers.Rows[i]["ServerName"].ToString()) ///// used to get the servers in the local machine////
+                // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
+                string myServer = Environment.MachineName;
+                DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
+                for (int i = 0; i < servers.Rows.Count; i++)
                 {
-                    if ((servers.Rows[i]["InstanceName"] as string) != null)
-                        this.comboBox1.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
-                    else
-                        this.comboBox1.Items.Add(servers.Rows[i]["ServerName"]);
+                    if (myServer == servers.Rows[i]["ServerName"].ToString()) ///// used to get the servers in the local machine////
+                    {
+                        if ((servers.Rows[i]["InstanceName"] as string) != null)
+                            this.comboBox1.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
+                        else
+                            this.comboBox1.Items.Add(servers.Rows[i]["ServerName"]);
+                    }
                 }
             }
+
 
         }
 
