@@ -44,12 +44,12 @@ namespace WindowsFormsApplication1
 
             // http://stackoverflow.com/questions/15631602/how-to-set-sql-server-connection-string
             connectionString =
-            "Data Source=" + this.serverName + ";" +
+            "Data Source=" + this.comboBox1.Text + ";" +
             "Initial Catalog=test;" +
             "User id=test;" +
             "Password=test;";
             connectionString =
-            "Data Source=" + this.serverName + ";" +
+            "Data Source=" + this.comboBox1.Text + ";" +
             //"Initial Catalog=test;" +
             "Integrated Security=SSPI;";
             //connectionString =
@@ -119,7 +119,6 @@ namespace WindowsFormsApplication1
                         break;
                 }
             }
-
             doc.Close();
 
         }
@@ -135,9 +134,7 @@ namespace WindowsFormsApplication1
             //var bindingSource1 = new BindingSource();
             //bindingSource1.DataSource = listOfServers;
             //this.comboBox1.DataSource = bindingSource1;
-
             
-
             while (this.comboBox1.Items.Count <= 0)
             {
                 // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
@@ -176,20 +173,10 @@ namespace WindowsFormsApplication1
             //rk.Close();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ComboBox comboBox = (ComboBox)sender;            
-            this.serverName = (string)comboBox.SelectedItem;
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ComboBox comboBox = (ComboBox)sender;
-            this.instanceName = (string)comboBox.SelectedItem;
-        }
-
         private string serverName = "";
         private string instanceName = "";
+
+
 
 
     }
