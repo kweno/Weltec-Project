@@ -1,1 +1,3 @@
 Read the "Configuring the Lifecycle for Evolution"
+
+Read the "MoSCoW Prioritisation"
