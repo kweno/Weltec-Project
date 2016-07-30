@@ -112,17 +112,8 @@ namespace WindowsFormsApplication1
             PdfWriter pdfwriter = PdfWriter.GetInstance(doc, fs);
             doc.Open();
 
-            // Display all attributes.
-            if (reader.HasAttributes)
-            {
-                Console.WriteLine("Attributes of <" + reader.Name + ">");
-                for (int i = 0; i < reader.AttributeCount; i++)
-                {
-                    MessageBox.Show("  {0}", reader[i]);
-                }
-                // Move the reader back to the element node.
-                reader.MoveToElement();
-            }
+            XDocument xml = XDocument.Load("SQLServer.xml");
+            var numberOfRows = xml.Descendants("Table").Count();
 
             // http://www.c-sharpcorner.com/blogs/create-table-in-pdf-using-c-sharp-and-itextsharp          
             PdfPTable table = new PdfPTable(3);
@@ -133,10 +124,10 @@ namespace WindowsFormsApplication1
                 {
                     case XmlNodeType.Element:
                         MessageBox.Show("<" + reader.Name + ">");
-                        doc.Add(new Paragraph("<" + reader.Name + ">"));
+                        //doc.Add(new Paragraph("<" + reader.Name + ">"));
                         break;
                     case XmlNodeType.Text:
-                        //MessageBox.Show(reader.Value);
+                        MessageBox.Show(reader.Value);
                         doc.Add(new Paragraph(reader.Value));
                         break;
                     case XmlNodeType.EndElement:
