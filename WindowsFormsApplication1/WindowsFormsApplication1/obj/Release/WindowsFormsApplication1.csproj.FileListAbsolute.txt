@@ -22,5 +22,3 @@ Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\WindowsFormsAppli
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.csproj.GenerateResource.Cache
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.exe
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.pdb
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\obj\Release\WindowsFormsApplication1.SplashForm.resources
