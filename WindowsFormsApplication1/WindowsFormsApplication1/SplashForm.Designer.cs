@@ -30,7 +30,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // SplashForm
@@ -41,11 +40,8 @@
             this.Name = "SplashForm";
             this.Text = "SplashForm";
             this.ResumeLayout(false);
-
         }
 
         #endregion
-
-        private System.Windows.Forms.Timer timer1;
     }
 }
