@@ -14,6 +14,8 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.Win32;
 using System.Data.Sql;
+using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace WindowsFormsApplication1
 {
@@ -58,7 +60,9 @@ namespace WindowsFormsApplication1
             //"User id=test;" +
             //"Password=test;";
 
-            sql = "SELECT * FROM master.sys.all_parameters";
+            // http://stackoverflow.com/questions/18654157/how-to-make-sql-query-result-to-xml-file
+            //sql = "SELECT * FROM master.sys.all_parameters";
+            sql = "SELECT * FROM master.sys.database_files";
             connection = new SqlConnection(connectionString);
             try
             {
@@ -68,7 +72,6 @@ namespace WindowsFormsApplication1
                 while (dataReader.Read())
                 {
                     MessageBox.Show(dataReader.GetValue(0) + " - " + dataReader.GetValue(1));
-                    return;
                 }
                 dataReader.Close();
                 command.Dispose();
@@ -82,16 +85,24 @@ namespace WindowsFormsApplication1
 
             MessageBox.Show("Current Working Directory: " + Directory.GetCurrentDirectory());
 
-            using (XmlWriter writer = XmlWriter.Create("SQLServer.xml"))
-            {
-                writer.WriteStartDocument();
-                writer.WriteStartElement("Instance");
-                writer.WriteStartElement("Database");
-                writer.WriteElementString("Name", "test");
-                writer.WriteEndElement();
-                writer.WriteEndElement();
-                writer.WriteEndDocument();
-            }
+            //using (XmlWriter writer = XmlWriter.Create("SQLServer.xml"))
+            //{
+            //    writer.WriteStartDocument();
+            //    writer.WriteStartElement("Instance");
+            //    writer.WriteStartElement("Database");
+            //    writer.WriteElementString("Name", "test");
+            //    writer.WriteEndElement();
+            //    writer.WriteEndElement();
+            //    writer.WriteEndDocument();
+            //}
+
+            // http://csharp.net-informations.com/xml/xml-from-sql.htm
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            adapter = new SqlDataAdapter(sql, connection);
+            adapter.Fill(ds);
+            connection.Close();
+            ds.WriteXml("SQLServer.xml");
 
             XmlTextReader reader = new XmlTextReader("SQLServer.xml"); //Combines the location of App_Data and the file name
 
@@ -100,6 +111,21 @@ namespace WindowsFormsApplication1
             Document doc = new Document();
             PdfWriter pdfwriter = PdfWriter.GetInstance(doc, fs);
             doc.Open();
+
+            // Display all attributes.
+            if (reader.HasAttributes)
+            {
+                Console.WriteLine("Attributes of <" + reader.Name + ">");
+                for (int i = 0; i < reader.AttributeCount; i++)
+                {
+                    MessageBox.Show("  {0}", reader[i]);
+                }
+                // Move the reader back to the element node.
+                reader.MoveToElement();
+            }
+
+            // http://www.c-sharpcorner.com/blogs/create-table-in-pdf-using-c-sharp-and-itextsharp          
+            PdfPTable table = new PdfPTable(3);
 
             while (reader.Read())
             {
@@ -134,7 +160,7 @@ namespace WindowsFormsApplication1
             //var bindingSource1 = new BindingSource();
             //bindingSource1.DataSource = listOfServers;
             //this.comboBox1.DataSource = bindingSource1;
-            
+
             while (this.comboBox1.Items.Count <= 0)
             {
                 // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
