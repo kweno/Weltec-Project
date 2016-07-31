@@ -1,0 +1,21 @@
+Team Agenda:
+
+1. Finalize Methodology
+2. Finalize Project Proposal Document
+3. Discussion of submissions due next week
+
+
+Meeting with Steve Agenda:
+
+1. Discussion about project/deliverables
+2. Review project proposal
+3. Discussion about weekly meetings (Steve's schedule etc..)
+4. Discussion about methodology (Get Steve's comments about it etc..)
+5. Discussion about SAD (Do we need to use it? When to do it? etc..)
+6. Ask about customer - data security 
+   - Is it okay to get meta data from their database?
+   - Security risks regarding this?
+   - Create a Security Agreement document?
+7. Ask for comments about the current progress in the project work (Discuss what is currently being done etc..)
+
+
