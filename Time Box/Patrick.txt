@@ -1,0 +1,4 @@
+To Do:
+
+1. Create GUI of Background Processing
+2. Get Initial DB Scripts from Hardik
