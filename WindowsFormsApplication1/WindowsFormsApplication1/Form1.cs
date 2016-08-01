@@ -170,22 +170,22 @@ namespace WindowsFormsApplication1
             //bindingSource1.DataSource = listOfServers;
             //this.comboBox1.DataSource = bindingSource1;
 
-            while (this.comboBox1.Items.Count <= 0)
-            {
-                // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
-                string myServer = Environment.MachineName;
-                DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
-                for (int i = 0; i < servers.Rows.Count; i++)
-                {
-                    if (myServer == servers.Rows[i]["ServerName"].ToString()) ///// used to get the servers in the local machine////
-                    {
-                        if ((servers.Rows[i]["InstanceName"] as string) != null)
-                            this.comboBox1.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
-                        else
-                            this.comboBox1.Items.Add(servers.Rows[i]["ServerName"]);
-                    }
-                }
-            }
+            //while (this.comboBox1.Items.Count <= 0)
+            //{
+            //    // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
+            //    string myServer = Environment.MachineName;
+            //    DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
+            //    for (int i = 0; i < servers.Rows.Count; i++)
+            //    {
+            //        if (myServer == servers.Rows[i]["ServerName"].ToString()) ///// used to get the servers in the local machine////
+            //        {
+            //            if ((servers.Rows[i]["InstanceName"] as string) != null)
+            //                this.comboBox1.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
+            //            else
+            //                this.comboBox1.Items.Add(servers.Rows[i]["ServerName"]);
+            //        }
+            //    }
+            //}
 
 
         }
@@ -294,9 +294,6 @@ namespace WindowsFormsApplication1
                 m_oWorker.CancelAsync();
             }
         }
-
-
-
 
 
     }
