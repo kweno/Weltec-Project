@@ -89,7 +89,7 @@ namespace WindowsFormsApplication1
                 dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    MessageBox.Show(dataReader.GetValue(0) + " - " + dataReader.GetValue(1));
+                    //MessageBox.Show(dataReader.GetValue(0) + " - " + dataReader.GetValue(1));
                 }
                 dataReader.Close();
                 command.Dispose();
@@ -98,10 +98,10 @@ namespace WindowsFormsApplication1
             catch (Exception ex)
             {
                 MessageBox.Show("Can not open connection ! ");
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
             }
 
-            MessageBox.Show("Current Working Directory: " + Directory.GetCurrentDirectory());
+            //MessageBox.Show("Current Working Directory: " + Directory.GetCurrentDirectory());
 
             //using (XmlWriter writer = XmlWriter.Create("SQLServer.xml"))
             //{
@@ -141,11 +141,11 @@ namespace WindowsFormsApplication1
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        MessageBox.Show("<" + reader.Name + ">");
+                        //MessageBox.Show("<" + reader.Name + ">");
                         //doc.Add(new Paragraph("<" + reader.Name + ">"));
                         break;
                     case XmlNodeType.Text:
-                        MessageBox.Show(reader.Value);
+                        //MessageBox.Show(reader.Value);
                         doc.Add(new Paragraph(reader.Value));
                         break;
                     case XmlNodeType.EndElement:
@@ -155,7 +155,6 @@ namespace WindowsFormsApplication1
                 }
             }
             doc.Close();
-
         }
 
 
@@ -221,15 +220,15 @@ namespace WindowsFormsApplication1
             //If it was cancelled midway
             if (e.Cancelled)
             {
-                this.label2.Text = "Task Cancelled.";
+                //this.label2.Text = "Task Cancelled.";
             }
             else if (e.Error != null)
             {
-                this.label2.Text = "Error while performing background operation.";
+                //this.label2.Text = "Error while performing background operation.";
             }
             else
             {
-                this.label2.Text = "Task Completed...";
+                //this.label2.Text = "Task Completed...";
             }
             this.button1.Enabled = true;
             //btnCancel.Enabled = false;
@@ -244,7 +243,40 @@ namespace WindowsFormsApplication1
         {
             //Here you play with the main UI thread
             //progressBar1.Value = e.ProgressPercentage;
-            this.label2.Text = "Processing......";// + progressBar1.Value.ToString() + "%";
+            if (e.ProgressPercentage == 1)
+            {
+                this.pictureBox2.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
+            }
+            else if (e.ProgressPercentage == 10)
+            {
+                this.pictureBox3.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
+            }
+            else if (e.ProgressPercentage == 14)
+            {
+                this.pictureBox3.Image = global::WindowsFormsApplication1.Properties.Resources.success;
+            }
+            else if (e.ProgressPercentage == 15)
+            {
+                this.pictureBox4.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
+            }
+            else if (e.ProgressPercentage == 28)
+            {
+                this.pictureBox4.Image = global::WindowsFormsApplication1.Properties.Resources.success;
+            }
+            else if (e.ProgressPercentage == 29)
+            {
+                this.pictureBox5.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
+            }
+            else if (e.ProgressPercentage == 42)
+            {
+                this.pictureBox5.Image = global::WindowsFormsApplication1.Properties.Resources.success;
+            }
+            else if (e.ProgressPercentage == 43)
+            {
+                this.pictureBox2.Image = global::WindowsFormsApplication1.Properties.Resources.success;
+            }
+            
+            //this.label2.Text = "Processing......";// + progressBar1.Value.ToString() + "%";
         }
 
         /// <summary>
@@ -256,13 +288,11 @@ namespace WindowsFormsApplication1
         void m_oWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             //NOTE : Never play with the UI thread here...
-
             //time consuming operation
             for (int i = 0; i < 100; i++)
             {
-                Thread.Sleep(100);
+                Thread.Sleep(200);
                 m_oWorker.ReportProgress(i);
-
                 //If cancel button was pressed while the execution is in progress
                 //Change the state from cancellation ---> cancel'ed
                 if (m_oWorker.CancellationPending)
@@ -271,16 +301,14 @@ namespace WindowsFormsApplication1
                     m_oWorker.ReportProgress(0);
                     return;
                 }
-
             }
-
             //Report 100% completion on operation completed
             m_oWorker.ReportProgress(100);
         }
 
         private void btnStartAsyncOperation_Click(object sender, EventArgs e)
         {
-            this.button1.Enabled = false;
+            //btnStartAsyncOperation.Enabled = false;
             //btnCancel.Enabled = true;
             //Start the async operation here
             m_oWorker.RunWorkerAsync();
