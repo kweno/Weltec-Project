@@ -99,10 +99,10 @@
     <None Include="Resources\telerik_logo_RGB_photoshop.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Current.bmp" />
+    <None Include="Resources\right-arrow-3.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\right-arrow-3.png" />
+    <None Include="Resources\success.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
