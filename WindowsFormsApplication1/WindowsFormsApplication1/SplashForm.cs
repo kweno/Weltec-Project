@@ -13,6 +13,9 @@ namespace WindowsFormsApplication1
             InitializeComponent();
             this.progressBar1.Style = ProgressBarStyle.Marquee;
             this.ControlBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             //this.Text = String.Empty;
             //this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             //PictureBox spashPictureBox = new PictureBox();

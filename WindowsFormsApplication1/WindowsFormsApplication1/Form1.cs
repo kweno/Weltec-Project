@@ -34,6 +34,12 @@ namespace WindowsFormsApplication1
             InitializeComponent();
             populateServerDropdown();
             populateInstanceDropdown();
+
+            // uncomment
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+
             m_oWorker = new BackgroundWorker();
             m_oWorker.DoWork += new DoWorkEventHandler(m_oWorker_DoWork);
             m_oWorker.ProgressChanged += new ProgressChangedEventHandler(m_oWorker_ProgressChanged);
