@@ -1,4 +1,15 @@
 To Do:
 
-1. Create GUI of Background Processing
-2. Get Initial DB Scripts from Hardik
+1. Create GUI of Client Application
+ - Create Splash Screen
+ - Create Main Screen
+   - Logo
+   - Dropdown for List of Servers
+   - Dropdown for List of DBs
+   - Progress Table 
+     - Icons to use
+     - Logic behind processing and what to display
+   - Start Button 
+     - Logic beind the start getting parameters event
+2. Create GUI of Database Evaluator
+3. Get Initial DB Scripts from Hardik
