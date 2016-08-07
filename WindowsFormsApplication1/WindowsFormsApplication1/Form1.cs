@@ -17,6 +17,8 @@ using System.Data.Sql;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using System.Threading;
+using System.Security.Cryptography;
+using System.Runtime.InteropServices;
 
 namespace WindowsFormsApplication1
 {
@@ -128,7 +130,31 @@ namespace WindowsFormsApplication1
             connection.Close();
             ds.WriteXml("SQLServer.xml");
 
-            XmlTextReader reader = new XmlTextReader("SQLServer.xml"); //Combines the location of App_Data and the file name
+            // Must be 64 bits, 8 bytes.
+            // Distribute this key to the user who will decrypt this file.
+            string sSecretKey;
+
+            // Get the Key for the file to Encrypt.
+            sSecretKey = GenerateKey();
+
+            // For additional security Pin the key.
+            GCHandle gch = GCHandle.Alloc(sSecretKey, GCHandleType.Pinned);
+
+            // Encrypt the file.        
+            EncryptFile(@"SQLServer.xml",
+               @"Encrypted_SQLServer.xml",
+               sSecretKey);
+
+            // Decrypt the file.
+            DecryptFile(@"Encrypted_SQLServer.xml",
+               @"Decrypted_SQLServer.xml",
+               sSecretKey);
+
+            // Remove the Key from memory. 
+            ZeroMemory(gch.AddrOfPinnedObject(), sSecretKey.Length * 2);
+            gch.Free();
+
+            XmlTextReader reader = new XmlTextReader("Decrypted_SQLServer.xml"); //Combines the location of App_Data and the file name
 
             // http://www.codeproject.com/Articles/686994/Create-Read-Advance-PDF-Report-using-iTextSharp-in
             FileStream fs = new FileStream("SQLServer.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
@@ -136,7 +162,7 @@ namespace WindowsFormsApplication1
             PdfWriter pdfwriter = PdfWriter.GetInstance(doc, fs);
             doc.Open();
 
-            XDocument xml = XDocument.Load("SQLServer.xml");
+            XDocument xml = XDocument.Load("Decrypted_SQLServer.xml");
             var numberOfRows = xml.Descendants("Table").Count();
 
             // http://www.c-sharpcorner.com/blogs/create-table-in-pdf-using-c-sharp-and-itextsharp          
@@ -175,22 +201,22 @@ namespace WindowsFormsApplication1
             //bindingSource1.DataSource = listOfServers;
             //this.comboBox1.DataSource = bindingSource1;
 
-            while (this.comboBox1.Items.Count <= 0)
-            {
-                // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
-                string myServer = Environment.MachineName;
-                DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
-                for (int i = 0; i < servers.Rows.Count; i++)
-                {
-                    if (myServer == servers.Rows[i]["ServerName"].ToString()) ///// used to get the servers in the local machine////
-                    {
-                        if ((servers.Rows[i]["InstanceName"] as string) != null)
-                            this.comboBox1.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
-                        else
-                            this.comboBox1.Items.Add(servers.Rows[i]["ServerName"]);
-                    }
-                }
-            }
+            //while (this.comboBox1.Items.Count <= 0)
+            //{
+            //    // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
+            //    string myServer = Environment.MachineName;
+            //    DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
+            //    for (int i = 0; i < servers.Rows.Count; i++)
+            //    {
+            //        if (myServer == servers.Rows[i]["ServerName"].ToString()) ///// used to get the servers in the local machine////
+            //        {
+            //            if ((servers.Rows[i]["InstanceName"] as string) != null)
+            //                this.comboBox1.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
+            //            else
+            //                this.comboBox1.Items.Add(servers.Rows[i]["ServerName"]);
+            //        }
+            //    }
+            //}
 
 
         }
@@ -328,6 +354,83 @@ namespace WindowsFormsApplication1
                 m_oWorker.CancelAsync();
             }
         }
+
+        // https://support.microsoft.com/en-nz/kb/307010
+        //  Call this function to remove the key from memory after use for security
+        [System.Runtime.InteropServices.DllImport("KERNEL32.DLL", EntryPoint = "RtlZeroMemory")]
+        public static extern bool ZeroMemory(IntPtr Destination, int Length);
+
+        // Function to Generate a 64 bits Key.
+        private string GenerateKey()
+        {
+            // Create an instance of Symetric Algorithm. Key and IV is generated automatically.
+            DESCryptoServiceProvider desCrypto = (DESCryptoServiceProvider)DESCryptoServiceProvider.Create();
+
+            // Use the Automatically generated key for Encryption. 
+            return ASCIIEncoding.ASCII.GetString(desCrypto.Key);
+        }
+
+        private void EncryptFile(string sInputFilename,
+           string sOutputFilename,
+           string sKey)
+        {
+            FileStream fsInput = new FileStream(sInputFilename,
+               FileMode.Open,
+               FileAccess.Read);
+
+            FileStream fsEncrypted = new FileStream(sOutputFilename,
+               FileMode.Create,
+               FileAccess.Write);
+            DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+            DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
+            DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
+            ICryptoTransform desencrypt = DES.CreateEncryptor();
+            CryptoStream cryptostream = new CryptoStream(fsEncrypted,
+               desencrypt,
+               CryptoStreamMode.Write);
+
+            byte[] bytearrayinput = new byte[fsInput.Length];
+            fsInput.Read(bytearrayinput, 0, bytearrayinput.Length);
+            cryptostream.Write(bytearrayinput, 0, bytearrayinput.Length);
+            cryptostream.Close();
+            fsInput.Close();
+            fsEncrypted.Close();
+        }
+
+        private void DecryptFile(string sInputFilename,
+           string sOutputFilename,
+           string sKey)
+        {
+            DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+            //A 64 bit key and IV is required for this provider.
+            //Set secret key For DES algorithm.
+            DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
+            //Set initialization vector.
+            DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
+
+            //Create a file stream to read the encrypted file back.
+            FileStream fsread = new FileStream(sInputFilename,
+               FileMode.Open,
+               FileAccess.Read);
+            //Create a DES decryptor from the DES instance.
+            ICryptoTransform desdecrypt = DES.CreateDecryptor();
+            //Create crypto stream set to read and do a 
+            //DES decryption transform on incoming bytes.
+            CryptoStream cryptostreamDecr = new CryptoStream(fsread,
+               desdecrypt,
+               CryptoStreamMode.Read);
+            //Print the contents of the decrypted file.
+            StreamWriter fsDecrypted = new StreamWriter(sOutputFilename);
+            fsDecrypted.Write(new StreamReader(cryptostreamDecr).ReadToEnd());
+            fsDecrypted.Flush();
+            fsDecrypted.Close();
+        }
+
+
+
+
+
+
 
 
     }
