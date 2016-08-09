@@ -203,31 +203,50 @@ namespace WindowsFormsApplication1
         {
             // https://msdn.microsoft.com/en-us/library/a6t1z9x2%28v=vs.110%29.aspx
             // Retrieve the enumerator instance and then the data.
-            //var instance = SqlDataSourceEnumerator.Instance;
-            //var serverTable = instance.GetDataSources();
-            //var listOfServers = (from DataRow dr in serverTable.Rows select dr["ServerName"].ToString()).ToList();
-            //var bindingSource1 = new BindingSource();
-            //bindingSource1.DataSource = listOfServers;
-            //this.comboBox1.DataSource = bindingSource1;
+            var instance = SqlDataSourceEnumerator.Instance;
+            var serverTable = instance.GetDataSources();
+            var listOfServers = (from DataRow dr in serverTable.Rows select dr["ServerName"].ToString()).ToList();
+            var bindingSource1 = new BindingSource();
+            bindingSource1.DataSource = listOfServers;
+            this.comboBox1.DataSource = bindingSource1;
 
-            //while (this.comboBox1.Items.Count <= 0)
-            //{
-            //    // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
-            //    string myServer = Environment.MachineName;
-            //    DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
-            //    for (int i = 0; i < servers.Rows.Count; i++)
-            //    {
-            //        if (myServer == servers.Rows[i]["ServerName"].ToString()) ///// used to get the servers in the local machine////
-            //        {
-            //            if ((servers.Rows[i]["InstanceName"] as string) != null)
-            //                this.comboBox1.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
-            //            else
-            //                this.comboBox1.Items.Add(servers.Rows[i]["ServerName"]);
-            //        }
-            //    }
-            //}
+            while (this.comboBox1.Items.Count <= 0)
+            {
+                // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
+                string myServer = Environment.MachineName;
+                DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
+                for (int i = 0; i < servers.Rows.Count; i++)
+                {
+                    if (myServer == servers.Rows[i]["ServerName"].ToString()) ///// used to get the servers in the local machine////
+                    {
+                        if ((servers.Rows[i]["InstanceName"] as string) != null)
+                            this.comboBox1.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
+                        else
+                            this.comboBox1.Items.Add(servers.Rows[i]["ServerName"]);
+                    }
+                }
+            }
 
 
+        }
+
+        private void populateDatabaseDropdown()
+        {
+            // http://stackoverflow.com/questions/12862604/c-sharp-connect-to-database-and-list-the-databases
+            var connectionString = "Data Source=" + this.comboBox1.Text + ";" +
+            //"Initial Catalog=test;" +
+            "Integrated Security=SSPI;";
+
+            using (var con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                DataTable databases = con.GetSchema("Databases");
+                foreach (DataRow database in databases.Rows)
+                {
+                    String databaseName = database.Field<String>("database_name");
+                    this.comboBox2.Items.Add(databaseName);
+                }
+            }
         }
 
         private void populateInstanceDropdown()
@@ -435,12 +454,14 @@ namespace WindowsFormsApplication1
             fsDecrypted.Close();
         }
 
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
 
-
-
-
-
-
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            populateDatabaseDropdown();
+        }
     }
 }
