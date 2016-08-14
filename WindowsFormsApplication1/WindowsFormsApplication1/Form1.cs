@@ -203,29 +203,28 @@ namespace WindowsFormsApplication1
         {
             // https://msdn.microsoft.com/en-us/library/a6t1z9x2%28v=vs.110%29.aspx
             // Retrieve the enumerator instance and then the data.
-            var instance = SqlDataSourceEnumerator.Instance;
-            var serverTable = instance.GetDataSources();
-            var listOfServers = (from DataRow dr in serverTable.Rows select dr["ServerName"].ToString()).ToList();
-            var bindingSource1 = new BindingSource();
-            bindingSource1.DataSource = listOfServers;
-            this.comboBox1.DataSource = bindingSource1;
+            //var instance = SqlDataSourceEnumerator.Instance;
+            //var serverTable = instance.GetDataSources();
+            //var listOfServers = (from DataRow dr in serverTable.Rows select dr["ServerName"].ToString()).ToList();
+            //var bindingSource1 = new BindingSource();
+            //bindingSource1.DataSource = listOfServers;
+            //this.comboBox1.DataSource = bindingSource1;
 
-            while (this.comboBox1.Items.Count <= 0)
+
+            // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
+            string myServer = Environment.MachineName;
+            DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
+            for (int i = 0; i < servers.Rows.Count; i++)
             {
-                // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
-                string myServer = Environment.MachineName;
-                DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
-                for (int i = 0; i < servers.Rows.Count; i++)
+                if (myServer == servers.Rows[i]["ServerName"].ToString()) ///// used to get the servers in the local machine////
                 {
-                    if (myServer == servers.Rows[i]["ServerName"].ToString()) ///// used to get the servers in the local machine////
-                    {
-                        if ((servers.Rows[i]["InstanceName"] as string) != null)
-                            this.comboBox1.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
-                        else
-                            this.comboBox1.Items.Add(servers.Rows[i]["ServerName"]);
-                    }
+                    if ((servers.Rows[i]["InstanceName"] as string) != null)
+                        this.comboBox1.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
+                    else
+                        this.comboBox1.Items.Add(servers.Rows[i]["ServerName"]);
                 }
             }
+
 
 
         }
@@ -335,7 +334,7 @@ namespace WindowsFormsApplication1
             {
                 this.pictureBox2.Image = global::WindowsFormsApplication1.Properties.Resources.success;
             }
-            
+
             //this.label2.Text = "Processing......";// + progressBar1.Value.ToString() + "%";
         }
 
@@ -461,7 +460,52 @@ namespace WindowsFormsApplication1
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            populateDatabaseDropdown();
+            if(comboBox2.Enabled)
+            {
+                populateDatabaseDropdown();
+            }
         }
-    }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!comboBox1.Enabled)
+            {
+                this.comboBox1.Enabled = true;
+                this.checkBox2.Enabled = true;
+            }
+            else
+            {
+                this.comboBox1.Enabled = false;
+                this.checkBox2.Enabled = false;
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!comboBox2.Enabled)
+            {
+                this.comboBox2.Enabled = true;
+                populateDatabaseDropdown();
+            }
+            else
+            {
+                this.comboBox2.Enabled = false;
+                this.comboBox2.Items.Clear();
+            }
+        }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (comboBox2.Enabled)
+            {
+                populateDatabaseDropdown();
+            }
+        }
+
+
+
+
+
+
+        }
 }
