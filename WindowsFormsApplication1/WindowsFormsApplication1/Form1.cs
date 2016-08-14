@@ -216,13 +216,10 @@ namespace WindowsFormsApplication1
             DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
             for (int i = 0; i < servers.Rows.Count; i++)
             {
-                if (myServer == servers.Rows[i]["ServerName"].ToString()) ///// used to get the servers in the local machine////
-                {
-                    if ((servers.Rows[i]["InstanceName"] as string) != null)
-                        this.comboBox1.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
-                    else
-                        this.comboBox1.Items.Add(servers.Rows[i]["ServerName"]);
-                }
+                if ((servers.Rows[i]["InstanceName"] as string) != null)
+                    this.comboBox1.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
+                else
+                    this.comboBox1.Items.Add(servers.Rows[i]["ServerName"]);
             }
 
 
@@ -231,6 +228,7 @@ namespace WindowsFormsApplication1
 
         private void populateDatabaseDropdown()
         {
+            this.comboBox2.Items.Clear();
             // http://stackoverflow.com/questions/12862604/c-sharp-connect-to-database-and-list-the-databases
             var connectionString = "Data Source=" + this.comboBox1.Text + ";" +
             //"Initial Catalog=test;" +
@@ -460,23 +458,9 @@ namespace WindowsFormsApplication1
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBox2.Enabled)
+            if (comboBox2.Enabled)
             {
                 populateDatabaseDropdown();
-            }
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!comboBox1.Enabled)
-            {
-                this.comboBox1.Enabled = true;
-                this.checkBox2.Enabled = true;
-            }
-            else
-            {
-                this.comboBox1.Enabled = false;
-                this.checkBox2.Enabled = false;
             }
         }
 
@@ -507,5 +491,5 @@ namespace WindowsFormsApplication1
 
 
 
-        }
+    }
 }
