@@ -212,7 +212,6 @@ namespace WindowsFormsApplication1
 
 
             // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
-            string myServer = Environment.MachineName;
             DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
             for (int i = 0; i < servers.Rows.Count; i++)
             {
