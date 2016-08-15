@@ -37,6 +37,7 @@ namespace WindowsFormsApplication1
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -80,7 +81,7 @@ namespace WindowsFormsApplication1
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(418, 518);
+            this.button1.Location = new System.Drawing.Point(418, 557);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -95,21 +96,32 @@ namespace WindowsFormsApplication1
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Location = new System.Drawing.Point(13, 13);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(480, 499);
+            this.panel1.Size = new System.Drawing.Size(480, 538);
             this.panel1.TabIndex = 1;
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.checkBox2);
             this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Controls.Add(this.comboBox2);
             this.groupBox2.Location = new System.Drawing.Point(16, 170);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(450, 78);
+            this.groupBox2.Size = new System.Drawing.Size(450, 110);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Selection";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(357, 48);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 13;
+            this.button2.Text = "Connect";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
@@ -123,7 +135,8 @@ namespace WindowsFormsApplication1
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(15, 49);
+            this.checkBox2.Enabled = false;
+            this.checkBox2.Location = new System.Drawing.Point(15, 79);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(106, 17);
             this.checkBox2.TabIndex = 11;
@@ -134,9 +147,9 @@ namespace WindowsFormsApplication1
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(312, 20);
+            this.comboBox1.Location = new System.Drawing.Point(231, 20);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.Size = new System.Drawing.Size(202, 21);
             this.comboBox1.TabIndex = 2;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -144,9 +157,9 @@ namespace WindowsFormsApplication1
             // 
             this.comboBox2.Enabled = false;
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(312, 47);
+            this.comboBox2.Location = new System.Drawing.Point(231, 77);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.Size = new System.Drawing.Size(202, 21);
             this.comboBox2.TabIndex = 9;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
@@ -163,7 +176,7 @@ namespace WindowsFormsApplication1
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox1.Location = new System.Drawing.Point(16, 254);
+            this.groupBox1.Location = new System.Drawing.Point(16, 297);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(450, 226);
             this.groupBox1.TabIndex = 7;
@@ -403,7 +416,7 @@ namespace WindowsFormsApplication1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 547);
+            this.ClientSize = new System.Drawing.Size(505, 588);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
@@ -458,6 +471,7 @@ namespace WindowsFormsApplication1
         private GroupBox groupBox2;
         private CheckBox checkBox2;
         private Label label1;
+        private Button button2;
     }
 }
 
