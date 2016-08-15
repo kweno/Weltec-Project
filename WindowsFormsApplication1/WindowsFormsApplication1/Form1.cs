@@ -25,19 +25,88 @@ namespace WindowsFormsApplication1
 
     public partial class Form1 : Form
     {
-        /// <summary>
+        // https://support.microsoft.com/en-nz/kb/307010
+        //  Call this function to remove the key from memory after use for security
+        [System.Runtime.InteropServices.DllImport("KERNEL32.DLL", EntryPoint = "RtlZeroMemory")]
+        public static extern bool ZeroMemory(IntPtr Destination, int Length);
+
+        // Function to Generate a 64 bits Key.
+        private string GenerateKey()
+        {
+            // Create an instance of Symetric Algorithm. Key and IV is generated automatically.
+            DESCryptoServiceProvider desCrypto = (DESCryptoServiceProvider)DESCryptoServiceProvider.Create();
+
+            // Use the Automatically generated key for Encryption. 
+            return ASCIIEncoding.ASCII.GetString(desCrypto.Key);
+        }
+
+        private void EncryptFile(string sInputFilename,
+           string sOutputFilename,
+           string sKey)
+        {
+            FileStream fsInput = new FileStream(sInputFilename,
+               FileMode.Open,
+               FileAccess.Read);
+
+            FileStream fsEncrypted = new FileStream(sOutputFilename,
+               FileMode.Create,
+               FileAccess.Write);
+            DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+            DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
+            DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
+            ICryptoTransform desencrypt = DES.CreateEncryptor();
+            CryptoStream cryptostream = new CryptoStream(fsEncrypted,
+               desencrypt,
+               CryptoStreamMode.Write);
+
+            byte[] bytearrayinput = new byte[fsInput.Length];
+            fsInput.Read(bytearrayinput, 0, bytearrayinput.Length);
+            cryptostream.Write(bytearrayinput, 0, bytearrayinput.Length);
+            cryptostream.Close();
+            fsInput.Close();
+            fsEncrypted.Close();
+        }
+
+        private void DecryptFile(string sInputFilename,
+           string sOutputFilename,
+           string sKey)
+        {
+            DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+            //A 64 bit key and IV is required for this provider.
+            //Set secret key For DES algorithm.
+            DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
+            //Set initialization vector.
+            DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
+
+            //Create a file stream to read the encrypted file back.
+            FileStream fsread = new FileStream(sInputFilename,
+               FileMode.Open,
+               FileAccess.Read);
+            //Create a DES decryptor from the DES instance.
+            ICryptoTransform desdecrypt = DES.CreateDecryptor();
+            //Create crypto stream set to read and do a 
+            //DES decryption transform on incoming bytes.
+            CryptoStream cryptostreamDecr = new CryptoStream(fsread,
+               desdecrypt,
+               CryptoStreamMode.Read);
+            //Print the contents of the decrypted file.
+            StreamWriter fsDecrypted = new StreamWriter(sOutputFilename);
+            fsDecrypted.Write(new StreamReader(cryptostreamDecr).ReadToEnd());
+            fsDecrypted.Flush();
+            fsDecrypted.Close();
+        }
+
         /// The backgroundworker object on which the time consuming operation shall be executed
         /// http://www.codeproject.com/Articles/99143/BackgroundWorker-Class-Sample-for-Beginners
-        /// </summary>
         BackgroundWorker m_oWorker;
 
         public Form1()
         {
             InitializeComponent();
             populateServerDropdown();
-            populateInstanceDropdown();
 
-            // uncomment
+            this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
+
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -61,14 +130,6 @@ namespace WindowsFormsApplication1
             SqlCommand command;
             string sql = null;
             SqlDataReader dataReader;
-
-            // http://stackoverflow.com/questions/9718057/how-to-create-a-single-setup-exe-with-installshield-limited-edition
-            // https://www.connectionstrings.com/sql-server-2012/
-            //connectionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";            
-            //connectionString = "Server= "+ this.serverName + "\\"+ instances.FirstOrDefault() + "; Database= test; Integrated Security = SSPI; ";
-            //connectionString = "Data Source=" + this.serverName + "\\" + instances.FirstOrDefault() + "; Initial Catalog= test; Integrated Security = SSPI; Connection Timeout=10;";
-            //connectionString = "Server= " + this.serverName + "\\SQLEXPRESS; Database= test; Integrated Security = SSPI; ";
-            //connectionString = "Data Source=DESKTOP-FVFO8GL\SQLEXPRESS;Initial Catalog=test;Integrated Security=SSPI;Connection Timeout=10;" //NT Authentication
 
             // http://stackoverflow.com/questions/15631602/how-to-set-sql-server-connection-string
             connectionString =
@@ -106,7 +167,6 @@ namespace WindowsFormsApplication1
             catch (Exception ex)
             {
                 MessageBox.Show("Can not open connection ! ");
-                //MessageBox.Show(ex.ToString());
             }
 
             //MessageBox.Show("Current Working Directory: " + Directory.GetCurrentDirectory());
@@ -210,7 +270,6 @@ namespace WindowsFormsApplication1
             //bindingSource1.DataSource = listOfServers;
             //this.comboBox1.DataSource = bindingSource1;
 
-
             // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
             DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
             for (int i = 0; i < servers.Rows.Count; i++)
@@ -220,9 +279,6 @@ namespace WindowsFormsApplication1
                 else
                     this.comboBox1.Items.Add(servers.Rows[i]["ServerName"]);
             }
-
-
-
         }
 
         private void populateDatabaseDropdown()
@@ -245,32 +301,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void populateInstanceDropdown()
-        {
-            //var localMachine = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
-            //var rk = localMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
-            //var instances = (String[])rk.GetValue("InstalledInstances");
-
-            //if (instances == null)
-            //{
-            //    rk = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server");
-            //    instances = (String[])rk.GetValue("InstalledInstances");
-            //}
-            //var bindingSource2 = new BindingSource();
-            //bindingSource2.DataSource = instances;
-            //this.comboBox2.DataSource = bindingSource2;
-            //localMachine.Close();
-            //rk.Close();
-        }
-
-        private string serverName = "";
-        private string instanceName = "";
-
-        /// <summary>
         /// On completed do the appropriate task
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         void m_oWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //If it was cancelled midway
@@ -290,11 +321,7 @@ namespace WindowsFormsApplication1
             //btnCancel.Enabled = false;
         }
 
-        /// <summary>
         /// Notification is performed here to the progress bar
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         void m_oWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //Here you play with the main UI thread
@@ -335,12 +362,8 @@ namespace WindowsFormsApplication1
             //this.label2.Text = "Processing......";// + progressBar1.Value.ToString() + "%";
         }
 
-        /// <summary>
         /// Time consuming operations go here </br>
         /// i.e. Database operations,Reporting
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         void m_oWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             //NOTE : Never play with the UI thread here...
@@ -379,76 +402,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        // https://support.microsoft.com/en-nz/kb/307010
-        //  Call this function to remove the key from memory after use for security
-        [System.Runtime.InteropServices.DllImport("KERNEL32.DLL", EntryPoint = "RtlZeroMemory")]
-        public static extern bool ZeroMemory(IntPtr Destination, int Length);
-
-        // Function to Generate a 64 bits Key.
-        private string GenerateKey()
-        {
-            // Create an instance of Symetric Algorithm. Key and IV is generated automatically.
-            DESCryptoServiceProvider desCrypto = (DESCryptoServiceProvider)DESCryptoServiceProvider.Create();
-
-            // Use the Automatically generated key for Encryption. 
-            return ASCIIEncoding.ASCII.GetString(desCrypto.Key);
-        }
-
-        private void EncryptFile(string sInputFilename,
-           string sOutputFilename,
-           string sKey)
-        {
-            FileStream fsInput = new FileStream(sInputFilename,
-               FileMode.Open,
-               FileAccess.Read);
-
-            FileStream fsEncrypted = new FileStream(sOutputFilename,
-               FileMode.Create,
-               FileAccess.Write);
-            DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
-            DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
-            DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
-            ICryptoTransform desencrypt = DES.CreateEncryptor();
-            CryptoStream cryptostream = new CryptoStream(fsEncrypted,
-               desencrypt,
-               CryptoStreamMode.Write);
-
-            byte[] bytearrayinput = new byte[fsInput.Length];
-            fsInput.Read(bytearrayinput, 0, bytearrayinput.Length);
-            cryptostream.Write(bytearrayinput, 0, bytearrayinput.Length);
-            cryptostream.Close();
-            fsInput.Close();
-            fsEncrypted.Close();
-        }
-
-        private void DecryptFile(string sInputFilename,
-           string sOutputFilename,
-           string sKey)
-        {
-            DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
-            //A 64 bit key and IV is required for this provider.
-            //Set secret key For DES algorithm.
-            DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
-            //Set initialization vector.
-            DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
-
-            //Create a file stream to read the encrypted file back.
-            FileStream fsread = new FileStream(sInputFilename,
-               FileMode.Open,
-               FileAccess.Read);
-            //Create a DES decryptor from the DES instance.
-            ICryptoTransform desdecrypt = DES.CreateDecryptor();
-            //Create crypto stream set to read and do a 
-            //DES decryption transform on incoming bytes.
-            CryptoStream cryptostreamDecr = new CryptoStream(fsread,
-               desdecrypt,
-               CryptoStreamMode.Read);
-            //Print the contents of the decrypted file.
-            StreamWriter fsDecrypted = new StreamWriter(sOutputFilename);
-            fsDecrypted.Write(new StreamReader(cryptostreamDecr).ReadToEnd());
-            fsDecrypted.Flush();
-            fsDecrypted.Close();
-        }
+        
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -457,9 +411,12 @@ namespace WindowsFormsApplication1
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox2.Enabled)
+            if (checkBox2.Enabled)
             {
-                populateDatabaseDropdown();
+                checkBox2.Checked = false;
+                checkBox2.Enabled = false;
+                comboBox2.Enabled = false;
+                this.comboBox2.Text = "";
             }
         }
 
@@ -469,22 +426,49 @@ namespace WindowsFormsApplication1
             {
                 this.comboBox2.Enabled = true;
                 populateDatabaseDropdown();
+                this.tableLayoutPanel2.Enabled = true;
             }
             else
             {
                 this.comboBox2.Enabled = false;
                 this.comboBox2.Items.Clear();
+                this.tableLayoutPanel2.Enabled = false;
             }
         }
 
-        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            if (comboBox2.Enabled)
+            string connectionString = null;
+            SqlConnection connection;
+            connectionString =
+            "Data Source=" + this.comboBox1.Text + ";" +
+            "Integrated Security=SSPI;";
+            connection = new SqlConnection(connectionString);
+            try
             {
+                connection.Open();
+                connection.Close();
+                this.checkBox2.Enabled = true;
                 populateDatabaseDropdown();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Can not open connection ! ");
+            }
+
         }
 
+        private void comboBox1_TextChanged(Object sender, EventArgs e)
+        {
+            if (checkBox2.Enabled)
+            {
+                checkBox2.Checked = false;
+                checkBox2.Enabled = false;
+                comboBox2.Enabled = false;
+                this.comboBox2.Text = "";
+                this.tableLayoutPanel2.Enabled = false;
+            }
+        }
 
 
 
