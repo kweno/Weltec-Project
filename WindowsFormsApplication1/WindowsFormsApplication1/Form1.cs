@@ -427,11 +427,13 @@ namespace WindowsFormsApplication1
             {
                 this.comboBox2.Enabled = true;
                 populateDatabaseDropdown();
+                this.tableLayoutPanel2.Enabled = true;
             }
             else
             {
                 this.comboBox2.Enabled = false;
                 this.comboBox2.Items.Clear();
+                this.tableLayoutPanel2.Enabled = false;
             }
         }
 
@@ -465,6 +467,7 @@ namespace WindowsFormsApplication1
                 checkBox2.Enabled = false;
                 comboBox2.Enabled = false;
                 this.comboBox2.Text = "";
+                this.tableLayoutPanel2.Enabled = false;
             }
         }
 
