@@ -4,9 +4,9 @@ using System.Data.Sql;
 using System.Windows.Forms;
 using System.Linq;
 
-namespace ClientApplication
+namespace DatabaseEvaluator
 {
-    partial class ClientApplicationMain_Form
+    partial class DatabaseEvaluatorMain_Form : Form
     {
         /// <summary>
         /// Required designer variable.
@@ -34,7 +34,7 @@ namespace ClientApplication
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientApplicationMain_Form));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DatabaseEvaluatorMain_Form));
             this.Start_Button = new System.Windows.Forms.Button();
             this.Main_Panel = new System.Windows.Forms.Panel();
             this.Selection_GroupBox = new System.Windows.Forms.GroupBox();
@@ -168,7 +168,7 @@ namespace ClientApplication
             // 
             // Logo_PictureBox
             // 
-            this.Logo_PictureBox.Image = global::ClientApplication.Properties.Resources.header_logo_alpha;
+            this.Logo_PictureBox.Image = global::DatabaseEvaluator.Properties.Resources.header_logo_alpha;
             this.Logo_PictureBox.Location = new System.Drawing.Point(120, 12);
             this.Logo_PictureBox.Name = "Logo_PictureBox";
             this.Logo_PictureBox.Size = new System.Drawing.Size(235, 140);

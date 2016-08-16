@@ -20,10 +20,10 @@ using System.Threading;
 using System.Security.Cryptography;
 using System.Runtime.InteropServices;
 
-namespace ClientApplication
+namespace DatabaseEvaluator
 {
 
-    public partial class ClientApplicationMain_Form : Form
+    public partial class DatabaseEvaluatorMain_Form : Form
     {
         // https://support.microsoft.com/en-nz/kb/307010
         //  Call this function to remove the key from memory after use for security
@@ -100,7 +100,7 @@ namespace ClientApplication
         /// http://www.codeproject.com/Articles/99143/BackgroundWorker-Class-Sample-for-Beginners
         BackgroundWorker ClientApplication_BackgroundWorker;
 
-        public ClientApplicationMain_Form()
+        public DatabaseEvaluatorMain_Form()
         {
             InitializeComponent();
             populateServerDropdown();
@@ -328,35 +328,35 @@ namespace ClientApplication
             //progressBar1.Value = e.ProgressPercentage;
             if (e.ProgressPercentage == 1)
             {
-                this.InstanceMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+                this.InstanceMainProgress_PictureBox.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
             }
             else if (e.ProgressPercentage == 10)
             {
-                this.InstanceProgress_PictureBox1.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+                this.InstanceProgress_PictureBox1.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
             }
             else if (e.ProgressPercentage == 14)
             {
-                this.InstanceProgress_PictureBox1.Image = global::ClientApplication.Properties.Resources.success;
+                this.InstanceProgress_PictureBox1.Image = global::WindowsFormsApplication1.Properties.Resources.success;
             }
             else if (e.ProgressPercentage == 15)
             {
-                this.InstanceProgress_PictureBox2.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+                this.InstanceProgress_PictureBox2.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
             }
             else if (e.ProgressPercentage == 28)
             {
-                this.InstanceProgress_PictureBox2.Image = global::ClientApplication.Properties.Resources.success;
+                this.InstanceProgress_PictureBox2.Image = global::WindowsFormsApplication1.Properties.Resources.success;
             }
             else if (e.ProgressPercentage == 29)
             {
-                this.InstanceProgress_PictureBox3.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+                this.InstanceProgress_PictureBox3.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
             }
             else if (e.ProgressPercentage == 42)
             {
-                this.InstanceProgress_PictureBox3.Image = global::ClientApplication.Properties.Resources.success;
+                this.InstanceProgress_PictureBox3.Image = global::WindowsFormsApplication1.Properties.Resources.success;
             }
             else if (e.ProgressPercentage == 43)
             {
-                this.InstanceMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.success;
+                this.InstanceMainProgress_PictureBox.Image = global::WindowsFormsApplication1.Properties.Resources.success;
             }
 
             //this.label2.Text = "Processing......";// + progressBar1.Value.ToString() + "%";

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using WindowsFormsApplication1.Properties;
+using ClientApplication.Properties;
 
-namespace WindowsFormsApplication1
+namespace ClientApplication
 {
     public partial class SplashScreen_Form : Form
     {

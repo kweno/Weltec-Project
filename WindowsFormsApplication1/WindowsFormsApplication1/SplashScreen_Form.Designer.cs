@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace ClientApplication
 {
     partial class SplashScreen_Form
     {
