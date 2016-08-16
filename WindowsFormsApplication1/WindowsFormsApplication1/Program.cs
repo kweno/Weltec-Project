@@ -9,7 +9,7 @@ namespace WindowsFormsApplication1
 {
     static class Program
     {
-        public static SplashForm splashForm = null;
+        public static SplashScreen_Form splashForm = null;
 
         /// <summary>
         /// The main entry point for the application.
@@ -28,7 +28,7 @@ namespace WindowsFormsApplication1
             Thread splashThread = new Thread(new ThreadStart(
                 delegate
                 {
-                    splashForm = new SplashForm();
+                    splashForm = new SplashScreen_Form();
                     Application.Run(splashForm);
                 }
                 ));
@@ -37,7 +37,7 @@ namespace WindowsFormsApplication1
             splashThread.Start();
 
             //run form - time taking operation
-            Form mainForm = new Form1();
+            Form mainForm = new ClientApplication_Form();
             mainForm.Load += new EventHandler(mainForm_Load);
             Application.Run(mainForm);
         }

@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication1
 {
-    partial class SplashForm
+    partial class SplashScreen_Form
     {
         /// <summary>
         /// Required designer variable.
@@ -28,45 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.Splash_ProgressBar = new System.Windows.Forms.ProgressBar();
+            this.Logo_PictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.Logo_PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // progressBar1
+            // Splash_ProgressBar
             // 
-            this.progressBar1.Location = new System.Drawing.Point(13, 91);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(412, 23);
-            this.progressBar1.TabIndex = 0;
+            this.Splash_ProgressBar.Location = new System.Drawing.Point(13, 91);
+            this.Splash_ProgressBar.Name = "Splash_ProgressBar";
+            this.Splash_ProgressBar.Size = new System.Drawing.Size(412, 23);
+            this.Splash_ProgressBar.TabIndex = 0;
             // 
-            // pictureBox1
+            // Logo_PictureBox
             // 
-            this.pictureBox1.Image = global::WindowsFormsApplication1.Properties.Resources.header_logo_alpha;
-            this.pictureBox1.Location = new System.Drawing.Point(140, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(144, 84);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
+            this.Logo_PictureBox.Image = global::WindowsFormsApplication1.Properties.Resources.header_logo_alpha;
+            this.Logo_PictureBox.Location = new System.Drawing.Point(140, 5);
+            this.Logo_PictureBox.Name = "Logo_PictureBox";
+            this.Logo_PictureBox.Size = new System.Drawing.Size(144, 84);
+            this.Logo_PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Logo_PictureBox.TabIndex = 2;
+            this.Logo_PictureBox.TabStop = false;
             // 
-            // SplashForm
+            // SplashScreen_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(437, 126);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.progressBar1);
-            this.Name = "SplashForm";
+            this.Controls.Add(this.Logo_PictureBox);
+            this.Controls.Add(this.Splash_ProgressBar);
+            this.Name = "SplashScreen_Form";
             this.Text = "Database Evaluator";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Logo_PictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ProgressBar Splash_ProgressBar;
+        private System.Windows.Forms.PictureBox Logo_PictureBox;
     }
 }

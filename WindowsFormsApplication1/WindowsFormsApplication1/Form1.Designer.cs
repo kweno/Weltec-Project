@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace WindowsFormsApplication1
 {
-    partial class Form1
+    partial class ClientApplication_Form
     {
         /// <summary>
         /// Required designer variable.
@@ -34,466 +34,466 @@ namespace WindowsFormsApplication1
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.pictureBox12 = new System.Windows.Forms.PictureBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.pictureBox13 = new System.Windows.Forms.PictureBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.pictureBox14 = new System.Windows.Forms.PictureBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.pictureBox15 = new System.Windows.Forms.PictureBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientApplication_Form));
+            this.Start_Button = new System.Windows.Forms.Button();
+            this.Main_Panel = new System.Windows.Forms.Panel();
+            this.Selection_GroupBox = new System.Windows.Forms.GroupBox();
+            this.Connect_Button = new System.Windows.Forms.Button();
+            this.ServerName_Label = new System.Windows.Forms.Label();
+            this.DatabaseName_CheckBox = new System.Windows.Forms.CheckBox();
+            this.Server_ComboBox = new System.Windows.Forms.ComboBox();
+            this.Database_ComboBox = new System.Windows.Forms.ComboBox();
+            this.Logo_PictureBox = new System.Windows.Forms.PictureBox();
+            this.Progress_GroupBox = new System.Windows.Forms.GroupBox();
+            this.Database_TableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.DatabaseProgress_Label4 = new System.Windows.Forms.Label();
+            this.DatabaseProgress_PictureBox4 = new System.Windows.Forms.PictureBox();
+            this.DatabaseProgress_Label3 = new System.Windows.Forms.Label();
+            this.DatabaseProgress_PictureBox3 = new System.Windows.Forms.PictureBox();
+            this.DatabaseProgress_Label2 = new System.Windows.Forms.Label();
+            this.DatabaseProgress_PictureBox2 = new System.Windows.Forms.PictureBox();
+            this.DatabaseProgress_Label1 = new System.Windows.Forms.Label();
+            this.DatabaseProgress_PictureBox1 = new System.Windows.Forms.PictureBox();
+            this.DatabaseMainProgress_Label = new System.Windows.Forms.Label();
+            this.DatabaseMainProgress_PictureBox = new System.Windows.Forms.PictureBox();
+            this.Instance_TableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.InstanceProgress_Label3 = new System.Windows.Forms.Label();
+            this.InstanceProgress_PictureBox3 = new System.Windows.Forms.PictureBox();
+            this.InstanceProgress_Label2 = new System.Windows.Forms.Label();
+            this.InstanceProgress_PictureBox2 = new System.Windows.Forms.PictureBox();
+            this.InstanceMainProgress_PictureBox = new System.Windows.Forms.PictureBox();
+            this.InstanceMainProgress_Label = new System.Windows.Forms.Label();
+            this.InstanceProgress_PictureBox1 = new System.Windows.Forms.PictureBox();
+            this.InstanceProgress_Label1 = new System.Windows.Forms.Label();
+            this.Main_Panel.SuspendLayout();
+            this.Selection_GroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Logo_PictureBox)).BeginInit();
+            this.Progress_GroupBox.SuspendLayout();
+            this.Database_TableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DatabaseProgress_PictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DatabaseProgress_PictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DatabaseProgress_PictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DatabaseProgress_PictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DatabaseMainProgress_PictureBox)).BeginInit();
+            this.Instance_TableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InstanceProgress_PictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InstanceProgress_PictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InstanceMainProgress_PictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InstanceProgress_PictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // Start_Button
             // 
-            this.button1.Location = new System.Drawing.Point(404, 574);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Start";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Start_Button.Location = new System.Drawing.Point(404, 574);
+            this.Start_Button.Name = "Start_Button";
+            this.Start_Button.Size = new System.Drawing.Size(75, 23);
+            this.Start_Button.TabIndex = 0;
+            this.Start_Button.Text = "Start";
+            this.Start_Button.UseVisualStyleBackColor = true;
+            this.Start_Button.Click += new System.EventHandler(this.Start_Button_Click);
             // 
-            // panel1
+            // Main_Panel
             // 
-            this.panel1.Controls.Add(this.groupBox2);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Location = new System.Drawing.Point(13, 13);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(480, 555);
-            this.panel1.TabIndex = 1;
+            this.Main_Panel.Controls.Add(this.Selection_GroupBox);
+            this.Main_Panel.Controls.Add(this.Logo_PictureBox);
+            this.Main_Panel.Controls.Add(this.Progress_GroupBox);
+            this.Main_Panel.Location = new System.Drawing.Point(13, 13);
+            this.Main_Panel.Name = "Main_Panel";
+            this.Main_Panel.Size = new System.Drawing.Size(480, 555);
+            this.Main_Panel.TabIndex = 1;
             // 
-            // groupBox2
+            // Selection_GroupBox
             // 
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.checkBox2);
-            this.groupBox2.Controls.Add(this.comboBox1);
-            this.groupBox2.Controls.Add(this.comboBox2);
-            this.groupBox2.Location = new System.Drawing.Point(16, 170);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(450, 110);
-            this.groupBox2.TabIndex = 12;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Selection";
+            this.Selection_GroupBox.Controls.Add(this.Connect_Button);
+            this.Selection_GroupBox.Controls.Add(this.ServerName_Label);
+            this.Selection_GroupBox.Controls.Add(this.DatabaseName_CheckBox);
+            this.Selection_GroupBox.Controls.Add(this.Server_ComboBox);
+            this.Selection_GroupBox.Controls.Add(this.Database_ComboBox);
+            this.Selection_GroupBox.Location = new System.Drawing.Point(16, 170);
+            this.Selection_GroupBox.Name = "Selection_GroupBox";
+            this.Selection_GroupBox.Size = new System.Drawing.Size(450, 110);
+            this.Selection_GroupBox.TabIndex = 12;
+            this.Selection_GroupBox.TabStop = false;
+            this.Selection_GroupBox.Text = "Selection";
             // 
-            // button2
+            // Connect_Button
             // 
-            this.button2.Location = new System.Drawing.Point(357, 48);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Connect";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.Connect_Button.Location = new System.Drawing.Point(357, 48);
+            this.Connect_Button.Name = "Connect_Button";
+            this.Connect_Button.Size = new System.Drawing.Size(75, 23);
+            this.Connect_Button.TabIndex = 13;
+            this.Connect_Button.Text = "Connect";
+            this.Connect_Button.UseVisualStyleBackColor = true;
+            this.Connect_Button.Click += new System.EventHandler(this.Connect_Button_Click);
             // 
-            // label1
+            // ServerName_Label
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Server Name:";
+            this.ServerName_Label.AutoSize = true;
+            this.ServerName_Label.Location = new System.Drawing.Point(12, 23);
+            this.ServerName_Label.Name = "ServerName_Label";
+            this.ServerName_Label.Size = new System.Drawing.Size(72, 13);
+            this.ServerName_Label.TabIndex = 12;
+            this.ServerName_Label.Text = "Server Name:";
             // 
-            // checkBox2
+            // DatabaseName_CheckBox
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Enabled = false;
-            this.checkBox2.Location = new System.Drawing.Point(15, 79);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(106, 17);
-            this.checkBox2.TabIndex = 11;
-            this.checkBox2.Text = "Database Name:";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.DatabaseName_CheckBox.AutoSize = true;
+            this.DatabaseName_CheckBox.Enabled = false;
+            this.DatabaseName_CheckBox.Location = new System.Drawing.Point(15, 79);
+            this.DatabaseName_CheckBox.Name = "DatabaseName_CheckBox";
+            this.DatabaseName_CheckBox.Size = new System.Drawing.Size(106, 17);
+            this.DatabaseName_CheckBox.TabIndex = 11;
+            this.DatabaseName_CheckBox.Text = "Database Name:";
+            this.DatabaseName_CheckBox.UseVisualStyleBackColor = true;
+            this.DatabaseName_CheckBox.CheckedChanged += new System.EventHandler(this.DatabaseName_CheckedChanged);
             // 
-            // comboBox1
+            // Server_ComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(231, 20);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(202, 21);
-            this.comboBox1.TabIndex = 2;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.Server_ComboBox.FormattingEnabled = true;
+            this.Server_ComboBox.Location = new System.Drawing.Point(231, 20);
+            this.Server_ComboBox.Name = "Server_ComboBox";
+            this.Server_ComboBox.Size = new System.Drawing.Size(202, 21);
+            this.Server_ComboBox.TabIndex = 2;
+            this.Server_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Server_ComboBox_SelectedIndexChanged);
             // 
-            // comboBox2
+            // Database_ComboBox
             // 
-            this.comboBox2.Enabled = false;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(231, 77);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(202, 21);
-            this.comboBox2.TabIndex = 9;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.Database_ComboBox.Enabled = false;
+            this.Database_ComboBox.FormattingEnabled = true;
+            this.Database_ComboBox.Location = new System.Drawing.Point(231, 77);
+            this.Database_ComboBox.Name = "Database_ComboBox";
+            this.Database_ComboBox.Size = new System.Drawing.Size(202, 21);
+            this.Database_ComboBox.TabIndex = 9;
+            this.Database_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Database_ComboBox_SelectedIndexChanged);
             // 
-            // pictureBox1
+            // Logo_PictureBox
             // 
-            this.pictureBox1.Image = global::WindowsFormsApplication1.Properties.Resources.header_logo_alpha;
-            this.pictureBox1.Location = new System.Drawing.Point(120, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(235, 140);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.Logo_PictureBox.Image = global::WindowsFormsApplication1.Properties.Resources.header_logo_alpha;
+            this.Logo_PictureBox.Location = new System.Drawing.Point(120, 12);
+            this.Logo_PictureBox.Name = "Logo_PictureBox";
+            this.Logo_PictureBox.Size = new System.Drawing.Size(235, 140);
+            this.Logo_PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Logo_PictureBox.TabIndex = 0;
+            this.Logo_PictureBox.TabStop = false;
             // 
-            // groupBox1
+            // Progress_GroupBox
             // 
-            this.groupBox1.Controls.Add(this.tableLayoutPanel2);
-            this.groupBox1.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox1.Location = new System.Drawing.Point(16, 297);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(450, 244);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Progress";
+            this.Progress_GroupBox.Controls.Add(this.Database_TableLayoutPanel);
+            this.Progress_GroupBox.Controls.Add(this.Instance_TableLayoutPanel);
+            this.Progress_GroupBox.Location = new System.Drawing.Point(16, 297);
+            this.Progress_GroupBox.Name = "Progress_GroupBox";
+            this.Progress_GroupBox.Size = new System.Drawing.Size(450, 244);
+            this.Progress_GroupBox.TabIndex = 7;
+            this.Progress_GroupBox.TabStop = false;
+            this.Progress_GroupBox.Text = "Progress";
             // 
-            // tableLayoutPanel2
+            // Database_TableLayoutPanel
             // 
-            this.tableLayoutPanel2.BackColor = System.Drawing.Color.White;
-            this.tableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.755396F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 94.24461F));
-            this.tableLayoutPanel2.Controls.Add(this.label3, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.pictureBox11, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label12, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.pictureBox12, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label13, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.pictureBox13, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label14, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.pictureBox14, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label15, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.pictureBox15, 0, 0);
-            this.tableLayoutPanel2.Enabled = false;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(15, 119);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 5;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 19F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 19F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(418, 107);
-            this.tableLayoutPanel2.TabIndex = 0;
+            this.Database_TableLayoutPanel.BackColor = System.Drawing.Color.White;
+            this.Database_TableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.Database_TableLayoutPanel.ColumnCount = 2;
+            this.Database_TableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.755396F));
+            this.Database_TableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 94.24461F));
+            this.Database_TableLayoutPanel.Controls.Add(this.DatabaseProgress_Label4, 1, 4);
+            this.Database_TableLayoutPanel.Controls.Add(this.DatabaseProgress_PictureBox4, 0, 4);
+            this.Database_TableLayoutPanel.Controls.Add(this.DatabaseProgress_Label3, 1, 3);
+            this.Database_TableLayoutPanel.Controls.Add(this.DatabaseProgress_PictureBox3, 0, 3);
+            this.Database_TableLayoutPanel.Controls.Add(this.DatabaseProgress_Label2, 1, 2);
+            this.Database_TableLayoutPanel.Controls.Add(this.DatabaseProgress_PictureBox2, 0, 2);
+            this.Database_TableLayoutPanel.Controls.Add(this.DatabaseProgress_Label1, 1, 1);
+            this.Database_TableLayoutPanel.Controls.Add(this.DatabaseProgress_PictureBox1, 0, 1);
+            this.Database_TableLayoutPanel.Controls.Add(this.DatabaseMainProgress_Label, 1, 0);
+            this.Database_TableLayoutPanel.Controls.Add(this.DatabaseMainProgress_PictureBox, 0, 0);
+            this.Database_TableLayoutPanel.Enabled = false;
+            this.Database_TableLayoutPanel.Location = new System.Drawing.Point(15, 119);
+            this.Database_TableLayoutPanel.Name = "Database_TableLayoutPanel";
+            this.Database_TableLayoutPanel.RowCount = 5;
+            this.Database_TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.Database_TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.Database_TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.Database_TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 19F));
+            this.Database_TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 19F));
+            this.Database_TableLayoutPanel.Size = new System.Drawing.Size(418, 107);
+            this.Database_TableLayoutPanel.TabIndex = 0;
             // 
-            // label3
+            // DatabaseProgress_Label4
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 89);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 13);
-            this.label3.TabIndex = 19;
-            this.label3.Text = "   • Security";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.DatabaseProgress_Label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.DatabaseProgress_Label4.AutoSize = true;
+            this.DatabaseProgress_Label4.Location = new System.Drawing.Point(28, 89);
+            this.DatabaseProgress_Label4.Name = "DatabaseProgress_Label4";
+            this.DatabaseProgress_Label4.Size = new System.Drawing.Size(63, 13);
+            this.DatabaseProgress_Label4.TabIndex = 19;
+            this.DatabaseProgress_Label4.Text = "   • Security";
+            this.DatabaseProgress_Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pictureBox11
+            // DatabaseProgress_PictureBox4
             // 
-            this.pictureBox11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox11.Location = new System.Drawing.Point(4, 88);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(17, 15);
-            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox11.TabIndex = 18;
-            this.pictureBox11.TabStop = false;
+            this.DatabaseProgress_PictureBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DatabaseProgress_PictureBox4.Location = new System.Drawing.Point(4, 88);
+            this.DatabaseProgress_PictureBox4.Name = "DatabaseProgress_PictureBox4";
+            this.DatabaseProgress_PictureBox4.Size = new System.Drawing.Size(17, 15);
+            this.DatabaseProgress_PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DatabaseProgress_PictureBox4.TabIndex = 18;
+            this.DatabaseProgress_PictureBox4.TabStop = false;
             // 
-            // label12
+            // DatabaseProgress_Label3
             // 
-            this.label12.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(28, 68);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(87, 13);
-            this.label12.TabIndex = 17;
-            this.label12.Text = "   • Maintenance";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.DatabaseProgress_Label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.DatabaseProgress_Label3.AutoSize = true;
+            this.DatabaseProgress_Label3.Location = new System.Drawing.Point(28, 68);
+            this.DatabaseProgress_Label3.Name = "DatabaseProgress_Label3";
+            this.DatabaseProgress_Label3.Size = new System.Drawing.Size(87, 13);
+            this.DatabaseProgress_Label3.TabIndex = 17;
+            this.DatabaseProgress_Label3.Text = "   • Maintenance";
+            this.DatabaseProgress_Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pictureBox12
+            // DatabaseProgress_PictureBox3
             // 
-            this.pictureBox12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox12.Location = new System.Drawing.Point(4, 68);
-            this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(17, 13);
-            this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox12.TabIndex = 16;
-            this.pictureBox12.TabStop = false;
+            this.DatabaseProgress_PictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DatabaseProgress_PictureBox3.Location = new System.Drawing.Point(4, 68);
+            this.DatabaseProgress_PictureBox3.Name = "DatabaseProgress_PictureBox3";
+            this.DatabaseProgress_PictureBox3.Size = new System.Drawing.Size(17, 13);
+            this.DatabaseProgress_PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DatabaseProgress_PictureBox3.TabIndex = 16;
+            this.DatabaseProgress_PictureBox3.TabStop = false;
             // 
-            // label13
+            // DatabaseProgress_Label2
             // 
-            this.label13.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(28, 47);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(175, 13);
-            this.label13.TabIndex = 15;
-            this.label13.Text = "   • Database Configuration Options";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.DatabaseProgress_Label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.DatabaseProgress_Label2.AutoSize = true;
+            this.DatabaseProgress_Label2.Location = new System.Drawing.Point(28, 47);
+            this.DatabaseProgress_Label2.Name = "DatabaseProgress_Label2";
+            this.DatabaseProgress_Label2.Size = new System.Drawing.Size(175, 13);
+            this.DatabaseProgress_Label2.TabIndex = 15;
+            this.DatabaseProgress_Label2.Text = "   • Database Configuration Options";
+            this.DatabaseProgress_Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pictureBox13
+            // DatabaseProgress_PictureBox2
             // 
-            this.pictureBox13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox13.Location = new System.Drawing.Point(4, 46);
-            this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(17, 15);
-            this.pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox13.TabIndex = 14;
-            this.pictureBox13.TabStop = false;
+            this.DatabaseProgress_PictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DatabaseProgress_PictureBox2.Location = new System.Drawing.Point(4, 46);
+            this.DatabaseProgress_PictureBox2.Name = "DatabaseProgress_PictureBox2";
+            this.DatabaseProgress_PictureBox2.Size = new System.Drawing.Size(17, 15);
+            this.DatabaseProgress_PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DatabaseProgress_PictureBox2.TabIndex = 14;
+            this.DatabaseProgress_PictureBox2.TabStop = false;
             // 
-            // label14
+            // DatabaseProgress_Label1
             // 
-            this.label14.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(28, 25);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(157, 13);
-            this.label14.TabIndex = 13;
-            this.label14.Text = "   • Implementation of Database";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.DatabaseProgress_Label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.DatabaseProgress_Label1.AutoSize = true;
+            this.DatabaseProgress_Label1.Location = new System.Drawing.Point(28, 25);
+            this.DatabaseProgress_Label1.Name = "DatabaseProgress_Label1";
+            this.DatabaseProgress_Label1.Size = new System.Drawing.Size(157, 13);
+            this.DatabaseProgress_Label1.TabIndex = 13;
+            this.DatabaseProgress_Label1.Text = "   • Implementation of Database";
+            this.DatabaseProgress_Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pictureBox14
+            // DatabaseProgress_PictureBox1
             // 
-            this.pictureBox14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox14.Location = new System.Drawing.Point(4, 25);
-            this.pictureBox14.Name = "pictureBox14";
-            this.pictureBox14.Size = new System.Drawing.Size(17, 14);
-            this.pictureBox14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox14.TabIndex = 12;
-            this.pictureBox14.TabStop = false;
+            this.DatabaseProgress_PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DatabaseProgress_PictureBox1.Location = new System.Drawing.Point(4, 25);
+            this.DatabaseProgress_PictureBox1.Name = "DatabaseProgress_PictureBox1";
+            this.DatabaseProgress_PictureBox1.Size = new System.Drawing.Size(17, 14);
+            this.DatabaseProgress_PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DatabaseProgress_PictureBox1.TabIndex = 12;
+            this.DatabaseProgress_PictureBox1.TabStop = false;
             // 
-            // label15
+            // DatabaseMainProgress_Label
             // 
-            this.label15.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(28, 4);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(111, 13);
-            this.label15.TabIndex = 7;
-            this.label15.Text = "SQL Server Database";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.DatabaseMainProgress_Label.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.DatabaseMainProgress_Label.AutoSize = true;
+            this.DatabaseMainProgress_Label.Location = new System.Drawing.Point(28, 4);
+            this.DatabaseMainProgress_Label.Name = "DatabaseMainProgress_Label";
+            this.DatabaseMainProgress_Label.Size = new System.Drawing.Size(111, 13);
+            this.DatabaseMainProgress_Label.TabIndex = 7;
+            this.DatabaseMainProgress_Label.Text = "SQL Server Database";
+            this.DatabaseMainProgress_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pictureBox15
+            // DatabaseMainProgress_PictureBox
             // 
-            this.pictureBox15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox15.Location = new System.Drawing.Point(4, 4);
-            this.pictureBox15.Name = "pictureBox15";
-            this.pictureBox15.Size = new System.Drawing.Size(17, 14);
-            this.pictureBox15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox15.TabIndex = 11;
-            this.pictureBox15.TabStop = false;
+            this.DatabaseMainProgress_PictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DatabaseMainProgress_PictureBox.Location = new System.Drawing.Point(4, 4);
+            this.DatabaseMainProgress_PictureBox.Name = "DatabaseMainProgress_PictureBox";
+            this.DatabaseMainProgress_PictureBox.Size = new System.Drawing.Size(17, 14);
+            this.DatabaseMainProgress_PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.DatabaseMainProgress_PictureBox.TabIndex = 11;
+            this.DatabaseMainProgress_PictureBox.TabStop = false;
             // 
-            // tableLayoutPanel1
+            // Instance_TableLayoutPanel
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.755396F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 94.24461F));
-            this.tableLayoutPanel1.Controls.Add(this.label6, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox5, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox4, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(15, 19);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.17391F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.82609F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(418, 91);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.Instance_TableLayoutPanel.BackColor = System.Drawing.Color.White;
+            this.Instance_TableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.Instance_TableLayoutPanel.ColumnCount = 2;
+            this.Instance_TableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.755396F));
+            this.Instance_TableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 94.24461F));
+            this.Instance_TableLayoutPanel.Controls.Add(this.InstanceProgress_Label3, 1, 3);
+            this.Instance_TableLayoutPanel.Controls.Add(this.InstanceProgress_PictureBox3, 0, 3);
+            this.Instance_TableLayoutPanel.Controls.Add(this.InstanceProgress_Label2, 1, 2);
+            this.Instance_TableLayoutPanel.Controls.Add(this.InstanceProgress_PictureBox2, 0, 2);
+            this.Instance_TableLayoutPanel.Controls.Add(this.InstanceMainProgress_PictureBox, 0, 0);
+            this.Instance_TableLayoutPanel.Controls.Add(this.InstanceMainProgress_Label, 1, 0);
+            this.Instance_TableLayoutPanel.Controls.Add(this.InstanceProgress_PictureBox1, 0, 1);
+            this.Instance_TableLayoutPanel.Controls.Add(this.InstanceProgress_Label1, 1, 1);
+            this.Instance_TableLayoutPanel.Location = new System.Drawing.Point(15, 19);
+            this.Instance_TableLayoutPanel.Name = "Instance_TableLayoutPanel";
+            this.Instance_TableLayoutPanel.RowCount = 4;
+            this.Instance_TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.17391F));
+            this.Instance_TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.82609F));
+            this.Instance_TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.Instance_TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.Instance_TableLayoutPanel.Size = new System.Drawing.Size(418, 91);
+            this.Instance_TableLayoutPanel.TabIndex = 0;
             // 
-            // label6
+            // InstanceProgress_Label3
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(28, 73);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 13);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "   • Security";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.InstanceProgress_Label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.InstanceProgress_Label3.AutoSize = true;
+            this.InstanceProgress_Label3.Location = new System.Drawing.Point(28, 73);
+            this.InstanceProgress_Label3.Name = "InstanceProgress_Label3";
+            this.InstanceProgress_Label3.Size = new System.Drawing.Size(63, 13);
+            this.InstanceProgress_Label3.TabIndex = 10;
+            this.InstanceProgress_Label3.Text = "   • Security";
+            this.InstanceProgress_Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pictureBox5
+            // InstanceProgress_PictureBox3
             // 
-            this.pictureBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox5.Location = new System.Drawing.Point(4, 72);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(17, 15);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 10;
-            this.pictureBox5.TabStop = false;
+            this.InstanceProgress_PictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.InstanceProgress_PictureBox3.Location = new System.Drawing.Point(4, 72);
+            this.InstanceProgress_PictureBox3.Name = "InstanceProgress_PictureBox3";
+            this.InstanceProgress_PictureBox3.Size = new System.Drawing.Size(17, 15);
+            this.InstanceProgress_PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.InstanceProgress_PictureBox3.TabIndex = 10;
+            this.InstanceProgress_PictureBox3.TabStop = false;
             // 
-            // label5
+            // InstanceProgress_Label2
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 51);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "   • Configuration";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.InstanceProgress_Label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.InstanceProgress_Label2.AutoSize = true;
+            this.InstanceProgress_Label2.Location = new System.Drawing.Point(28, 51);
+            this.InstanceProgress_Label2.Name = "InstanceProgress_Label2";
+            this.InstanceProgress_Label2.Size = new System.Drawing.Size(87, 13);
+            this.InstanceProgress_Label2.TabIndex = 9;
+            this.InstanceProgress_Label2.Text = "   • Configuration";
+            this.InstanceProgress_Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pictureBox4
+            // InstanceProgress_PictureBox2
             // 
-            this.pictureBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox4.Location = new System.Drawing.Point(4, 50);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(17, 15);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 9;
-            this.pictureBox4.TabStop = false;
+            this.InstanceProgress_PictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.InstanceProgress_PictureBox2.Location = new System.Drawing.Point(4, 50);
+            this.InstanceProgress_PictureBox2.Name = "InstanceProgress_PictureBox2";
+            this.InstanceProgress_PictureBox2.Size = new System.Drawing.Size(17, 15);
+            this.InstanceProgress_PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.InstanceProgress_PictureBox2.TabIndex = 9;
+            this.InstanceProgress_PictureBox2.TabStop = false;
             // 
-            // pictureBox2
+            // InstanceMainProgress_PictureBox
             // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Location = new System.Drawing.Point(4, 4);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(17, 17);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
+            this.InstanceMainProgress_PictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.InstanceMainProgress_PictureBox.Location = new System.Drawing.Point(4, 4);
+            this.InstanceMainProgress_PictureBox.Name = "InstanceMainProgress_PictureBox";
+            this.InstanceMainProgress_PictureBox.Size = new System.Drawing.Size(17, 17);
+            this.InstanceMainProgress_PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.InstanceMainProgress_PictureBox.TabIndex = 0;
+            this.InstanceMainProgress_PictureBox.TabStop = false;
             // 
-            // label2
+            // InstanceMainProgress_Label
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 6);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "SQL Instance";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.InstanceMainProgress_Label.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.InstanceMainProgress_Label.AutoSize = true;
+            this.InstanceMainProgress_Label.Location = new System.Drawing.Point(28, 6);
+            this.InstanceMainProgress_Label.Name = "InstanceMainProgress_Label";
+            this.InstanceMainProgress_Label.Size = new System.Drawing.Size(72, 13);
+            this.InstanceMainProgress_Label.TabIndex = 6;
+            this.InstanceMainProgress_Label.Text = "SQL Instance";
+            this.InstanceMainProgress_Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pictureBox3
+            // InstanceProgress_PictureBox1
             // 
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox3.Location = new System.Drawing.Point(4, 28);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(17, 15);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 7;
-            this.pictureBox3.TabStop = false;
+            this.InstanceProgress_PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.InstanceProgress_PictureBox1.Location = new System.Drawing.Point(4, 28);
+            this.InstanceProgress_PictureBox1.Name = "InstanceProgress_PictureBox1";
+            this.InstanceProgress_PictureBox1.Size = new System.Drawing.Size(17, 15);
+            this.InstanceProgress_PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.InstanceProgress_PictureBox1.TabIndex = 7;
+            this.InstanceProgress_PictureBox1.TabStop = false;
             // 
-            // label4
+            // InstanceProgress_Label1
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 29);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "   • Installation";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.InstanceProgress_Label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.InstanceProgress_Label1.AutoSize = true;
+            this.InstanceProgress_Label1.Location = new System.Drawing.Point(28, 29);
+            this.InstanceProgress_Label1.Name = "InstanceProgress_Label1";
+            this.InstanceProgress_Label1.Size = new System.Drawing.Size(75, 13);
+            this.InstanceProgress_Label1.TabIndex = 8;
+            this.InstanceProgress_Label1.Text = "   • Installation";
+            this.InstanceProgress_Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // Form1
+            // ClientApplication_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(505, 607);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Main_Panel);
+            this.Controls.Add(this.Start_Button);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "ClientApplication_Form";
             this.Text = "Database Evaluator";
-            this.panel1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.Main_Panel.ResumeLayout(false);
+            this.Selection_GroupBox.ResumeLayout(false);
+            this.Selection_GroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Logo_PictureBox)).EndInit();
+            this.Progress_GroupBox.ResumeLayout(false);
+            this.Database_TableLayoutPanel.ResumeLayout(false);
+            this.Database_TableLayoutPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DatabaseProgress_PictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DatabaseProgress_PictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DatabaseProgress_PictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DatabaseProgress_PictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DatabaseMainProgress_PictureBox)).EndInit();
+            this.Instance_TableLayoutPanel.ResumeLayout(false);
+            this.Instance_TableLayoutPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InstanceProgress_PictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InstanceProgress_PictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InstanceMainProgress_PictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.InstanceProgress_PictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private GroupBox groupBox1;
-        private PictureBox pictureBox2;
-        private Label label2;
-        private PictureBox pictureBox3;
-        private Label label4;
-        private Label label6;
-        private PictureBox pictureBox5;
-        private Label label5;
-        private PictureBox pictureBox4;
-        private ComboBox comboBox2;
-        private GroupBox groupBox2;
-        private CheckBox checkBox2;
-        private Label label1;
-        private Button button2;
-        private TableLayoutPanel tableLayoutPanel2;
-        private Label label3;
-        private PictureBox pictureBox11;
-        private Label label12;
-        private PictureBox pictureBox12;
-        private Label label13;
-        private PictureBox pictureBox13;
-        private Label label14;
-        private PictureBox pictureBox14;
-        private Label label15;
-        private PictureBox pictureBox15;
-        private TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button Start_Button;
+        private System.Windows.Forms.Panel Main_Panel;
+        private System.Windows.Forms.ComboBox Server_ComboBox;
+        private System.Windows.Forms.PictureBox Logo_PictureBox;
+        private GroupBox Progress_GroupBox;
+        private PictureBox InstanceMainProgress_PictureBox;
+        private Label InstanceMainProgress_Label;
+        private PictureBox InstanceProgress_PictureBox1;
+        private Label InstanceProgress_Label1;
+        private Label InstanceProgress_Label3;
+        private PictureBox InstanceProgress_PictureBox3;
+        private Label InstanceProgress_Label2;
+        private PictureBox InstanceProgress_PictureBox2;
+        private ComboBox Database_ComboBox;
+        private GroupBox Selection_GroupBox;
+        private CheckBox DatabaseName_CheckBox;
+        private Label ServerName_Label;
+        private Button Connect_Button;
+        private TableLayoutPanel Database_TableLayoutPanel;
+        private Label DatabaseProgress_Label4;
+        private PictureBox DatabaseProgress_PictureBox4;
+        private Label DatabaseProgress_Label3;
+        private PictureBox DatabaseProgress_PictureBox3;
+        private Label DatabaseProgress_Label2;
+        private PictureBox DatabaseProgress_PictureBox2;
+        private Label DatabaseProgress_Label1;
+        private PictureBox DatabaseProgress_PictureBox1;
+        private Label DatabaseMainProgress_Label;
+        private PictureBox DatabaseMainProgress_PictureBox;
+        private TableLayoutPanel Instance_TableLayoutPanel;
     }
 }
 

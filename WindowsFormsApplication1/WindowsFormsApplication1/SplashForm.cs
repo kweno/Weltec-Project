@@ -5,13 +5,13 @@ using WindowsFormsApplication1.Properties;
 
 namespace WindowsFormsApplication1
 {
-    public partial class SplashForm : Form
+    public partial class SplashScreen_Form : Form
     {
 
-        public SplashForm()
+        public SplashScreen_Form()
         {
             InitializeComponent();
-            this.progressBar1.Style = ProgressBarStyle.Marquee;
+            this.Splash_ProgressBar.Style = ProgressBarStyle.Marquee;
             this.ControlBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
