@@ -42,7 +42,7 @@
             // 
             // Logo_PictureBox
             // 
-            this.Logo_PictureBox.Image = global::WindowsFormsApplication1.Properties.Resources.header_logo_alpha;
+            this.Logo_PictureBox.Image = global::ClientApplication.Properties.Resources.header_logo_alpha;
             this.Logo_PictureBox.Location = new System.Drawing.Point(140, 5);
             this.Logo_PictureBox.Name = "Logo_PictureBox";
             this.Logo_PictureBox.Size = new System.Drawing.Size(144, 84);

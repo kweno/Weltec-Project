@@ -326,38 +326,7 @@ namespace DatabaseEvaluator
         {
             //Here you play with the main UI thread
             //progressBar1.Value = e.ProgressPercentage;
-            if (e.ProgressPercentage == 1)
-            {
-                this.InstanceMainProgress_PictureBox.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
-            }
-            else if (e.ProgressPercentage == 10)
-            {
-                this.InstanceProgress_PictureBox1.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
-            }
-            else if (e.ProgressPercentage == 14)
-            {
-                this.InstanceProgress_PictureBox1.Image = global::WindowsFormsApplication1.Properties.Resources.success;
-            }
-            else if (e.ProgressPercentage == 15)
-            {
-                this.InstanceProgress_PictureBox2.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
-            }
-            else if (e.ProgressPercentage == 28)
-            {
-                this.InstanceProgress_PictureBox2.Image = global::WindowsFormsApplication1.Properties.Resources.success;
-            }
-            else if (e.ProgressPercentage == 29)
-            {
-                this.InstanceProgress_PictureBox3.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
-            }
-            else if (e.ProgressPercentage == 42)
-            {
-                this.InstanceProgress_PictureBox3.Image = global::WindowsFormsApplication1.Properties.Resources.success;
-            }
-            else if (e.ProgressPercentage == 43)
-            {
-                this.InstanceMainProgress_PictureBox.Image = global::WindowsFormsApplication1.Properties.Resources.success;
-            }
+
 
             //this.label2.Text = "Processing......";// + progressBar1.Value.ToString() + "%";
         }
