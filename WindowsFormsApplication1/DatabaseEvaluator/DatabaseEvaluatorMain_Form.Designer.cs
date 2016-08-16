@@ -37,12 +37,10 @@ namespace DatabaseEvaluator
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DatabaseEvaluatorMain_Form));
             this.Start_Button = new System.Windows.Forms.Button();
             this.Main_Panel = new System.Windows.Forms.Panel();
-            this.Selection_GroupBox = new System.Windows.Forms.GroupBox();
-            this.Connect_Button = new System.Windows.Forms.Button();
-            this.ServerName_Label = new System.Windows.Forms.Label();
-            this.DatabaseName_CheckBox = new System.Windows.Forms.CheckBox();
-            this.Server_ComboBox = new System.Windows.Forms.ComboBox();
-            this.Database_ComboBox = new System.Windows.Forms.ComboBox();
+            this.FindFile_GroupBox = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Browse_Button = new System.Windows.Forms.Button();
+            this.PathToXML_Label = new System.Windows.Forms.Label();
             this.Logo_PictureBox = new System.Windows.Forms.PictureBox();
             this.Progress_GroupBox = new System.Windows.Forms.GroupBox();
             this.Database_TableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -66,7 +64,7 @@ namespace DatabaseEvaluator
             this.InstanceProgress_PictureBox1 = new System.Windows.Forms.PictureBox();
             this.InstanceProgress_Label1 = new System.Windows.Forms.Label();
             this.Main_Panel.SuspendLayout();
-            this.Selection_GroupBox.SuspendLayout();
+            this.FindFile_GroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo_PictureBox)).BeginInit();
             this.Progress_GroupBox.SuspendLayout();
             this.Database_TableLayoutPanel.SuspendLayout();
@@ -84,7 +82,7 @@ namespace DatabaseEvaluator
             // 
             // Start_Button
             // 
-            this.Start_Button.Location = new System.Drawing.Point(404, 574);
+            this.Start_Button.Location = new System.Drawing.Point(404, 543);
             this.Start_Button.Name = "Start_Button";
             this.Start_Button.Size = new System.Drawing.Size(75, 23);
             this.Start_Button.TabIndex = 0;
@@ -94,77 +92,53 @@ namespace DatabaseEvaluator
             // 
             // Main_Panel
             // 
-            this.Main_Panel.Controls.Add(this.Selection_GroupBox);
+            this.Main_Panel.Controls.Add(this.FindFile_GroupBox);
             this.Main_Panel.Controls.Add(this.Logo_PictureBox);
             this.Main_Panel.Controls.Add(this.Progress_GroupBox);
             this.Main_Panel.Location = new System.Drawing.Point(13, 13);
             this.Main_Panel.Name = "Main_Panel";
-            this.Main_Panel.Size = new System.Drawing.Size(480, 555);
+            this.Main_Panel.Size = new System.Drawing.Size(480, 524);
             this.Main_Panel.TabIndex = 1;
             // 
-            // Selection_GroupBox
+            // FindFile_GroupBox
             // 
-            this.Selection_GroupBox.Controls.Add(this.Connect_Button);
-            this.Selection_GroupBox.Controls.Add(this.ServerName_Label);
-            this.Selection_GroupBox.Controls.Add(this.DatabaseName_CheckBox);
-            this.Selection_GroupBox.Controls.Add(this.Server_ComboBox);
-            this.Selection_GroupBox.Controls.Add(this.Database_ComboBox);
-            this.Selection_GroupBox.Location = new System.Drawing.Point(16, 170);
-            this.Selection_GroupBox.Name = "Selection_GroupBox";
-            this.Selection_GroupBox.Size = new System.Drawing.Size(450, 110);
-            this.Selection_GroupBox.TabIndex = 12;
-            this.Selection_GroupBox.TabStop = false;
-            this.Selection_GroupBox.Text = "Selection";
+            this.FindFile_GroupBox.Controls.Add(this.textBox1);
+            this.FindFile_GroupBox.Controls.Add(this.Browse_Button);
+            this.FindFile_GroupBox.Controls.Add(this.PathToXML_Label);
+            this.FindFile_GroupBox.Location = new System.Drawing.Point(16, 170);
+            this.FindFile_GroupBox.Name = "FindFile_GroupBox";
+            this.FindFile_GroupBox.Size = new System.Drawing.Size(450, 87);
+            this.FindFile_GroupBox.TabIndex = 12;
+            this.FindFile_GroupBox.TabStop = false;
+            this.FindFile_GroupBox.Text = "Find File";
             // 
-            // Connect_Button
+            // textBox1
             // 
-            this.Connect_Button.Location = new System.Drawing.Point(357, 48);
-            this.Connect_Button.Name = "Connect_Button";
-            this.Connect_Button.Size = new System.Drawing.Size(75, 23);
-            this.Connect_Button.TabIndex = 13;
-            this.Connect_Button.Text = "Connect";
-            this.Connect_Button.UseVisualStyleBackColor = true;
-            this.Connect_Button.Click += new System.EventHandler(this.Connect_Button_Click);
+            this.textBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.textBox1.Location = new System.Drawing.Point(104, 20);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(328, 20);
+            this.textBox1.TabIndex = 14;
             // 
-            // ServerName_Label
+            // Browse_Button
             // 
-            this.ServerName_Label.AutoSize = true;
-            this.ServerName_Label.Location = new System.Drawing.Point(12, 23);
-            this.ServerName_Label.Name = "ServerName_Label";
-            this.ServerName_Label.Size = new System.Drawing.Size(72, 13);
-            this.ServerName_Label.TabIndex = 12;
-            this.ServerName_Label.Text = "Server Name:";
+            this.Browse_Button.Location = new System.Drawing.Point(357, 48);
+            this.Browse_Button.Name = "Browse_Button";
+            this.Browse_Button.Size = new System.Drawing.Size(75, 23);
+            this.Browse_Button.TabIndex = 13;
+            this.Browse_Button.Text = "Browse";
+            this.Browse_Button.UseVisualStyleBackColor = true;
+            this.Browse_Button.Click += new System.EventHandler(this.Browse_Button_Click);
             // 
-            // DatabaseName_CheckBox
+            // PathToXML_Label
             // 
-            this.DatabaseName_CheckBox.AutoSize = true;
-            this.DatabaseName_CheckBox.Enabled = false;
-            this.DatabaseName_CheckBox.Location = new System.Drawing.Point(15, 79);
-            this.DatabaseName_CheckBox.Name = "DatabaseName_CheckBox";
-            this.DatabaseName_CheckBox.Size = new System.Drawing.Size(106, 17);
-            this.DatabaseName_CheckBox.TabIndex = 11;
-            this.DatabaseName_CheckBox.Text = "Database Name:";
-            this.DatabaseName_CheckBox.UseVisualStyleBackColor = true;
-            this.DatabaseName_CheckBox.CheckedChanged += new System.EventHandler(this.DatabaseName_CheckedChanged);
-            // 
-            // Server_ComboBox
-            // 
-            this.Server_ComboBox.FormattingEnabled = true;
-            this.Server_ComboBox.Location = new System.Drawing.Point(231, 20);
-            this.Server_ComboBox.Name = "Server_ComboBox";
-            this.Server_ComboBox.Size = new System.Drawing.Size(202, 21);
-            this.Server_ComboBox.TabIndex = 2;
-            this.Server_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Server_ComboBox_SelectedIndexChanged);
-            // 
-            // Database_ComboBox
-            // 
-            this.Database_ComboBox.Enabled = false;
-            this.Database_ComboBox.FormattingEnabled = true;
-            this.Database_ComboBox.Location = new System.Drawing.Point(231, 77);
-            this.Database_ComboBox.Name = "Database_ComboBox";
-            this.Database_ComboBox.Size = new System.Drawing.Size(202, 21);
-            this.Database_ComboBox.TabIndex = 9;
-            this.Database_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Database_ComboBox_SelectedIndexChanged);
+            this.PathToXML_Label.AutoSize = true;
+            this.PathToXML_Label.Location = new System.Drawing.Point(12, 23);
+            this.PathToXML_Label.Name = "PathToXML_Label";
+            this.PathToXML_Label.Size = new System.Drawing.Size(69, 13);
+            this.PathToXML_Label.TabIndex = 12;
+            this.PathToXML_Label.Text = "Path to XML:";
             // 
             // Logo_PictureBox
             // 
@@ -180,7 +154,7 @@ namespace DatabaseEvaluator
             // 
             this.Progress_GroupBox.Controls.Add(this.Database_TableLayoutPanel);
             this.Progress_GroupBox.Controls.Add(this.Instance_TableLayoutPanel);
-            this.Progress_GroupBox.Location = new System.Drawing.Point(16, 297);
+            this.Progress_GroupBox.Location = new System.Drawing.Point(16, 263);
             this.Progress_GroupBox.Name = "Progress_GroupBox";
             this.Progress_GroupBox.Size = new System.Drawing.Size(450, 244);
             this.Progress_GroupBox.TabIndex = 7;
@@ -204,7 +178,6 @@ namespace DatabaseEvaluator
             this.Database_TableLayoutPanel.Controls.Add(this.DatabaseProgress_PictureBox1, 0, 1);
             this.Database_TableLayoutPanel.Controls.Add(this.DatabaseMainProgress_Label, 1, 0);
             this.Database_TableLayoutPanel.Controls.Add(this.DatabaseMainProgress_PictureBox, 0, 0);
-            this.Database_TableLayoutPanel.Enabled = false;
             this.Database_TableLayoutPanel.Location = new System.Drawing.Point(15, 119);
             this.Database_TableLayoutPanel.Name = "Database_TableLayoutPanel";
             this.Database_TableLayoutPanel.RowCount = 5;
@@ -434,15 +407,15 @@ namespace DatabaseEvaluator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 607);
+            this.ClientSize = new System.Drawing.Size(505, 575);
             this.Controls.Add(this.Main_Panel);
             this.Controls.Add(this.Start_Button);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DatabaseEvaluatorMain_Form";
             this.Text = "Database Evaluator";
             this.Main_Panel.ResumeLayout(false);
-            this.Selection_GroupBox.ResumeLayout(false);
-            this.Selection_GroupBox.PerformLayout();
+            this.FindFile_GroupBox.ResumeLayout(false);
+            this.FindFile_GroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo_PictureBox)).EndInit();
             this.Progress_GroupBox.ResumeLayout(false);
             this.Database_TableLayoutPanel.ResumeLayout(false);
@@ -466,7 +439,6 @@ namespace DatabaseEvaluator
 
         private System.Windows.Forms.Button Start_Button;
         private System.Windows.Forms.Panel Main_Panel;
-        private System.Windows.Forms.ComboBox Server_ComboBox;
         private System.Windows.Forms.PictureBox Logo_PictureBox;
         private GroupBox Progress_GroupBox;
         private PictureBox InstanceMainProgress_PictureBox;
@@ -477,11 +449,9 @@ namespace DatabaseEvaluator
         private PictureBox InstanceProgress_PictureBox3;
         private Label InstanceProgress_Label2;
         private PictureBox InstanceProgress_PictureBox2;
-        private ComboBox Database_ComboBox;
-        private GroupBox Selection_GroupBox;
-        private CheckBox DatabaseName_CheckBox;
-        private Label ServerName_Label;
-        private Button Connect_Button;
+        private GroupBox FindFile_GroupBox;
+        private Label PathToXML_Label;
+        private Button Browse_Button;
         private TableLayoutPanel Database_TableLayoutPanel;
         private Label DatabaseProgress_Label4;
         private PictureBox DatabaseProgress_PictureBox4;
@@ -494,6 +464,7 @@ namespace DatabaseEvaluator
         private Label DatabaseMainProgress_Label;
         private PictureBox DatabaseMainProgress_PictureBox;
         private TableLayoutPanel Instance_TableLayoutPanel;
+        private TextBox textBox1;
     }
 }
 

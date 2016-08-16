@@ -103,102 +103,14 @@ namespace DatabaseEvaluator
         public DatabaseEvaluatorMain_Form()
         {
             InitializeComponent();
-            populateServerDropdown();
-
-            this.Server_ComboBox.TextChanged += new System.EventHandler(this.Server_ComboBox_TextChanged);
 
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-
-            ClientApplication_BackgroundWorker = new BackgroundWorker();
-            ClientApplication_BackgroundWorker.DoWork += new DoWorkEventHandler(ClientApplication_BackgroundWorker_DoWork);
-            ClientApplication_BackgroundWorker.ProgressChanged += new ProgressChangedEventHandler(ClientApplication_BackgroundWorker_ProgressChanged);
-            ClientApplication_BackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ClientApplication_BackgroundWorker_RunWorkerCompleted);
-            ClientApplication_BackgroundWorker.WorkerReportsProgress = true;
-            ClientApplication_BackgroundWorker.WorkerSupportsCancellation = true;
         }
 
         private void Start_Button_Click(object sender, EventArgs e)
         {
-            this.Start_Button.Enabled = false;
-            //Start the async operation here
-            ClientApplication_BackgroundWorker.RunWorkerAsync();
-
-            string connectionString = null;
-            SqlConnection connection;
-            SqlCommand command;
-            string sql = null;
-            SqlDataReader dataReader;
-
-            // http://stackoverflow.com/questions/15631602/how-to-set-sql-server-connection-string
-            connectionString =
-            "Data Source=" + this.Server_ComboBox.Text + ";" +
-            "Initial Catalog=test;" +
-            "User id=test;" +
-            "Password=test;";
-            connectionString =
-            "Data Source=" + this.Server_ComboBox.Text + ";" +
-            //"Initial Catalog=test;" +
-            "Integrated Security=SSPI;";
-            //connectionString =
-            //"Server=" + this.serverName + "\\" + this.instanceName + ";" +
-            //"Initial Catalog=test;" +
-            //"User id=test;" +
-            //"Password=test;";
-
-            // http://stackoverflow.com/questions/18654157/how-to-make-sql-query-result-to-xml-file
-            //sql = "SELECT * FROM master.sys.all_parameters";
-            sql = "SELECT * FROM master.sys.database_files";
-            connection = new SqlConnection(connectionString);
-            try
-            {
-                connection.Open();
-                command = new SqlCommand(sql, connection);
-                dataReader = command.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    //MessageBox.Show(dataReader.GetValue(0) + " - " + dataReader.GetValue(1));
-                }
-                dataReader.Close();
-                command.Dispose();
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Can not open connection ! ");
-            }
-
-            //MessageBox.Show("Current Working Directory: " + Directory.GetCurrentDirectory());
-
-            //using (XmlWriter writer = XmlWriter.Create("SQLServer.xml"))
-            //{
-            //    writer.WriteStartDocument();
-            //    writer.WriteStartElement("Instance");
-            //    writer.WriteStartElement("Database");
-            //    writer.WriteElementString("Name", "test");
-            //    writer.WriteEndElement();
-            //    writer.WriteEndElement();
-            //    writer.WriteEndDocument();
-            //}
-
-            // http://csharp.net-informations.com/xml/xml-from-sql.htm
-            SqlDataAdapter adapter;
-            DataSet ds = new DataSet();
-            adapter = new SqlDataAdapter(sql, connection);
-            adapter.Fill(ds);
-            connection.Close();
-            ds.WriteXml("SQLServer.xml");
-
-            // Displays a SaveFileDialog so the user can save the Image
-            // assigned to Button2.
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.FileName = "SQLServer.xml";
-            saveFileDialog1.Filter = "XML File|*.xml";
-            saveFileDialog1.Title = "Save an XML File";
-            saveFileDialog1.ShowDialog();
-            ds.WriteXml(saveFileDialog1.FileName);
-
             // Must be 64 bits, 8 bytes.
             // Distribute this key to the user who will decrypt this file.
             string sSecretKey;
@@ -258,190 +170,19 @@ namespace DatabaseEvaluator
             doc.Close();
         }
 
-
-        private void populateServerDropdown()
+        private void Browse_Button_Click(object sender, EventArgs e)
         {
-            // https://msdn.microsoft.com/en-us/library/a6t1z9x2%28v=vs.110%29.aspx
-            // Retrieve the enumerator instance and then the data.
-            //var instance = SqlDataSourceEnumerator.Instance;
-            //var serverTable = instance.GetDataSources();
-            //var listOfServers = (from DataRow dr in serverTable.Rows select dr["ServerName"].ToString()).ToList();
-            //var bindingSource1 = new BindingSource();
-            //bindingSource1.DataSource = listOfServers;
-            //this.comboBox1.DataSource = bindingSource1;
-
-            // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
-            DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
-            for (int i = 0; i < servers.Rows.Count; i++)
+            // http://stackoverflow.com/questions/4999734/how-to-add-browse-file-button-to-windows-form-using-c-sharp
+            OpenFileDialog fdlg = new OpenFileDialog();
+            fdlg.Title = "Browse for XML file";
+            fdlg.InitialDirectory = @"c:\";
+            fdlg.Filter = "All files (*.*)|*.*";
+            fdlg.FilterIndex = 1;
+            fdlg.RestoreDirectory = true;
+            if (fdlg.ShowDialog() == DialogResult.OK)
             {
-                if ((servers.Rows[i]["InstanceName"] as string) != null)
-                    this.Server_ComboBox.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
-                else
-                    this.Server_ComboBox.Items.Add(servers.Rows[i]["ServerName"]);
+                this.textBox1.Text = fdlg.FileName;
             }
         }
-
-        private void populateDatabaseDropdown()
-        {
-            this.Database_ComboBox.Items.Clear();
-            // http://stackoverflow.com/questions/12862604/c-sharp-connect-to-database-and-list-the-databases
-            var connectionString = "Data Source=" + this.Server_ComboBox.Text + ";" +
-            //"Initial Catalog=test;" +
-            "Integrated Security=SSPI;";
-
-            using (var con = new SqlConnection(connectionString))
-            {
-                con.Open();
-                DataTable databases = con.GetSchema("Databases");
-                foreach (DataRow database in databases.Rows)
-                {
-                    String databaseName = database.Field<String>("database_name");
-                    this.Database_ComboBox.Items.Add(databaseName);
-                }
-            }
-        }
-
-        /// On completed do the appropriate task
-        void ClientApplication_BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            //If it was cancelled midway
-            if (e.Cancelled)
-            {
-                //this.label2.Text = "Task Cancelled.";
-            }
-            else if (e.Error != null)
-            {
-                //this.label2.Text = "Error while performing background operation.";
-            }
-            else
-            {
-                //this.label2.Text = "Task Completed...";
-            }
-            this.Start_Button.Enabled = true;
-            //btnCancel.Enabled = false;
-        }
-
-        /// Notification is performed here to the progress bar
-        void ClientApplication_BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            //Here you play with the main UI thread
-            //progressBar1.Value = e.ProgressPercentage;
-
-
-            //this.label2.Text = "Processing......";// + progressBar1.Value.ToString() + "%";
-        }
-
-        /// Time consuming operations go here </br>
-        /// i.e. Database operations,Reporting
-        void ClientApplication_BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            //NOTE : Never play with the UI thread here...
-            //time consuming operation
-            for (int i = 0; i < 100; i++)
-            {
-                Thread.Sleep(200);
-                ClientApplication_BackgroundWorker.ReportProgress(i);
-                //If cancel button was pressed while the execution is in progress
-                //Change the state from cancellation ---> cancel'ed
-                if (ClientApplication_BackgroundWorker.CancellationPending)
-                {
-                    e.Cancel = true;
-                    ClientApplication_BackgroundWorker.ReportProgress(0);
-                    return;
-                }
-            }
-            //Report 100% completion on operation completed
-            ClientApplication_BackgroundWorker.ReportProgress(100);
-        }
-
-        private void btnStartAsyncOperation_Click(object sender, EventArgs e)
-        {
-            //btnStartAsyncOperation.Enabled = false;
-            //btnCancel.Enabled = true;
-            //Start the async operation here
-            ClientApplication_BackgroundWorker.RunWorkerAsync();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            if (ClientApplication_BackgroundWorker.IsBusy)
-            {
-                //Stop/Cancel the async operation here
-                ClientApplication_BackgroundWorker.CancelAsync();
-            }
-        }
-
-        
-
-        private void Database_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Server_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (DatabaseName_CheckBox.Enabled)
-            {
-                DatabaseName_CheckBox.Checked = false;
-                DatabaseName_CheckBox.Enabled = false;
-                Database_ComboBox.Enabled = false;
-                this.Database_ComboBox.Text = "";
-            }
-        }
-
-        private void DatabaseName_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!Database_ComboBox.Enabled)
-            {
-                this.Database_ComboBox.Enabled = true;
-                populateDatabaseDropdown();
-                this.Database_TableLayoutPanel.Enabled = true;
-            }
-            else
-            {
-                this.Database_ComboBox.Enabled = false;
-                this.Database_ComboBox.Items.Clear();
-                this.Database_TableLayoutPanel.Enabled = false;
-            }
-        }
-
-        private void Connect_Button_Click(object sender, EventArgs e)
-        {
-            string connectionString = null;
-            SqlConnection connection;
-            connectionString =
-            "Data Source=" + this.Server_ComboBox.Text + ";" +
-            "Integrated Security=SSPI;";
-            connection = new SqlConnection(connectionString);
-            try
-            {
-                connection.Open();
-                connection.Close();
-                this.DatabaseName_CheckBox.Enabled = true;
-                populateDatabaseDropdown();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Can not open connection ! ");
-            }
-
-        }
-
-        private void Server_ComboBox_TextChanged(Object sender, EventArgs e)
-        {
-            if (DatabaseName_CheckBox.Enabled)
-            {
-                DatabaseName_CheckBox.Checked = false;
-                DatabaseName_CheckBox.Enabled = false;
-                Database_ComboBox.Enabled = false;
-                this.Database_ComboBox.Text = "";
-                this.Database_TableLayoutPanel.Enabled = false;
-            }
-        }
-
-
-
-
-
     }
 }
