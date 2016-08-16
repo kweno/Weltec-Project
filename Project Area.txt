@@ -2,7 +2,7 @@ SQL Server Instance
 
 1. Installation 
 
-	Default Drive Installation
+	SQL Server software installation drive
 	SQL Server Version and Service Pack
 
 2. Configuration 
