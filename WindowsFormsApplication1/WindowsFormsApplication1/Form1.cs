@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 namespace WindowsFormsApplication1
 {
 
-    public partial class Form1 : Form
+    public partial class ClientApplication_Form : Form
     {
         // https://support.microsoft.com/en-nz/kb/307010
         //  Call this function to remove the key from memory after use for security
@@ -100,12 +100,12 @@ namespace WindowsFormsApplication1
         /// http://www.codeproject.com/Articles/99143/BackgroundWorker-Class-Sample-for-Beginners
         BackgroundWorker m_oWorker;
 
-        public Form1()
+        public ClientApplication_Form()
         {
             InitializeComponent();
             populateServerDropdown();
 
-            this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
+            this.Server_ComboBox.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
 
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -119,9 +119,9 @@ namespace WindowsFormsApplication1
             m_oWorker.WorkerSupportsCancellation = true;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Start_Button_Click(object sender, EventArgs e)
         {
-            this.button1.Enabled = false;
+            this.Start_Button.Enabled = false;
             //Start the async operation here
             m_oWorker.RunWorkerAsync();
 
@@ -133,12 +133,12 @@ namespace WindowsFormsApplication1
 
             // http://stackoverflow.com/questions/15631602/how-to-set-sql-server-connection-string
             connectionString =
-            "Data Source=" + this.comboBox1.Text + ";" +
+            "Data Source=" + this.Server_ComboBox.Text + ";" +
             "Initial Catalog=test;" +
             "User id=test;" +
             "Password=test;";
             connectionString =
-            "Data Source=" + this.comboBox1.Text + ";" +
+            "Data Source=" + this.Server_ComboBox.Text + ";" +
             //"Initial Catalog=test;" +
             "Integrated Security=SSPI;";
             //connectionString =
@@ -275,17 +275,17 @@ namespace WindowsFormsApplication1
             for (int i = 0; i < servers.Rows.Count; i++)
             {
                 if ((servers.Rows[i]["InstanceName"] as string) != null)
-                    this.comboBox1.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
+                    this.Server_ComboBox.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
                 else
-                    this.comboBox1.Items.Add(servers.Rows[i]["ServerName"]);
+                    this.Server_ComboBox.Items.Add(servers.Rows[i]["ServerName"]);
             }
         }
 
         private void populateDatabaseDropdown()
         {
-            this.comboBox2.Items.Clear();
+            this.Database_ComboBox.Items.Clear();
             // http://stackoverflow.com/questions/12862604/c-sharp-connect-to-database-and-list-the-databases
-            var connectionString = "Data Source=" + this.comboBox1.Text + ";" +
+            var connectionString = "Data Source=" + this.Server_ComboBox.Text + ";" +
             //"Initial Catalog=test;" +
             "Integrated Security=SSPI;";
 
@@ -296,7 +296,7 @@ namespace WindowsFormsApplication1
                 foreach (DataRow database in databases.Rows)
                 {
                     String databaseName = database.Field<String>("database_name");
-                    this.comboBox2.Items.Add(databaseName);
+                    this.Database_ComboBox.Items.Add(databaseName);
                 }
             }
         }
@@ -317,7 +317,7 @@ namespace WindowsFormsApplication1
             {
                 //this.label2.Text = "Task Completed...";
             }
-            this.button1.Enabled = true;
+            this.Start_Button.Enabled = true;
             //btnCancel.Enabled = false;
         }
 
@@ -328,35 +328,35 @@ namespace WindowsFormsApplication1
             //progressBar1.Value = e.ProgressPercentage;
             if (e.ProgressPercentage == 1)
             {
-                this.pictureBox2.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
+                this.InstanceMainProgress_PictureBox.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
             }
             else if (e.ProgressPercentage == 10)
             {
-                this.pictureBox3.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
+                this.InstanceProgress_PictureBox1.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
             }
             else if (e.ProgressPercentage == 14)
             {
-                this.pictureBox3.Image = global::WindowsFormsApplication1.Properties.Resources.success;
+                this.InstanceProgress_PictureBox1.Image = global::WindowsFormsApplication1.Properties.Resources.success;
             }
             else if (e.ProgressPercentage == 15)
             {
-                this.pictureBox4.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
+                this.InstanceProgress_PictureBox2.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
             }
             else if (e.ProgressPercentage == 28)
             {
-                this.pictureBox4.Image = global::WindowsFormsApplication1.Properties.Resources.success;
+                this.InstanceProgress_PictureBox2.Image = global::WindowsFormsApplication1.Properties.Resources.success;
             }
             else if (e.ProgressPercentage == 29)
             {
-                this.pictureBox5.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
+                this.InstanceProgress_PictureBox3.Image = global::WindowsFormsApplication1.Properties.Resources.right_arrow_3;
             }
             else if (e.ProgressPercentage == 42)
             {
-                this.pictureBox5.Image = global::WindowsFormsApplication1.Properties.Resources.success;
+                this.InstanceProgress_PictureBox3.Image = global::WindowsFormsApplication1.Properties.Resources.success;
             }
             else if (e.ProgressPercentage == 43)
             {
-                this.pictureBox2.Image = global::WindowsFormsApplication1.Properties.Resources.success;
+                this.InstanceMainProgress_PictureBox.Image = global::WindowsFormsApplication1.Properties.Resources.success;
             }
 
             //this.label2.Text = "Processing......";// + progressBar1.Value.ToString() + "%";
@@ -404,51 +404,51 @@ namespace WindowsFormsApplication1
 
         
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void Database_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void Server_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (checkBox2.Enabled)
+            if (DatabaseName_CheckBox.Enabled)
             {
-                checkBox2.Checked = false;
-                checkBox2.Enabled = false;
-                comboBox2.Enabled = false;
-                this.comboBox2.Text = "";
+                DatabaseName_CheckBox.Checked = false;
+                DatabaseName_CheckBox.Enabled = false;
+                Database_ComboBox.Enabled = false;
+                this.Database_ComboBox.Text = "";
             }
         }
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        private void DatabaseName_CheckedChanged(object sender, EventArgs e)
         {
-            if (!comboBox2.Enabled)
+            if (!Database_ComboBox.Enabled)
             {
-                this.comboBox2.Enabled = true;
+                this.Database_ComboBox.Enabled = true;
                 populateDatabaseDropdown();
-                this.tableLayoutPanel2.Enabled = true;
+                this.Database_TableLayoutPanel.Enabled = true;
             }
             else
             {
-                this.comboBox2.Enabled = false;
-                this.comboBox2.Items.Clear();
-                this.tableLayoutPanel2.Enabled = false;
+                this.Database_ComboBox.Enabled = false;
+                this.Database_ComboBox.Items.Clear();
+                this.Database_TableLayoutPanel.Enabled = false;
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Connect_Button_Click(object sender, EventArgs e)
         {
             string connectionString = null;
             SqlConnection connection;
             connectionString =
-            "Data Source=" + this.comboBox1.Text + ";" +
+            "Data Source=" + this.Server_ComboBox.Text + ";" +
             "Integrated Security=SSPI;";
             connection = new SqlConnection(connectionString);
             try
             {
                 connection.Open();
                 connection.Close();
-                this.checkBox2.Enabled = true;
+                this.DatabaseName_CheckBox.Enabled = true;
                 populateDatabaseDropdown();
             }
             catch (Exception ex)
@@ -460,13 +460,13 @@ namespace WindowsFormsApplication1
 
         private void comboBox1_TextChanged(Object sender, EventArgs e)
         {
-            if (checkBox2.Enabled)
+            if (DatabaseName_CheckBox.Enabled)
             {
-                checkBox2.Checked = false;
-                checkBox2.Enabled = false;
-                comboBox2.Enabled = false;
-                this.comboBox2.Text = "";
-                this.tableLayoutPanel2.Enabled = false;
+                DatabaseName_CheckBox.Checked = false;
+                DatabaseName_CheckBox.Enabled = false;
+                Database_ComboBox.Enabled = false;
+                this.Database_ComboBox.Text = "";
+                this.Database_TableLayoutPanel.Enabled = false;
             }
         }
 
