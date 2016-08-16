@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 namespace WindowsFormsApplication1
 {
 
-    public partial class ClientApplication_Form : Form
+    public partial class ClientApplicationMain_Form : Form
     {
         // https://support.microsoft.com/en-nz/kb/307010
         //  Call this function to remove the key from memory after use for security
@@ -98,32 +98,32 @@ namespace WindowsFormsApplication1
 
         /// The backgroundworker object on which the time consuming operation shall be executed
         /// http://www.codeproject.com/Articles/99143/BackgroundWorker-Class-Sample-for-Beginners
-        BackgroundWorker m_oWorker;
+        BackgroundWorker ClientApplication_BackgroundWorker;
 
-        public ClientApplication_Form()
+        public ClientApplicationMain_Form()
         {
             InitializeComponent();
             populateServerDropdown();
 
-            this.Server_ComboBox.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
+            this.Server_ComboBox.TextChanged += new System.EventHandler(this.Server_ComboBox_TextChanged);
 
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
-            m_oWorker = new BackgroundWorker();
-            m_oWorker.DoWork += new DoWorkEventHandler(m_oWorker_DoWork);
-            m_oWorker.ProgressChanged += new ProgressChangedEventHandler(m_oWorker_ProgressChanged);
-            m_oWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(m_oWorker_RunWorkerCompleted);
-            m_oWorker.WorkerReportsProgress = true;
-            m_oWorker.WorkerSupportsCancellation = true;
+            ClientApplication_BackgroundWorker = new BackgroundWorker();
+            ClientApplication_BackgroundWorker.DoWork += new DoWorkEventHandler(ClientApplication_BackgroundWorker_DoWork);
+            ClientApplication_BackgroundWorker.ProgressChanged += new ProgressChangedEventHandler(ClientApplication_BackgroundWorker_ProgressChanged);
+            ClientApplication_BackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ClientApplication_BackgroundWorker_RunWorkerCompleted);
+            ClientApplication_BackgroundWorker.WorkerReportsProgress = true;
+            ClientApplication_BackgroundWorker.WorkerSupportsCancellation = true;
         }
 
         private void Start_Button_Click(object sender, EventArgs e)
         {
             this.Start_Button.Enabled = false;
             //Start the async operation here
-            m_oWorker.RunWorkerAsync();
+            ClientApplication_BackgroundWorker.RunWorkerAsync();
 
             string connectionString = null;
             SqlConnection connection;
@@ -302,7 +302,7 @@ namespace WindowsFormsApplication1
         }
 
         /// On completed do the appropriate task
-        void m_oWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        void ClientApplication_BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //If it was cancelled midway
             if (e.Cancelled)
@@ -322,7 +322,7 @@ namespace WindowsFormsApplication1
         }
 
         /// Notification is performed here to the progress bar
-        void m_oWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        void ClientApplication_BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //Here you play with the main UI thread
             //progressBar1.Value = e.ProgressPercentage;
@@ -364,25 +364,25 @@ namespace WindowsFormsApplication1
 
         /// Time consuming operations go here </br>
         /// i.e. Database operations,Reporting
-        void m_oWorker_DoWork(object sender, DoWorkEventArgs e)
+        void ClientApplication_BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             //NOTE : Never play with the UI thread here...
             //time consuming operation
             for (int i = 0; i < 100; i++)
             {
                 Thread.Sleep(200);
-                m_oWorker.ReportProgress(i);
+                ClientApplication_BackgroundWorker.ReportProgress(i);
                 //If cancel button was pressed while the execution is in progress
                 //Change the state from cancellation ---> cancel'ed
-                if (m_oWorker.CancellationPending)
+                if (ClientApplication_BackgroundWorker.CancellationPending)
                 {
                     e.Cancel = true;
-                    m_oWorker.ReportProgress(0);
+                    ClientApplication_BackgroundWorker.ReportProgress(0);
                     return;
                 }
             }
             //Report 100% completion on operation completed
-            m_oWorker.ReportProgress(100);
+            ClientApplication_BackgroundWorker.ReportProgress(100);
         }
 
         private void btnStartAsyncOperation_Click(object sender, EventArgs e)
@@ -390,15 +390,15 @@ namespace WindowsFormsApplication1
             //btnStartAsyncOperation.Enabled = false;
             //btnCancel.Enabled = true;
             //Start the async operation here
-            m_oWorker.RunWorkerAsync();
+            ClientApplication_BackgroundWorker.RunWorkerAsync();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (m_oWorker.IsBusy)
+            if (ClientApplication_BackgroundWorker.IsBusy)
             {
                 //Stop/Cancel the async operation here
-                m_oWorker.CancelAsync();
+                ClientApplication_BackgroundWorker.CancelAsync();
             }
         }
 
@@ -458,7 +458,7 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void comboBox1_TextChanged(Object sender, EventArgs e)
+        private void Server_ComboBox_TextChanged(Object sender, EventArgs e)
         {
             if (DatabaseName_CheckBox.Enabled)
             {

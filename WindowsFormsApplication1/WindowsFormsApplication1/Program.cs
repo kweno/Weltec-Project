@@ -37,7 +37,7 @@ namespace WindowsFormsApplication1
             splashThread.Start();
 
             //run form - time taking operation
-            Form mainForm = new ClientApplication_Form();
+            Form mainForm = new ClientApplicationMain_Form();
             mainForm.Load += new EventHandler(mainForm_Load);
             Application.Run(mainForm);
         }

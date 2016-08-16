@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace WindowsFormsApplication1
 {
-    partial class ClientApplication_Form
+    partial class ClientApplicationMain_Form
     {
         /// <summary>
         /// Required designer variable.
@@ -34,7 +34,7 @@ namespace WindowsFormsApplication1
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientApplication_Form));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientApplicationMain_Form));
             this.Start_Button = new System.Windows.Forms.Button();
             this.Main_Panel = new System.Windows.Forms.Panel();
             this.Selection_GroupBox = new System.Windows.Forms.GroupBox();
