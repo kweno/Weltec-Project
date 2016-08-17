@@ -205,6 +205,7 @@ namespace ClientApplication
 
             // Get the Key for the file to Encrypt.
             sSecretKey = GenerateKey();
+            //sSecretKey = "AAECAwQFBgcICQoLDA0ODw==";
 
             // For additional security Pin the key.
             GCHandle gch = GCHandle.Alloc(sSecretKey, GCHandleType.Pinned);
@@ -271,6 +272,7 @@ namespace ClientApplication
             //this.comboBox1.DataSource = bindingSource1;
 
             // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
+            // https://msdn.microsoft.com/en-us/library/a6t1z9x2%28v=vs.110%29.aspx
             DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
             for (int i = 0; i < servers.Rows.Count; i++)
             {
@@ -401,8 +403,6 @@ namespace ClientApplication
                 ClientApplication_BackgroundWorker.CancelAsync();
             }
         }
-
-        
 
         private void Database_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
