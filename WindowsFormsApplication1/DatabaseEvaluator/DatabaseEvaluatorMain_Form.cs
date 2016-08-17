@@ -117,17 +117,15 @@ namespace DatabaseEvaluator
 
             // Get the Key for the file to Encrypt.
             sSecretKey = GenerateKey();
+            //sSecretKey = "AAECAwQFBgcICQoLDA0ODw==";
 
             // For additional security Pin the key.
             GCHandle gch = GCHandle.Alloc(sSecretKey, GCHandleType.Pinned);
 
-            // Encrypt the file.        
-            EncryptFile(@"SQLServer.xml",
-               @"Encrypted_SQLServer.xml",
-               sSecretKey);
+            var fileLocation = this.textBox1.Text;
 
             // Decrypt the file.
-            DecryptFile(@"Encrypted_SQLServer.xml",
+            DecryptFile(fileLocation,
                @"Decrypted_SQLServer.xml",
                sSecretKey);
 
