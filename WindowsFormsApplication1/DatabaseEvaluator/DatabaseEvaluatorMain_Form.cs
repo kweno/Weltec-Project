@@ -117,7 +117,13 @@ namespace DatabaseEvaluator
 
             // Get the Key for the file to Encrypt.
             sSecretKey = GenerateKey();
-            //sSecretKey = "AAECAwQFBgcICQoLDA0ODw==";
+
+            //// Define a byte array.
+            //byte[] bytes = { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20 };
+            //// Convert the array to a base 64 sring.
+            //String s = Convert.ToBase64String(bytes);
+            //// Restore the byte array.
+            //sSecretKey = ASCIIEncoding.ASCII.GetString(bytes);
 
             // For additional security Pin the key.
             GCHandle gch = GCHandle.Alloc(sSecretKey, GCHandleType.Pinned);
