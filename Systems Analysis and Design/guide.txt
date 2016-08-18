@@ -1,3 +1,0 @@
-Analysis – Use Cases for at least one scenario for all given events listed in an Event Table,  activity diagrams, system sequence diagrams, state machine diagrams, CRUD analysis, ER / Class diagrams.
-
-Design – Class Diagram, or ERD, Realization of Uses Cases with Sequence Diagrams (object oriented) – perhaps not for all Use Cases but a demonstration that you have a solid understanding of the concept, component diagrams, CRC card design, Package diagrams, architectural/network model, data models, general discussion regarding design methodology process etc.
