@@ -1,0 +1,8 @@
+<plan>
+  <tasks>
+    <task id="0" name="Untitled" desc="" outlinelevel="0" summary="True" collapsed="False" useduration="False" start="2011-05-03 22:26:56" finish="2011-05-04 22:26:56" start_display="03 May 2011" finish_display="04 May 2011" percentcomplete="0" uniqueid="0" duration="2" durationunits="d">
+      <task id="1" name="New Task 1" desc="" outlinelevel="1" summary="False" collapsed="False" useduration="False" start="2011-05-03 22:26:56" finish="2011-05-04 22:26:56" start_display="03 May 2011" finish_display="04 May 2011" percentcomplete="0" uniqueid="0" duration="2" durationunits="d" />
+    </task>
+  </tasks>
+  <resources name="" desc="" />
+</plan>
