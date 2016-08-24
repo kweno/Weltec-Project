@@ -126,20 +126,18 @@ namespace DatabaseEvaluator
             //sSecretKey = ASCIIEncoding.ASCII.GetString(bytes);
 
             // For additional security Pin the key.
-            GCHandle gch = GCHandle.Alloc(sSecretKey, GCHandleType.Pinned);
+            //GCHandle gch = GCHandle.Alloc(sSecretKey, GCHandleType.Pinned);
 
             var fileLocation = this.textBox1.Text;
 
             // Decrypt the file.
-            DecryptFile(fileLocation,
-               @"Decrypted_SQLServer.xml",
-               sSecretKey);
+            //DecryptFile(fileLocation,
+            //   @"Decrypted_SQLServer.xml",
+            //   sSecretKey);
 
             // Remove the Key from memory. 
-            ZeroMemory(gch.AddrOfPinnedObject(), sSecretKey.Length * 2);
-            gch.Free();
-
-            XmlTextReader reader = new XmlTextReader("Decrypted_SQLServer.xml"); //Combines the location of App_Data and the file name
+            //ZeroMemory(gch.AddrOfPinnedObject(), sSecretKey.Length * 2);
+            //gch.Free();
 
             // http://www.codeproject.com/Articles/686994/Create-Read-Advance-PDF-Report-using-iTextSharp-in
             FileStream fs = new FileStream("SQLServer.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
@@ -147,29 +145,29 @@ namespace DatabaseEvaluator
             PdfWriter pdfwriter = PdfWriter.GetInstance(doc, fs);
             doc.Open();
 
-            XDocument xml = XDocument.Load("Decrypted_SQLServer.xml");
-            var numberOfRows = xml.Descendants("Table").Count();
+            var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+            doc.Add(new Paragraph("SQL Server", boldFont));
+            doc.Add(new Paragraph(" "));
 
-            // http://www.c-sharpcorner.com/blogs/create-table-in-pdf-using-c-sharp-and-itextsharp          
-            PdfPTable table = new PdfPTable(3);
-
-            while (reader.Read())
+            // http://www.mikesdotnetting.com/article/86/itextsharp-introducing-tables
+            for (int i = 0; i < 20; i++)
             {
-                switch (reader.NodeType)
-                {
-                    case XmlNodeType.Element:
-                        //MessageBox.Show("<" + reader.Name + ">");
-                        //doc.Add(new Paragraph("<" + reader.Name + ">"));
-                        break;
-                    case XmlNodeType.Text:
-                        //MessageBox.Show(reader.Value);
-                        doc.Add(new Paragraph(reader.Value));
-                        break;
-                    case XmlNodeType.EndElement:
-                        //MessageBox.Show("");
-                        doc.Add(new Paragraph(""));
-                        break;
-                }
+                PdfPTable table = new PdfPTable(4);
+                PdfPCell cell = new PdfPCell(new Phrase("Issue 1: Install SQL 2008 R2 SP2 CU11", boldFont));
+                cell.Colspan = 4;
+                table.AddCell(cell);
+                table.AddCell(new Phrase("Issue Type", boldFont));
+                table.AddCell("Health");
+                table.AddCell(new Phrase("Issue Severity", boldFont));
+                table.AddCell("Critical");
+                PdfPCell cell2 = new PdfPCell(new Phrase("Currently Installed version of SQL Sserver is SQL server 2008 R2 SP1 (10.50)", boldFont));
+                cell2.Colspan = 4;
+                table.AddCell(cell2);
+                PdfPCell cell3 = new PdfPCell(new Phrase("This version is unsupported. We recommend installing the latest update of SQL Server, which is SQL server 2008 R2 SP2 CU11 http://support.microsoft.com/kb/2926028"));
+                cell3.Colspan = 4;
+                table.AddCell(cell3);
+                doc.Add(table);
+                doc.Add(new Paragraph(" "));
             }
             doc.Close();
         }

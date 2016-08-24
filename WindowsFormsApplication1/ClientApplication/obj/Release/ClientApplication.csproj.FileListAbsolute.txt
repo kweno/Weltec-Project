@@ -1,12 +1,12 @@
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe.config
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.pdb
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\itextsharp.dll
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\itextsharp.xml
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.csprojResolveAssemblyReference.cache
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.ClientApplicationMain_Form.resources
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.Properties.Resources.resources
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.SplashScreen_Form.resources
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.csproj.GenerateResource.Cache
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.pdb
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\itextsharp.dll
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\itextsharp.xml
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.exe
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.pdb
