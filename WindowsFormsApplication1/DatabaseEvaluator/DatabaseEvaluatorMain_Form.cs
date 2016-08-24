@@ -25,6 +25,85 @@ namespace DatabaseEvaluator
 
     public partial class DatabaseEvaluatorMain_Form : Form
     {
+        private byte[] EncryptStringToBytes_Aes(string plainText, byte[] Key, byte[] IV)
+        {
+            // Check arguments.
+            if (plainText == null || plainText.Length <= 0)
+                throw new ArgumentNullException("plainText");
+            if (Key == null || Key.Length <= 0)
+                throw new ArgumentNullException("Key");
+            if (IV == null || IV.Length <= 0)
+                throw new ArgumentNullException("IV");
+            byte[] encrypted;
+            // Create an AesCryptoServiceProvider object
+            // with the specified key and IV.
+            using (AesCryptoServiceProvider aesAlg = new AesCryptoServiceProvider())
+            {
+                aesAlg.Key = Key;
+                aesAlg.IV = IV;
+                // Create a decrytor to perform the stream transform.
+                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+                // Create the streams used for encryption.
+                using (MemoryStream msEncrypt = new MemoryStream())
+                {
+                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                    {
+                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                        {
+                            //Write all data to the stream.
+                            swEncrypt.Write(plainText);
+                        }
+                        encrypted = msEncrypt.ToArray();
+                    }
+                }
+            }
+            // Return the encrypted bytes from the memory stream.
+            return encrypted;
+        }
+
+        private string DecryptStringFromBytes_Aes(byte[] cipherText, byte[] Key, byte[] IV)
+        {
+            // Check arguments.
+            if (cipherText == null || cipherText.Length <= 0)
+                throw new ArgumentNullException("cipherText");
+            if (Key == null || Key.Length <= 0)
+                throw new ArgumentNullException("Key");
+            if (IV == null || IV.Length <= 0)
+                throw new ArgumentNullException("IV");
+
+            // Declare the string used to hold
+            // the decrypted text.
+            string plaintext = null;
+
+            // Create an AesCryptoServiceProvider object
+            // with the specified key and IV.
+            using (AesCryptoServiceProvider aesAlg = new AesCryptoServiceProvider())
+            {
+                aesAlg.Key = Key;
+                aesAlg.IV = IV;
+
+                // Create a decrytor to perform the stream transform.
+                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+
+                // Create the streams used for decryption.
+                using (MemoryStream msDecrypt = new MemoryStream(cipherText))
+                {
+                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                        {
+
+                            // Read the decrypted bytes from the decrypting stream
+                            // and place them in a string.
+                            plaintext = srDecrypt.ReadToEnd();
+                        }
+                    }
+                }
+
+            }
+            return plaintext;
+        }
+
         // https://support.microsoft.com/en-nz/kb/307010
         //  Call this function to remove the key from memory after use for security
         [System.Runtime.InteropServices.DllImport("KERNEL32.DLL", EntryPoint = "RtlZeroMemory")]
@@ -111,6 +190,30 @@ namespace DatabaseEvaluator
 
         private void Start_Button_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string original = "Here is some data to encrypt!";
+                // Create a new instance of the AesCryptoServiceProvider
+                // class.  This generates a new key and initialization 
+                // vector (IV).
+                using (AesCryptoServiceProvider myAes = new AesCryptoServiceProvider())
+                {
+                    Console.WriteLine("Original:   {0} \n", original);
+                    // Encrypt the string to an array of bytes.
+                    byte[] encrypted = EncryptStringToBytes_Aes(original, Convert.FromBase64String("AAECAwQFBgcICQoLDA0ODw=="), Convert.FromBase64String("AAECAwQFBgcICQoLDA0ODw=="));
+                    Console.WriteLine("Encrypted:   {0} \n", System.Text.Encoding.UTF8.GetString(encrypted));
+                    // Decrypt the bytes to a string.
+                    string decrypted = DecryptStringFromBytes_Aes(encrypted, Convert.FromBase64String("AAECAwQFBgcICQoLDA0ODw=="), Convert.FromBase64String("AAECAwQFBgcICQoLDA0ODw=="));
+
+                    //Display the original data and the decrypted data.                   
+                    Console.WriteLine("Decrypted Trip: {0}", decrypted);
+                }
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine("Error: {0}", error.Message);
+            }
+
             // Must be 64 bits, 8 bytes.
             // Distribute this key to the user who will decrypt this file.
             string sSecretKey;
