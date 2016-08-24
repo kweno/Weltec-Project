@@ -26,6 +26,8 @@ namespace ClientApplication
     public partial class ClientApplicationMain_Form : Form
     {
         // https://support.microsoft.com/en-nz/kb/307010
+        // https://dotnetfiddle.net/bFvxp8
+        // http://stackoverflow.com/questions/2919228/specified-key-is-not-a-valid-size-for-this-algorithm
         //  Call this function to remove the key from memory after use for security
         [System.Runtime.InteropServices.DllImport("KERNEL32.DLL", EntryPoint = "RtlZeroMemory")]
         public static extern bool ZeroMemory(IntPtr Destination, int Length);
@@ -44,56 +46,58 @@ namespace ClientApplication
            string sOutputFilename,
            string sKey)
         {
-            FileStream fsInput = new FileStream(sInputFilename,
-               FileMode.Open,
-               FileAccess.Read);
+            using (AesCryptoServiceProvider aesAlg = new AesCryptoServiceProvider())
+            {
+                FileStream fsInput = new FileStream(sInputFilename,
+                FileMode.Open,
+                FileAccess.Read);
 
-            FileStream fsEncrypted = new FileStream(sOutputFilename,
-               FileMode.Create,
-               FileAccess.Write);
-            DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
-            DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
-            DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
-            ICryptoTransform desencrypt = DES.CreateEncryptor();
-            CryptoStream cryptostream = new CryptoStream(fsEncrypted,
+                FileStream fsEncrypted = new FileStream(sOutputFilename,
+                   FileMode.Create,
+                   FileAccess.Write);
+
+                aesAlg.Key = Convert.FromBase64String("AAECAwQFBgcICQoLDA0ODw==");
+                aesAlg.IV = Convert.FromBase64String("AAECAwQFBgcICQoLDA0ODw==");
+                // Create a decrytor to perform the stream transform.
+                ICryptoTransform desencrypt = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+                CryptoStream cryptostream = new CryptoStream(fsEncrypted,
                desencrypt,
                CryptoStreamMode.Write);
 
-            byte[] bytearrayinput = new byte[fsInput.Length];
-            fsInput.Read(bytearrayinput, 0, bytearrayinput.Length);
-            cryptostream.Write(bytearrayinput, 0, bytearrayinput.Length);
-            cryptostream.Close();
-            fsInput.Close();
-            fsEncrypted.Close();
+                byte[] bytearrayinput = new byte[fsInput.Length];
+                fsInput.Read(bytearrayinput, 0, bytearrayinput.Length);
+                cryptostream.Write(bytearrayinput, 0, bytearrayinput.Length);
+                cryptostream.Close();
+                fsInput.Close();
+                fsEncrypted.Close();
+            }
         }
 
         private void DecryptFile(string sInputFilename,
            string sOutputFilename,
            string sKey)
         {
-            DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
-            //A 64 bit key and IV is required for this provider.
-            //Set secret key For DES algorithm.
-            DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
-            //Set initialization vector.
-            DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
-
-            //Create a file stream to read the encrypted file back.
-            FileStream fsread = new FileStream(sInputFilename,
+            using (AesCryptoServiceProvider aesAlg = new AesCryptoServiceProvider())
+            {
+                //Create a file stream to read the encrypted file back.
+                FileStream fsread = new FileStream(sInputFilename,
                FileMode.Open,
                FileAccess.Read);
-            //Create a DES decryptor from the DES instance.
-            ICryptoTransform desdecrypt = DES.CreateDecryptor();
-            //Create crypto stream set to read and do a 
-            //DES decryption transform on incoming bytes.
-            CryptoStream cryptostreamDecr = new CryptoStream(fsread,
-               desdecrypt,
-               CryptoStreamMode.Read);
-            //Print the contents of the decrypted file.
-            StreamWriter fsDecrypted = new StreamWriter(sOutputFilename);
-            fsDecrypted.Write(new StreamReader(cryptostreamDecr).ReadToEnd());
-            fsDecrypted.Flush();
-            fsDecrypted.Close();
+                aesAlg.Key = Convert.FromBase64String("AAECAwQFBgcICQoLDA0ODw==");
+                aesAlg.IV = Convert.FromBase64String("AAECAwQFBgcICQoLDA0ODw==");
+                // Create a decrytor to perform the stream transform.
+                ICryptoTransform desdecrypt = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+                //Create crypto stream set to read and do a 
+                //DES decryption transform on incoming bytes.
+                CryptoStream cryptostreamDecr = new CryptoStream(fsread,
+                   desdecrypt,
+                   CryptoStreamMode.Read);
+                //Print the contents of the decrypted file.
+                StreamWriter fsDecrypted = new StreamWriter(sOutputFilename);
+                fsDecrypted.Write(new StreamReader(cryptostreamDecr).ReadToEnd());
+                fsDecrypted.Flush();
+                fsDecrypted.Close();
+            }
         }
 
         /// The backgroundworker object on which the time consuming operation shall be executed
@@ -204,14 +208,8 @@ namespace ClientApplication
             string sSecretKey;
 
             // Get the Key for the file to Encrypt.
-            sSecretKey = GenerateKey();
-
-            //// Define a byte array.
-            //byte[] bytes = { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20 };
-            //// Convert the array to a base 64 sring.
-            //String s = Convert.ToBase64String(bytes);
-            //// Restore the byte array.
-            //sSecretKey = ASCIIEncoding.ASCII.GetString(bytes);
+            //sSecretKey = GenerateKey();
+            sSecretKey = "AAECAwQFBgcICQoLDA0ODw==";
 
             // For additional security Pin the key.
             GCHandle gch = GCHandle.Alloc(sSecretKey, GCHandleType.Pinned);

@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <Table>
+    <file_id>1</file_id>
+    <type>0</type>
+    <type_desc>ROWS</type_desc>
+    <data_space_id>1</data_space_id>
+    <name>master</name>
+    <physical_name>C:\Program Files\Microsoft SQL Server\MSSQL13.SQL1\MSSQL\DATA\master.mdf</physical_name>
+    <state>0</state>
+    <state_desc>ONLINE</state_desc>
+    <size>688</size>
+    <max_size>-1</max_size>
+    <growth>10</growth>
+    <is_media_read_only>false</is_media_read_only>
+    <is_read_only>false</is_read_only>
+    <is_sparse>false</is_sparse>
+    <is_percent_growth>true</is_percent_growth>
+    <is_name_reserved>false</is_name_reserved>
+  </Table>
+  <Table>
+    <file_id>2</file_id>
+    <type>1</type>
+    <type_desc>LOG</type_desc>
+    <data_space_id>0</data_space_id>
+    <name>mastlog</name>
+    <physical_name>C:\Program Files\Microsoft SQL Server\MSSQL13.SQL1\MSSQL\DATA\mastlog.ldf</physical_name>
+    <state>0</state>
+    <state_desc>ONLINE</state_desc>
+    <size>256</size>
+    <max_size>-1</max_size>
+    <growth>10</growth>
+    <is_media_read_only>false</is_media_read_only>
+    <is_read_only>false</is_read_only>
+    <is_sparse>false</is_sparse>
+    <is_percent_growth>true</is_percent_growth>
+    <is_name_reserved>false</is_name_reserved>
+  </Table>
+</NewDataSet>
