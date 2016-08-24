@@ -28,54 +28,8 @@ namespace DatabaseEvaluator
         // https://support.microsoft.com/en-nz/kb/307010
         // https://dotnetfiddle.net/bFvxp8
         // http://stackoverflow.com/questions/2919228/specified-key-is-not-a-valid-size-for-this-algorithm
-        //  Call this function to remove the key from memory after use for security
-        [System.Runtime.InteropServices.DllImport("KERNEL32.DLL", EntryPoint = "RtlZeroMemory")]
-        public static extern bool ZeroMemory(IntPtr Destination, int Length);
-
-        // Function to Generate a 64 bits Key.
-        private string GenerateKey()
-        {
-            // Create an instance of Symetric Algorithm. Key and IV is generated automatically.
-            DESCryptoServiceProvider desCrypto = (DESCryptoServiceProvider)DESCryptoServiceProvider.Create();
-
-            // Use the Automatically generated key for Encryption. 
-            return ASCIIEncoding.ASCII.GetString(desCrypto.Key);
-        }
-
-        private void EncryptFile(string sInputFilename,
-           string sOutputFilename,
-           string sKey)
-        {
-            using (AesCryptoServiceProvider aesAlg = new AesCryptoServiceProvider())
-            {
-                FileStream fsInput = new FileStream(sInputFilename,
-                FileMode.Open,
-                FileAccess.Read);
-
-                FileStream fsEncrypted = new FileStream(sOutputFilename,
-                   FileMode.Create,
-                   FileAccess.Write);
-
-                aesAlg.Key = Convert.FromBase64String("AAECAwQFBgcICQoLDA0ODw==");
-                aesAlg.IV = Convert.FromBase64String("AAECAwQFBgcICQoLDA0ODw==");
-                // Create a decrytor to perform the stream transform.
-                ICryptoTransform desencrypt = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
-                CryptoStream cryptostream = new CryptoStream(fsEncrypted,
-               desencrypt,
-               CryptoStreamMode.Write);
-
-                byte[] bytearrayinput = new byte[fsInput.Length];
-                fsInput.Read(bytearrayinput, 0, bytearrayinput.Length);
-                cryptostream.Write(bytearrayinput, 0, bytearrayinput.Length);
-                cryptostream.Close();
-                fsInput.Close();
-                fsEncrypted.Close();
-            }
-        }
-
         private void DecryptFile(string sInputFilename,
-           string sOutputFilename,
-           string sKey)
+           string sOutputFilename)
         {
             using (AesCryptoServiceProvider aesAlg = new AesCryptoServiceProvider())
             {
@@ -117,25 +71,9 @@ namespace DatabaseEvaluator
         {
             var fileLocation = this.textBox1.Text;
 
-            // Must be 64 bits, 8 bytes.
-            // Distribute this key to the user who will decrypt this file.
-            string sSecretKey;
-
-            // Get the Key for the file to Encrypt.
-            //sSecretKey = GenerateKey();
-            sSecretKey = "AAECAwQFBgcICQoLDA0ODw==";
-
-            // For additional security Pin the key.
-            GCHandle gch = GCHandle.Alloc(sSecretKey, GCHandleType.Pinned);
-
             // Decrypt the file.
             DecryptFile(fileLocation,
-               @"Decrypted_SQLServer.xml",
-               sSecretKey);
-
-            // Remove the Key from memory. 
-            ZeroMemory(gch.AddrOfPinnedObject(), sSecretKey.Length * 2);
-            gch.Free();
+               @"Decrypted_SQLServer.xml");
 
             // http://www.codeproject.com/Articles/686994/Create-Read-Advance-PDF-Report-using-iTextSharp-in
             FileStream fs = new FileStream("SQLServer.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
