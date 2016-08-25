@@ -8,3 +8,4 @@ Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.csproj.GenerateResource.Cache
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.exe
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.pdb
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.csprojResolveAssemblyReference.cache

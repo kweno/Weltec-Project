@@ -56,7 +56,7 @@ namespace DatabaseEvaluator
 
         /// The backgroundworker object on which the time consuming operation shall be executed
         /// http://www.codeproject.com/Articles/99143/BackgroundWorker-Class-Sample-for-Beginners
-        BackgroundWorker ClientApplication_BackgroundWorker;
+        BackgroundWorker DatabaseEvaluator_BackgroundWorker;
 
         public DatabaseEvaluatorMain_Form()
         {
@@ -69,14 +69,22 @@ namespace DatabaseEvaluator
 
         private void Start_Button_Click(object sender, EventArgs e)
         {
-            var fileLocation = this.textBox1.Text;
+            var fileLocation = this.PathToXML_TextBox.Text;
 
             // Decrypt the file.
             DecryptFile(fileLocation,
                @"Decrypted_SQLServer.xml");
 
+            // Displays a SaveFileDialog so the user can save the Image
+            // assigned to Button2.
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.FileName = "SQLServer.pdf";
+            saveFileDialog1.Filter = "PDF File|*.pdf";
+            saveFileDialog1.Title = "Save a PDF File";
+            saveFileDialog1.ShowDialog();
+
             // http://www.codeproject.com/Articles/686994/Create-Read-Advance-PDF-Report-using-iTextSharp-in
-            FileStream fs = new FileStream("SQLServer.pdf", FileMode.Create, FileAccess.Write, FileShare.None);
+            FileStream fs = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
             Document doc = new Document();
             PdfWriter pdfwriter = PdfWriter.GetInstance(doc, fs);
             doc.Open();
@@ -119,7 +127,7 @@ namespace DatabaseEvaluator
             fdlg.RestoreDirectory = true;
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
-                this.textBox1.Text = fdlg.FileName;
+                this.PathToXML_TextBox.Text = fdlg.FileName;
             }
         }
     }

@@ -38,7 +38,7 @@ namespace DatabaseEvaluator
             this.Start_Button = new System.Windows.Forms.Button();
             this.Main_Panel = new System.Windows.Forms.Panel();
             this.FindFile_GroupBox = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.PathToXML_TextBox = new System.Windows.Forms.TextBox();
             this.Browse_Button = new System.Windows.Forms.Button();
             this.PathToXML_Label = new System.Windows.Forms.Label();
             this.Logo_PictureBox = new System.Windows.Forms.PictureBox();
@@ -102,7 +102,7 @@ namespace DatabaseEvaluator
             // 
             // FindFile_GroupBox
             // 
-            this.FindFile_GroupBox.Controls.Add(this.textBox1);
+            this.FindFile_GroupBox.Controls.Add(this.PathToXML_TextBox);
             this.FindFile_GroupBox.Controls.Add(this.Browse_Button);
             this.FindFile_GroupBox.Controls.Add(this.PathToXML_Label);
             this.FindFile_GroupBox.Location = new System.Drawing.Point(16, 170);
@@ -112,14 +112,14 @@ namespace DatabaseEvaluator
             this.FindFile_GroupBox.TabStop = false;
             this.FindFile_GroupBox.Text = "Find File";
             // 
-            // textBox1
+            // PathToXML_TextBox
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.textBox1.Location = new System.Drawing.Point(104, 20);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(328, 20);
-            this.textBox1.TabIndex = 14;
+            this.PathToXML_TextBox.BackColor = System.Drawing.SystemColors.Window;
+            this.PathToXML_TextBox.Location = new System.Drawing.Point(104, 20);
+            this.PathToXML_TextBox.Name = "PathToXML_TextBox";
+            this.PathToXML_TextBox.ReadOnly = true;
+            this.PathToXML_TextBox.Size = new System.Drawing.Size(328, 20);
+            this.PathToXML_TextBox.TabIndex = 14;
             // 
             // Browse_Button
             // 
@@ -464,7 +464,7 @@ namespace DatabaseEvaluator
         private Label DatabaseMainProgress_Label;
         private PictureBox DatabaseMainProgress_PictureBox;
         private TableLayoutPanel Instance_TableLayoutPanel;
-        private TextBox textBox1;
+        private TextBox PathToXML_TextBox;
     }
 }
 

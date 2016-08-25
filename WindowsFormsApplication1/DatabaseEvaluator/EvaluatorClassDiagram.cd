@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DatabaseEvaluator.DatabaseEvaluatorMain_Form">
+    <Position X="0.5" Y="0.5" Width="4" />
+    <Members>
+      <Field Name="components" Hidden="true" />
+      <Method Name="DatabaseEvaluatorMain_Form" Hidden="true" />
+      <Field Name="DatabaseMainProgress_Label" Hidden="true" />
+      <Field Name="DatabaseMainProgress_PictureBox" Hidden="true" />
+      <Field Name="DatabaseProgress_Label1" Hidden="true" />
+      <Field Name="DatabaseProgress_Label2" Hidden="true" />
+      <Field Name="DatabaseProgress_Label3" Hidden="true" />
+      <Field Name="DatabaseProgress_Label4" Hidden="true" />
+      <Field Name="DatabaseProgress_PictureBox1" Hidden="true" />
+      <Field Name="DatabaseProgress_PictureBox2" Hidden="true" />
+      <Field Name="DatabaseProgress_PictureBox3" Hidden="true" />
+      <Field Name="DatabaseProgress_PictureBox4" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+      <Field Name="InstanceMainProgress_Label" Hidden="true" />
+      <Field Name="InstanceMainProgress_PictureBox" Hidden="true" />
+      <Field Name="InstanceProgress_Label1" Hidden="true" />
+      <Field Name="InstanceProgress_Label2" Hidden="true" />
+      <Field Name="InstanceProgress_Label3" Hidden="true" />
+      <Field Name="InstanceProgress_PictureBox1" Hidden="true" />
+      <Field Name="InstanceProgress_PictureBox2" Hidden="true" />
+      <Field Name="InstanceProgress_PictureBox3" Hidden="true" />
+      <Field Name="Logo_PictureBox" Hidden="true" />
+      <Field Name="Main_Panel" Hidden="true" />
+      <Field Name="PathToXML_Label" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>BAAAgAACADCgEbcAAECIoABDAAAEACAAQIAIBFCgAAA=</HashCode>
+      <FileName>DatabaseEvaluatorMain_Form.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
