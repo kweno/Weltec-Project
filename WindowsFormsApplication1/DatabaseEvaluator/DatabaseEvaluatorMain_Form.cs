@@ -90,6 +90,9 @@ namespace DatabaseEvaluator
             doc.Open();
 
             var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+            var whiteBoldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, new BaseColor(255, 255, 255));
+            var darkBlue = new BaseColor(79, 129, 188);
+            var lightBlue = new BaseColor(219, 229, 241);
             doc.Add(new Paragraph("SQL Server", boldFont));
             doc.Add(new Paragraph(" "));
 
@@ -97,19 +100,28 @@ namespace DatabaseEvaluator
             for (int i = 0; i < 20; i++)
             {
                 PdfPTable table = new PdfPTable(4);
-                PdfPCell cell = new PdfPCell(new Phrase("Issue 1: Install SQL 2008 R2 SP2 CU11", boldFont));
-                cell.Colspan = 4;
-                table.AddCell(cell);
-                table.AddCell(new Phrase("Issue Type", boldFont));
-                table.AddCell("Health");
-                table.AddCell(new Phrase("Issue Severity", boldFont));
-                table.AddCell("Critical");
-                PdfPCell cell2 = new PdfPCell(new Phrase("Currently Installed version of SQL Sserver is SQL server 2008 R2 SP1 (10.50)", boldFont));
-                cell2.Colspan = 4;
-                table.AddCell(cell2);
-                PdfPCell cell3 = new PdfPCell(new Phrase("This version is unsupported. We recommend installing the latest update of SQL Server, which is SQL server 2008 R2 SP2 CU11 http://support.microsoft.com/kb/2926028"));
-                cell3.Colspan = 4;
-                table.AddCell(cell3);
+                PdfPCell header_cell = new PdfPCell(new Phrase("Issue 1: Install SQL 2008 R2 SP2 CU11", whiteBoldFont));
+                header_cell.Colspan = 4;
+                header_cell.BackgroundColor = darkBlue;
+                table.AddCell(header_cell);
+                PdfPCell issueTypeHeader_cell = new PdfPCell(new Phrase("Issue Type", boldFont));
+                issueTypeHeader_cell.BackgroundColor = lightBlue;
+                table.AddCell(issueTypeHeader_cell);
+                PdfPCell issueType_cell = new PdfPCell(new Phrase("Health"));
+                issueType_cell.BackgroundColor = lightBlue;
+                table.AddCell(issueType_cell);
+                PdfPCell issueSeverityHeader_cell = new PdfPCell(new Phrase("Issue Severity", boldFont));
+                issueSeverityHeader_cell.BackgroundColor = lightBlue;
+                table.AddCell(issueSeverityHeader_cell);
+                PdfPCell issueSeverity_cell = new PdfPCell(new Phrase("Critical"));
+                issueSeverity_cell.BackgroundColor = lightBlue;
+                table.AddCell(issueSeverity_cell);
+                PdfPCell summary_cell = new PdfPCell(new Phrase("Currently Installed version of SQL Sserver is SQL server 2008 R2 SP1 (10.50)", boldFont));
+                summary_cell.Colspan = 4;
+                table.AddCell(summary_cell);
+                PdfPCell comments_cell = new PdfPCell(new Phrase("This version is unsupported. We recommend installing the latest update of SQL Server, which is SQL server 2008 R2 SP2 CU11 http://support.microsoft.com/kb/2926028"));
+                comments_cell.Colspan = 4;
+                table.AddCell(comments_cell);
                 doc.Add(table);
                 doc.Add(new Paragraph(" "));
             }
