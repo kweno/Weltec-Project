@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SplashScreen_Form));
             this.Splash_ProgressBar = new System.Windows.Forms.ProgressBar();
             this.Logo_PictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.Logo_PictureBox)).BeginInit();
@@ -42,7 +43,7 @@
             // 
             // Logo_PictureBox
             // 
-            this.Logo_PictureBox.Image = Properties.Resources.header_logo_alpha1;
+            this.Logo_PictureBox.Image = global::ClientApplication.Properties.Resources.header_logo_alpha1;
             this.Logo_PictureBox.Location = new System.Drawing.Point(140, 5);
             this.Logo_PictureBox.Name = "Logo_PictureBox";
             this.Logo_PictureBox.Size = new System.Drawing.Size(144, 84);
@@ -54,11 +55,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 126);
+            this.ClientSize = new System.Drawing.Size(437, 136);
             this.Controls.Add(this.Logo_PictureBox);
             this.Controls.Add(this.Splash_ProgressBar);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SplashScreen_Form";
-            this.Text = "Database Evaluator";
+            this.Text = "   ";
             ((System.ComponentModel.ISupportInitialize)(this.Logo_PictureBox)).EndInit();
             this.ResumeLayout(false);
 

@@ -9,3 +9,4 @@
 /1. Final Documentation/18. Project Progress Report/~$ekly Progress Report - Week 5.doc
 *.tmp
 /WindowsFormsApplication1/DatabaseEvaluator/obj/Release/TempPE
+/WindowsFormsApplication1/ClientApplication/obj/Release/TempPE/Properties.Resources.Designer.cs.dll
