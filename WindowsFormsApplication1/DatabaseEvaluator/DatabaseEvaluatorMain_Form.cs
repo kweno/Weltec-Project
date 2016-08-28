@@ -69,63 +69,73 @@ namespace DatabaseEvaluator
 
         private void Start_Button_Click(object sender, EventArgs e)
         {
-            var fileLocation = this.PathToXML_TextBox.Text;
-
-            // Decrypt the file.
-            DecryptFile(fileLocation,
-               @"Decrypted_SQLServer.xml");
-
-            // Displays a SaveFileDialog so the user can save the Image
-            // assigned to Button2.
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.FileName = "SQLServer.pdf";
-            saveFileDialog1.Filter = "PDF File|*.pdf";
-            saveFileDialog1.Title = "Save a PDF File";
-            saveFileDialog1.ShowDialog();
-
-            // http://www.codeproject.com/Articles/686994/Create-Read-Advance-PDF-Report-using-iTextSharp-in
-            FileStream fs = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
-            Document doc = new Document();
-            PdfWriter pdfwriter = PdfWriter.GetInstance(doc, fs);
-            doc.Open();
-
-            var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
-            var whiteBoldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, new BaseColor(255, 255, 255));
-            var darkBlue = new BaseColor(79, 129, 188);
-            var lightBlue = new BaseColor(219, 229, 241);
-            doc.Add(new Paragraph("SQL Server", boldFont));
-            doc.Add(new Paragraph(" "));
-
-            // http://www.mikesdotnetting.com/article/86/itextsharp-introducing-tables
-            for (int i = 0; i < 20; i++)
+            try
             {
-                PdfPTable table = new PdfPTable(4);
-                PdfPCell header_cell = new PdfPCell(new Phrase("Issue 1: Install SQL 2008 R2 SP2 CU11", whiteBoldFont));
-                header_cell.Colspan = 4;
-                header_cell.BackgroundColor = darkBlue;
-                table.AddCell(header_cell);
-                PdfPCell issueTypeHeader_cell = new PdfPCell(new Phrase("Issue Type", boldFont));
-                issueTypeHeader_cell.BackgroundColor = lightBlue;
-                table.AddCell(issueTypeHeader_cell);
-                PdfPCell issueType_cell = new PdfPCell(new Phrase("Health"));
-                issueType_cell.BackgroundColor = lightBlue;
-                table.AddCell(issueType_cell);
-                PdfPCell issueSeverityHeader_cell = new PdfPCell(new Phrase("Issue Severity", boldFont));
-                issueSeverityHeader_cell.BackgroundColor = lightBlue;
-                table.AddCell(issueSeverityHeader_cell);
-                PdfPCell issueSeverity_cell = new PdfPCell(new Phrase("Critical"));
-                issueSeverity_cell.BackgroundColor = lightBlue;
-                table.AddCell(issueSeverity_cell);
-                PdfPCell summary_cell = new PdfPCell(new Phrase("Currently Installed version of SQL Sserver is SQL server 2008 R2 SP1 (10.50)", boldFont));
-                summary_cell.Colspan = 4;
-                table.AddCell(summary_cell);
-                PdfPCell comments_cell = new PdfPCell(new Phrase("This version is unsupported. We recommend installing the latest update of SQL Server, which is SQL server 2008 R2 SP2 CU11 http://support.microsoft.com/kb/2926028"));
-                comments_cell.Colspan = 4;
-                table.AddCell(comments_cell);
-                doc.Add(table);
+                var fileLocation = this.PathToXML_TextBox.Text;
+
+                // Decrypt the file.
+                DecryptFile(fileLocation,
+                   @"Decrypted_SQLServer.xml");
+
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.FileName = "SQLServer.pdf";
+                saveFileDialog1.Filter = "PDF File|*.pdf";
+                saveFileDialog1.Title = "Save a PDF File";
+                saveFileDialog1.ShowDialog();
+
+                // http://www.codeproject.com/Articles/686994/Create-Read-Advance-PDF-Report-using-iTextSharp-in
+                FileStream fs = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
+                Document doc = new Document();
+                PdfWriter pdfwriter = PdfWriter.GetInstance(doc, fs);
+                doc.Open();
+
+                var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                var whiteBoldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, new BaseColor(255, 255, 255));
+                var darkBlue = new BaseColor(79, 129, 188);
+                var lightBlue = new BaseColor(219, 229, 241);
+                doc.Add(new Paragraph("SQL Server", boldFont));
                 doc.Add(new Paragraph(" "));
+
+                // http://www.mikesdotnetting.com/article/86/itextsharp-introducing-tables
+                for (int i = 0; i < 20; i++)
+                {
+                    PdfPTable table = new PdfPTable(4);
+                    PdfPCell header_cell = new PdfPCell(new Phrase("Issue 1: Install SQL 2008 R2 SP2 CU11", whiteBoldFont));
+                    header_cell.Colspan = 4;
+                    header_cell.BackgroundColor = darkBlue;
+                    table.AddCell(header_cell);
+                    PdfPCell issueTypeHeader_cell = new PdfPCell(new Phrase("Issue Type", boldFont));
+                    issueTypeHeader_cell.BackgroundColor = lightBlue;
+                    table.AddCell(issueTypeHeader_cell);
+                    PdfPCell issueType_cell = new PdfPCell(new Phrase("Health"));
+                    issueType_cell.BackgroundColor = lightBlue;
+                    table.AddCell(issueType_cell);
+                    PdfPCell issueSeverityHeader_cell = new PdfPCell(new Phrase("Issue Severity", boldFont));
+                    issueSeverityHeader_cell.BackgroundColor = lightBlue;
+                    table.AddCell(issueSeverityHeader_cell);
+                    PdfPCell issueSeverity_cell = new PdfPCell(new Phrase("Critical"));
+                    issueSeverity_cell.BackgroundColor = lightBlue;
+                    table.AddCell(issueSeverity_cell);
+                    PdfPCell summary_cell = new PdfPCell(new Phrase("Currently Installed version of SQL Sserver is SQL server 2008 R2 SP1 (10.50)", boldFont));
+                    summary_cell.Colspan = 4;
+                    table.AddCell(summary_cell);
+                    PdfPCell comments_cell = new PdfPCell(new Phrase("This version is unsupported. We recommend installing the latest update of SQL Server, which is SQL server 2008 R2 SP2 CU11 http://support.microsoft.com/kb/2926028"));
+                    comments_cell.Colspan = 4;
+                    table.AddCell(comments_cell);
+                    doc.Add(table);
+                    doc.Add(new Paragraph(" "));
+                }
+                doc.Close();
             }
-            doc.Close();
+            catch (IOException exception)
+            {
+                MessageBox.Show("File Permissions Error.");
+            }
+            catch (CryptographicException exception)
+            {
+                MessageBox.Show("Invalid Dump File.");
+            }
+
         }
 
         private void Browse_Button_Click(object sender, EventArgs e)
