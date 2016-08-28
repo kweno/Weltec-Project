@@ -10,9 +10,10 @@ using System.Security.Cryptography;
 
 namespace ClientApplication
 {
-
     public partial class ClientApplicationMain_Form : Form
     {
+        private string EVALUATOR_KEY = "AAECAwQFBgcICQoLDA0ODw==";
+
         // https://support.microsoft.com/en-nz/kb/307010
         // https://dotnetfiddle.net/bFvxp8
         // http://stackoverflow.com/questions/2919228/specified-key-is-not-a-valid-size-for-this-algorithm
@@ -29,8 +30,8 @@ namespace ClientApplication
                    FileMode.Create,
                    FileAccess.Write);
 
-                aesAlg.Key = Convert.FromBase64String("AAECAwQFBgcICQoLDA0ODw==");
-                aesAlg.IV = Convert.FromBase64String("AAECAwQFBgcICQoLDA0ODw==");
+                aesAlg.Key = Convert.FromBase64String(EVALUATOR_KEY);
+                aesAlg.IV = Convert.FromBase64String(EVALUATOR_KEY);
                 // Create a decrytor to perform the stream transform.
                 ICryptoTransform desencrypt = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
                 CryptoStream cryptostream = new CryptoStream(fsEncrypted,

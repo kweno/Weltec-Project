@@ -6,7 +6,7 @@
     <type_desc>ROWS</type_desc>
     <data_space_id>1</data_space_id>
     <name>master</name>
-    <physical_name>C:\Program Files\Microsoft SQL Server\MSSQL13.SQL1\MSSQL\DATA\master.mdf</physical_name>
+    <physical_name>C:\Program Files\Microsoft SQL Server\MSSQL13.SQL2016N2\MSSQL\DATA\master.mdf</physical_name>
     <state>0</state>
     <state_desc>ONLINE</state_desc>
     <size>688</size>
@@ -24,10 +24,10 @@
     <type_desc>LOG</type_desc>
     <data_space_id>0</data_space_id>
     <name>mastlog</name>
-    <physical_name>C:\Program Files\Microsoft SQL Server\MSSQL13.SQL1\MSSQL\DATA\mastlog.ldf</physical_name>
+    <physical_name>C:\Program Files\Microsoft SQL Server\MSSQL13.SQL2016N2\MSSQL\DATA\mastlog.ldf</physical_name>
     <state>0</state>
     <state_desc>ONLINE</state_desc>
-    <size>256</size>
+    <size>288</size>
     <max_size>-1</max_size>
     <growth>10</growth>
     <is_media_read_only>false</is_media_read_only>

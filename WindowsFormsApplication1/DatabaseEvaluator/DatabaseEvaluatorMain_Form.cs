@@ -8,9 +8,10 @@ using System.Security.Cryptography;
 
 namespace DatabaseEvaluator
 {
-
     public partial class DatabaseEvaluatorMain_Form : Form
     {
+        private string EVALUATOR_KEY = "AAECAwQFBgcICQoLDA0ODw==";
+
         // https://support.microsoft.com/en-nz/kb/307010
         // https://dotnetfiddle.net/bFvxp8
         // http://stackoverflow.com/questions/2919228/specified-key-is-not-a-valid-size-for-this-algorithm
@@ -21,10 +22,10 @@ namespace DatabaseEvaluator
             {
                 //Create a file stream to read the encrypted file back.
                 FileStream fsread = new FileStream(sInputFilename,
-               FileMode.Open,
-               FileAccess.Read);
-                aesAlg.Key = Convert.FromBase64String("AAECAwQFBgcICQoLDA0ODw==");
-                aesAlg.IV = Convert.FromBase64String("AAECAwQFBgcICQoLDA0ODw==");
+                    FileMode.Open,
+                    FileAccess.Read);
+                aesAlg.Key = Convert.FromBase64String(EVALUATOR_KEY);
+                aesAlg.IV = Convert.FromBase64String(EVALUATOR_KEY);
                 // Create a decrytor to perform the stream transform.
                 ICryptoTransform desdecrypt = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
                 //Create crypto stream set to read and do a 
@@ -138,5 +139,9 @@ namespace DatabaseEvaluator
                 this.PathToXML_TextBox.Text = fdlg.FileName;
             }
         }
+
+
+
+
     }
 }
