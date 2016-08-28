@@ -73,6 +73,11 @@ namespace ClientApplication
         private void Start_Button_Click(object sender, EventArgs e)
         {
             Start_Button.Enabled = false;
+            Server_ComboBox.Enabled = false;
+            Connect_Button.Enabled = false;
+            DatabaseName_CheckBox.Enabled = false;
+            Database_ComboBox.Enabled = false;
+
             //Start the async operation here
             ClientApplication_BackgroundWorker.RunWorkerAsync();
 
@@ -141,8 +146,6 @@ namespace ClientApplication
             connection.Close();
             ds.WriteXml("SQLServer.xml");
 
-            // Displays a SaveFileDialog so the user can save the Image
-            // assigned to Button2.
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.FileName = "SQLServer.xml";
             saveFileDialog1.Filter = "XML File|*.xml";
@@ -216,6 +219,11 @@ namespace ClientApplication
                 //label2.Text = "Task Completed...";
             }
             Start_Button.Enabled = true;
+            Start_Button.Enabled = true;
+            Server_ComboBox.Enabled = true;
+            Connect_Button.Enabled = true;
+            DatabaseName_CheckBox.Enabled = true;
+            Database_ComboBox.Enabled = true;
             //btnCancel.Enabled = false;
         }
 
@@ -266,7 +274,7 @@ namespace ClientApplication
         {
             //NOTE : Never play with the UI thread here...
             //time consuming operation
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 50; i++)
             {
                 Thread.Sleep(200);
                 ClientApplication_BackgroundWorker.ReportProgress(i);
@@ -318,7 +326,7 @@ namespace ClientApplication
 
         private void DatabaseName_CheckedChanged(object sender, EventArgs e)
         {
-            if (!Database_ComboBox.Enabled)
+            if (DatabaseName_CheckBox.Checked)
             {
                 Database_ComboBox.Enabled = true;
                 populateDatabaseDropdown();
