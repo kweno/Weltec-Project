@@ -36,7 +36,7 @@
             // 
             // Splash_ProgressBar
             // 
-            this.Splash_ProgressBar.Location = new System.Drawing.Point(13, 91);
+            this.Splash_ProgressBar.Location = new System.Drawing.Point(13, 130);
             this.Splash_ProgressBar.Name = "Splash_ProgressBar";
             this.Splash_ProgressBar.Size = new System.Drawing.Size(412, 23);
             this.Splash_ProgressBar.TabIndex = 0;
@@ -44,7 +44,7 @@
             // Logo_PictureBox
             // 
             this.Logo_PictureBox.Image = global::ClientApplication.Properties.Resources.header_logo_alpha1;
-            this.Logo_PictureBox.Location = new System.Drawing.Point(140, 5);
+            this.Logo_PictureBox.Location = new System.Drawing.Point(143, 30);
             this.Logo_PictureBox.Name = "Logo_PictureBox";
             this.Logo_PictureBox.Size = new System.Drawing.Size(144, 84);
             this.Logo_PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -55,7 +55,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 136);
+            this.ClientSize = new System.Drawing.Size(437, 180);
             this.Controls.Add(this.Logo_PictureBox);
             this.Controls.Add(this.Splash_ProgressBar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
