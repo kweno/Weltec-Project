@@ -84,6 +84,7 @@ namespace ClientApplication
             // 
             // Start_Button
             // 
+            this.Start_Button.Enabled = false;
             this.Start_Button.Location = new System.Drawing.Point(404, 574);
             this.Start_Button.Name = "Start_Button";
             this.Start_Button.Size = new System.Drawing.Size(75, 23);
@@ -168,7 +169,7 @@ namespace ClientApplication
             // 
             // Logo_PictureBox
             // 
-            this.Logo_PictureBox.Image = Properties.Resources.header_logo_alpha1;
+            this.Logo_PictureBox.Image = global::ClientApplication.Properties.Resources.header_logo_alpha1;
             this.Logo_PictureBox.Location = new System.Drawing.Point(120, 12);
             this.Logo_PictureBox.Name = "Logo_PictureBox";
             this.Logo_PictureBox.Size = new System.Drawing.Size(235, 140);
@@ -430,7 +431,7 @@ namespace ClientApplication
             this.InstanceProgress_Label1.Text = "   • Installation";
             this.InstanceProgress_Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // ClientApplication_Form
+            // ClientApplicationMain_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -438,7 +439,7 @@ namespace ClientApplication
             this.Controls.Add(this.Main_Panel);
             this.Controls.Add(this.Start_Button);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ClientApplication_Form";
+            this.Name = "ClientApplicationMain_Form";
             this.Text = "Database Evaluator";
             this.Main_Panel.ResumeLayout(false);
             this.Selection_GroupBox.ResumeLayout(false);

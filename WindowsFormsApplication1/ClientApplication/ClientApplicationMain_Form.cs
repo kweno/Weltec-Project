@@ -1,24 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using System.Xml;
 using System.IO;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using Microsoft.Win32;
 using System.Data.Sql;
-using System.Xml.Linq;
-using System.Xml.XPath;
 using System.Threading;
 using System.Security.Cryptography;
-using System.Runtime.InteropServices;
 
 namespace ClientApplication
 {
@@ -46,8 +34,8 @@ namespace ClientApplication
                 // Create a decrytor to perform the stream transform.
                 ICryptoTransform desencrypt = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
                 CryptoStream cryptostream = new CryptoStream(fsEncrypted,
-               desencrypt,
-               CryptoStreamMode.Write);
+                    desencrypt,
+                    CryptoStreamMode.Write);
 
                 byte[] bytearrayinput = new byte[fsInput.Length];
                 fsInput.Read(bytearrayinput, 0, bytearrayinput.Length);
@@ -67,11 +55,11 @@ namespace ClientApplication
             InitializeComponent();
             populateServerDropdown();
 
-            this.Server_ComboBox.TextChanged += new System.EventHandler(this.Server_ComboBox_TextChanged);
+            Server_ComboBox.TextChanged += new System.EventHandler(Server_ComboBox_TextChanged);
 
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
 
             ClientApplication_BackgroundWorker = new BackgroundWorker();
             ClientApplication_BackgroundWorker.DoWork += new DoWorkEventHandler(ClientApplication_BackgroundWorker_DoWork);
@@ -83,7 +71,7 @@ namespace ClientApplication
 
         private void Start_Button_Click(object sender, EventArgs e)
         {
-            this.Start_Button.Enabled = false;
+            Start_Button.Enabled = false;
             //Start the async operation here
             ClientApplication_BackgroundWorker.RunWorkerAsync();
 
@@ -95,16 +83,16 @@ namespace ClientApplication
 
             // http://stackoverflow.com/questions/15631602/how-to-set-sql-server-connection-string
             connectionString =
-            "Data Source=" + this.Server_ComboBox.Text + ";" +
+            "Data Source=" + Server_ComboBox.Text + ";" +
             "Initial Catalog=test;" +
             "User id=test;" +
             "Password=test;";
             connectionString =
-            "Data Source=" + this.Server_ComboBox.Text + ";" +
+            "Data Source=" + Server_ComboBox.Text + ";" +
             //"Initial Catalog=test;" +
             "Integrated Security=SSPI;";
             //connectionString =
-            //"Server=" + this.serverName + "\\" + this.instanceName + ";" +
+            //"Server=" + serverName + "\\" + instanceName + ";" +
             //"Initial Catalog=test;" +
             //"User id=test;" +
             //"Password=test;";
@@ -126,7 +114,7 @@ namespace ClientApplication
                 command.Dispose();
                 connection.Close();
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
                 MessageBox.Show("Can not open connection ! ");
             }
@@ -176,7 +164,7 @@ namespace ClientApplication
             //var listOfServers = (from DataRow dr in serverTable.Rows select dr["ServerName"].ToString()).ToList();
             //var bindingSource1 = new BindingSource();
             //bindingSource1.DataSource = listOfServers;
-            //this.comboBox1.DataSource = bindingSource1;
+            //comboBox1.DataSource = bindingSource1;
 
             // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
             // https://msdn.microsoft.com/en-us/library/a6t1z9x2%28v=vs.110%29.aspx
@@ -184,17 +172,17 @@ namespace ClientApplication
             for (int i = 0; i < servers.Rows.Count; i++)
             {
                 if ((servers.Rows[i]["InstanceName"] as string) != null)
-                    this.Server_ComboBox.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
+                    Server_ComboBox.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
                 else
-                    this.Server_ComboBox.Items.Add(servers.Rows[i]["ServerName"]);
+                    Server_ComboBox.Items.Add(servers.Rows[i]["ServerName"]);
             }
         }
 
         private void populateDatabaseDropdown()
         {
-            this.Database_ComboBox.Items.Clear();
+            Database_ComboBox.Items.Clear();
             // http://stackoverflow.com/questions/12862604/c-sharp-connect-to-database-and-list-the-databases
-            var connectionString = "Data Source=" + this.Server_ComboBox.Text + ";" +
+            var connectionString = "Data Source=" + Server_ComboBox.Text + ";" +
             //"Initial Catalog=test;" +
             "Integrated Security=SSPI;";
 
@@ -204,8 +192,8 @@ namespace ClientApplication
                 DataTable databases = con.GetSchema("Databases");
                 foreach (DataRow database in databases.Rows)
                 {
-                    String databaseName = database.Field<String>("database_name");
-                    this.Database_ComboBox.Items.Add(databaseName);
+                    string databaseName = database.Field<String>("database_name");
+                    Database_ComboBox.Items.Add(databaseName);
                 }
             }
         }
@@ -216,17 +204,17 @@ namespace ClientApplication
             //If it was cancelled midway
             if (e.Cancelled)
             {
-                //this.label2.Text = "Task Cancelled.";
+                //label2.Text = "Task Cancelled.";
             }
             else if (e.Error != null)
             {
-                //this.label2.Text = "Error while performing background operation.";
+                //label2.Text = "Error while performing background operation.";
             }
             else
             {
-                //this.label2.Text = "Task Completed...";
+                //label2.Text = "Task Completed...";
             }
-            this.Start_Button.Enabled = true;
+            Start_Button.Enabled = true;
             //btnCancel.Enabled = false;
         }
 
@@ -237,38 +225,38 @@ namespace ClientApplication
             //progressBar1.Value = e.ProgressPercentage;
             if (e.ProgressPercentage == 1)
             {
-                this.InstanceMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+                InstanceMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
             }
             else if (e.ProgressPercentage == 10)
             {
-                this.InstanceProgress_PictureBox1.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+                InstanceProgress_PictureBox1.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
             }
             else if (e.ProgressPercentage == 14)
             {
-                this.InstanceProgress_PictureBox1.Image = global::ClientApplication.Properties.Resources.success;
+                InstanceProgress_PictureBox1.Image = global::ClientApplication.Properties.Resources.success;
             }
             else if (e.ProgressPercentage == 15)
             {
-                this.InstanceProgress_PictureBox2.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+                InstanceProgress_PictureBox2.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
             }
             else if (e.ProgressPercentage == 28)
             {
-                this.InstanceProgress_PictureBox2.Image = global::ClientApplication.Properties.Resources.success;
+                InstanceProgress_PictureBox2.Image = global::ClientApplication.Properties.Resources.success;
             }
             else if (e.ProgressPercentage == 29)
             {
-                this.InstanceProgress_PictureBox3.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+                InstanceProgress_PictureBox3.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
             }
             else if (e.ProgressPercentage == 42)
             {
-                this.InstanceProgress_PictureBox3.Image = global::ClientApplication.Properties.Resources.success;
+                InstanceProgress_PictureBox3.Image = global::ClientApplication.Properties.Resources.success;
             }
             else if (e.ProgressPercentage == 43)
             {
-                this.InstanceMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.success;
+                InstanceMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.success;
             }
 
-            //this.label2.Text = "Processing......";// + progressBar1.Value.ToString() + "%";
+            //label2.Text = "Processing......";// + progressBar1.Value.ToString() + "%";
         }
 
         /// Time consuming operations go here </br>
@@ -323,7 +311,7 @@ namespace ClientApplication
                 DatabaseName_CheckBox.Checked = false;
                 DatabaseName_CheckBox.Enabled = false;
                 Database_ComboBox.Enabled = false;
-                this.Database_ComboBox.Text = "";
+                Database_ComboBox.Text = "";
             }
         }
 
@@ -331,15 +319,15 @@ namespace ClientApplication
         {
             if (!Database_ComboBox.Enabled)
             {
-                this.Database_ComboBox.Enabled = true;
+                Database_ComboBox.Enabled = true;
                 populateDatabaseDropdown();
-                this.Database_TableLayoutPanel.Enabled = true;
+                Database_TableLayoutPanel.Enabled = true;
             }
             else
             {
-                this.Database_ComboBox.Enabled = false;
-                this.Database_ComboBox.Items.Clear();
-                this.Database_TableLayoutPanel.Enabled = false;
+                Database_ComboBox.Enabled = false;
+                Database_ComboBox.Items.Clear();
+                Database_TableLayoutPanel.Enabled = false;
             }
         }
 
@@ -348,17 +336,18 @@ namespace ClientApplication
             string connectionString = null;
             SqlConnection connection;
             connectionString =
-            "Data Source=" + this.Server_ComboBox.Text + ";" +
+            "Data Source=" + Server_ComboBox.Text + ";" +
             "Integrated Security=SSPI;";
             connection = new SqlConnection(connectionString);
             try
             {
                 connection.Open();
                 connection.Close();
-                this.DatabaseName_CheckBox.Enabled = true;
+                DatabaseName_CheckBox.Enabled = true;
+                Start_Button.Enabled = true;
                 populateDatabaseDropdown();
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
                 MessageBox.Show("Can not open connection ! ");
             }
@@ -369,11 +358,12 @@ namespace ClientApplication
         {
             if (DatabaseName_CheckBox.Enabled)
             {
+                Start_Button.Enabled = false;
                 DatabaseName_CheckBox.Checked = false;
                 DatabaseName_CheckBox.Enabled = false;
                 Database_ComboBox.Enabled = false;
-                this.Database_ComboBox.Text = "";
-                this.Database_TableLayoutPanel.Enabled = false;
+                Database_ComboBox.Text = "";
+                Database_TableLayoutPanel.Enabled = false;
             }
         }
 

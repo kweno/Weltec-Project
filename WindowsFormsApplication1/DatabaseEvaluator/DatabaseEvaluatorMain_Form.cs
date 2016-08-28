@@ -1,24 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using System.Xml;
 using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using Microsoft.Win32;
-using System.Data.Sql;
-using System.Xml.Linq;
-using System.Xml.XPath;
-using System.Threading;
 using System.Security.Cryptography;
-using System.Runtime.InteropServices;
 
 namespace DatabaseEvaluator
 {
