@@ -102,9 +102,9 @@ namespace ClientApplication
             //"Initial Catalog=test;" +
             //"User id=test;" +
             //"Password=test;";
+
             /*
             // http://stackoverflow.com/questions/18654157/how-to-make-sql-query-result-to-xml-file
-            //sql = "SELECT * FROM master.sys.all_parameters";
             sql = "SELECT * FROM master.sys.database_files";
             connection = new SqlConnection(connectionString);
             try
@@ -126,22 +126,20 @@ namespace ClientApplication
             }
             */
 
-            sql =     "DECLARE @ExpressionToSearch VARCHAR(200)" + Environment.NewLine
-                    + "DECLARE  @ExpressionToFind VARCHAR(200)" + Environment.NewLine
-                    + "CREATE TABLE [dbo].[#TmpErrorLog] ([LogDate] DATETIME NULL, [ProcessInfo] VARCHAR(20) NULL, [Text] VARCHAR(MAX) NULL );" + Environment.NewLine
-                    + "CREATE TABLE [dbo].[#TmpResults] ([Text] VARCHAR(MAX) NULL );" + Environment.NewLine
-                    + "INSERT INTO #TmpErrorLog ([LogDate], [ProcessInfo], [Text]) EXEC [master].[dbo].[xp_readerrorlog] 0, 1, N'Server is listening on';" + Environment.NewLine
-                    + "SET @ExpressionToFind = '1433' " + Environment.NewLine
-                    + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog where text like '%any%' and text like '%<ipv4>%' and text like '%1433%' and ProcessInfo = 'Server'" + Environment.NewLine
-                    + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + Environment.NewLine
-                    + "    INSERT INTO #TmpResults VALUES ('Yes, 1433 port is using by SQL Server');" + Environment.NewLine
-                    + "ELSE" + Environment.NewLine
-                    + "    INSERT INTO #TmpResults VALUES ('SQL Server doesn''t use default port')"
+            sql =     "DECLARE @ExpressionToSearch VARCHAR(200)" 
+                    + "DECLARE  @ExpressionToFind VARCHAR(200)" 
+                    + "CREATE TABLE [dbo].[#TmpErrorLog] ([LogDate] DATETIME NULL, [ProcessInfo] VARCHAR(20) NULL, [Text] VARCHAR(MAX) NULL );" 
+                    + "CREATE TABLE [dbo].[#TmpResults] ([Text] VARCHAR(MAX) NULL );" 
+                    + "INSERT INTO #TmpErrorLog ([LogDate], [ProcessInfo], [Text]) EXEC [master].[dbo].[xp_readerrorlog] 0, 1, N'Server is listening on';" 
+                    + "SET @ExpressionToFind = '1433'" 
+                    + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog where text like '%any%' and text like '%<ipv4>%' and text like '%1433%' and ProcessInfo = 'Server'" 
+                    + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" 
+                    + "    INSERT INTO #TmpResults VALUES ('Yes, 1433 port is using by SQL Server');" 
+                    + "ELSE" 
+                    + "    INSERT INTO #TmpResults VALUES ('SQL Server doesn''t use default port');"
                     + "SELECT * FROM #TmpResults;";
 
             connection = new SqlConnection(connectionString);
-            // http://stackoverflow.com/questions/1880471/capture-stored-procedure-print-output-in-net
-            // connection.InfoMessage += new SqlInfoMessageEventHandler(myConnection_InfoMessage);
 
             try
             {
@@ -160,7 +158,7 @@ namespace ClientApplication
             {
                 MessageBox.Show("Can not open connection ! ");
             }
-            
+
             //MessageBox.Show("Current Working Directory: " + Directory.GetCurrentDirectory());
 
             //using (XmlWriter writer = XmlWriter.Create("SQLServer.xml"))
@@ -193,13 +191,6 @@ namespace ClientApplication
             EncryptFile(@"SQLServer.xml",
                @"Encrypted_SQLServer.xml");
         }
-
-        /*
-        void myConnection_InfoMessage(object sender, SqlInfoMessageEventArgs e)
-        {
-            MessageBox.Show(e.Message);
-        }
-        */
 
         private void populateServerDropdown()
         {
