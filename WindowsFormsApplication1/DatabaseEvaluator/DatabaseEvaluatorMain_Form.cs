@@ -12,33 +12,43 @@ namespace DatabaseEvaluator
     {
         private string EVALUATOR_KEY = "AAECAwQFBgcICQoLDA0ODw==";
 
-        // https://support.microsoft.com/en-nz/kb/307010
         // https://dotnetfiddle.net/bFvxp8
-        // http://stackoverflow.com/questions/2919228/specified-key-is-not-a-valid-size-for-this-algorithm
-        private void DecryptFile(string sInputFilename,
-           string sOutputFilename)
+        private string DecryptStringFromBytes_Aes(byte[] cipherText)
         {
+            // Check arguments.
+            if (cipherText == null || cipherText.Length <= 0)
+                throw new ArgumentNullException("cipherText");
+
+            // Declare the string used to hold
+            // the decrypted text.
+            string plaintext = null;
+
+            // Create an AesCryptoServiceProvider object
+            // with the specified key and IV.
             using (AesCryptoServiceProvider aesAlg = new AesCryptoServiceProvider())
             {
-                //Create a file stream to read the encrypted file back.
-                FileStream fsread = new FileStream(sInputFilename,
-                    FileMode.Open,
-                    FileAccess.Read);
-                aesAlg.Key = Convert.FromBase64String(EVALUATOR_KEY);
-                aesAlg.IV = Convert.FromBase64String(EVALUATOR_KEY);
+                aesAlg.Key = Convert.FromBase64String(EVALUATOR_KEY); 
+                aesAlg.IV = Convert.FromBase64String(EVALUATOR_KEY); 
+
                 // Create a decrytor to perform the stream transform.
-                ICryptoTransform desdecrypt = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
-                //Create crypto stream set to read and do a 
-                //DES decryption transform on incoming bytes.
-                CryptoStream cryptostreamDecr = new CryptoStream(fsread,
-                   desdecrypt,
-                   CryptoStreamMode.Read);
-                //Print the contents of the decrypted file.
-                StreamWriter fsDecrypted = new StreamWriter(sOutputFilename);
-                fsDecrypted.Write(new StreamReader(cryptostreamDecr).ReadToEnd());
-                fsDecrypted.Flush();
-                fsDecrypted.Close();
+                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+
+                // Create the streams used for decryption.
+                using (MemoryStream msDecrypt = new MemoryStream(cipherText))
+                {
+                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                        {
+                            // Read the decrypted bytes from the decrypting stream
+                            // and place them in a string.
+                            plaintext = srDecrypt.ReadToEnd();
+                        }
+                    }
+                }
+
             }
+            return plaintext;
         }
 
         /// The backgroundworker object on which the time consuming operation shall be executed
@@ -60,9 +70,11 @@ namespace DatabaseEvaluator
             {
                 var fileLocation = this.PathToXML_TextBox.Text;
 
-                // Decrypt the file.
-                DecryptFile(fileLocation,
-                   @"Decrypted_SQLServer.xml");
+                // Decrypt the bytes to a string.
+                // http://stackoverflow.com/questions/2030847/best-way-to-read-a-large-file-into-a-byte-array-in-c
+                string decrypted = DecryptStringFromBytes_Aes(File.ReadAllBytes(fileLocation));
+
+                MessageBox.Show(decrypted);
 
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.FileName = "SQLServer.pdf";
@@ -118,10 +130,7 @@ namespace DatabaseEvaluator
             {
                 MessageBox.Show("File Permissions Error.");
             }
-            catch (CryptographicException exception)
-            {
-                MessageBox.Show("Invalid Dump File.");
-            }
+          
 
         }
 

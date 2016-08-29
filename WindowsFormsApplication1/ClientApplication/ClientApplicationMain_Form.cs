@@ -14,37 +14,68 @@ namespace ClientApplication
     {
         private string EVALUATOR_KEY = "AAECAwQFBgcICQoLDA0ODw==";
 
-        // https://support.microsoft.com/en-nz/kb/307010
         // https://dotnetfiddle.net/bFvxp8
-        // http://stackoverflow.com/questions/2919228/specified-key-is-not-a-valid-size-for-this-algorithm
-        private void EncryptFile(string sInputFilename,
-           string sOutputFilename)
+        private byte[] EncryptStringToBytes_Aes(string plainText)
         {
+            // Check arguments.
+            if (plainText == null || plainText.Length <= 0)
+                throw new ArgumentNullException("plainText");
+            byte[] encrypted;
+            // Create an AesCryptoServiceProvider object
+            // with the specified key and IV.
             using (AesCryptoServiceProvider aesAlg = new AesCryptoServiceProvider())
             {
-                FileStream fsInput = new FileStream(sInputFilename,
-                FileMode.Open,
-                FileAccess.Read);
+                aesAlg.Key = Convert.FromBase64String(EVALUATOR_KEY); ;
+                aesAlg.IV = Convert.FromBase64String(EVALUATOR_KEY); ;
 
-                FileStream fsEncrypted = new FileStream(sOutputFilename,
-                   FileMode.Create,
-                   FileAccess.Write);
-
-                aesAlg.Key = Convert.FromBase64String(EVALUATOR_KEY);
-                aesAlg.IV = Convert.FromBase64String(EVALUATOR_KEY);
                 // Create a decrytor to perform the stream transform.
-                ICryptoTransform desencrypt = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
-                CryptoStream cryptostream = new CryptoStream(fsEncrypted,
-                    desencrypt,
-                    CryptoStreamMode.Write);
+                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
 
-                byte[] bytearrayinput = new byte[fsInput.Length];
-                fsInput.Read(bytearrayinput, 0, bytearrayinput.Length);
-                cryptostream.Write(bytearrayinput, 0, bytearrayinput.Length);
-                cryptostream.Close();
-                fsInput.Close();
-                fsEncrypted.Close();
+                // Create the streams used for encryption.
+                using (MemoryStream msEncrypt = new MemoryStream())
+                {
+                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                    {
+                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                        {
+
+                            //Write all data to the stream.
+                            swEncrypt.Write(plainText);
+                        }
+                        encrypted = msEncrypt.ToArray();
+                    }
+                }
             }
+            // Return the encrypted bytes from the memory stream.
+            return encrypted;
+        }
+
+        private bool ByteArrayToFile(string _FileName, byte[] _ByteArray)
+        {
+            try
+            {
+                // Open file for reading
+                System.IO.FileStream _FileStream =
+                   new System.IO.FileStream(_FileName, System.IO.FileMode.Create,
+                                            System.IO.FileAccess.Write);
+                // Writes a block of bytes to this stream using data from
+                // a byte array.
+                _FileStream.Write(_ByteArray, 0, _ByteArray.Length);
+
+                // close file stream
+                _FileStream.Close();
+
+                return true;
+            }
+            catch (Exception _Exception)
+            {
+                // Error
+                Console.WriteLine("Exception caught in process: {0}",
+                                  _Exception.ToString());
+            }
+
+            // error occured, return false
+            return false;
         }
 
         /// The backgroundworker object on which the time consuming operation shall be executed
@@ -72,6 +103,10 @@ namespace ClientApplication
 
         private void Start_Button_Click(object sender, EventArgs e)
         {
+            var parameterValues = "";
+            var encryptedParameterValues = "";
+            byte[] encrypted = null;
+
             Start_Button.Enabled = false;
             Server_ComboBox.Enabled = false;
             Connect_Button.Enabled = false;
@@ -103,39 +138,16 @@ namespace ClientApplication
             //"User id=test;" +
             //"Password=test;";
 
-            /*
-            // http://stackoverflow.com/questions/18654157/how-to-make-sql-query-result-to-xml-file
-            sql = "SELECT * FROM master.sys.database_files";
-            connection = new SqlConnection(connectionString);
-            try
-            {
-                connection.Open();
-                command = new SqlCommand(sql, connection);
-                dataReader = command.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    //MessageBox.Show(dataReader.GetValue(0) + " - " + dataReader.GetValue(1));
-                }
-                dataReader.Close();
-                command.Dispose();
-                connection.Close();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show("Can not open connection ! ");
-            }
-            */
-
-            sql =     "DECLARE @ExpressionToSearch VARCHAR(200)" 
-                    + "DECLARE  @ExpressionToFind VARCHAR(200)" 
-                    + "CREATE TABLE [dbo].[#TmpErrorLog] ([LogDate] DATETIME NULL, [ProcessInfo] VARCHAR(20) NULL, [Text] VARCHAR(MAX) NULL );" 
-                    + "CREATE TABLE [dbo].[#TmpResults] ([Text] VARCHAR(MAX) NULL );" 
-                    + "INSERT INTO #TmpErrorLog ([LogDate], [ProcessInfo], [Text]) EXEC [master].[dbo].[xp_readerrorlog] 0, 1, N'Server is listening on';" 
-                    + "SET @ExpressionToFind = '1433'" 
-                    + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog where text like '%any%' and text like '%<ipv4>%' and text like '%1433%' and ProcessInfo = 'Server'" 
-                    + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" 
-                    + "    INSERT INTO #TmpResults VALUES ('Yes, 1433 port is using by SQL Server');" 
-                    + "ELSE" 
+            sql = "DECLARE @ExpressionToSearch VARCHAR(200)"
+                    + "DECLARE  @ExpressionToFind VARCHAR(200)"
+                    + "CREATE TABLE [dbo].[#TmpErrorLog] ([LogDate] DATETIME NULL, [ProcessInfo] VARCHAR(20) NULL, [Text] VARCHAR(MAX) NULL );"
+                    + "CREATE TABLE [dbo].[#TmpResults] ([Text] VARCHAR(MAX) NULL );"
+                    + "INSERT INTO #TmpErrorLog ([LogDate], [ProcessInfo], [Text]) EXEC [master].[dbo].[xp_readerrorlog] 0, 1, N'Server is listening on';"
+                    + "SET @ExpressionToFind = '1433'"
+                    + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog where text like '%any%' and text like '%<ipv4>%' and text like '%1433%' and ProcessInfo = 'Server'"
+                    + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'"
+                    + "    INSERT INTO #TmpResults VALUES ('Yes, 1433 port is using by SQL Server');"
+                    + "ELSE"
                     + "    INSERT INTO #TmpResults VALUES ('SQL Server doesn''t use default port');"
                     + "SELECT * FROM #TmpResults;";
 
@@ -148,7 +160,11 @@ namespace ClientApplication
                 dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    MessageBox.Show(dataReader.GetValue(0)+"");
+                    MessageBox.Show(dataReader.GetValue(0) + "");
+                    for(int i = 0; i < 5; i++)
+                    {
+                        parameterValues += dataReader.GetValue(0) + "\n";
+                    }
                 }
                 dataReader.Close();
                 command.Dispose();
@@ -159,37 +175,23 @@ namespace ClientApplication
                 MessageBox.Show("Can not open connection ! ");
             }
 
-            //MessageBox.Show("Current Working Directory: " + Directory.GetCurrentDirectory());
-
-            //using (XmlWriter writer = XmlWriter.Create("SQLServer.xml"))
-            //{
-            //    writer.WriteStartDocument();
-            //    writer.WriteStartElement("Instance");
-            //    writer.WriteStartElement("Database");
-            //    writer.WriteElementString("Name", "test");
-            //    writer.WriteEndElement();
-            //    writer.WriteEndElement();
-            //    writer.WriteEndDocument();
-            //}
-
-            // http://csharp.net-informations.com/xml/xml-from-sql.htm
-            SqlDataAdapter adapter;
-            DataSet ds = new DataSet();
-            adapter = new SqlDataAdapter(sql, connection);
-            adapter.Fill(ds);
-            connection.Close();
-            ds.WriteXml("SQLServer.xml");
+            try
+            {
+                // Encrypt the string to an array of bytes.
+                encrypted = EncryptStringToBytes_Aes(parameterValues);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Error: {0}", exception.Message);
+            }
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.FileName = "SQLServer.xml";
-            saveFileDialog1.Filter = "XML File|*.xml";
-            saveFileDialog1.Title = "Save an XML File";
+            saveFileDialog1.FileName = "SQLServer.dbe";
+            saveFileDialog1.Filter = "DBE File|*.dbe";
+            saveFileDialog1.Title = "Save a DBE File";
             saveFileDialog1.ShowDialog();
-            ds.WriteXml(saveFileDialog1.FileName);
-
-            // Encrypt the file.        
-            EncryptFile(@"SQLServer.xml",
-               @"Encrypted_SQLServer.xml");
+            // http://stackoverflow.com/questions/6397235/write-bytes-to-file
+            ByteArrayToFile(saveFileDialog1.FileName, encrypted);
         }
 
         private void populateServerDropdown()

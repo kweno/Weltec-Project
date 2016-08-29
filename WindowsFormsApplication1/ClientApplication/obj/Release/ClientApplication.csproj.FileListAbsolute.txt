@@ -10,15 +10,3 @@ Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.csproj.GenerateResource.Cache
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.exe
 Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.pdb
-D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe.config
-D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.exe
-D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.pdb
-D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe
-D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.pdb
-D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\itextsharp.dll
-D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\itextsharp.xml
-D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.csprojResolveAssemblyReference.cache
-D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.ClientApplicationMain_Form.resources
-D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.Properties.Resources.resources
-D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.SplashScreen_Form.resources
-D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.csproj.GenerateResource.Cache
