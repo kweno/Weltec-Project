@@ -124,7 +124,46 @@ namespace ClientApplication
             {
                 MessageBox.Show("Can not open connection ! ");
             }
-
+            /*
+            sql = "USE [MASTER]"
+                    + "GO"
+                    + "DECLARE @ExpressionToSearch VARCHAR(200)"
+                    + "DECLARE  @ExpressionToFind VARCHAR(200)"
+                    + "-- Command will create the temporary table in tempdb"
+                    + "CREATE TABLE [dbo].[#TmpErrorLog]"
+                    + "([LogDate] DATETIME NULL,"
+                    + " [ProcessInfo] VARCHAR(20) NULL,"
+                    + " [Text] VARCHAR(MAX) NULL ) ;"
+                    + "-- Command will insert the errorlog data into temporary table"
+                    + "INSERT INTO #TmpErrorLog ([LogDate], [ProcessInfo], [Text])"
+                    + "EXEC [master].[dbo].[xp_readerrorlog] 0, 1, N'Server is listening on';"
+                    + "-- retrieves the data from temporary table"
+                    + "SET @ExpressionToFind = '1433'"
+                    + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog where text like '%ipv4%' and ProcessInfo = 'Server'"
+                    + "Print @ExpressionToSearch"
+                    + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'"
+                    + "    PRINT 'Yes, 1433 port is using by SQL Server'"
+                    + "ELSE"
+                    + "    PRINT 'SQL Server doesn''t use default port'";
+            connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(sql, connection);
+                dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    //MessageBox.Show(dataReader.GetValue(0) + " - " + dataReader.GetValue(1));
+                }
+                dataReader.Close();
+                command.Dispose();
+                connection.Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Can not open connection ! ");
+            }
+            */
             //MessageBox.Show("Current Working Directory: " + Directory.GetCurrentDirectory());
 
             //using (XmlWriter writer = XmlWriter.Create("SQLServer.xml"))
