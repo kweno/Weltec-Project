@@ -151,6 +151,19 @@ namespace ClientApplication
                     + "    INSERT INTO #TmpResults VALUES ('SQL Server doesn''t use default port');"
                     + "SELECT * FROM #TmpResults;";
 
+            sql = "CREATE TABLE [dbo].[#Values]"
+                    + "( [ProcessInfo] VARCHAR(50) NULL,"
+                    + " [Text] VARCHAR(MAX) NULL) ;"
+                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('HostName',HOST_NAME())"
+                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('InstanceName',CONVERT(VARCHAR(MAX),SERVERPROPERTY('InstanceName')))"
+                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductLevel',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductLevel')))"
+                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductVersion',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductVersion')))"
+                    + "INSERT INTO [#Values] ([ProcessInfo], [Text])"
+                    + "    SELECT 'SQLVersion', SUBSTRING(@@VERSION, 1, CHARINDEX('-', @@VERSION) - 1)"
+                    + "        + CONVERT(VARCHAR(100), SERVERPROPERTY('edition'))"
+                    + "    AS 'Server Version';"
+                    + "SELECT * FROM [#Values]";
+
             connection = new SqlConnection(connectionString);
 
             try
@@ -161,7 +174,7 @@ namespace ClientApplication
                 while (dataReader.Read())
                 {
                     MessageBox.Show(dataReader.GetValue(0) + "");
-                    for(int i = 0; i < 5; i++)
+                    for (int i = 0; i < 5; i++)
                     {
                         parameterValues += dataReader.GetValue(0) + "\n";
                     }
@@ -179,6 +192,28 @@ namespace ClientApplication
             {
                 // Encrypt the string to an array of bytes.
                 encrypted = EncryptStringToBytes_Aes(parameterValues);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Error: {0}", exception.Message);
+            }
+
+            // http://csharp.net-informations.com/xml/xml-from-sql.htm
+            SqlDataAdapter adapter;
+            DataSet ds = new DataSet();
+            adapter = new SqlDataAdapter(sql, connection);
+            adapter.Fill(ds);
+            connection.Close();
+
+            StringWriter sw = new StringWriter();
+            ds.WriteXml(@"SQLServer.xml");
+            ds.WriteXml(sw);
+            string result = sw.ToString();
+
+            try
+            {
+                // Encrypt the string to an array of bytes.
+                encrypted = EncryptStringToBytes_Aes(result);
             }
             catch (Exception exception)
             {

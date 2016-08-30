@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <Table>
+    <ProcessInfo>HostName</ProcessInfo>
+    <Text>B105-01</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>InstanceName</ProcessInfo>
+  </Table>
+  <Table>
+    <ProcessInfo>ProductLevel</ProcessInfo>
+    <Text>RTM</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>ProductVersion</ProcessInfo>
+    <Text>13.0.1601.5</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>SQLVersion</ProcessInfo>
+    <Text>Microsoft SQL Server 2016 (RTM) Express Edition (64-bit)</Text>
+  </Table>
+</NewDataSet>
