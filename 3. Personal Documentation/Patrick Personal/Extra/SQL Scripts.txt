@@ -1,29 +1,22 @@
-1. Get the SQL Default Port
+CREATE TABLE [dbo].[#Values]
+( [ProcessInfo] VARCHAR(50) NULL,
+ [Text] VARCHAR(MAX) NULL) ;
 
-USE [MASTER]
-GO
+INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('HostName',HOST_NAME())
 
-DECLARE @ExpressionToSearch VARCHAR(200)
-DECLARE  @ExpressionToFind VARCHAR(200)
+INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('InstanceName',CONVERT(VARCHAR(MAX),SERVERPROPERTY('InstanceName')))
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductLevel',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductLevel')))
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductVersion',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductVersion')))
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) 
+
+    SELECT 'SQLVersion', SUBSTRING(@@VERSION, 1, CHARINDEX('-', @@VERSION) - 1)
+        + CONVERT(VARCHAR(100), SERVERPROPERTY('edition'))
+    AS 'Server Version';
 
 
--- Command will create the temporary table in tempdb
-CREATE TABLE [dbo].[#TmpErrorLog]
-([LogDate] DATETIME NULL,
- [ProcessInfo] VARCHAR(20) NULL,
- [Text] VARCHAR(MAX) NULL ) ;
+SELECT * FROM [#Values]
 
--- Command will insert the errorlog data into temporary table
-INSERT INTO #TmpErrorLog ([LogDate], [ProcessInfo], [Text])
-EXEC [master].[dbo].[xp_readerrorlog] 0, 1, N'Server is listening on';
-
--- retrieves the data from temporary table
-
-SET @ExpressionToFind = '1433'
-
-SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog where text like '%any%' and text like '%<ipv4>%' and text like '%1433%' and ProcessInfo = 'Server'
-
-IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'
-    PRINT 'Yes, 1433 port is using by SQL Server'
-ELSE
-    PRINT 'SQL Server doesn''t use default port'
+-- DROP TABLE [#Values]
