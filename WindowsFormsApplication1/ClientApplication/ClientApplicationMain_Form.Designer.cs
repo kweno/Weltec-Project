@@ -65,6 +65,7 @@ namespace ClientApplication
             this.InstanceMainProgress_Label = new System.Windows.Forms.Label();
             this.InstanceProgress_PictureBox1 = new System.Windows.Forms.PictureBox();
             this.InstanceProgress_Label1 = new System.Windows.Forms.Label();
+            this.Global_ProgressBar = new System.Windows.Forms.ProgressBar();
             this.Main_Panel.SuspendLayout();
             this.Selection_GroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ConnectStatus_PictureBox)).BeginInit();
@@ -86,7 +87,7 @@ namespace ClientApplication
             // Start_Button
             // 
             this.Start_Button.Enabled = false;
-            this.Start_Button.Location = new System.Drawing.Point(404, 540);
+            this.Start_Button.Location = new System.Drawing.Point(404, 569);
             this.Start_Button.Name = "Start_Button";
             this.Start_Button.Size = new System.Drawing.Size(75, 23);
             this.Start_Button.TabIndex = 0;
@@ -96,12 +97,13 @@ namespace ClientApplication
             // 
             // Main_Panel
             // 
+            this.Main_Panel.Controls.Add(this.Global_ProgressBar);
             this.Main_Panel.Controls.Add(this.Selection_GroupBox);
             this.Main_Panel.Controls.Add(this.Logo_PictureBox);
             this.Main_Panel.Controls.Add(this.Progress_GroupBox);
             this.Main_Panel.Location = new System.Drawing.Point(13, 13);
             this.Main_Panel.Name = "Main_Panel";
-            this.Main_Panel.Size = new System.Drawing.Size(480, 519);
+            this.Main_Panel.Size = new System.Drawing.Size(480, 553);
             this.Main_Panel.TabIndex = 1;
             // 
             // Selection_GroupBox
@@ -432,11 +434,18 @@ namespace ClientApplication
             this.InstanceProgress_Label1.Text = "   • Installation";
             this.InstanceProgress_Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // Global_ProgressBar
+            // 
+            this.Global_ProgressBar.Location = new System.Drawing.Point(16, 521);
+            this.Global_ProgressBar.Name = "Global_ProgressBar";
+            this.Global_ProgressBar.Size = new System.Drawing.Size(450, 23);
+            this.Global_ProgressBar.TabIndex = 2;
+            // 
             // ClientApplicationMain_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 575);
+            this.ClientSize = new System.Drawing.Size(505, 605);
             this.Controls.Add(this.Main_Panel);
             this.Controls.Add(this.Start_Button);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -497,6 +506,7 @@ namespace ClientApplication
         private PictureBox DatabaseMainProgress_PictureBox;
         private TableLayoutPanel Instance_TableLayoutPanel;
         private PictureBox ConnectStatus_PictureBox;
+        private ProgressBar Global_ProgressBar;
     }
 }
 

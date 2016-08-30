@@ -13,6 +13,38 @@ namespace ClientApplication
     public partial class ClientApplicationMain_Form : Form
     {
         private string EVALUATOR_KEY = "AAECAwQFBgcICQoLDA0ODw==";
+        private string SERVER = "";
+        private bool SERVER_OK = false;
+
+        /// The backgroundworker object on which the time consuming operation shall be executed
+        /// http://www.codeproject.com/Articles/99143/BackgroundWorker-Class-Sample-for-Beginners
+        BackgroundWorker ClientApplication_BackgroundWorker;
+        BackgroundWorker CheckServerConnection_BackgroundWorker;
+
+        public ClientApplicationMain_Form()
+        {
+            InitializeComponent();
+            //populateServerDropdown();
+
+            Server_ComboBox.TextChanged += new System.EventHandler(Server_ComboBox_TextChanged);
+
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = true;
+
+            ClientApplication_BackgroundWorker = new BackgroundWorker();
+            ClientApplication_BackgroundWorker.DoWork += new DoWorkEventHandler(ClientApplication_BackgroundWorker_DoWork);
+            ClientApplication_BackgroundWorker.ProgressChanged += new ProgressChangedEventHandler(ClientApplication_BackgroundWorker_ProgressChanged);
+            ClientApplication_BackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ClientApplication_BackgroundWorker_RunWorkerCompleted);
+            ClientApplication_BackgroundWorker.WorkerReportsProgress = true;
+            ClientApplication_BackgroundWorker.WorkerSupportsCancellation = true;
+
+            CheckServerConnection_BackgroundWorker = new BackgroundWorker();
+            CheckServerConnection_BackgroundWorker.DoWork += new DoWorkEventHandler(CheckServerConnection_BackgroundWorker_DoWork);
+            CheckServerConnection_BackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(CheckServerConnectionn_BackgroundWorker_RunWorkerCompleted);
+            CheckServerConnection_BackgroundWorker.WorkerReportsProgress = true;
+            CheckServerConnection_BackgroundWorker.WorkerSupportsCancellation = true;
+        }
 
         // https://dotnetfiddle.net/bFvxp8
         private byte[] EncryptStringToBytes_Aes(string plainText)
@@ -76,29 +108,6 @@ namespace ClientApplication
 
             // error occured, return false
             return false;
-        }
-
-        /// The backgroundworker object on which the time consuming operation shall be executed
-        /// http://www.codeproject.com/Articles/99143/BackgroundWorker-Class-Sample-for-Beginners
-        BackgroundWorker ClientApplication_BackgroundWorker;
-
-        public ClientApplicationMain_Form()
-        {
-            InitializeComponent();
-            populateServerDropdown();
-
-            Server_ComboBox.TextChanged += new System.EventHandler(Server_ComboBox_TextChanged);
-
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            MaximizeBox = false;
-            MinimizeBox = true;
-
-            ClientApplication_BackgroundWorker = new BackgroundWorker();
-            ClientApplication_BackgroundWorker.DoWork += new DoWorkEventHandler(ClientApplication_BackgroundWorker_DoWork);
-            ClientApplication_BackgroundWorker.ProgressChanged += new ProgressChangedEventHandler(ClientApplication_BackgroundWorker_ProgressChanged);
-            ClientApplication_BackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ClientApplication_BackgroundWorker_RunWorkerCompleted);
-            ClientApplication_BackgroundWorker.WorkerReportsProgress = true;
-            ClientApplication_BackgroundWorker.WorkerSupportsCancellation = true;
         }
 
         private void Start_Button_Click(object sender, EventArgs e)
@@ -275,33 +284,18 @@ namespace ClientApplication
         /// On completed do the appropriate task
         void ClientApplication_BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //If it was cancelled midway
-            if (e.Cancelled)
-            {
-                //label2.Text = "Task Cancelled.";
-            }
-            else if (e.Error != null)
-            {
-                //label2.Text = "Error while performing background operation.";
-            }
-            else
-            {
-                //label2.Text = "Task Completed...";
-            }
             Start_Button.Enabled = true;
             Start_Button.Enabled = true;
             Server_ComboBox.Enabled = true;
             //Connect_Button.Enabled = true;
             DatabaseName_CheckBox.Enabled = true;
             Database_ComboBox.Enabled = true;
-            //btnCancel.Enabled = false;
         }
 
         /// Notification is performed here to the progress bar
         void ClientApplication_BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //Here you play with the main UI thread
-            //progressBar1.Value = e.ProgressPercentage;
             if (e.ProgressPercentage == 1)
             {
                 InstanceMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
@@ -334,8 +328,6 @@ namespace ClientApplication
             {
                 InstanceMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.success;
             }
-
-            //label2.Text = "Processing......";// + progressBar1.Value.ToString() + "%";
         }
 
         /// Time consuming operations go here </br>
@@ -348,34 +340,9 @@ namespace ClientApplication
             {
                 Thread.Sleep(200);
                 ClientApplication_BackgroundWorker.ReportProgress(i);
-                //If cancel button was pressed while the execution is in progress
-                //Change the state from cancellation ---> cancel'ed
-                if (ClientApplication_BackgroundWorker.CancellationPending)
-                {
-                    e.Cancel = true;
-                    ClientApplication_BackgroundWorker.ReportProgress(0);
-                    return;
-                }
             }
             //Report 100% completion on operation completed
             ClientApplication_BackgroundWorker.ReportProgress(100);
-        }
-
-        private void btnStartAsyncOperation_Click(object sender, EventArgs e)
-        {
-            //btnStartAsyncOperation.Enabled = false;
-            //btnCancel.Enabled = true;
-            //Start the async operation here
-            ClientApplication_BackgroundWorker.RunWorkerAsync();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            if (ClientApplication_BackgroundWorker.IsBusy)
-            {
-                //Stop/Cancel the async operation here
-                ClientApplication_BackgroundWorker.CancelAsync();
-            }
         }
 
         private void Server_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -408,25 +375,57 @@ namespace ClientApplication
                 Database_ComboBox.Text = "";
             }
 
+            Global_ProgressBar.Style = ProgressBarStyle.Marquee;
+            Global_ProgressBar.MarqueeAnimationSpeed = 70;
+
+            SERVER = Server_ComboBox.Text;
+
+            CheckServerConnection_BackgroundWorker.RunWorkerAsync();
+
+            Server_ComboBox.Enabled = false;
+            Instance_TableLayoutPanel.Enabled = false;
+        }
+
+        private void CheckServerConnection_BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            SERVER_OK = false;
             string connectionString = null;
             SqlConnection connection;
             connectionString =
-            "Data Source=" + Server_ComboBox.Text + ";" +
+            "Data Source=" + SERVER + ";" +
             "Integrated Security=SSPI;";
             connection = new SqlConnection(connectionString);
             try
             {
                 connection.Open();
                 connection.Close();
+                SERVER_OK = true;
+            }
+            catch (SqlException exception)
+            {
+                MessageBox.Show("Can not open connection ! ");
+            }
+            CheckServerConnection_BackgroundWorker.ReportProgress(100);
+        }
+
+        private void CheckServerConnectionn_BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // http://stackoverflow.com/questions/312936/windows-forms-progressbar-easiest-way-to-start-stop-marquee
+            Global_ProgressBar.Style = ProgressBarStyle.Continuous;
+            Global_ProgressBar.MarqueeAnimationSpeed = 0;
+            Server_ComboBox.Enabled = true;
+            Instance_TableLayoutPanel.Enabled = true;
+
+            if (SERVER_OK)
+            {
+                populateDatabaseDropdown();
                 DatabaseName_CheckBox.Enabled = true;
                 Start_Button.Enabled = true;
-                populateDatabaseDropdown();
                 ConnectStatus_PictureBox.Image = global::ClientApplication.Properties.Resources.success;
             }
-            catch (Exception exception)
+            else
             {
                 ConnectStatus_PictureBox.Image = global::ClientApplication.Properties.Resources.error;
-                MessageBox.Show("Can not open connection ! ");
             }
         }
 
