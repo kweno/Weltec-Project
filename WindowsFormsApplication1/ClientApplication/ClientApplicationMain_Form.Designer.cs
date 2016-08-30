@@ -38,7 +38,7 @@ namespace ClientApplication
             this.Start_Button = new System.Windows.Forms.Button();
             this.Main_Panel = new System.Windows.Forms.Panel();
             this.Selection_GroupBox = new System.Windows.Forms.GroupBox();
-            this.Connect_Button = new System.Windows.Forms.Button();
+            this.ConnectStatus_PictureBox = new System.Windows.Forms.PictureBox();
             this.ServerName_Label = new System.Windows.Forms.Label();
             this.DatabaseName_CheckBox = new System.Windows.Forms.CheckBox();
             this.Server_ComboBox = new System.Windows.Forms.ComboBox();
@@ -67,6 +67,7 @@ namespace ClientApplication
             this.InstanceProgress_Label1 = new System.Windows.Forms.Label();
             this.Main_Panel.SuspendLayout();
             this.Selection_GroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ConnectStatus_PictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Logo_PictureBox)).BeginInit();
             this.Progress_GroupBox.SuspendLayout();
             this.Database_TableLayoutPanel.SuspendLayout();
@@ -85,7 +86,7 @@ namespace ClientApplication
             // Start_Button
             // 
             this.Start_Button.Enabled = false;
-            this.Start_Button.Location = new System.Drawing.Point(404, 574);
+            this.Start_Button.Location = new System.Drawing.Point(404, 540);
             this.Start_Button.Name = "Start_Button";
             this.Start_Button.Size = new System.Drawing.Size(75, 23);
             this.Start_Button.TabIndex = 0;
@@ -100,32 +101,31 @@ namespace ClientApplication
             this.Main_Panel.Controls.Add(this.Progress_GroupBox);
             this.Main_Panel.Location = new System.Drawing.Point(13, 13);
             this.Main_Panel.Name = "Main_Panel";
-            this.Main_Panel.Size = new System.Drawing.Size(480, 555);
+            this.Main_Panel.Size = new System.Drawing.Size(480, 519);
             this.Main_Panel.TabIndex = 1;
             // 
             // Selection_GroupBox
             // 
-            this.Selection_GroupBox.Controls.Add(this.Connect_Button);
+            this.Selection_GroupBox.Controls.Add(this.ConnectStatus_PictureBox);
             this.Selection_GroupBox.Controls.Add(this.ServerName_Label);
             this.Selection_GroupBox.Controls.Add(this.DatabaseName_CheckBox);
             this.Selection_GroupBox.Controls.Add(this.Server_ComboBox);
             this.Selection_GroupBox.Controls.Add(this.Database_ComboBox);
             this.Selection_GroupBox.Location = new System.Drawing.Point(16, 170);
             this.Selection_GroupBox.Name = "Selection_GroupBox";
-            this.Selection_GroupBox.Size = new System.Drawing.Size(450, 110);
+            this.Selection_GroupBox.Size = new System.Drawing.Size(450, 89);
             this.Selection_GroupBox.TabIndex = 12;
             this.Selection_GroupBox.TabStop = false;
             this.Selection_GroupBox.Text = "Selection";
             // 
-            // Connect_Button
+            // ConnectStatus_PictureBox
             // 
-            this.Connect_Button.Location = new System.Drawing.Point(357, 48);
-            this.Connect_Button.Name = "Connect_Button";
-            this.Connect_Button.Size = new System.Drawing.Size(75, 23);
-            this.Connect_Button.TabIndex = 13;
-            this.Connect_Button.Text = "Connect";
-            this.Connect_Button.UseVisualStyleBackColor = true;
-            this.Connect_Button.Click += new System.EventHandler(this.Connect_Button_Click);
+            this.ConnectStatus_PictureBox.Location = new System.Drawing.Point(422, 21);
+            this.ConnectStatus_PictureBox.Name = "ConnectStatus_PictureBox";
+            this.ConnectStatus_PictureBox.Size = new System.Drawing.Size(17, 17);
+            this.ConnectStatus_PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ConnectStatus_PictureBox.TabIndex = 14;
+            this.ConnectStatus_PictureBox.TabStop = false;
             // 
             // ServerName_Label
             // 
@@ -140,7 +140,7 @@ namespace ClientApplication
             // 
             this.DatabaseName_CheckBox.AutoSize = true;
             this.DatabaseName_CheckBox.Enabled = false;
-            this.DatabaseName_CheckBox.Location = new System.Drawing.Point(15, 79);
+            this.DatabaseName_CheckBox.Location = new System.Drawing.Point(15, 55);
             this.DatabaseName_CheckBox.Name = "DatabaseName_CheckBox";
             this.DatabaseName_CheckBox.Size = new System.Drawing.Size(106, 17);
             this.DatabaseName_CheckBox.TabIndex = 11;
@@ -151,21 +151,21 @@ namespace ClientApplication
             // Server_ComboBox
             // 
             this.Server_ComboBox.FormattingEnabled = true;
-            this.Server_ComboBox.Location = new System.Drawing.Point(231, 20);
+            this.Server_ComboBox.Location = new System.Drawing.Point(214, 20);
             this.Server_ComboBox.Name = "Server_ComboBox";
             this.Server_ComboBox.Size = new System.Drawing.Size(202, 21);
             this.Server_ComboBox.TabIndex = 2;
             this.Server_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Server_ComboBox_SelectedIndexChanged);
+            this.Server_ComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Server_ComboBox_KeyPress);
             // 
             // Database_ComboBox
             // 
             this.Database_ComboBox.Enabled = false;
             this.Database_ComboBox.FormattingEnabled = true;
-            this.Database_ComboBox.Location = new System.Drawing.Point(231, 77);
+            this.Database_ComboBox.Location = new System.Drawing.Point(214, 53);
             this.Database_ComboBox.Name = "Database_ComboBox";
             this.Database_ComboBox.Size = new System.Drawing.Size(202, 21);
             this.Database_ComboBox.TabIndex = 9;
-            this.Database_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Database_ComboBox_SelectedIndexChanged);
             // 
             // Logo_PictureBox
             // 
@@ -181,7 +181,7 @@ namespace ClientApplication
             // 
             this.Progress_GroupBox.Controls.Add(this.Database_TableLayoutPanel);
             this.Progress_GroupBox.Controls.Add(this.Instance_TableLayoutPanel);
-            this.Progress_GroupBox.Location = new System.Drawing.Point(16, 297);
+            this.Progress_GroupBox.Location = new System.Drawing.Point(16, 269);
             this.Progress_GroupBox.Name = "Progress_GroupBox";
             this.Progress_GroupBox.Size = new System.Drawing.Size(450, 244);
             this.Progress_GroupBox.TabIndex = 7;
@@ -344,6 +344,7 @@ namespace ClientApplication
             this.Instance_TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.82609F));
             this.Instance_TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
             this.Instance_TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.Instance_TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.Instance_TableLayoutPanel.Size = new System.Drawing.Size(418, 91);
             this.Instance_TableLayoutPanel.TabIndex = 0;
             // 
@@ -435,7 +436,7 @@ namespace ClientApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 607);
+            this.ClientSize = new System.Drawing.Size(505, 575);
             this.Controls.Add(this.Main_Panel);
             this.Controls.Add(this.Start_Button);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -444,6 +445,7 @@ namespace ClientApplication
             this.Main_Panel.ResumeLayout(false);
             this.Selection_GroupBox.ResumeLayout(false);
             this.Selection_GroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ConnectStatus_PictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Logo_PictureBox)).EndInit();
             this.Progress_GroupBox.ResumeLayout(false);
             this.Database_TableLayoutPanel.ResumeLayout(false);
@@ -482,7 +484,6 @@ namespace ClientApplication
         private GroupBox Selection_GroupBox;
         private CheckBox DatabaseName_CheckBox;
         private Label ServerName_Label;
-        private Button Connect_Button;
         private TableLayoutPanel Database_TableLayoutPanel;
         private Label DatabaseProgress_Label4;
         private PictureBox DatabaseProgress_PictureBox4;
@@ -495,6 +496,7 @@ namespace ClientApplication
         private Label DatabaseMainProgress_Label;
         private PictureBox DatabaseMainProgress_PictureBox;
         private TableLayoutPanel Instance_TableLayoutPanel;
+        private PictureBox ConnectStatus_PictureBox;
     }
 }
 

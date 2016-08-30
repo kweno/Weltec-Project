@@ -85,13 +85,13 @@ namespace ClientApplication
         public ClientApplicationMain_Form()
         {
             InitializeComponent();
-            //populateServerDropdown();
+            populateServerDropdown();
 
             Server_ComboBox.TextChanged += new System.EventHandler(Server_ComboBox_TextChanged);
 
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
-            MinimizeBox = false;
+            MinimizeBox = true;
 
             ClientApplication_BackgroundWorker = new BackgroundWorker();
             ClientApplication_BackgroundWorker.DoWork += new DoWorkEventHandler(ClientApplication_BackgroundWorker_DoWork);
@@ -109,7 +109,7 @@ namespace ClientApplication
 
             Start_Button.Enabled = false;
             Server_ComboBox.Enabled = false;
-            Connect_Button.Enabled = false;
+            //Connect_Button.Enabled = false;
             DatabaseName_CheckBox.Enabled = false;
             Database_ComboBox.Enabled = false;
 
@@ -204,7 +204,7 @@ namespace ClientApplication
             adapter = new SqlDataAdapter(sql, connection);
             adapter.Fill(ds);
             connection.Close();
-
+            // http://stackoverflow.com/questions/963870/dataset-writexml-to-string
             StringWriter sw = new StringWriter();
             ds.WriteXml(@"SQLServer.xml");
             ds.WriteXml(sw);
@@ -291,7 +291,7 @@ namespace ClientApplication
             Start_Button.Enabled = true;
             Start_Button.Enabled = true;
             Server_ComboBox.Enabled = true;
-            Connect_Button.Enabled = true;
+            //Connect_Button.Enabled = true;
             DatabaseName_CheckBox.Enabled = true;
             Database_ComboBox.Enabled = true;
             //btnCancel.Enabled = false;
@@ -378,19 +378,55 @@ namespace ClientApplication
             }
         }
 
-        private void Database_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void Server_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            CheckServerConnection();
+        }
+
+        private void Server_ComboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                CheckServerConnection();
+            }
+        }
+
+        private void CheckServerConnection()
+        {
+            if (ConnectStatus_PictureBox.Image != null)
+            {
+                ConnectStatus_PictureBox.Image.Dispose();
+                ConnectStatus_PictureBox.Image = null;
+                ConnectStatus_PictureBox.InitialImage = null;
+            }
+
             if (DatabaseName_CheckBox.Enabled)
             {
                 DatabaseName_CheckBox.Checked = false;
                 DatabaseName_CheckBox.Enabled = false;
                 Database_ComboBox.Enabled = false;
                 Database_ComboBox.Text = "";
+            }
+
+            string connectionString = null;
+            SqlConnection connection;
+            connectionString =
+            "Data Source=" + Server_ComboBox.Text + ";" +
+            "Integrated Security=SSPI;";
+            connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                connection.Close();
+                DatabaseName_CheckBox.Enabled = true;
+                Start_Button.Enabled = true;
+                populateDatabaseDropdown();
+                ConnectStatus_PictureBox.Image = global::ClientApplication.Properties.Resources.success;
+            }
+            catch (Exception exception)
+            {
+                ConnectStatus_PictureBox.Image = global::ClientApplication.Properties.Resources.error;
+                MessageBox.Show("Can not open connection ! ");
             }
         }
 
@@ -410,29 +446,6 @@ namespace ClientApplication
             }
         }
 
-        private void Connect_Button_Click(object sender, EventArgs e)
-        {
-            string connectionString = null;
-            SqlConnection connection;
-            connectionString =
-            "Data Source=" + Server_ComboBox.Text + ";" +
-            "Integrated Security=SSPI;";
-            connection = new SqlConnection(connectionString);
-            try
-            {
-                connection.Open();
-                connection.Close();
-                DatabaseName_CheckBox.Enabled = true;
-                Start_Button.Enabled = true;
-                populateDatabaseDropdown();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show("Can not open connection ! ");
-            }
-
-        }
-
         private void Server_ComboBox_TextChanged(Object sender, EventArgs e)
         {
             if (DatabaseName_CheckBox.Enabled)
@@ -445,6 +458,8 @@ namespace ClientApplication
                 Database_TableLayoutPanel.Enabled = false;
             }
         }
+
+
 
 
 

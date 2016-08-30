@@ -61,7 +61,7 @@ namespace DatabaseEvaluator
 
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.MinimizeBox = true;
         }
 
         private void Start_Button_Click(object sender, EventArgs e)
