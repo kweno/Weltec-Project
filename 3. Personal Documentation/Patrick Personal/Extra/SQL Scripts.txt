@@ -1,5 +1,7 @@
 USE [MASTER];
 
+IF EXISTS(SELECT * FROM dbo.[#Values]) DROP TABLE dbo.[#Values]
+
 CREATE TABLE [dbo].[#Values]
 ( [ProcessInfo] VARCHAR(50) NULL,
  [Text] VARCHAR(MAX) NULL) ;
@@ -43,5 +45,3 @@ WHERE name like '%server memory%'
 
 
 SELECT * FROM [#Values]
-
--- DROP TABLE [#Values]
