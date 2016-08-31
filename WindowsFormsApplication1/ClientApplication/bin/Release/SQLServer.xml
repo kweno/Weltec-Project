@@ -6,6 +6,7 @@
   </Table>
   <Table>
     <ProcessInfo>InstanceName</ProcessInfo>
+    <Text>SQL1</Text>
   </Table>
   <Table>
     <ProcessInfo>ProductLevel</ProcessInfo>

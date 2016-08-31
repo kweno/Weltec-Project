@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using ClientApplication.Properties;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace ClientApplication
 {
@@ -46,6 +47,8 @@ namespace ClientApplication
             //this.Controls.Add(spashPictureBox);
             //this.StartPosition = FormStartPosition.CenterScreen;
         }
+
+
 
 
     }
