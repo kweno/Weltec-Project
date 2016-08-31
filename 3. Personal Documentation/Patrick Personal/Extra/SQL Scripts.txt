@@ -1,3 +1,5 @@
+USE [MASTER];
+
 CREATE TABLE [dbo].[#Values]
 ( [ProcessInfo] VARCHAR(50) NULL,
  [Text] VARCHAR(MAX) NULL) ;
@@ -15,6 +17,29 @@ INSERT INTO [#Values] ([ProcessInfo], [Text])
     SELECT 'SQLVersion', SUBSTRING(@@VERSION, 1, CHARINDEX('-', @@VERSION) - 1)
         + CONVERT(VARCHAR(100), SERVERPROPERTY('edition'))
     AS 'Server Version';
+
+-- Max DOP
+
+CREATE TABLE #MaxDOP (NAME VARCHAR(255), minimum INT, maximum INT, config_value INT, run_value INT)
+
+EXEC sp_configure 'show advanced options', 1;
+RECONFIGURE;
+
+INSERT INTO #MaxDOP
+EXEC sp_configure 'max degree of parallelism'
+
+EXEC sp_configure 'show advanced options', 0;
+RECONFIGURE;
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) SELECT 'Max Degree Of Parallelism',run_value FROM #MaxDOP WHERE name='max degree of parallelism'
+
+DROP TABLE #MaxDOP
+
+-- Memory
+
+INSERT INTO [#Values] ([ProcessInfo], [Text])
+SELECT [description], CONVERT(VARCHAR(50),value_in_use) FROM sys.configurations
+WHERE name like '%server memory%'
 
 
 SELECT * FROM [#Values]
