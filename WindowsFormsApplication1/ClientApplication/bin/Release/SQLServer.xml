@@ -6,7 +6,6 @@
   </Table>
   <Table>
     <ProcessInfo>InstanceName</ProcessInfo>
-    <Text>SQL1</Text>
   </Table>
   <Table>
     <ProcessInfo>ProductLevel</ProcessInfo>
@@ -19,5 +18,17 @@
   <Table>
     <ProcessInfo>SQLVersion</ProcessInfo>
     <Text>Microsoft SQL Server 2016 (RTM) Express Edition (64-bit)</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Max Degree Of Parallelism</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Minimum size of server memory (MB)</ProcessInfo>
+    <Text>16</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Maximum size of server memory (MB)</ProcessInfo>
+    <Text>2147483647</Text>
   </Table>
 </NewDataSet>

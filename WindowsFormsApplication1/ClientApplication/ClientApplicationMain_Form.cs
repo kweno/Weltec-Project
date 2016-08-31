@@ -24,7 +24,7 @@ namespace ClientApplication
         public ClientApplicationMain_Form()
         {
             InitializeComponent();
-            populateServerDropdown();
+            //populateServerDropdown();
 
             Server_ComboBox.TextChanged += new System.EventHandler(Server_ComboBox_TextChanged);
 
@@ -147,31 +147,31 @@ namespace ClientApplication
             //"User id=test;" +
             //"Password=test;";
 
-            sql = "DECLARE @ExpressionToSearch VARCHAR(200)"
-                    + "DECLARE  @ExpressionToFind VARCHAR(200)"
-                    + "CREATE TABLE [dbo].[#TmpErrorLog] ([LogDate] DATETIME NULL, [ProcessInfo] VARCHAR(20) NULL, [Text] VARCHAR(MAX) NULL );"
-                    + "CREATE TABLE [dbo].[#TmpResults] ([Text] VARCHAR(MAX) NULL );"
-                    + "INSERT INTO #TmpErrorLog ([LogDate], [ProcessInfo], [Text]) EXEC [master].[dbo].[xp_readerrorlog] 0, 1, N'Server is listening on';"
-                    + "SET @ExpressionToFind = '1433'"
-                    + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog where text like '%any%' and text like '%<ipv4>%' and text like '%1433%' and ProcessInfo = 'Server'"
-                    + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'"
-                    + "    INSERT INTO #TmpResults VALUES ('Yes, 1433 port is using by SQL Server');"
-                    + "ELSE"
-                    + "    INSERT INTO #TmpResults VALUES ('SQL Server doesn''t use default port');"
-                    + "SELECT * FROM #TmpResults;";
-
-            sql = "CREATE TABLE [dbo].[#Values]"
-                    + "( [ProcessInfo] VARCHAR(50) NULL,"
-                    + " [Text] VARCHAR(MAX) NULL) ;"
-                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('HostName',HOST_NAME())"
-                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('InstanceName',CONVERT(VARCHAR(MAX),SERVERPROPERTY('InstanceName')))"
-                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductLevel',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductLevel')))"
-                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductVersion',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductVersion')))"
-                    + "INSERT INTO [#Values] ([ProcessInfo], [Text])"
-                    + "    SELECT 'SQLVersion', SUBSTRING(@@VERSION, 1, CHARINDEX('-', @@VERSION) - 1)"
-                    + "        + CONVERT(VARCHAR(100), SERVERPROPERTY('edition'))"
-                    + "    AS 'Server Version';"
-                    + "SELECT * FROM [#Values]";
+            sql = "USE [MASTER];" + "\n"
+            + "CREATE TABLE [dbo].[#Values]" + "\n"
+            + "( [ProcessInfo] VARCHAR(50) NULL," + "\n"
+            + " [Text] VARCHAR(MAX) NULL) ;" + "\n"
+            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('HostName',HOST_NAME())" + "\n"
+            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('InstanceName',CONVERT(VARCHAR(MAX),SERVERPROPERTY('InstanceName')))" + "\n"
+            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductLevel',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductLevel')))" + "\n"
+            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductVersion',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductVersion')))" + "\n"
+            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
+            + "    SELECT 'SQLVersion', SUBSTRING(@@VERSION, 1, CHARINDEX('-', @@VERSION) - 1)" + "\n"
+            + "       + CONVERT(VARCHAR(100), SERVERPROPERTY('edition'))" + "\n"
+            + "    AS 'Server Version';" + "\n"
+            + "CREATE TABLE #MaxDOP (NAME VARCHAR(255), minimum INT, maximum INT, config_value INT, run_value INT)" + "\n"
+            + "EXEC [master].[dbo].[sp_configure] 'show advanced options', 1;" + "\n"
+            + "RECONFIGURE;" + "\n"
+            + "INSERT INTO #MaxDOP" + "\n"
+            + "EXEC sp_configure 'max degree of parallelism'" + "\n"
+            + "EXEC sp_configure 'show advanced options', 0;" + "\n"
+            + "RECONFIGURE;" + "\n"
+            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) SELECT 'Max Degree Of Parallelism',run_value FROM #MaxDOP WHERE name='max degree of parallelism'" + "\n"
+            + "DROP TABLE #MaxDOP;" + "\n"
+            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
+            + "SELECT [description], CONVERT(VARCHAR(50),value_in_use) FROM sys.configurations" + "\n"
+            + "WHERE name like '%server memory%';" + "\n"
+            + "SELECT * FROM [#Values];";
 
             connection = new SqlConnection(connectionString);
 
