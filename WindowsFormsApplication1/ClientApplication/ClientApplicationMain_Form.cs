@@ -175,6 +175,7 @@ namespace ClientApplication
 
             connection = new SqlConnection(connectionString);
 
+            // CAN REMOVE THIS PART, JUST FOR TESTING PURPOSES
             try
             {
                 connection.Open();
@@ -183,10 +184,6 @@ namespace ClientApplication
                 while (dataReader.Read())
                 {
                     MessageBox.Show(dataReader.GetValue(0) + "");
-                    for (int i = 0; i < 5; i++)
-                    {
-                        parameterValues += dataReader.GetValue(0) + "\n";
-                    }
                 }
                 dataReader.Close();
                 command.Dispose();
@@ -196,16 +193,7 @@ namespace ClientApplication
             {
                 MessageBox.Show("Can not open connection ! ");
             }
-
-            try
-            {
-                // Encrypt the string to an array of bytes.
-                encrypted = EncryptStringToBytes_Aes(parameterValues);
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine("Error: {0}", exception.Message);
-            }
+            //------------------------------------------------------
 
             // http://csharp.net-informations.com/xml/xml-from-sql.htm
             SqlDataAdapter adapter;
@@ -213,6 +201,7 @@ namespace ClientApplication
             adapter = new SqlDataAdapter(sql, connection);
             adapter.Fill(ds);
             connection.Close();
+
             // http://stackoverflow.com/questions/963870/dataset-writexml-to-string
             StringWriter sw = new StringWriter();
             ds.WriteXml(@"SQLServer.xml");

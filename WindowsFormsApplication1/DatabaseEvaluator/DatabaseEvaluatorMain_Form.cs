@@ -5,6 +5,9 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Security.Cryptography;
+using System.Data.SqlClient;
+using System.Data;
+using System.Data.Sql;
 
 namespace DatabaseEvaluator
 {
@@ -75,7 +78,76 @@ namespace DatabaseEvaluator
                 string decrypted = DecryptStringFromBytes_Aes(File.ReadAllBytes(fileLocation));
 
                 MessageBox.Show(decrypted);
+                /*
+                DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
 
+                var connectionString = "Data Source=" + servers.Rows[0]["ServerName"] + ";" +
+                //"Initial Catalog=test;" +
+                "Integrated Security=SSPI;";
+
+                var sql = "DECLARE @xml xml"
+                        + "SET @xml = N'<NewDataSet>"
+                        + "  <Table>"
+                        + "    <ProcessInfo>HostName</ProcessInfo>"
+                        + "    <Text>B105-01</Text>"
+                        + "  </Table>"
+                        + "  <Table>"
+                        + "    <ProcessInfo>InstanceName</ProcessInfo>"
+                        + "  </Table>"
+                        + "  <Table>"
+                        + "    <ProcessInfo>ProductLevel</ProcessInfo>"
+                        + "    <Text>RTM</Text>"
+                        + "  </Table>"
+                        + "  <Table>"
+                        + "    <ProcessInfo>ProductVersion</ProcessInfo>"
+                        + "    <Text>10.50.1600.1</Text>"
+                        + "  </Table>"
+                        + "  <Table>"
+                        + "    <ProcessInfo>SQLVersion</ProcessInfo>"
+                        + "    <Text>Microsoft SQL Server 2008 R2 (RTM) Enterprise Evaluation Edition (64-bit)</Text>"
+                        + "  </Table>"
+                        + "</NewDataSet>'"
+                        + "DECLARE @ProductVersion nvarchar(20)"
+                        + "DECLARE @SQLName nvarchar(50)"
+                        + "SELECT @ProductVersion = doc.col.value('Text[1]', 'nvarchar(50)')"
+                        + "FROM @xml.nodes('/NewDataSet/Table') doc(col)"
+                        + "WHERE doc.col.value('ProcessInfo[1]', 'varchar(100)') = 'ProductVersion'"
+                        + "Print @ProductVersion"
+                        + "IF (LEFT(@ProductVersion ,2) = '10')"
+                        + "   SET @SQLName = 'Microsoft SQL Server 2008 R2'"
+                        + "ELSE IF (LEFT(@ProductVersion ,2) = '11')"
+                        + "   SET @SQLName = 'Microsoft SQL Server 2012'"
+                        + "Select * from [EVALUATOR].[dbo].[ServicePack]"
+                        + "WHERE [LatestServicePackValue] != @ProductVersion and [SQLServerVersion] = @SQLName";
+
+                SqlCommand command;
+                SqlDataReader dataReader;
+                var connection = new SqlConnection(connectionString);
+                var parameterValues = "";
+
+                try
+                {
+                    connection.Open();
+                    command = new SqlCommand(sql, connection);
+                    dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        for (int i = 0; i < 5; i++)
+                        {
+                            parameterValues += dataReader.GetValue(0) + " " + dataReader.GetValue(1) + "\n";
+                        }
+                    }
+                    dataReader.Close();
+                    command.Dispose();
+                    connection.Close();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("Can not open connection ! ");
+                }
+
+                MessageBox.Show(parameterValues);
+                */
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.FileName = "SQLServer.pdf";
                 saveFileDialog1.Filter = "PDF File|*.pdf";
