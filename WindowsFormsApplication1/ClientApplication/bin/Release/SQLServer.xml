@@ -2,10 +2,11 @@
 <NewDataSet>
   <Table>
     <ProcessInfo>HostName</ProcessInfo>
-    <Text>B105-01</Text>
+    <Text>DESKTOP-FVFO8GL</Text>
   </Table>
   <Table>
     <ProcessInfo>InstanceName</ProcessInfo>
+    <Text>SQL2016N2</Text>
   </Table>
   <Table>
     <ProcessInfo>ProductLevel</ProcessInfo>

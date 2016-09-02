@@ -24,7 +24,7 @@ namespace ClientApplication
         public ClientApplicationMain_Form()
         {
             InitializeComponent();
-            //populateServerDropdown();
+            populateServerDropdown();
 
             Server_ComboBox.TextChanged += new System.EventHandler(Server_ComboBox_TextChanged);
 

@@ -81,32 +81,41 @@ namespace DatabaseEvaluator
                 
                 DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
 
-                var connectionString = "Data Source=" + servers.Rows[0]["ServerName"] + ";" +
+                var instance = "";
+
+                if ((servers.Rows[0]["InstanceName"] as string) != null)
+                    instance = servers.Rows[0]["ServerName"] + "\\" + servers.Rows[0]["InstanceName"];
+                else
+                    instance = servers.Rows[0]["ServerName"] + "";
+
+                var connectionString = "Data Source=" + instance + ";" +
                 //"Initial Catalog=test;" +
                 "Integrated Security=SSPI;";
 
                 var sql = "DECLARE @xml xml" + "\n"
-                        + "SET @xml = N'<NewDataSet>" + "\n"
-                        + "  <Table>" + "\n"
-                        + "    <ProcessInfo>HostName</ProcessInfo>" + "\n"
-                        + "    <Text>B105-01</Text>" + "\n"
-                        + "  </Table>" + "\n"
-                        + "  <Table>" + "\n"
-                        + "    <ProcessInfo>InstanceName</ProcessInfo>" + "\n"
-                        + "  </Table>" + "\n"
-                        + "  <Table>" + "\n"
-                        + "    <ProcessInfo>ProductLevel</ProcessInfo>" + "\n"
-                        + "    <Text>RTM</Text>" + "\n"
-                        + "  </Table>" + "\n"
-                        + "  <Table>" + "\n"
-                        + "    <ProcessInfo>ProductVersion</ProcessInfo>" + "\n"
-                        + "    <Text>10.50.1600.1</Text>" + "\n"
-                        + "  </Table>" + "\n"
-                        + "  <Table>" + "\n"
-                        + "    <ProcessInfo>SQLVersion</ProcessInfo>" + "\n"
-                        + "    <Text>Microsoft SQL Server 2008 R2 (RTM) Enterprise Evaluation Edition (64-bit)</Text>" + "\n"
-                        + "  </Table>" + "\n"
-                        + "</NewDataSet>'" + "\n"
+                        + "SET @xml = N'"
+                        + decrypted + "'\n"
+                        //+ "<NewDataSet>" + "\n"
+                        //+ "  <Table>" + "\n"
+                        //+ "    <ProcessInfo>HostName</ProcessInfo>" + "\n"
+                        //+ "    <Text>B105-01</Text>" + "\n"
+                        //+ "  </Table>" + "\n"
+                        //+ "  <Table>" + "\n"
+                        //+ "    <ProcessInfo>InstanceName</ProcessInfo>" + "\n"
+                        //+ "  </Table>" + "\n"
+                        //+ "  <Table>" + "\n"
+                        //+ "    <ProcessInfo>ProductLevel</ProcessInfo>" + "\n"
+                        //+ "    <Text>RTM</Text>" + "\n"
+                        //+ "  </Table>" + "\n"
+                        //+ "  <Table>" + "\n"
+                        //+ "    <ProcessInfo>ProductVersion</ProcessInfo>" + "\n"
+                        //+ "    <Text>10.50.1600.1</Text>" + "\n"
+                        //+ "  </Table>" + "\n"
+                        //+ "  <Table>" + "\n"
+                        //+ "    <ProcessInfo>SQLVersion</ProcessInfo>" + "\n"
+                        //+ "    <Text>Microsoft SQL Server 2008 R2 (RTM) Enterprise Evaluation Edition (64-bit)</Text>" + "\n"
+                        //+ "  </Table>" + "\n"
+                        //+ "</NewDataSet>'" + "\n"
                         + "DECLARE @ProductVersion nvarchar(20)" + "\n"
                         + "DECLARE @SQLName nvarchar(50)" + "\n"
                         + "SELECT @ProductVersion = doc.col.value('Text[1]', 'nvarchar(50)')" + "\n"
