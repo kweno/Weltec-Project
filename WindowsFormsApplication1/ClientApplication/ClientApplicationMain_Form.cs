@@ -41,7 +41,7 @@ namespace ClientApplication
 
             CheckServerConnection_BackgroundWorker = new BackgroundWorker();
             CheckServerConnection_BackgroundWorker.DoWork += new DoWorkEventHandler(CheckServerConnection_BackgroundWorker_DoWork);
-            CheckServerConnection_BackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(CheckServerConnectionn_BackgroundWorker_RunWorkerCompleted);
+            CheckServerConnection_BackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(CheckServerConnection_BackgroundWorker_RunWorkerCompleted);
             CheckServerConnection_BackgroundWorker.WorkerReportsProgress = true;
             CheckServerConnection_BackgroundWorker.WorkerSupportsCancellation = true;
         }
@@ -397,7 +397,7 @@ namespace ClientApplication
             CheckServerConnection_BackgroundWorker.ReportProgress(100);
         }
 
-        private void CheckServerConnectionn_BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void CheckServerConnection_BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             // http://stackoverflow.com/questions/312936/windows-forms-progressbar-easiest-way-to-start-stop-marquee
             Global_ProgressBar.Style = ProgressBarStyle.Continuous;
