@@ -154,74 +154,186 @@ namespace ClientApplication
 
                     // ------------- SQL Server Instance 
 
-                    // 1. Installation 
+                        // 1. Installation 
 
-                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('HostName',HOST_NAME())" + "\n"
-                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('InstanceName',CONVERT(VARCHAR(MAX),SERVERPROPERTY('InstanceName')))" + "\n"
-                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductLevel',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductLevel')))" + "\n"
-                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductVersion',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductVersion')))" + "\n"
-                    + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
-                    + "    SELECT 'SQLVersion', SUBSTRING(@@VERSION, 1, CHARINDEX('-', @@VERSION) - 1)" + "\n"
-                    + "        + CONVERT(VARCHAR(100), SERVERPROPERTY('edition'))" + "\n"
-                    + "    AS 'Server Version';" + "\n"
+                            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('HostName',HOST_NAME())" + "\n"
+                            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('InstanceName',CONVERT(VARCHAR(MAX),SERVERPROPERTY('InstanceName')))" + "\n"
+                            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductLevel',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductLevel')))" + "\n"
+                            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductVersion',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductVersion')))" + "\n"
+                            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
+                            + "    SELECT 'SQLVersion', SUBSTRING(@@VERSION, 1, CHARINDEX('-', @@VERSION) - 1)" + "\n"
+                            + "        + CONVERT(VARCHAR(100), SERVERPROPERTY('edition'))" + "\n"
+                            + "    AS 'Server Version';" + "\n"
 
-                    // 2. Configuration 
+                        // 2. Configuration 
 
-                    // -- Max DOP
-                    + "IF OBJECT_ID('tempdb..#MaxDOP') IS NOT NULL DROP TABLE #MaxDOP" + "\n"
-                    + "CREATE TABLE [dbo].[#MaxDOP] (NAME VARCHAR(255), minimum INT, maximum INT, config_value INT, run_value INT)" + "\n"
-                    + "EXEC [sp_configure] 'show advanced options', 1;" + "\n"
-                    + "RECONFIGURE;" + "\n"
-                    + "INSERT INTO [#MaxDOP]" + "\n"
-                    + "EXEC [sp_configure] 'max degree of parallelism'" + "\n"
-                    + "EXEC [sp_configure] 'show advanced options', 0;" + "\n"
-                    + "RECONFIGURE;" + "\n"
-                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) SELECT 'Max Degree Of Parallelism',run_value FROM #MaxDOP WHERE name='max degree of parallelism'" + "\n"
+                            // -- Max DOP
+                            + "IF OBJECT_ID('tempdb..#MaxDOP') IS NOT NULL DROP TABLE #MaxDOP" + "\n"
+                            + "CREATE TABLE [dbo].[#MaxDOP] (NAME VARCHAR(255), minimum INT, maximum INT, config_value INT, run_value INT)" + "\n"
+                            + "EXEC [sp_configure] 'show advanced options', 1;" + "\n"
+                            + "RECONFIGURE;" + "\n"
+                            + "INSERT INTO [#MaxDOP]" + "\n"
+                            + "EXEC [sp_configure] 'max degree of parallelism'" + "\n"
+                            + "EXEC [sp_configure] 'show advanced options', 0;" + "\n"
+                            + "RECONFIGURE;" + "\n"
+                            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) SELECT 'Max Degree Of Parallelism',run_value FROM #MaxDOP WHERE name='max degree of parallelism'" + "\n"
 
-                    // -- Memory
-                    + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
-                    + "SELECT [description], CONVERT(VARCHAR(50),value_in_use) FROM sys.configurations" + "\n"
-                    + "WHERE name like '%server memory%'" + "\n"
+                            // -- Memory
+                            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
+                            + "SELECT [description], CONVERT(VARCHAR(50),value_in_use) FROM sys.configurations" + "\n"
+                            + "WHERE name like '%server memory%'" + "\n"
 
-                    // -- Trace Flags
-                    + "DECLARE @ExpressionToSearch VARCHAR(200)" + "\n"
-                    + "DECLARE  @ExpressionToFind VARCHAR(200)" + "\n"
+                            // -- Trace Flags
+                            + "DECLARE @ExpressionToSearch VARCHAR(200)" + "\n"
+                            + "DECLARE  @ExpressionToFind VARCHAR(200)" + "\n"
 
-                    // -- Command will create the temporary table in tempdb
-                    + "IF OBJECT_ID('tempdb..#TmpErrorLog') IS NOT NULL DROP TABLE #TmpErrorLog" + "\n"
-                    + "CREATE TABLE [dbo].[#TmpErrorLog]" + "\n"
-                    + "([LogDate] DATETIME NULL," + "\n"
-                    + " [ProcessInfo] VARCHAR(20) NULL," + "\n"
-                    + " [Text] VARCHAR(MAX) NULL ) ;" + "\n"
+                            // -- Command will create the temporary table in tempdb
+                            + "IF OBJECT_ID('tempdb..#TmpErrorLog') IS NOT NULL DROP TABLE #TmpErrorLog" + "\n"
+                            + "CREATE TABLE [dbo].[#TmpErrorLog]" + "\n"
+                            + "([LogDate] DATETIME NULL," + "\n"
+                            + " [ProcessInfo] VARCHAR(20) NULL," + "\n"
+                            + " [Text] VARCHAR(MAX) NULL ) ;" + "\n"
 
-                    /*
-                    // -- Command will insert the errorlog data into temporary table
-                    + "INSERT INTO #TmpErrorLog ([LogDate], [ProcessInfo], [Text])" + "/n"
-                    + "EXEC[master].[dbo].[xp_readerrorlog] 0, 1, N'DBCC TRACEON';" + "/n"
+                            // -- Command will insert the errorlog data into temporary table
+                            + "INSERT INTO #TmpErrorLog ([LogDate], [ProcessInfo], [Text])" + "\n"
+                            + "EXEC[master].[dbo].[xp_readerrorlog] 0, 1, N'DBCC TRACEON';" + "\n"
 
+                            // -- retrieves the data from temporary table
+                            + "SET @ExpressionToFind = 'DBCC TRACEON 2371'" + "\n"
+                            + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog" + "\n"
+                            + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "\n"
+                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 2371','1')" + "\n"
+                            + "ELSE" + "\n"
+                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 2371','0')" + "\n"
+                            + "SET @ExpressionToFind = 'DBCC TRACEON 1117'" + "\n"
+                            + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog" + "\n"
+                            + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "\n"
+                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1117','1')" + "\n"
+                            + "ELSE" + "\n"
+                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1117','0')" + "\n"
+                            + "SET @ExpressionToFind = 'DBCC TRACEON 1118'" + "\n"
+                            + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog" + "\n"
+                            + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "\n"
+                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1118','1')" + "\n"
+                            + "ELSE" + "\n"
+                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1118','0')" + "\n"
                     
-                    // -- retrieves the data from temporary table
-                    + "SET @ExpressionToFind = 'DBCC TRACEON 2371'" + "/n"
-                    + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog" + "/n"
-                    + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "/n"
-                    + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 2371','1')" + "/n"
-                    + "ELSE" + "/n"
-                    + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 2371','0')" + "/n"
-                    + "SET @ExpressionToFind = 'DBCC TRACEON 1117'" + "/n"
-                    + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog" + "/n"
-                    + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "/n"
-                    + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1117','1')" + "/n"
-                    + "ELSE" + "/n"
-                    + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1117','0')" + "/n"
-                    + "SET @ExpressionToFind = 'DBCC TRACEON 1118'" + "/n"
-                    + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog" + "/n"
-                    + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "/n"
-                    + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1118','1')" + "/n"
-                    + "ELSE" + "/n"
-                    + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1118','0')" + "/n"
-                    */
+                            // -- Default index fill factor
+                            + "IF OBJECT_ID('tempdb..#Fill') IS NOT NULL DROP TABLE #Fill" + "\n"
+                            + "CREATE TABLE [dbo].[#Fill] (NAME VARCHAR(255), minimum INT, maximum INT, config_value INT, run_value INT)" + "\n"
+                            + "EXEC [sp_configure] 'show advanced options', 1;" + "\n"
+                            + "RECONFIGURE;" + "\n"
+                            + "INSERT INTO [#Fill]" + "\n"
+                            + "EXEC [sp_configure] 'fill factor (%)'" + "\n"
+                            + "EXEC [sp_configure] 'show advanced options', 0;" + "\n"
+                            + "RECONFIGURE;" + "\n"
+                            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) SELECT 'Fill Factor Values in (%)',run_value FROM #Fill WHERE name='fill factor (%)'" + "\n"
 
-            + "SELECT * FROM [#Values];";
+                        // 3. Security
+                    
+                            // -- Server authentication
+                            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
+                            + "SELECT 'SQL Server Authentication Mode', CASE SERVERPROPERTY('IsIntegratedSecurityOnly')" + "\n"
+                            + "WHEN 1 THEN 'Windows Authentication'" + "\n"
+                            + "WHEN 0 THEN 'Windows and SQL Server Authentication'" + "\n"
+                            + "END as [Authentication Mode]" + "\n"
+
+                            // -- SQL Server Network Port
+                            + "IF OBJECT_ID('tempdb..#TmpErrorLogNetworkPort') IS NOT NULL DROP TABLE #TmpErrorLogNetworkPort" + "\n"
+                            + "CREATE TABLE[dbo].[#TmpErrorLogNetworkPort]" + "\n"
+                            + "([LogDate] DATETIME NULL," + "\n"
+                            + " [ProcessInfo] VARCHAR(20) NULL," + "\n"
+                            + " [Text] VARCHAR(MAX) NULL ) ;" + "\n"
+
+                            // --Command will insert the errorlog data into temporary table
+                            + "INSERT INTO #TmpErrorLogNetworkPort ([LogDate], [ProcessInfo], [Text])" + "\n"
+                            + "EXEC[master].[dbo].[xp_readerrorlog] 0, 1, N'Server is listening on';" + "\n"
+
+                            // --retrieves the data from temporary table
+                            + "SET @ExpressionToFind = '1433'" + "\n"
+                            + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLogNetworkPort where text like '%any%' and text like '%<ipv4>%' and text like '%1433%' and ProcessInfo = 'Server'" + "\n"
+                            + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "\n"
+                            + "    INSERT INTO[#Values] ([ProcessInfo], [Text]) VALUES ('SQL Port','1433')" + "\n"
+                            + "ELSE" + "\n"
+                            + "    INSERT INTO[#Values] ([ProcessInfo], [Text]) VALUES ('SQL Port','SQL Server doesn''t use default port')" + "\n"
+
+                    //----- SQL Server Database 
+
+                        // 1. Implemetation 
+
+                            //-- DataFiles 
+                            + "DECLARE @DBName VARCHAR(200);" + "\n"
+                            + "declare @sql varchar(200);" + "\n"
+                            + "SET @DBName = 'EVALUATOR'" + "\n"
+                            + "SELECT @sql = 'USE [' + @DBName + ']'" + "\n"
+                            + "EXEC sp_sqlexec @Sql" + "\n"
+                            + "IF OBJECT_ID('tempdb..#DataFile') IS NOT NULL DROP TABLE #DataFile" + "\n"
+                            + "CREATE TABLE [dbo].[#DataFile]" + "\n"
+                            + "	([name] VARCHAR(200) NULL," + "\n"
+                            + "	[fileid] int NULL," + "\n"
+                            + "	[filename] VARCHAR(max) NULL," + "\n"
+                            + "	[filegroup] VARCHAR(50) NULL," + "\n"
+                            + "	[size] VARCHAR(50) NULL," + "\n"
+                            + "	[maxsize] VARCHAR(50) NULL," + "\n"
+                            + "	[growth] VARCHAR(50) NULL," + "\n"
+                            + "	[usage] VARCHAR(50) NULL) ;" + "\n"
+
+                            //-- Command will insert the errorlog data into temporary table
+                            + "INSERT INTO #DataFile ([name], [fileid], [filename], [filegroup], [size], [maxsize], [growth], [usage])" + "\n"
+                            + "EXEC [sp_helpfile]" + "\n"
+                            + "SET @ExpressionToFind = 'C:\\Program Files\\'" + "\n"
+                            + "SELECT @ExpressionToSearch = [filename] FROM #DataFile where [filename] like '%.mdf'" + "\n"
+                            + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "\n"
+                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Location','System Drive')" + "\n"
+                            + "ELSE" + "\n"
+                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Location','Datadile doesn''t use system drive')" + "\n"
+                            + "SELECT @ExpressionToSearch = [filename] FROM #DataFile where [filename] like '%.ldf'" + "\n"
+                            + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "\n"
+                            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Logfile Location','System Drive')" + "\n"
+                            + "ELSE" + "\n"
+                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Logfile Location','Datadile doesn''t use system drive')" + "\n"
+
+                        // 2. Configuration Options
+
+                            //-- Recovery Model
+                            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
+                            + "SELECT 'Recovery Model' , recovery_model_desc FROM sys.databases WHERE name = @DBName" + "\n"
+
+                            //-- Compatibility Level
+                            + "INSERT INTO[#Values] ([ProcessInfo], [Text])" + "\n"
+                            + "SELECT 'Compatibility Level', [compatibility_level]" + "\n"
+                            + "        FROM sys.databases WHERE name = @DBName" + "\n"
+
+                            //-- Read Committed Snapshot Isolation
+                            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
+                            + "SELECT 'Snapshot Isolation', [snapshot_isolation_state_desc] FROM sys.databases WHERE name = @DBName" + "\n"
+                            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
+                            + "SELECT 'Read Committed Snapshot Isolation', [is_read_committed_snapshot_on] FROM sys.databases WHERE name = @DBName" + "\n"
+
+                            //-- Database Auto growth
+                            + "SET @ExpressionToFind = 'KB'" + "\n"
+                            + "SELECT @ExpressionToSearch = CASE is_percent_growth WHEN 1 THEN CONVERT(VARCHAR(10),growth) +'%' ELSE Convert(VARCHAR(10),growth*8) +' KB' END" + "\n"
+                            + "FROM sys.master_files" + "\n"
+                            + "WHERE  name = @DBName and[physical_name] like '%.mdf'" + "\n"
+                            + "print @ExpressionToSearch" + "\n"
+                            + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "\n"
+                            + "    INSERT INTO[#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Growth','Fix in size')" + "\n"
+                            + "ELSE" + "\n"
+                            + "    INSERT INTO[#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Growth','In percent')" + "\n"
+
+                            //-- Auto Create Statistics
+                            + "INSERT INTO[#Values] ([ProcessInfo], [Text])" + "\n"
+                            + "SELECT 'Auto Create Statistics', [is_auto_create_stats_on] FROM sys.databases WHERE name = @DBName" + "\n"
+
+                            //-- Auto Update Statistics
+                            + "INSERT INTO[#Values] ([ProcessInfo], [Text])" + "\n"
+                            + "SELECT 'Auto Update Statistics', [is_auto_update_stats_on] FROM sys.databases WHERE name = @DBName" + "\n"
+
+                            //-- Auto Shrink
+                            + "INSERT INTO[#Values] ([ProcessInfo], [Text])" + "\n"
+                            + "SELECT 'Auto Shrink', [is_auto_shrink_on] FROM sys.databases WHERE name = @DBName" + "\n"
+
+            + "\nSELECT * FROM [#Values];";
 
             connection = new SqlConnection(connectionString);
 
