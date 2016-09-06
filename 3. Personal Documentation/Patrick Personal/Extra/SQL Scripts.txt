@@ -1,25 +1,54 @@
+DECLARE @ExpressionToSearch VARCHAR(200)
+DECLARE  @ExpressionToFind VARCHAR(200)
+DECLARE @rc int
+DECLARE @dir nvarchar(4000)
+
 IF OBJECT_ID('tempdb..#Values') IS NOT NULL DROP TABLE #Values
 
 CREATE TABLE [dbo].[#Values]
 ( [ProcessInfo] VARCHAR(50) NULL,
  [Text] VARCHAR(MAX) NULL) ;
+ 
 
 
 ------------- SQL Server Instance 
+
 
 INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('HostName',HOST_NAME())
 
 INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('InstanceName',CONVERT(VARCHAR(MAX),SERVERPROPERTY('InstanceName')))
 
+
+-- SQL Server Instance Installation Directory
+
+exec @rc = master.dbo.xp_instance_regread
+      N'HKEY_LOCAL_MACHINE',
+      N'Software\Microsoft\MSSQLServer\Setup',
+      N'SQLPath', 
+      @dir output, 'no_output'
+
+SET @ExpressionToFind = 'C:\Program Files\'
+
+SELECT @ExpressionToSearch = @dir
+
+IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Installation Directory','System Drive')
+ELSE
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Installation Directory','Doesn''t use system drive')
+
+
+-- SQL Server Version and Service Pack
+
+INSERT INTO [#Values] ([ProcessInfo], [Text])
+    SELECT 'SQLVersion', SUBSTRING(@@VERSION, 1, CHARINDEX('-', @@VERSION) - 1)
+        + CONVERT(VARCHAR(100), SERVERPROPERTY('edition'))
+    AS 'Server Version';
+
 INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductLevel',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductLevel')))
 
 INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductVersion',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductVersion')))
 
-INSERT INTO [#Values] ([ProcessInfo], [Text]) 
 
-    SELECT 'SQLVersion', SUBSTRING(@@VERSION, 1, CHARINDEX('-', @@VERSION) - 1)
-        + CONVERT(VARCHAR(100), SERVERPROPERTY('edition'))
-    AS 'Server Version';
 
 
 -- Max DOP
@@ -48,9 +77,6 @@ WHERE name like '%server memory%'
 
 
 -- Trace Flags
-
-DECLARE @ExpressionToSearch VARCHAR(200)
-DECLARE  @ExpressionToFind VARCHAR(200)
 
 -- Command will create the temporary table in tempdb
 
@@ -186,7 +212,7 @@ SELECT @ExpressionToSearch = [filename] FROM #DataFile where [filename] like '%.
 IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'
     INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Location','System Drive')
 ELSE
-    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Location','Datadile doesn''t use system drive')
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Location','Datafile doesn''t use system drive')
 
 
 SELECT @ExpressionToSearch = [filename] FROM #DataFile where [filename] like '%.ldf'
@@ -194,7 +220,7 @@ SELECT @ExpressionToSearch = [filename] FROM #DataFile where [filename] like '%.
 IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'
     INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Logfile Location','System Drive')
 ELSE
-    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Logfile Location','Datadile doesn''t use system drive')
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Logfile Location','Logfile doesn''t use system drive')
 
 
 -- Recovery Model
