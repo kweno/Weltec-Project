@@ -8,16 +8,20 @@
     <ProcessInfo>InstanceName</ProcessInfo>
   </Table>
   <Table>
+    <ProcessInfo>Installation Directory</ProcessInfo>
+    <Text>System Drive</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>SQLVersion</ProcessInfo>
+    <Text>Microsoft SQL Server 2016 (RTM) Express Edition (64-bit)</Text>
+  </Table>
+  <Table>
     <ProcessInfo>ProductLevel</ProcessInfo>
     <Text>RTM</Text>
   </Table>
   <Table>
     <ProcessInfo>ProductVersion</ProcessInfo>
     <Text>13.0.1601.5</Text>
-  </Table>
-  <Table>
-    <ProcessInfo>SQLVersion</ProcessInfo>
-    <Text>Microsoft SQL Server 2016 (RTM) Express Edition (64-bit)</Text>
   </Table>
   <Table>
     <ProcessInfo>Max Degree Of Parallelism</ProcessInfo>
@@ -94,5 +98,17 @@
   <Table>
     <ProcessInfo>Auto Shrink</ProcessInfo>
     <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Last Full Backup</ProcessInfo>
+    <Text>5</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>SA Login</ProcessInfo>
+    <Text>Does not have a blank password</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>NT AUTHORITY\SYSTEM</ProcessInfo>
+    <Text>Does have a access</Text>
   </Table>
 </NewDataSet>

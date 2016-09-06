@@ -147,195 +147,6 @@ namespace ClientApplication
             //"User id=test;" +
             //"Password=test;";
 
-            sql = "IF OBJECT_ID('tempdb..#Values') IS NOT NULL DROP TABLE #Values" + "\n"
-                    + "CREATE TABLE [dbo].[#Values]" + "\n"
-                    + "( [ProcessInfo] VARCHAR(50) NULL," + "\n"
-                    + " [Text] VARCHAR(MAX) NULL) ;"
-
-                    // ------------- SQL Server Instance 
-
-                        // 1. Installation 
-
-                            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('HostName',HOST_NAME())" + "\n"
-                            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('InstanceName',CONVERT(VARCHAR(MAX),SERVERPROPERTY('InstanceName')))" + "\n"
-                            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductLevel',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductLevel')))" + "\n"
-                            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductVersion',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductVersion')))" + "\n"
-                            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
-                            + "    SELECT 'SQLVersion', SUBSTRING(@@VERSION, 1, CHARINDEX('-', @@VERSION) - 1)" + "\n"
-                            + "        + CONVERT(VARCHAR(100), SERVERPROPERTY('edition'))" + "\n"
-                            + "    AS 'Server Version';" + "\n"
-
-                        // 2. Configuration 
-
-                            // -- Max DOP
-                            + "IF OBJECT_ID('tempdb..#MaxDOP') IS NOT NULL DROP TABLE #MaxDOP" + "\n"
-                            + "CREATE TABLE [dbo].[#MaxDOP] (NAME VARCHAR(255), minimum INT, maximum INT, config_value INT, run_value INT)" + "\n"
-                            + "EXEC [sp_configure] 'show advanced options', 1;" + "\n"
-                            + "RECONFIGURE;" + "\n"
-                            + "INSERT INTO [#MaxDOP]" + "\n"
-                            + "EXEC [sp_configure] 'max degree of parallelism'" + "\n"
-                            + "EXEC [sp_configure] 'show advanced options', 0;" + "\n"
-                            + "RECONFIGURE;" + "\n"
-                            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) SELECT 'Max Degree Of Parallelism',run_value FROM #MaxDOP WHERE name='max degree of parallelism'" + "\n"
-
-                            // -- Memory
-                            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
-                            + "SELECT [description], CONVERT(VARCHAR(50),value_in_use) FROM sys.configurations" + "\n"
-                            + "WHERE name like '%server memory%'" + "\n"
-
-                            // -- Trace Flags
-                            + "DECLARE @ExpressionToSearch VARCHAR(200)" + "\n"
-                            + "DECLARE  @ExpressionToFind VARCHAR(200)" + "\n"
-
-                            // -- Command will create the temporary table in tempdb
-                            + "IF OBJECT_ID('tempdb..#TmpErrorLog') IS NOT NULL DROP TABLE #TmpErrorLog" + "\n"
-                            + "CREATE TABLE [dbo].[#TmpErrorLog]" + "\n"
-                            + "([LogDate] DATETIME NULL," + "\n"
-                            + " [ProcessInfo] VARCHAR(20) NULL," + "\n"
-                            + " [Text] VARCHAR(MAX) NULL ) ;" + "\n"
-
-                            // -- Command will insert the errorlog data into temporary table
-                            + "INSERT INTO #TmpErrorLog ([LogDate], [ProcessInfo], [Text])" + "\n"
-                            + "EXEC[master].[dbo].[xp_readerrorlog] 0, 1, N'DBCC TRACEON';" + "\n"
-
-                            // -- retrieves the data from temporary table
-                            + "SET @ExpressionToFind = 'DBCC TRACEON 2371'" + "\n"
-                            + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog" + "\n"
-                            + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "\n"
-                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 2371','1')" + "\n"
-                            + "ELSE" + "\n"
-                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 2371','0')" + "\n"
-                            + "SET @ExpressionToFind = 'DBCC TRACEON 1117'" + "\n"
-                            + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog" + "\n"
-                            + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "\n"
-                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1117','1')" + "\n"
-                            + "ELSE" + "\n"
-                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1117','0')" + "\n"
-                            + "SET @ExpressionToFind = 'DBCC TRACEON 1118'" + "\n"
-                            + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog" + "\n"
-                            + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "\n"
-                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1118','1')" + "\n"
-                            + "ELSE" + "\n"
-                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1118','0')" + "\n"
-                    
-                            // -- Default index fill factor
-                            + "IF OBJECT_ID('tempdb..#Fill') IS NOT NULL DROP TABLE #Fill" + "\n"
-                            + "CREATE TABLE [dbo].[#Fill] (NAME VARCHAR(255), minimum INT, maximum INT, config_value INT, run_value INT)" + "\n"
-                            + "EXEC [sp_configure] 'show advanced options', 1;" + "\n"
-                            + "RECONFIGURE;" + "\n"
-                            + "INSERT INTO [#Fill]" + "\n"
-                            + "EXEC [sp_configure] 'fill factor (%)'" + "\n"
-                            + "EXEC [sp_configure] 'show advanced options', 0;" + "\n"
-                            + "RECONFIGURE;" + "\n"
-                            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) SELECT 'Fill Factor Values in (%)',run_value FROM #Fill WHERE name='fill factor (%)'" + "\n"
-
-                        // 3. Security
-                    
-                            // -- Server authentication
-                            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
-                            + "SELECT 'SQL Server Authentication Mode', CASE SERVERPROPERTY('IsIntegratedSecurityOnly')" + "\n"
-                            + "WHEN 1 THEN 'Windows Authentication'" + "\n"
-                            + "WHEN 0 THEN 'Windows and SQL Server Authentication'" + "\n"
-                            + "END as [Authentication Mode]" + "\n"
-
-                            // -- SQL Server Network Port
-                            + "IF OBJECT_ID('tempdb..#TmpErrorLogNetworkPort') IS NOT NULL DROP TABLE #TmpErrorLogNetworkPort" + "\n"
-                            + "CREATE TABLE[dbo].[#TmpErrorLogNetworkPort]" + "\n"
-                            + "([LogDate] DATETIME NULL," + "\n"
-                            + " [ProcessInfo] VARCHAR(20) NULL," + "\n"
-                            + " [Text] VARCHAR(MAX) NULL ) ;" + "\n"
-
-                            // --Command will insert the errorlog data into temporary table
-                            + "INSERT INTO #TmpErrorLogNetworkPort ([LogDate], [ProcessInfo], [Text])" + "\n"
-                            + "EXEC[master].[dbo].[xp_readerrorlog] 0, 1, N'Server is listening on';" + "\n"
-
-                            // --retrieves the data from temporary table
-                            + "SET @ExpressionToFind = '1433'" + "\n"
-                            + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLogNetworkPort where text like '%any%' and text like '%<ipv4>%' and text like '%1433%' and ProcessInfo = 'Server'" + "\n"
-                            + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "\n"
-                            + "    INSERT INTO[#Values] ([ProcessInfo], [Text]) VALUES ('SQL Port','1433')" + "\n"
-                            + "ELSE" + "\n"
-                            + "    INSERT INTO[#Values] ([ProcessInfo], [Text]) VALUES ('SQL Port','SQL Server doesn''t use default port')" + "\n"
-
-                    //----- SQL Server Database 
-
-                        // 1. Implemetation 
-
-                            //-- DataFiles 
-                            + "DECLARE @DBName VARCHAR(200);" + "\n"
-                            + "declare @sql varchar(200);" + "\n"
-                            + "SET @DBName = 'EVALUATOR'" + "\n"
-                            + "SELECT @sql = 'USE [' + @DBName + ']'" + "\n"
-                            + "EXEC sp_sqlexec @Sql" + "\n"
-                            + "IF OBJECT_ID('tempdb..#DataFile') IS NOT NULL DROP TABLE #DataFile" + "\n"
-                            + "CREATE TABLE [dbo].[#DataFile]" + "\n"
-                            + "	([name] VARCHAR(200) NULL," + "\n"
-                            + "	[fileid] int NULL," + "\n"
-                            + "	[filename] VARCHAR(max) NULL," + "\n"
-                            + "	[filegroup] VARCHAR(50) NULL," + "\n"
-                            + "	[size] VARCHAR(50) NULL," + "\n"
-                            + "	[maxsize] VARCHAR(50) NULL," + "\n"
-                            + "	[growth] VARCHAR(50) NULL," + "\n"
-                            + "	[usage] VARCHAR(50) NULL) ;" + "\n"
-
-                            //-- Command will insert the errorlog data into temporary table
-                            + "INSERT INTO #DataFile ([name], [fileid], [filename], [filegroup], [size], [maxsize], [growth], [usage])" + "\n"
-                            + "EXEC [sp_helpfile]" + "\n"
-                            + "SET @ExpressionToFind = 'C:\\Program Files\\'" + "\n"
-                            + "SELECT @ExpressionToSearch = [filename] FROM #DataFile where [filename] like '%.mdf'" + "\n"
-                            + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "\n"
-                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Location','System Drive')" + "\n"
-                            + "ELSE" + "\n"
-                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Location','Datadile doesn''t use system drive')" + "\n"
-                            + "SELECT @ExpressionToSearch = [filename] FROM #DataFile where [filename] like '%.ldf'" + "\n"
-                            + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "\n"
-                            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Logfile Location','System Drive')" + "\n"
-                            + "ELSE" + "\n"
-                            + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Logfile Location','Datadile doesn''t use system drive')" + "\n"
-
-                        // 2. Configuration Options
-
-                            //-- Recovery Model
-                            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
-                            + "SELECT 'Recovery Model' , recovery_model_desc FROM sys.databases WHERE name = @DBName" + "\n"
-
-                            //-- Compatibility Level
-                            + "INSERT INTO[#Values] ([ProcessInfo], [Text])" + "\n"
-                            + "SELECT 'Compatibility Level', [compatibility_level]" + "\n"
-                            + "        FROM sys.databases WHERE name = @DBName" + "\n"
-
-                            //-- Read Committed Snapshot Isolation
-                            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
-                            + "SELECT 'Snapshot Isolation', [snapshot_isolation_state_desc] FROM sys.databases WHERE name = @DBName" + "\n"
-                            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
-                            + "SELECT 'Read Committed Snapshot Isolation', [is_read_committed_snapshot_on] FROM sys.databases WHERE name = @DBName" + "\n"
-
-                            //-- Database Auto growth
-                            + "SET @ExpressionToFind = 'KB'" + "\n"
-                            + "SELECT @ExpressionToSearch = CASE is_percent_growth WHEN 1 THEN CONVERT(VARCHAR(10),growth) +'%' ELSE Convert(VARCHAR(10),growth*8) +' KB' END" + "\n"
-                            + "FROM sys.master_files" + "\n"
-                            + "WHERE  name = @DBName and[physical_name] like '%.mdf'" + "\n"
-                            + "print @ExpressionToSearch" + "\n"
-                            + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "\n"
-                            + "    INSERT INTO[#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Growth','Fix in size')" + "\n"
-                            + "ELSE" + "\n"
-                            + "    INSERT INTO[#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Growth','In percent')" + "\n"
-
-                            //-- Auto Create Statistics
-                            + "INSERT INTO[#Values] ([ProcessInfo], [Text])" + "\n"
-                            + "SELECT 'Auto Create Statistics', [is_auto_create_stats_on] FROM sys.databases WHERE name = @DBName" + "\n"
-
-                            //-- Auto Update Statistics
-                            + "INSERT INTO[#Values] ([ProcessInfo], [Text])" + "\n"
-                            + "SELECT 'Auto Update Statistics', [is_auto_update_stats_on] FROM sys.databases WHERE name = @DBName" + "\n"
-
-                            //-- Auto Shrink
-                            + "INSERT INTO[#Values] ([ProcessInfo], [Text])" + "\n"
-                            + "SELECT 'Auto Shrink', [is_auto_shrink_on] FROM sys.databases WHERE name = @DBName" + "\n"
-
-            + "\nSELECT * FROM [#Values];";
-
-
             String varname1 = "";
             varname1 = varname1 + "DECLARE @ExpressionToSearch VARCHAR(200)";
 
@@ -823,86 +634,85 @@ namespace ClientApplication
             varname177 = varname177 + "SELECT * FROM [#Values]";
 
             // http://www.dpriver.com/pp/sqlformat.htm
+            sql = varname1 + Environment.NewLine +
+                    varname11 + Environment.NewLine +
+                    varname12 + Environment.NewLine +
+                    varname13 + Environment.NewLine +
+                    varname14 + Environment.NewLine +
+                    varname15 + Environment.NewLine +
+                    varname16 + Environment.NewLine +
+                    varname17 + Environment.NewLine +
+                    varname18 + Environment.NewLine +
+                    varname19 + Environment.NewLine +
+                    varname110 + Environment.NewLine +
+                    varname111 + Environment.NewLine +
+                    varname112 + Environment.NewLine +
+                    varname113 + Environment.NewLine +
+                    varname114 + Environment.NewLine +
+                    varname115 + Environment.NewLine +
+                    varname116 + Environment.NewLine +
+                    varname117 + Environment.NewLine +
+                    varname118 + Environment.NewLine +
+                    varname119 + Environment.NewLine +
+                    varname120 + Environment.NewLine +
+                    varname121 + Environment.NewLine +
+                    varname122 + Environment.NewLine +
+                    varname123 + Environment.NewLine +
+                    varname124 + Environment.NewLine +
+                    varname125 + Environment.NewLine +
+                    varname126 + Environment.NewLine +
+                    varname127 + Environment.NewLine +
+                    varname128 + Environment.NewLine +
+                    varname129 + Environment.NewLine +
+                    varname130 + Environment.NewLine +
+                    varname131 + Environment.NewLine +
+                    varname132 + Environment.NewLine +
+                    varname133 + Environment.NewLine +
+                    varname134 + Environment.NewLine +
+                    varname135 + Environment.NewLine +
+                    varname136 + Environment.NewLine +
+                    varname137 + Environment.NewLine +
+                    varname138 + Environment.NewLine +
+                    varname139 + Environment.NewLine +
+                    varname140 + Environment.NewLine +
+                    varname141 + Environment.NewLine +
+                    varname142 + Environment.NewLine +
+                    varname143 + Environment.NewLine +
+                    varname144 + Environment.NewLine +
+                    varname145 + Environment.NewLine +
+                    varname146 + Environment.NewLine +
+                    varname147 + Environment.NewLine +
+                    varname148 + Environment.NewLine +
+                    varname149 + Environment.NewLine +
+                    varname150 + Environment.NewLine +
+                    varname151 + Environment.NewLine +
+                    varname152 + Environment.NewLine +
+                    varname153 + Environment.NewLine +
+                    varname154 + Environment.NewLine +
+                    varname155 + Environment.NewLine +
+                    varname156 + Environment.NewLine +
+                    varname157 + Environment.NewLine +
+                    varname158 + Environment.NewLine +
+                    varname159 + Environment.NewLine +
+                    varname160 + Environment.NewLine +
+                    varname161 + Environment.NewLine +
+                    varname162 + Environment.NewLine +
+                    varname163 + Environment.NewLine +
+                    varname164 + Environment.NewLine +
+                    varname165 + Environment.NewLine +
+                    varname166 + Environment.NewLine +
+                    varname167 + Environment.NewLine +
+                    varname168 + Environment.NewLine +
+                    varname169 + Environment.NewLine +
+                    varname170 + Environment.NewLine +
+                    varname171 + Environment.NewLine +
+                    varname172 + Environment.NewLine +
+                    varname173 + Environment.NewLine +
+                    varname174 + Environment.NewLine +
+                    varname175 + Environment.NewLine +
+                    varname176 + Environment.NewLine +
+                    varname177 + Environment.NewLine;
 
-            /*
-            sql = varname1 +
-            varname12 +
-            varname13 +
-            varname14 +
-            varname15 +
-            varname16 +
-            varname17 +
-            varname18 +
-            varname19 +
-            varname110 +
-            varname111 +
-            varname112 +
-            varname113 +
-            varname114 +
-            varname115 +
-            varname116 +
-            varname117 +
-            varname118 +
-            varname119 +
-            varname120 +
-            varname121 +
-            varname122 +
-            varname123 +
-            varname124 +
-            varname125 +
-            varname126 +
-            varname127 +
-            varname128 +
-            varname129 +
-            varname130 +
-            varname131 +
-            varname132 +
-            varname133 +
-            varname134 +
-            varname135 +
-            varname136 +
-            varname137 +
-            varname138 +
-            varname139 +
-            varname140 +
-            varname141 +
-            varname142 +
-            varname143 +
-            varname144 +
-            varname145 +
-            varname146 +
-            varname147 +
-            varname148 +
-            varname149 +
-            varname150 +
-            varname151 +
-            varname152 +
-            varname153 +
-            varname154 +
-            varname155 +
-            varname156 +
-            varname157 +
-            varname158 +
-            varname159 +
-            varname160 +
-            varname161 +
-            varname162 +
-            varname163 +
-            varname164 +
-            varname165 +
-            varname166 +
-            varname167 +
-            varname168 +
-            varname169 +
-            varname170 +
-            varname171 +
-            varname172 +
-            varname173 +
-            varname174 +
-            varname175 +
-            varname176 +
-            varname177;
-            */
 
             connection = new SqlConnection(connectionString);
 
@@ -914,7 +724,7 @@ namespace ClientApplication
                 dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    MessageBox.Show(dataReader.GetValue(0) + " " + dataReader.GetValue(1));
+                    //MessageBox.Show(dataReader.GetValue(0) + " " + dataReader.GetValue(1));
                 }
                 dataReader.Close();
                 command.Dispose();
