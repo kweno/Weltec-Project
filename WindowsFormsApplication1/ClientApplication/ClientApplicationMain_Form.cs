@@ -15,6 +15,7 @@ namespace ClientApplication
         private string EVALUATOR_KEY = "AAECAwQFBgcICQoLDA0ODw==";
         private string SERVER = "";
         private bool SERVER_OK = false;
+        private byte[] ENCYRPTED = null;
 
         /// The backgroundworker object on which the time consuming operation shall be executed
         /// http://www.codeproject.com/Articles/99143/BackgroundWorker-Class-Sample-for-Beginners
@@ -112,18 +113,122 @@ namespace ClientApplication
 
         private void Start_Button_Click(object sender, EventArgs e)
         {
-            var parameterValues = "";
-            var encryptedParameterValues = "";
-            byte[] encrypted = null;
+            //Start the async operation here
+            ClientApplication_BackgroundWorker.RunWorkerAsync();
 
             Start_Button.Enabled = false;
             Server_ComboBox.Enabled = false;
-            //Connect_Button.Enabled = false;
             DatabaseName_CheckBox.Enabled = false;
             Database_ComboBox.Enabled = false;
 
-            //Start the async operation here
-            ClientApplication_BackgroundWorker.RunWorkerAsync();
+            
+        }
+
+        private void populateServerDropdown()
+        {
+            // https://msdn.microsoft.com/en-us/library/a6t1z9x2%28v=vs.110%29.aspx
+            // Retrieve the enumerator instance and then the data.
+            //var instance = SqlDataSourceEnumerator.Instance;
+            //var serverTable = instance.GetDataSources();
+            //var listOfServers = (from DataRow dr in serverTable.Rows select dr["ServerName"].ToString()).ToList();
+            //var bindingSource1 = new BindingSource();
+            //bindingSource1.DataSource = listOfServers;
+            //comboBox1.DataSource = bindingSource1;
+
+            // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
+            // https://msdn.microsoft.com/en-us/library/a6t1z9x2%28v=vs.110%29.aspx
+            DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
+            for (int i = 0; i < servers.Rows.Count; i++)
+            {
+                if ((servers.Rows[i]["InstanceName"] as string) != null)
+                    Server_ComboBox.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
+                else
+                    Server_ComboBox.Items.Add(servers.Rows[i]["ServerName"]);
+            }
+        }
+
+        private void populateDatabaseDropdown()
+        {
+            Database_ComboBox.Items.Clear();
+            // http://stackoverflow.com/questions/12862604/c-sharp-connect-to-database-and-list-the-databases
+            var connectionString = "Data Source=" + Server_ComboBox.Text + ";" +
+            //"Initial Catalog=test;" +
+            "Integrated Security=SSPI;";
+
+            using (var con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                DataTable databases = con.GetSchema("Databases");
+                foreach (DataRow database in databases.Rows)
+                {
+                    string databaseName = database.Field<String>("database_name");
+                    Database_ComboBox.Items.Add(databaseName);
+                }
+            }
+        }
+
+        /// On completed do the appropriate task
+        void ClientApplication_BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.FileName = "SQLServer.dbe";
+            saveFileDialog1.Filter = "DBE File|*.dbe";
+            saveFileDialog1.Title = "Save a DBE File";
+            saveFileDialog1.ShowDialog();
+            // http://stackoverflow.com/questions/6397235/write-bytes-to-file
+            ByteArrayToFile(saveFileDialog1.FileName, ENCYRPTED);
+
+            Start_Button.Enabled = true;
+            Start_Button.Enabled = true;
+            Server_ComboBox.Enabled = true;
+            //Connect_Button.Enabled = true;
+            DatabaseName_CheckBox.Enabled = true;
+            Database_ComboBox.Enabled = true;
+        }
+
+        /// Notification is performed here to the progress bar
+        void ClientApplication_BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //Here you play with the main UI thread
+            if (e.ProgressPercentage == 1)
+            {
+                InstanceMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+            }
+            else if (e.ProgressPercentage == 10)
+            {
+                InstanceProgress_PictureBox1.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+            }
+            else if (e.ProgressPercentage == 14)
+            {
+                InstanceProgress_PictureBox1.Image = global::ClientApplication.Properties.Resources.success;
+            }
+            else if (e.ProgressPercentage == 15)
+            {
+                InstanceProgress_PictureBox2.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+            }
+            else if (e.ProgressPercentage == 28)
+            {
+                InstanceProgress_PictureBox2.Image = global::ClientApplication.Properties.Resources.success;
+            }
+            else if (e.ProgressPercentage == 29)
+            {
+                InstanceProgress_PictureBox3.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+            }
+            else if (e.ProgressPercentage == 42)
+            {
+                InstanceProgress_PictureBox3.Image = global::ClientApplication.Properties.Resources.success;
+            }
+            else if (e.ProgressPercentage == 43)
+            {
+                InstanceMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.success;
+            }
+        }
+
+        /// Time consuming operations go here </br>
+        /// i.e. Database operations,Reporting
+        void ClientApplication_BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            ENCYRPTED = null;
 
             string connectionString = null;
             SqlConnection connection;
@@ -133,12 +238,12 @@ namespace ClientApplication
 
             // http://stackoverflow.com/questions/15631602/how-to-set-sql-server-connection-string
             connectionString =
-            "Data Source=" + Server_ComboBox.Text + ";" +
+            "Data Source=" + SERVER + ";" +
             "Initial Catalog=test;" +
             "User id=test;" +
             "Password=test;";
             connectionString =
-            "Data Source=" + Server_ComboBox.Text + ";" +
+            "Data Source=" + SERVER + ";" +
             //"Initial Catalog=test;" +
             "Integrated Security=SSPI;";
             //connectionString =
@@ -745,125 +850,22 @@ namespace ClientApplication
 
             // http://stackoverflow.com/questions/963870/dataset-writexml-to-string
             StringWriter sw = new StringWriter();
-            ds.WriteXml(@"SQLServer.xml");
+            ds.WriteXml(@"SQLServer.xml"); // COMMENT OUT THIS LINE AFTER TESTING
             ds.WriteXml(sw);
             string result = sw.ToString();
-
+            
             try
             {
                 // Encrypt the string to an array of bytes.
-                encrypted = EncryptStringToBytes_Aes(result);
+                ENCYRPTED = EncryptStringToBytes_Aes(result);
             }
             catch (Exception exception)
             {
                 Console.WriteLine("Error: {0}", exception.Message);
             }
+            
 
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.FileName = "SQLServer.dbe";
-            saveFileDialog1.Filter = "DBE File|*.dbe";
-            saveFileDialog1.Title = "Save a DBE File";
-            saveFileDialog1.ShowDialog();
-            // http://stackoverflow.com/questions/6397235/write-bytes-to-file
-            ByteArrayToFile(saveFileDialog1.FileName, encrypted);
-        }
-
-        private void populateServerDropdown()
-        {
-            // https://msdn.microsoft.com/en-us/library/a6t1z9x2%28v=vs.110%29.aspx
-            // Retrieve the enumerator instance and then the data.
-            //var instance = SqlDataSourceEnumerator.Instance;
-            //var serverTable = instance.GetDataSources();
-            //var listOfServers = (from DataRow dr in serverTable.Rows select dr["ServerName"].ToString()).ToList();
-            //var bindingSource1 = new BindingSource();
-            //bindingSource1.DataSource = listOfServers;
-            //comboBox1.DataSource = bindingSource1;
-
-            // http://stackoverflow.com/questions/10781334/how-to-get-list-of-available-sql-servers-using-c-sharp-code
-            // https://msdn.microsoft.com/en-us/library/a6t1z9x2%28v=vs.110%29.aspx
-            DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
-            for (int i = 0; i < servers.Rows.Count; i++)
-            {
-                if ((servers.Rows[i]["InstanceName"] as string) != null)
-                    Server_ComboBox.Items.Add(servers.Rows[i]["ServerName"] + "\\" + servers.Rows[i]["InstanceName"]);
-                else
-                    Server_ComboBox.Items.Add(servers.Rows[i]["ServerName"]);
-            }
-        }
-
-        private void populateDatabaseDropdown()
-        {
-            Database_ComboBox.Items.Clear();
-            // http://stackoverflow.com/questions/12862604/c-sharp-connect-to-database-and-list-the-databases
-            var connectionString = "Data Source=" + Server_ComboBox.Text + ";" +
-            //"Initial Catalog=test;" +
-            "Integrated Security=SSPI;";
-
-            using (var con = new SqlConnection(connectionString))
-            {
-                con.Open();
-                DataTable databases = con.GetSchema("Databases");
-                foreach (DataRow database in databases.Rows)
-                {
-                    string databaseName = database.Field<String>("database_name");
-                    Database_ComboBox.Items.Add(databaseName);
-                }
-            }
-        }
-
-        /// On completed do the appropriate task
-        void ClientApplication_BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            Start_Button.Enabled = true;
-            Start_Button.Enabled = true;
-            Server_ComboBox.Enabled = true;
-            //Connect_Button.Enabled = true;
-            DatabaseName_CheckBox.Enabled = true;
-            Database_ComboBox.Enabled = true;
-        }
-
-        /// Notification is performed here to the progress bar
-        void ClientApplication_BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            //Here you play with the main UI thread
-            if (e.ProgressPercentage == 1)
-            {
-                InstanceMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
-            }
-            else if (e.ProgressPercentage == 10)
-            {
-                InstanceProgress_PictureBox1.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
-            }
-            else if (e.ProgressPercentage == 14)
-            {
-                InstanceProgress_PictureBox1.Image = global::ClientApplication.Properties.Resources.success;
-            }
-            else if (e.ProgressPercentage == 15)
-            {
-                InstanceProgress_PictureBox2.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
-            }
-            else if (e.ProgressPercentage == 28)
-            {
-                InstanceProgress_PictureBox2.Image = global::ClientApplication.Properties.Resources.success;
-            }
-            else if (e.ProgressPercentage == 29)
-            {
-                InstanceProgress_PictureBox3.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
-            }
-            else if (e.ProgressPercentage == 42)
-            {
-                InstanceProgress_PictureBox3.Image = global::ClientApplication.Properties.Resources.success;
-            }
-            else if (e.ProgressPercentage == 43)
-            {
-                InstanceMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.success;
-            }
-        }
-
-        /// Time consuming operations go here </br>
-        /// i.e. Database operations,Reporting
-        void ClientApplication_BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
+            
             //NOTE : Never play with the UI thread here...
             //time consuming operation
             for (int i = 0; i < 50; i++)
