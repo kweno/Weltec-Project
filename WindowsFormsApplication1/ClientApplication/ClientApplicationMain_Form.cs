@@ -822,6 +822,8 @@ namespace ClientApplication
             String varname177 = "";
             varname177 = varname177 + "SELECT * FROM [#Values]";
 
+            // http://www.dpriver.com/pp/sqlformat.htm
+
             /*
             sql = varname1 +
             varname12 +
