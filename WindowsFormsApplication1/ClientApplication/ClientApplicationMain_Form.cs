@@ -147,30 +147,80 @@ namespace ClientApplication
             //"User id=test;" +
             //"Password=test;";
 
-            sql = "USE [MASTER];" + "\n"
-            + "CREATE TABLE [dbo].[#Values]" + "\n"
-            + "( [ProcessInfo] VARCHAR(50) NULL," + "\n"
-            + " [Text] VARCHAR(MAX) NULL) ;" + "\n"
-            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('HostName',HOST_NAME())" + "\n"
-            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('InstanceName',CONVERT(VARCHAR(MAX),SERVERPROPERTY('InstanceName')))" + "\n"
-            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductLevel',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductLevel')))" + "\n"
-            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductVersion',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductVersion')))" + "\n"
-            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
-            + "    SELECT 'SQLVersion', SUBSTRING(@@VERSION, 1, CHARINDEX('-', @@VERSION) - 1)" + "\n"
-            + "       + CONVERT(VARCHAR(100), SERVERPROPERTY('edition'))" + "\n"
-            + "    AS 'Server Version';" + "\n"
-            + "CREATE TABLE #MaxDOP (NAME VARCHAR(255), minimum INT, maximum INT, config_value INT, run_value INT)" + "\n"
-            + "EXEC [master].[dbo].[sp_configure] 'show advanced options', 1;" + "\n"
-            + "RECONFIGURE;" + "\n"
-            + "INSERT INTO #MaxDOP" + "\n"
-            + "EXEC sp_configure 'max degree of parallelism'" + "\n"
-            + "EXEC sp_configure 'show advanced options', 0;" + "\n"
-            + "RECONFIGURE;" + "\n"
-            + "INSERT INTO [#Values] ([ProcessInfo], [Text]) SELECT 'Max Degree Of Parallelism',run_value FROM #MaxDOP WHERE name='max degree of parallelism'" + "\n"
-            + "DROP TABLE #MaxDOP;" + "\n"
-            + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
-            + "SELECT [description], CONVERT(VARCHAR(50),value_in_use) FROM sys.configurations" + "\n"
-            + "WHERE name like '%server memory%';" + "\n"
+            sql = "IF OBJECT_ID('tempdb..#Values') IS NOT NULL DROP TABLE #Values" + "\n"
+                    + "CREATE TABLE [dbo].[#Values]" + "\n"
+                    + "( [ProcessInfo] VARCHAR(50) NULL," + "\n"
+                    + " [Text] VARCHAR(MAX) NULL) ;"
+
+                    // ------------- SQL Server Instance 
+
+                    // 1. Installation 
+
+                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('HostName',HOST_NAME())" + "\n"
+                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('InstanceName',CONVERT(VARCHAR(MAX),SERVERPROPERTY('InstanceName')))" + "\n"
+                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductLevel',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductLevel')))" + "\n"
+                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductVersion',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductVersion')))" + "\n"
+                    + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
+                    + "    SELECT 'SQLVersion', SUBSTRING(@@VERSION, 1, CHARINDEX('-', @@VERSION) - 1)" + "\n"
+                    + "        + CONVERT(VARCHAR(100), SERVERPROPERTY('edition'))" + "\n"
+                    + "    AS 'Server Version';" + "\n"
+
+                    // 2. Configuration 
+
+                    // -- Max DOP
+                    + "IF OBJECT_ID('tempdb..#MaxDOP') IS NOT NULL DROP TABLE #MaxDOP" + "\n"
+                    + "CREATE TABLE [dbo].[#MaxDOP] (NAME VARCHAR(255), minimum INT, maximum INT, config_value INT, run_value INT)" + "\n"
+                    + "EXEC [sp_configure] 'show advanced options', 1;" + "\n"
+                    + "RECONFIGURE;" + "\n"
+                    + "INSERT INTO [#MaxDOP]" + "\n"
+                    + "EXEC [sp_configure] 'max degree of parallelism'" + "\n"
+                    + "EXEC [sp_configure] 'show advanced options', 0;" + "\n"
+                    + "RECONFIGURE;" + "\n"
+                    + "INSERT INTO [#Values] ([ProcessInfo], [Text]) SELECT 'Max Degree Of Parallelism',run_value FROM #MaxDOP WHERE name='max degree of parallelism'" + "\n"
+
+                    // -- Memory
+                    + "INSERT INTO [#Values] ([ProcessInfo], [Text])" + "\n"
+                    + "SELECT [description], CONVERT(VARCHAR(50),value_in_use) FROM sys.configurations" + "\n"
+                    + "WHERE name like '%server memory%'" + "\n"
+
+                    // -- Trace Flags
+                    + "DECLARE @ExpressionToSearch VARCHAR(200)" + "\n"
+                    + "DECLARE  @ExpressionToFind VARCHAR(200)" + "\n"
+
+                    // -- Command will create the temporary table in tempdb
+                    + "IF OBJECT_ID('tempdb..#TmpErrorLog') IS NOT NULL DROP TABLE #TmpErrorLog" + "\n"
+                    + "CREATE TABLE [dbo].[#TmpErrorLog]" + "\n"
+                    + "([LogDate] DATETIME NULL," + "\n"
+                    + " [ProcessInfo] VARCHAR(20) NULL," + "\n"
+                    + " [Text] VARCHAR(MAX) NULL ) ;" + "\n"
+
+                    /*
+                    // -- Command will insert the errorlog data into temporary table
+                    + "INSERT INTO #TmpErrorLog ([LogDate], [ProcessInfo], [Text])" + "/n"
+                    + "EXEC[master].[dbo].[xp_readerrorlog] 0, 1, N'DBCC TRACEON';" + "/n"
+
+                    
+                    // -- retrieves the data from temporary table
+                    + "SET @ExpressionToFind = 'DBCC TRACEON 2371'" + "/n"
+                    + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog" + "/n"
+                    + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "/n"
+                    + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 2371','1')" + "/n"
+                    + "ELSE" + "/n"
+                    + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 2371','0')" + "/n"
+                    + "SET @ExpressionToFind = 'DBCC TRACEON 1117'" + "/n"
+                    + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog" + "/n"
+                    + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "/n"
+                    + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1117','1')" + "/n"
+                    + "ELSE" + "/n"
+                    + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1117','0')" + "/n"
+                    + "SET @ExpressionToFind = 'DBCC TRACEON 1118'" + "/n"
+                    + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog" + "/n"
+                    + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'" + "/n"
+                    + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1118','1')" + "/n"
+                    + "ELSE" + "/n"
+                    + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1118','0')" + "/n"
+                    */
+
             + "SELECT * FROM [#Values];";
 
             connection = new SqlConnection(connectionString);
@@ -183,7 +233,7 @@ namespace ClientApplication
                 dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    MessageBox.Show(dataReader.GetValue(0) + "");
+                    MessageBox.Show(dataReader.GetValue(0) + " " + dataReader.GetValue(1));
                 }
                 dataReader.Close();
                 command.Dispose();
