@@ -310,7 +310,7 @@ INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('SA Login','Does have a bl
 
 IF NOT EXISTS
 (
-SELECT name,* FROM syslogins WHERE name = 'NT AUTHORITY\SYSTEM' AND hasaccess = 1
+SELECT name,* FROM master..syslogins WHERE name = 'NT AUTHORITY\SYSTEM' AND hasaccess = 1
 )
 INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('NT AUTHORITY\SYSTEM','Does not have a access')
 ELSE
