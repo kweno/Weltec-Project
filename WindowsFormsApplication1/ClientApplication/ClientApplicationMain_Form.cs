@@ -335,6 +335,573 @@ namespace ClientApplication
 
             + "\nSELECT * FROM [#Values];";
 
+
+            String varname1 = "";
+            varname1 = varname1 + "DECLARE @ExpressionToSearch VARCHAR(200)";
+
+
+            String varname11 = "";
+            varname11 = varname11 + "DECLARE  @ExpressionToFind VARCHAR(200)";
+
+
+            String varname12 = "";
+            varname12 = varname12 + "DECLARE @rc int";
+
+
+            String varname13 = "";
+            varname13 = varname13 + "DECLARE @dir nvarchar(4000)";
+
+
+            String varname14 = "";
+            varname14 = varname14 + "IF OBJECT_ID('tempdb..#Values') IS NOT NULL DROP TABLE #Values";
+
+
+            String varname15 = "";
+            varname15 = varname15 + "CREATE TABLE [dbo].[#Values] " + "\n";
+            varname15 = varname15 + "( [ProcessInfo] VARCHAR(50) NULL, " + "\n";
+            varname15 = varname15 + " [Text] VARCHAR(MAX) NULL) ; " + "\n";
+            varname15 = varname15 + "  " + "\n";
+            varname15 = varname15 + " " + "\n";
+            varname15 = varname15 + " " + "\n";
+            varname15 = varname15 + "------------- SQL Server Instance ";
+
+
+            String varname16 = "";
+            varname16 = varname16 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('HostName',HOST_NAME())";
+
+
+            String varname17 = "";
+            varname17 = varname17 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('InstanceName',CONVERT(VARCHAR(MAX),SERVERPROPERTY('InstanceName'))) " + "\n";
+            varname17 = varname17 + " " + "\n";
+            varname17 = varname17 + " " + "\n";
+            varname17 = varname17 + " " + "\n";
+            varname17 = varname17 + " " + "\n";
+            varname17 = varname17 + "-- SQL Server Instance Installation Directory";
+
+
+            String varname18 = "";
+            varname18 = varname18 + "exec @rc = master.dbo.xp_instance_regread " + "\n";
+            varname18 = varname18 + "      N'HKEY_LOCAL_MACHINE', " + "\n";
+            varname18 = varname18 + "      N'Software\\Microsoft\\MSSQLServer\\Setup', " + "\n";
+            varname18 = varname18 + "      N'SQLPath', " + "\n";
+            varname18 = varname18 + "      @dir output, 'no_output'";
+
+
+            String varname19 = "";
+            varname19 = varname19 + "SET @ExpressionToFind = 'C:\\Program Files\\'";
+
+
+            String varname110 = "";
+            varname110 = varname110 + "SELECT @ExpressionToSearch = @dir";
+
+
+            String varname111 = "";
+            varname111 = varname111 + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%' " + "\n";
+            varname111 = varname111 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Installation Directory','System Drive') " + "\n";
+            varname111 = varname111 + "ELSE " + "\n";
+            varname111 = varname111 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Installation Directory','Doesn''t use system drive') " + "\n";
+            varname111 = varname111 + " " + "\n";
+            varname111 = varname111 + " " + "\n";
+            varname111 = varname111 + "-- SQL Server Version and Service Pack";
+
+
+            String varname112 = "";
+            varname112 = varname112 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) " + "\n";
+            varname112 = varname112 + "    SELECT 'SQLVersion', SUBSTRING(@@VERSION, 1, CHARINDEX('-', @@VERSION) - 1) " + "\n";
+            varname112 = varname112 + "        + CONVERT(VARCHAR(100), SERVERPROPERTY('edition')) " + "\n";
+            varname112 = varname112 + "    AS 'Server Version';";
+
+
+            String varname113 = "";
+            varname113 = varname113 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductLevel',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductLevel')))";
+
+
+            String varname114 = "";
+            varname114 = varname114 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductVersion',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductVersion'))) " + "\n";
+            varname114 = varname114 + " " + "\n";
+            varname114 = varname114 + " " + "\n";
+            varname114 = varname114 + " " + "\n";
+            varname114 = varname114 + " " + "\n";
+            varname114 = varname114 + "-- Max DOP";
+
+
+            String varname115 = "";
+            varname115 = varname115 + "IF OBJECT_ID('tempdb..#MaxDOP') IS NOT NULL DROP TABLE #MaxDOP";
+
+
+            String varname116 = "";
+            varname116 = varname116 + "CREATE TABLE [dbo].[#MaxDOP] (NAME VARCHAR(255), minimum INT, maximum INT, config_value INT, run_value INT)";
+
+
+            String varname117 = "";
+            varname117 = varname117 + "EXEC [sp_configure] 'show advanced options', 1;";
+
+
+            String varname118 = "";
+            varname118 = varname118 + "RECONFIGURE;";
+
+
+            String varname119 = "";
+            varname119 = varname119 + "INSERT INTO [#MaxDOP] " + "\n";
+            varname119 = varname119 + "EXEC [sp_configure] 'max degree of parallelism' " + "\n";
+            varname119 = varname119 + " " + "\n";
+            varname119 = varname119 + "EXEC [sp_configure] 'show advanced options', 0;";
+
+
+            String varname120 = "";
+            varname120 = varname120 + "RECONFIGURE;";
+
+
+            String varname121 = "";
+            varname121 = varname121 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) SELECT 'Max Degree Of Parallelism',run_value FROM #MaxDOP WHERE name='max degree of parallelism' " + "\n";
+            varname121 = varname121 + " " + "\n";
+            varname121 = varname121 + " " + "\n";
+            varname121 = varname121 + "-- Memory";
+
+
+            String varname122 = "";
+            varname122 = varname122 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) " + "\n";
+            varname122 = varname122 + "SELECT [description], CONVERT(VARCHAR(50),value_in_use) FROM sys.configurations " + "\n";
+            varname122 = varname122 + "WHERE name like '%server memory%' " + "\n";
+            varname122 = varname122 + " " + "\n";
+            varname122 = varname122 + " " + "\n";
+            varname122 = varname122 + "-- Trace Flags " + "\n";
+            varname122 = varname122 + " " + "\n";
+            varname122 = varname122 + " " + "\n";
+            varname122 = varname122 + " " + "\n";
+            varname122 = varname122 + " " + "\n";
+            varname122 = varname122 + "-- Command will create the temporary table in tempdb";
+
+
+            String varname123 = "";
+            varname123 = varname123 + "IF OBJECT_ID('tempdb..#TmpErrorLog') IS NOT NULL DROP TABLE #TmpErrorLog";
+
+
+            String varname124 = "";
+            varname124 = varname124 + "CREATE TABLE [dbo].[#TmpErrorLog] " + "\n";
+            varname124 = varname124 + "([LogDate] DATETIME NULL, " + "\n";
+            varname124 = varname124 + " [ProcessInfo] VARCHAR(20) NULL, " + "\n";
+            varname124 = varname124 + " [Text] VARCHAR(MAX) NULL ) ; " + "\n";
+            varname124 = varname124 + " " + "\n";
+            varname124 = varname124 + "-- Command will insert the errorlog data into temporary table";
+
+
+            String varname125 = "";
+            varname125 = varname125 + "INSERT INTO #TmpErrorLog ([LogDate], [ProcessInfo], [Text]) " + "\n";
+            varname125 = varname125 + "EXEC [master].[dbo].[xp_readerrorlog] 0, 1, N'DBCC TRACEON'; " + "\n";
+            varname125 = varname125 + " " + "\n";
+            varname125 = varname125 + "-- retrieves the data from temporary table";
+
+
+            String varname126 = "";
+            varname126 = varname126 + "SET @ExpressionToFind = 'DBCC TRACEON 2371'";
+
+
+            String varname127 = "";
+            varname127 = varname127 + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog";
+
+
+            String varname128 = "";
+            varname128 = varname128 + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%' " + "\n";
+            varname128 = varname128 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 2371','1') " + "\n";
+            varname128 = varname128 + "ELSE " + "\n";
+            varname128 = varname128 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 2371','0')";
+
+
+            String varname129 = "";
+            varname129 = varname129 + "SET @ExpressionToFind = 'DBCC TRACEON 1117'";
+
+
+            String varname130 = "";
+            varname130 = varname130 + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog";
+
+
+            String varname131 = "";
+            varname131 = varname131 + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%' " + "\n";
+            varname131 = varname131 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1117','1') " + "\n";
+            varname131 = varname131 + "ELSE " + "\n";
+            varname131 = varname131 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1117','0')";
+
+
+            String varname132 = "";
+            varname132 = varname132 + "SET @ExpressionToFind = 'DBCC TRACEON 1118'";
+
+
+            String varname133 = "";
+            varname133 = varname133 + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog";
+
+
+            String varname134 = "";
+            varname134 = varname134 + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%' " + "\n";
+            varname134 = varname134 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1118','1') " + "\n";
+            varname134 = varname134 + "ELSE " + "\n";
+            varname134 = varname134 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1118','0') " + "\n";
+            varname134 = varname134 + " " + "\n";
+            varname134 = varname134 + " " + "\n";
+            varname134 = varname134 + "-- Default index fill factor";
+
+
+            String varname135 = "";
+            varname135 = varname135 + "IF OBJECT_ID('tempdb..#Fill') IS NOT NULL DROP TABLE #Fill";
+
+
+            String varname136 = "";
+            varname136 = varname136 + "CREATE TABLE [dbo].[#Fill] (NAME VARCHAR(255), minimum INT, maximum INT, config_value INT, run_value INT)";
+
+
+            String varname137 = "";
+            varname137 = varname137 + "EXEC [sp_configure] 'show advanced options', 1;";
+
+
+            String varname138 = "";
+            varname138 = varname138 + "RECONFIGURE;";
+
+
+            String varname139 = "";
+            varname139 = varname139 + "INSERT INTO [#Fill] " + "\n";
+            varname139 = varname139 + "EXEC [sp_configure] 'fill factor (%)' " + "\n";
+            varname139 = varname139 + " " + "\n";
+            varname139 = varname139 + "EXEC [sp_configure] 'show advanced options', 0;";
+
+
+            String varname140 = "";
+            varname140 = varname140 + "RECONFIGURE;";
+
+
+            String varname141 = "";
+            varname141 = varname141 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) SELECT 'Fill Factor Values in (%)',run_value FROM #Fill WHERE name='fill factor (%)' " + "\n";
+            varname141 = varname141 + " " + "\n";
+            varname141 = varname141 + " " + "\n";
+            varname141 = varname141 + "-- Server authentication";
+
+
+            String varname142 = "";
+            varname142 = varname142 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) " + "\n";
+            varname142 = varname142 + "SELECT 'SQL Server Authentication Mode', CASE SERVERPROPERTY('IsIntegratedSecurityOnly') " + "\n";
+            varname142 = varname142 + "WHEN 1 THEN 'Windows Authentication' " + "\n";
+            varname142 = varname142 + "WHEN 0 THEN 'Windows and SQL Server Authentication' " + "\n";
+            varname142 = varname142 + "END as [Authentication Mode] " + "\n";
+            varname142 = varname142 + " " + "\n";
+            varname142 = varname142 + " " + "\n";
+            varname142 = varname142 + "-- SQL Server Network Port";
+
+
+            String varname143 = "";
+            varname143 = varname143 + "IF OBJECT_ID('tempdb..#TmpErrorLogNetworkPort') IS NOT NULL DROP TABLE #TmpErrorLogNetworkPort";
+
+
+            String varname144 = "";
+            varname144 = varname144 + "CREATE TABLE [dbo].[#TmpErrorLogNetworkPort] " + "\n";
+            varname144 = varname144 + "([LogDate] DATETIME NULL, " + "\n";
+            varname144 = varname144 + " [ProcessInfo] VARCHAR(20) NULL, " + "\n";
+            varname144 = varname144 + " [Text] VARCHAR(MAX) NULL ) ; " + "\n";
+            varname144 = varname144 + " " + "\n";
+            varname144 = varname144 + "-- Command will insert the errorlog data into temporary table";
+
+
+            String varname145 = "";
+            varname145 = varname145 + "INSERT INTO #TmpErrorLogNetworkPort ([LogDate], [ProcessInfo], [Text]) " + "\n";
+            varname145 = varname145 + "EXEC [master].[dbo].[xp_readerrorlog] 0, 1, N'Server is listening on'; " + "\n";
+            varname145 = varname145 + " " + "\n";
+            varname145 = varname145 + "-- retrieves the data from temporary table";
+
+
+            String varname146 = "";
+            varname146 = varname146 + "SET @ExpressionToFind = '1433'";
+
+
+            String varname147 = "";
+            varname147 = varname147 + "SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLogNetworkPort where text like '%any%' and text like '%<ipv4>%' and text like '%1433%' and ProcessInfo = 'Server'";
+
+
+            String varname148 = "";
+            varname148 = varname148 + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%' " + "\n";
+            varname148 = varname148 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('SQL Port','1433') " + "\n";
+            varname148 = varname148 + "ELSE " + "\n";
+            varname148 = varname148 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('SQL Port','SQL Server doesn''t use default port') " + "\n";
+            varname148 = varname148 + " " + "\n";
+            varname148 = varname148 + " " + "\n";
+            varname148 = varname148 + " " + "\n";
+            varname148 = varname148 + "----- SQL Server Database  " + "\n";
+            varname148 = varname148 + " " + "\n";
+            varname148 = varname148 + "-- DataFiles ";
+
+
+            String varname149 = "";
+            varname149 = varname149 + "DECLARE @DBName VARCHAR(200);";
+
+
+            String varname150 = "";
+            varname150 = varname150 + "declare @sql varchar(200);";
+
+
+            String varname151 = "";
+            varname151 = varname151 + "SET @DBName = 'EVALUATOR'";
+
+
+            String varname152 = "";
+            varname152 = varname152 + "SELECT @sql = 'USE [' + @DBName + ']'";
+
+
+            String varname153 = "";
+            varname153 = varname153 + "EXEC sp_sqlexec @Sql";
+
+
+            String varname154 = "";
+            varname154 = varname154 + "IF OBJECT_ID('tempdb..#DataFile') IS NOT NULL DROP TABLE #DataFile";
+
+
+            String varname155 = "";
+            varname155 = varname155 + "CREATE TABLE [dbo].[#DataFile] " + "\n";
+            varname155 = varname155 + "	([name] VARCHAR(200) NULL, " + "\n";
+            varname155 = varname155 + "	[fileid] int NULL, " + "\n";
+            varname155 = varname155 + "	[filename] VARCHAR(max) NULL, " + "\n";
+            varname155 = varname155 + "	[filegroup] VARCHAR(50) NULL, " + "\n";
+            varname155 = varname155 + "	[size] VARCHAR(50) NULL, " + "\n";
+            varname155 = varname155 + "	[maxsize] VARCHAR(50) NULL, " + "\n";
+            varname155 = varname155 + "	[growth] VARCHAR(50) NULL, " + "\n";
+            varname155 = varname155 + "	[usage] VARCHAR(50) NULL) ; " + "\n";
+            varname155 = varname155 + " " + "\n";
+            varname155 = varname155 + "-- Command will insert the errorlog data into temporary table";
+
+
+            String varname156 = "";
+            varname156 = varname156 + "INSERT INTO #DataFile ([name], [fileid], [filename], [filegroup], [size], [maxsize], [growth], [usage]) " + "\n";
+            varname156 = varname156 + "EXEC [sp_helpfile]";
+
+
+            String varname157 = "";
+            varname157 = varname157 + "SET @ExpressionToFind = 'C:\\Program Files\\'";
+
+
+            String varname158 = "";
+            varname158 = varname158 + "SELECT @ExpressionToSearch = [filename] FROM #DataFile where [filename] like '%.mdf'";
+
+
+            String varname159 = "";
+            varname159 = varname159 + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%' " + "\n";
+            varname159 = varname159 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Location','System Drive') " + "\n";
+            varname159 = varname159 + "ELSE " + "\n";
+            varname159 = varname159 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Location','Datafile doesn''t use system drive')";
+
+
+            String varname160 = "";
+            varname160 = varname160 + "SELECT @ExpressionToSearch = [filename] FROM #DataFile where [filename] like '%.ldf'";
+
+
+            String varname161 = "";
+            varname161 = varname161 + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%' " + "\n";
+            varname161 = varname161 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Logfile Location','System Drive') " + "\n";
+            varname161 = varname161 + "ELSE " + "\n";
+            varname161 = varname161 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Logfile Location','Logfile doesn''t use system drive') " + "\n";
+            varname161 = varname161 + " " + "\n";
+            varname161 = varname161 + " " + "\n";
+            varname161 = varname161 + "-- Recovery Model";
+
+
+            String varname162 = "";
+            varname162 = varname162 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) " + "\n";
+            varname162 = varname162 + "SELECT 'Recovery Model' , recovery_model_desc FROM sys.databases WHERE name = @DBName " + "\n";
+            varname162 = varname162 + " " + "\n";
+            varname162 = varname162 + " " + "\n";
+            varname162 = varname162 + "-- Compatibility Level";
+
+
+            String varname163 = "";
+            varname163 = varname163 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) " + "\n";
+            varname163 = varname163 + "SELECT 'Compatibility Level' , [compatibility_level] FROM sys.databases WHERE name = @DBName " + "\n";
+            varname163 = varname163 + " " + "\n";
+            varname163 = varname163 + "-- Read Committed Snapshot Isolation";
+
+
+            String varname164 = "";
+            varname164 = varname164 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) " + "\n";
+            varname164 = varname164 + "SELECT 'Snapshot Isolation', [snapshot_isolation_state_desc] FROM sys.databases WHERE name = @DBName";
+
+
+            String varname165 = "";
+            varname165 = varname165 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) " + "\n";
+            varname165 = varname165 + "SELECT 'Read Committed Snapshot Isolation', [is_read_committed_snapshot_on] FROM sys.databases WHERE name = @DBName " + "\n";
+            varname165 = varname165 + " " + "\n";
+            varname165 = varname165 + "-- Database Auto growth";
+
+
+            String varname166 = "";
+            varname166 = varname166 + "SET @ExpressionToFind = 'KB'";
+
+
+            String varname167 = "";
+            varname167 = varname167 + "SELECT @ExpressionToSearch = CASE is_percent_growth WHEN 1 THEN CONVERT(VARCHAR(10),growth) +'%' ELSE Convert(VARCHAR(10),growth*8) +' KB' END " + "\n";
+            varname167 = varname167 + "FROM sys.master_files " + "\n";
+            varname167 = varname167 + "WHERE  name = @DBName and [physical_name] like '%.mdf'";
+
+
+            String varname168 = "";
+            varname168 = varname168 + "print @ExpressionToSearch";
+
+
+            String varname169 = "";
+            varname169 = varname169 + "IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%' " + "\n";
+            varname169 = varname169 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Growth','Fix in size') " + "\n";
+            varname169 = varname169 + "ELSE " + "\n";
+            varname169 = varname169 + "    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Growth','In percent') " + "\n";
+            varname169 = varname169 + " " + "\n";
+            varname169 = varname169 + "-- Auto Create Statistics";
+
+
+            String varname170 = "";
+            varname170 = varname170 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) " + "\n";
+            varname170 = varname170 + "SELECT 'Auto Create Statistics' , [is_auto_create_stats_on] FROM sys.databases WHERE name = @DBName " + "\n";
+            varname170 = varname170 + " " + "\n";
+            varname170 = varname170 + "-- Auto Update Statistics";
+
+
+            String varname171 = "";
+            varname171 = varname171 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) " + "\n";
+            varname171 = varname171 + "SELECT 'Auto Update Statistics' , [is_auto_update_stats_on] FROM sys.databases WHERE name = @DBName " + "\n";
+            varname171 = varname171 + " " + "\n";
+            varname171 = varname171 + "-- Auto Shrink";
+
+
+            String varname172 = "";
+            varname172 = varname172 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) " + "\n";
+            varname172 = varname172 + "SELECT 'Auto Shrink' , [is_auto_shrink_on] FROM sys.databases WHERE name = @DBName " + "\n";
+            varname172 = varname172 + " " + "\n";
+            varname172 = varname172 + " " + "\n";
+            varname172 = varname172 + "-- Daily Index Rebuild";
+
+
+            String varname173 = "";
+            varname173 = varname173 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) " + "\n";
+            varname173 = varname173 + "SELECT TOP 1 'Old Statistics Found' " + "\n";
+            varname173 = varname173 + ",DATEDIFF(d, (STATS_DATE(i.OBJECT_ID, index_id)), Getdate()) as Days_Since_Last " + "\n";
+            varname173 = varname173 + "FROM sys.indexes i " + "\n";
+            varname173 = varname173 + "INNER JOIN sys.objects o ON i.object_id = o.object_id " + "\n";
+            varname173 = varname173 + "INNER JOIN sys.schemas sc ON o.schema_id = sc.schema_id " + "\n";
+            varname173 = varname173 + "WHERE i.name IS NOT NULL " + "\n";
+            varname173 = varname173 + "AND o.type = 'U' " + "\n";
+            varname173 = varname173 + "ORDER BY (STATS_DATE(i.OBJECT_ID, index_id)) ASC " + "\n";
+            varname173 = varname173 + " " + "\n";
+            varname173 = varname173 + "-- Daily database Full backup";
+
+
+            String varname174 = "";
+            varname174 = varname174 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) " + "\n";
+            varname174 = varname174 + "SELECT 'Last Full Backup', DATEDIFF(d, MAX(Backup_Finish_Date), Getdate()) as Days_Since_Last " + "\n";
+            varname174 = varname174 + "FROM MSDB.dbo.BackupSet " + "\n";
+            varname174 = varname174 + "WHERE Type = 'd' " + "\n";
+            varname174 = varname174 + "GROUP BY Database_Name " + "\n";
+            varname174 = varname174 + " " + "\n";
+            varname174 = varname174 + "-- Blank SQL 'SA' Password";
+
+
+            String varname175 = "";
+            varname175 = varname175 + "IF NOT EXISTS " + "\n";
+            varname175 = varname175 + "( " + "\n";
+            varname175 = varname175 + "SELECT name,* FROM sys.sql_logins " + "\n";
+            varname175 = varname175 + "WHERE name = 'sa' AND (PWDCOMPARE('', password_hash) = 1 OR PWDCOMPARE('', password_hash, 1) = 1) " + "\n";
+            varname175 = varname175 + ") " + "\n";
+            varname175 = varname175 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('SA Login','Does not have a blank password') " + "\n";
+            varname175 = varname175 + "ELSE " + "\n";
+            varname175 = varname175 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('SA Login','Does have a blank password') " + "\n";
+            varname175 = varname175 + " " + "\n";
+            varname175 = varname175 + " " + "\n";
+            varname175 = varname175 + "-- NT AUTHORITY\\SYSTEM Administrator";
+
+
+            String varname176 = "";
+            varname176 = varname176 + "IF NOT EXISTS " + "\n";
+            varname176 = varname176 + "( " + "\n";
+            varname176 = varname176 + "SELECT name,* FROM syslogins WHERE name = 'NT AUTHORITY\\SYSTEM' AND hasaccess = 1 " + "\n";
+            varname176 = varname176 + ") " + "\n";
+            varname176 = varname176 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('NT AUTHORITY\\SYSTEM','Does not have a access') " + "\n";
+            varname176 = varname176 + "ELSE " + "\n";
+            varname176 = varname176 + "INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('NT AUTHORITY\\SYSTEM','Does have a access')";
+
+
+            String varname177 = "";
+            varname177 = varname177 + "SELECT * FROM [#Values]";
+
+            /*
+            sql = varname1 +
+            varname12 +
+            varname13 +
+            varname14 +
+            varname15 +
+            varname16 +
+            varname17 +
+            varname18 +
+            varname19 +
+            varname110 +
+            varname111 +
+            varname112 +
+            varname113 +
+            varname114 +
+            varname115 +
+            varname116 +
+            varname117 +
+            varname118 +
+            varname119 +
+            varname120 +
+            varname121 +
+            varname122 +
+            varname123 +
+            varname124 +
+            varname125 +
+            varname126 +
+            varname127 +
+            varname128 +
+            varname129 +
+            varname130 +
+            varname131 +
+            varname132 +
+            varname133 +
+            varname134 +
+            varname135 +
+            varname136 +
+            varname137 +
+            varname138 +
+            varname139 +
+            varname140 +
+            varname141 +
+            varname142 +
+            varname143 +
+            varname144 +
+            varname145 +
+            varname146 +
+            varname147 +
+            varname148 +
+            varname149 +
+            varname150 +
+            varname151 +
+            varname152 +
+            varname153 +
+            varname154 +
+            varname155 +
+            varname156 +
+            varname157 +
+            varname158 +
+            varname159 +
+            varname160 +
+            varname161 +
+            varname162 +
+            varname163 +
+            varname164 +
+            varname165 +
+            varname166 +
+            varname167 +
+            varname168 +
+            varname169 +
+            varname170 +
+            varname171 +
+            varname172 +
+            varname173 +
+            varname174 +
+            varname175 +
+            varname176 +
+            varname177;
+            */
+
             connection = new SqlConnection(connectionString);
 
             // CAN REMOVE THIS PART, JUST FOR TESTING PURPOSES
