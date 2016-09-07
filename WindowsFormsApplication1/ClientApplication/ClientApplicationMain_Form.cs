@@ -16,6 +16,7 @@ namespace ClientApplication
         private string SERVER = "";
         private bool SERVER_OK = false;
         private byte[] ENCYRPTED = null;
+        private int SLEEP = 200;
 
         /// The backgroundworker object on which the time consuming operation shall be executed
         /// http://www.codeproject.com/Articles/99143/BackgroundWorker-Class-Sample-for-Beginners
@@ -190,15 +191,15 @@ namespace ClientApplication
         void ClientApplication_BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //Here you play with the main UI thread
-            if (e.ProgressPercentage == 1)
+            if (e.ProgressPercentage == 0)
             {
                 InstanceMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
             }
-            else if (e.ProgressPercentage == 10)
+            else if (e.ProgressPercentage == 5)
             {
                 InstanceProgress_PictureBox1.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
             }
-            else if (e.ProgressPercentage == 14)
+            else if (e.ProgressPercentage == 10)
             {
                 InstanceProgress_PictureBox1.Image = global::ClientApplication.Properties.Resources.success;
             }
@@ -206,21 +207,61 @@ namespace ClientApplication
             {
                 InstanceProgress_PictureBox2.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
             }
-            else if (e.ProgressPercentage == 28)
+            else if (e.ProgressPercentage == 20)
             {
                 InstanceProgress_PictureBox2.Image = global::ClientApplication.Properties.Resources.success;
             }
-            else if (e.ProgressPercentage == 29)
+            else if (e.ProgressPercentage == 25)
             {
                 InstanceProgress_PictureBox3.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
             }
-            else if (e.ProgressPercentage == 42)
+            else if (e.ProgressPercentage == 30)
             {
                 InstanceProgress_PictureBox3.Image = global::ClientApplication.Properties.Resources.success;
             }
-            else if (e.ProgressPercentage == 43)
+            else if (e.ProgressPercentage == 31)
             {
                 InstanceMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.success;
+            }
+            else if (e.ProgressPercentage == 32)
+            {
+                DatabaseMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+            }
+            else if (e.ProgressPercentage == 35)
+            {
+                DatabaseProgress_PictureBox1.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+            }
+            else if (e.ProgressPercentage == 40)
+            {
+                DatabaseProgress_PictureBox1.Image = global::ClientApplication.Properties.Resources.success;
+            }
+            else if (e.ProgressPercentage == 45)
+            {
+                DatabaseProgress_PictureBox2.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+            }
+            else if (e.ProgressPercentage == 50)
+            {
+                DatabaseProgress_PictureBox2.Image = global::ClientApplication.Properties.Resources.success;
+            }
+            else if (e.ProgressPercentage == 55)
+            {
+                DatabaseProgress_PictureBox3.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+            }
+            else if (e.ProgressPercentage == 60)
+            {
+                DatabaseProgress_PictureBox3.Image = global::ClientApplication.Properties.Resources.success;
+            }
+            else if (e.ProgressPercentage == 65)
+            {
+                DatabaseProgress_PictureBox4.Image = global::ClientApplication.Properties.Resources.right_arrow_3;
+            }
+            else if (e.ProgressPercentage == 70)
+            {
+                DatabaseProgress_PictureBox4.Image = global::ClientApplication.Properties.Resources.success;
+            }
+            else if (e.ProgressPercentage == 100)
+            {
+                DatabaseMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.success;
             }
         }
 
@@ -743,6 +784,9 @@ namespace ClientApplication
                 connection = new SqlConnection(connectionString);
                 connection.Open();
 
+                Thread.Sleep(SLEEP);
+                ClientApplication_BackgroundWorker.ReportProgress(0);
+
                 string header = 
                         varname1 + Environment.NewLine +
                         varname11 + Environment.NewLine +
@@ -767,8 +811,14 @@ namespace ClientApplication
                         varname113 + Environment.NewLine +
                         varname114 + Environment.NewLine;
 
+                Thread.Sleep(SLEEP);
+                ClientApplication_BackgroundWorker.ReportProgress(5);
+
                 command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
+
+                Thread.Sleep(SLEEP);
+                ClientApplication_BackgroundWorker.ReportProgress(10);
 
                 sql =
                         // 2. Configuration 
@@ -802,8 +852,14 @@ namespace ClientApplication
                         varname141 + Environment.NewLine +
                         varname142 + Environment.NewLine;
 
+                Thread.Sleep(SLEEP);
+                ClientApplication_BackgroundWorker.ReportProgress(15);
+
                 command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
+
+                Thread.Sleep(200);
+                ClientApplication_BackgroundWorker.ReportProgress(20);
 
                 sql =
                         // 3. Security
@@ -815,8 +871,20 @@ namespace ClientApplication
                         varname147 + Environment.NewLine +
                         varname148 + Environment.NewLine;
 
+                Thread.Sleep(200);
+                ClientApplication_BackgroundWorker.ReportProgress(25);
+
                 command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
+
+                Thread.Sleep(200);
+                ClientApplication_BackgroundWorker.ReportProgress(30);
+
+                Thread.Sleep(200);
+                ClientApplication_BackgroundWorker.ReportProgress(31);
+
+                Thread.Sleep(200);
+                ClientApplication_BackgroundWorker.ReportProgress(32);
 
                 string dbHeader =
                         varname149 + Environment.NewLine +
@@ -840,8 +908,14 @@ namespace ClientApplication
                         varname160 + Environment.NewLine +
                         varname161 + Environment.NewLine;
 
+                Thread.Sleep(200);
+                ClientApplication_BackgroundWorker.ReportProgress(35);
+
                 command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
+
+                Thread.Sleep(200);
+                ClientApplication_BackgroundWorker.ReportProgress(40);
 
                 sql =
                         // 2. Configuration Options
@@ -859,8 +933,14 @@ namespace ClientApplication
                         varname171 + Environment.NewLine +
                         varname172 + Environment.NewLine;
 
+                Thread.Sleep(200);
+                ClientApplication_BackgroundWorker.ReportProgress(45);
+
                 command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
+
+                Thread.Sleep(200);
+                ClientApplication_BackgroundWorker.ReportProgress(50);
 
                 sql =
                         // 3. Maintenance
@@ -869,8 +949,14 @@ namespace ClientApplication
                         varname173 + Environment.NewLine +
                         varname174 + Environment.NewLine;
 
+                Thread.Sleep(200);
+                ClientApplication_BackgroundWorker.ReportProgress(55);
+
                 command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
+
+                Thread.Sleep(200);
+                ClientApplication_BackgroundWorker.ReportProgress(60);
 
                 sql =
                         // 4. Security
@@ -879,117 +965,9 @@ namespace ClientApplication
                         varname175 + Environment.NewLine +
                         varname176 + Environment.NewLine +
                         varname177 + Environment.NewLine;
-                /*
-                sql =
-                        // SQL Server Instance 
 
-                        // 1.Installation
-                        varname1 + Environment.NewLine +
-                        varname11 + Environment.NewLine +
-                        varname12 + Environment.NewLine +
-                        varname13 + Environment.NewLine +
-                        varname14 + Environment.NewLine +
-                        varname15 + Environment.NewLine +
-                        varname16 + Environment.NewLine +
-                        varname17 + Environment.NewLine +
-                        varname18 + Environment.NewLine +
-                        varname19 + Environment.NewLine +
-                        varname110 + Environment.NewLine +
-                        varname111 + Environment.NewLine +
-                        varname112 + Environment.NewLine +
-                        varname113 + Environment.NewLine +
-                        varname114 + Environment.NewLine +
-
-                        // 2. Configuration 
-                        varname115 + Environment.NewLine +
-                        varname116 + Environment.NewLine +
-                        varname117 + Environment.NewLine +
-                        varname118 + Environment.NewLine +
-                        varname119 + Environment.NewLine +
-                        varname120 + Environment.NewLine +
-                        varname121 + Environment.NewLine +
-                        varname122 + Environment.NewLine +
-                        varname123 + Environment.NewLine +
-                        varname124 + Environment.NewLine +
-                        varname125 + Environment.NewLine +
-                        varname126 + Environment.NewLine +
-                        varname127 + Environment.NewLine +
-                        varname128 + Environment.NewLine +
-                        varname129 + Environment.NewLine +
-                        varname130 + Environment.NewLine +
-                        varname131 + Environment.NewLine +
-                        varname132 + Environment.NewLine +
-                        varname133 + Environment.NewLine +
-                        varname134 + Environment.NewLine +
-                        varname135 + Environment.NewLine +
-                        varname136 + Environment.NewLine +
-                        varname137 + Environment.NewLine +
-                        varname138 + Environment.NewLine +
-                        varname139 + Environment.NewLine +
-                        varname140 + Environment.NewLine +
-                        varname141 + Environment.NewLine +
-                        varname142 + Environment.NewLine +
-
-                        // 3. Security
-                        varname143 + Environment.NewLine +
-                        varname144 + Environment.NewLine +
-                        varname145 + Environment.NewLine +
-                        varname146 + Environment.NewLine +
-                        varname147 + Environment.NewLine +
-                        varname148 + Environment.NewLine +
-
-                        // SQL Server Database
-
-                        // 1. Implemetation 
-                        varname149 + Environment.NewLine +
-                        varname150 + Environment.NewLine +
-                        varname151 + Environment.NewLine +
-                        varname152 + Environment.NewLine +
-                        varname153 + Environment.NewLine +
-                        varname154 + Environment.NewLine +
-                        varname155 + Environment.NewLine +
-                        varname156 + Environment.NewLine +
-                        varname157 + Environment.NewLine +
-                        varname158 + Environment.NewLine +
-                        varname159 + Environment.NewLine +
-                        varname160 + Environment.NewLine +
-                        varname161 + Environment.NewLine +
-
-                        // 2. Configuration Options
-                        varname162 + Environment.NewLine +
-                        varname163 + Environment.NewLine +
-                        varname164 + Environment.NewLine +
-                        varname165 + Environment.NewLine +
-                        varname166 + Environment.NewLine +
-                        varname167 + Environment.NewLine +
-                        varname168 + Environment.NewLine +
-                        varname169 + Environment.NewLine +
-                        varname170 + Environment.NewLine +
-                        varname171 + Environment.NewLine +
-                        varname172 + Environment.NewLine +
-
-                        // 3. Maintenance
-                        varname173 + Environment.NewLine +
-                        varname174 + Environment.NewLine +
-
-                        // 4. Security
-                        varname175 + Environment.NewLine +
-                        varname176 + Environment.NewLine +
-                        varname177 + Environment.NewLine;
-                */
-                /*
-                command = new SqlCommand(sql, connection);
-                dataReader = command.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    MessageBox.Show(dataReader.GetValue(0) + " " + dataReader.GetValue(1));
-                }
-                dataReader.Close();
-                command.Dispose();
-                connection.Close();
-                */
-
-               
+                Thread.Sleep(200);
+                ClientApplication_BackgroundWorker.ReportProgress(65);
 
                 // http://csharp.net-informations.com/xml/xml-from-sql.htm
                 SqlDataAdapter adapter;
@@ -1005,6 +983,9 @@ namespace ClientApplication
                 ds.WriteXml(sw);
                 string result = sw.ToString();
 
+                Thread.Sleep(200);
+                ClientApplication_BackgroundWorker.ReportProgress(70);
+
                 try
                 {
                     // Encrypt the string to an array of bytes.
@@ -1015,15 +996,7 @@ namespace ClientApplication
                     Console.WriteLine("Error: {0}", exception.Message);
                 }
 
-
-
-                //NOTE : Never play with the UI thread here...
-                //time consuming operation
-                for (int i = 0; i < 50; i++)
-                {
-                    Thread.Sleep(200);
-                    ClientApplication_BackgroundWorker.ReportProgress(i);
-                }
+                
                 //Report 100% completion on operation completed
                 ClientApplication_BackgroundWorker.ReportProgress(100);
             }
