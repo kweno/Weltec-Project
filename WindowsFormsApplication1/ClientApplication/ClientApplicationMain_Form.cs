@@ -743,15 +743,18 @@ namespace ClientApplication
                 connection = new SqlConnection(connectionString);
                 connection.Open();
 
+                string header = 
+                        varname1 + Environment.NewLine +
+                        varname11 + Environment.NewLine +
+                        varname12 + Environment.NewLine +
+                        varname13 + Environment.NewLine;
+
                 // http://www.dpriver.com/pp/sqlformat.htm
                 sql =
                         // SQL Server Instance 
 
                         // 1.Installation
-                        varname1 + Environment.NewLine +
-                        varname11 + Environment.NewLine +
-                        varname12 + Environment.NewLine +
-                        varname13 + Environment.NewLine +
+                        header +
                         varname14 + Environment.NewLine +
                         varname15 + Environment.NewLine +
                         varname16 + Environment.NewLine +
@@ -764,11 +767,12 @@ namespace ClientApplication
                         varname113 + Environment.NewLine +
                         varname114 + Environment.NewLine;
 
-                //command = new SqlCommand(sql, connection);
-                //command.ExecuteNonQuery();
+                command = new SqlCommand(sql, connection);
+                command.ExecuteNonQuery();
 
                 sql =
                         // 2. Configuration 
+                        header +
                         varname115 + Environment.NewLine +
                         varname116 + Environment.NewLine +
                         varname117 + Environment.NewLine +
@@ -798,11 +802,12 @@ namespace ClientApplication
                         varname141 + Environment.NewLine +
                         varname142 + Environment.NewLine;
 
-                //command = new SqlCommand(sql, connection);
-                //command.ExecuteNonQuery();
+                command = new SqlCommand(sql, connection);
+                command.ExecuteNonQuery();
 
                 sql =
                         // 3. Security
+                        header +
                         varname143 + Environment.NewLine +
                         varname144 + Environment.NewLine +
                         varname145 + Environment.NewLine +
@@ -810,16 +815,20 @@ namespace ClientApplication
                         varname147 + Environment.NewLine +
                         varname148 + Environment.NewLine;
 
-                //command = new SqlCommand(sql, connection);
-                //command.ExecuteNonQuery();
+                command = new SqlCommand(sql, connection);
+                command.ExecuteNonQuery();
+
+                string dbHeader =
+                        varname149 + Environment.NewLine +
+                        varname150 + Environment.NewLine +
+                        varname151 + Environment.NewLine;
 
                 sql =
                         // SQL Server Database
 
                         // 1. Implemetation 
-                        varname149 + Environment.NewLine +
-                        varname150 + Environment.NewLine +
-                        varname151 + Environment.NewLine +
+                        header +
+                        dbHeader +
                         varname152 + Environment.NewLine +
                         varname153 + Environment.NewLine +
                         varname154 + Environment.NewLine +
@@ -831,11 +840,13 @@ namespace ClientApplication
                         varname160 + Environment.NewLine +
                         varname161 + Environment.NewLine;
 
-                //command = new SqlCommand(sql, connection);
-                //command.ExecuteNonQuery();
+                command = new SqlCommand(sql, connection);
+                command.ExecuteNonQuery();
 
                 sql =
                         // 2. Configuration Options
+                        header +
+                        dbHeader +
                         varname162 + Environment.NewLine +
                         varname163 + Environment.NewLine +
                         varname164 + Environment.NewLine +
@@ -848,23 +859,27 @@ namespace ClientApplication
                         varname171 + Environment.NewLine +
                         varname172 + Environment.NewLine;
 
-                //command = new SqlCommand(sql, connection);
-                //command.ExecuteNonQuery();
+                command = new SqlCommand(sql, connection);
+                command.ExecuteNonQuery();
 
                 sql =
                         // 3. Maintenance
+                        header +
+                        dbHeader +
                         varname173 + Environment.NewLine +
                         varname174 + Environment.NewLine;
 
-                //command = new SqlCommand(sql, connection);
-                //command.ExecuteNonQuery();
+                command = new SqlCommand(sql, connection);
+                command.ExecuteNonQuery();
 
                 sql =
                         // 4. Security
+                        header +
+                        dbHeader +
                         varname175 + Environment.NewLine +
                         varname176 + Environment.NewLine +
                         varname177 + Environment.NewLine;
-
+                /*
                 sql =
                         // SQL Server Instance 
 
@@ -961,17 +976,18 @@ namespace ClientApplication
                         varname175 + Environment.NewLine +
                         varname176 + Environment.NewLine +
                         varname177 + Environment.NewLine;
-
+                */
+                /*
                 command = new SqlCommand(sql, connection);
                 dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    //MessageBox.Show(dataReader.GetValue(0) + " " + dataReader.GetValue(1));
+                    MessageBox.Show(dataReader.GetValue(0) + " " + dataReader.GetValue(1));
                 }
                 dataReader.Close();
                 command.Dispose();
                 connection.Close();
-
+                */
 
                
 
@@ -980,6 +996,7 @@ namespace ClientApplication
                 DataSet ds = new DataSet();
                 adapter = new SqlDataAdapter(sql, connection);
                 adapter.Fill(ds);
+                command.Dispose();
                 connection.Close();
 
                 // http://stackoverflow.com/questions/963870/dataset-writexml-to-string
