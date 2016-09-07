@@ -740,7 +740,131 @@ namespace ClientApplication
                 String varname177 = "";
                 varname177 = varname177 + "SELECT * FROM [#Values]";
 
+                connection = new SqlConnection(connectionString);
+                connection.Open();
+
                 // http://www.dpriver.com/pp/sqlformat.htm
+                sql =
+                        // SQL Server Instance 
+
+                        // 1.Installation
+                        varname1 + Environment.NewLine +
+                        varname11 + Environment.NewLine +
+                        varname12 + Environment.NewLine +
+                        varname13 + Environment.NewLine +
+                        varname14 + Environment.NewLine +
+                        varname15 + Environment.NewLine +
+                        varname16 + Environment.NewLine +
+                        varname17 + Environment.NewLine +
+                        varname18 + Environment.NewLine +
+                        varname19 + Environment.NewLine +
+                        varname110 + Environment.NewLine +
+                        varname111 + Environment.NewLine +
+                        varname112 + Environment.NewLine +
+                        varname113 + Environment.NewLine +
+                        varname114 + Environment.NewLine;
+
+                //command = new SqlCommand(sql, connection);
+                //command.ExecuteNonQuery();
+
+                sql =
+                        // 2. Configuration 
+                        varname115 + Environment.NewLine +
+                        varname116 + Environment.NewLine +
+                        varname117 + Environment.NewLine +
+                        varname118 + Environment.NewLine +
+                        varname119 + Environment.NewLine +
+                        varname120 + Environment.NewLine +
+                        varname121 + Environment.NewLine +
+                        varname122 + Environment.NewLine +
+                        varname123 + Environment.NewLine +
+                        varname124 + Environment.NewLine +
+                        varname125 + Environment.NewLine +
+                        varname126 + Environment.NewLine +
+                        varname127 + Environment.NewLine +
+                        varname128 + Environment.NewLine +
+                        varname129 + Environment.NewLine +
+                        varname130 + Environment.NewLine +
+                        varname131 + Environment.NewLine +
+                        varname132 + Environment.NewLine +
+                        varname133 + Environment.NewLine +
+                        varname134 + Environment.NewLine +
+                        varname135 + Environment.NewLine +
+                        varname136 + Environment.NewLine +
+                        varname137 + Environment.NewLine +
+                        varname138 + Environment.NewLine +
+                        varname139 + Environment.NewLine +
+                        varname140 + Environment.NewLine +
+                        varname141 + Environment.NewLine +
+                        varname142 + Environment.NewLine;
+
+                //command = new SqlCommand(sql, connection);
+                //command.ExecuteNonQuery();
+
+                sql =
+                        // 3. Security
+                        varname143 + Environment.NewLine +
+                        varname144 + Environment.NewLine +
+                        varname145 + Environment.NewLine +
+                        varname146 + Environment.NewLine +
+                        varname147 + Environment.NewLine +
+                        varname148 + Environment.NewLine;
+
+                //command = new SqlCommand(sql, connection);
+                //command.ExecuteNonQuery();
+
+                sql =
+                        // SQL Server Database
+
+                        // 1. Implemetation 
+                        varname149 + Environment.NewLine +
+                        varname150 + Environment.NewLine +
+                        varname151 + Environment.NewLine +
+                        varname152 + Environment.NewLine +
+                        varname153 + Environment.NewLine +
+                        varname154 + Environment.NewLine +
+                        varname155 + Environment.NewLine +
+                        varname156 + Environment.NewLine +
+                        varname157 + Environment.NewLine +
+                        varname158 + Environment.NewLine +
+                        varname159 + Environment.NewLine +
+                        varname160 + Environment.NewLine +
+                        varname161 + Environment.NewLine;
+
+                //command = new SqlCommand(sql, connection);
+                //command.ExecuteNonQuery();
+
+                sql =
+                        // 2. Configuration Options
+                        varname162 + Environment.NewLine +
+                        varname163 + Environment.NewLine +
+                        varname164 + Environment.NewLine +
+                        varname165 + Environment.NewLine +
+                        varname166 + Environment.NewLine +
+                        varname167 + Environment.NewLine +
+                        varname168 + Environment.NewLine +
+                        varname169 + Environment.NewLine +
+                        varname170 + Environment.NewLine +
+                        varname171 + Environment.NewLine +
+                        varname172 + Environment.NewLine;
+
+                //command = new SqlCommand(sql, connection);
+                //command.ExecuteNonQuery();
+
+                sql =
+                        // 3. Maintenance
+                        varname173 + Environment.NewLine +
+                        varname174 + Environment.NewLine;
+
+                //command = new SqlCommand(sql, connection);
+                //command.ExecuteNonQuery();
+
+                sql =
+                        // 4. Security
+                        varname175 + Environment.NewLine +
+                        varname176 + Environment.NewLine +
+                        varname177 + Environment.NewLine;
+
                 sql =
                         // SQL Server Instance 
 
@@ -838,12 +962,6 @@ namespace ClientApplication
                         varname176 + Environment.NewLine +
                         varname177 + Environment.NewLine;
 
-
-                connection = new SqlConnection(connectionString);
-
-               
-
-                connection.Open();
                 command = new SqlCommand(sql, connection);
                 dataReader = command.ExecuteReader();
                 while (dataReader.Read())
