@@ -38,6 +38,7 @@ namespace ClientApplication
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientApplicationMain_Form));
             this.Start_Button = new System.Windows.Forms.Button();
             this.Main_Panel = new System.Windows.Forms.Panel();
+            this.Global_ProgressBar = new System.Windows.Forms.ProgressBar();
             this.Selection_GroupBox = new System.Windows.Forms.GroupBox();
             this.ConnectStatus_PictureBox = new System.Windows.Forms.PictureBox();
             this.ServerName_Label = new System.Windows.Forms.Label();
@@ -66,7 +67,6 @@ namespace ClientApplication
             this.InstanceMainProgress_Label = new System.Windows.Forms.Label();
             this.InstanceProgress_PictureBox1 = new System.Windows.Forms.PictureBox();
             this.InstanceProgress_Label1 = new System.Windows.Forms.Label();
-            this.Global_ProgressBar = new System.Windows.Forms.ProgressBar();
             this.Main_Panel.SuspendLayout();
             this.Selection_GroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ConnectStatus_PictureBox)).BeginInit();
@@ -106,6 +106,13 @@ namespace ClientApplication
             this.Main_Panel.Name = "Main_Panel";
             this.Main_Panel.Size = new System.Drawing.Size(480, 553);
             this.Main_Panel.TabIndex = 1;
+            // 
+            // Global_ProgressBar
+            // 
+            this.Global_ProgressBar.Location = new System.Drawing.Point(16, 521);
+            this.Global_ProgressBar.Name = "Global_ProgressBar";
+            this.Global_ProgressBar.Size = new System.Drawing.Size(450, 23);
+            this.Global_ProgressBar.TabIndex = 2;
             // 
             // Selection_GroupBox
             // 
@@ -163,12 +170,14 @@ namespace ClientApplication
             // 
             // Database_ComboBox
             // 
+            this.Database_ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Database_ComboBox.Enabled = false;
             this.Database_ComboBox.FormattingEnabled = true;
             this.Database_ComboBox.Location = new System.Drawing.Point(214, 53);
             this.Database_ComboBox.Name = "Database_ComboBox";
             this.Database_ComboBox.Size = new System.Drawing.Size(202, 21);
             this.Database_ComboBox.TabIndex = 9;
+            this.Database_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Database_ComboBox_SelectedIndexChanged);
             // 
             // Logo_PictureBox
             // 
@@ -434,13 +443,6 @@ namespace ClientApplication
             this.InstanceProgress_Label1.TabIndex = 8;
             this.InstanceProgress_Label1.Text = "   • Installation";
             this.InstanceProgress_Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Global_ProgressBar
-            // 
-            this.Global_ProgressBar.Location = new System.Drawing.Point(16, 521);
-            this.Global_ProgressBar.Name = "Global_ProgressBar";
-            this.Global_ProgressBar.Size = new System.Drawing.Size(450, 23);
-            this.Global_ProgressBar.TabIndex = 2;
             // 
             // ClientApplicationMain_Form
             // 

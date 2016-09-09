@@ -14,7 +14,9 @@ namespace ClientApplication
     {
         private string EVALUATOR_KEY = "AAECAwQFBgcICQoLDA0ODw==";
         private string SERVER = "";
+        private string DATABASE = "";
         private bool SERVER_OK = false;
+        private bool DATABASENAME_CHECKED = false;
         private byte[] ENCYRPTED = null;
         private int SLEEP = 200;
 
@@ -150,6 +152,7 @@ namespace ClientApplication
 
         private void populateDatabaseDropdown()
         {
+            DATABASE = "";
             Database_ComboBox.Items.Clear();
             // http://stackoverflow.com/questions/12862604/c-sharp-connect-to-database-and-list-the-databases
             var connectionString = "Data Source=" + Server_ComboBox.Text + ";" +
@@ -165,6 +168,16 @@ namespace ClientApplication
                     string databaseName = database.Field<String>("database_name");
                     Database_ComboBox.Items.Add(databaseName);
                 }
+            }
+            if (Database_ComboBox.Items.Count > 0)
+            {
+                Database_ComboBox.SelectedIndex = 0;
+                DatabaseName_CheckBox.Enabled = true;
+                DATABASE = Database_ComboBox.SelectedItem.ToString();
+            }
+            else
+            {
+                DatabaseName_CheckBox.Enabled = false;
             }
         }
 
@@ -259,7 +272,7 @@ namespace ClientApplication
             {
                 DatabaseProgress_PictureBox4.Image = global::ClientApplication.Properties.Resources.success;
             }
-            else if (e.ProgressPercentage == 100)
+            else if (e.ProgressPercentage == 71)
             {
                 DatabaseMainProgress_PictureBox.Image = global::ClientApplication.Properties.Resources.success;
             }
@@ -595,7 +608,7 @@ namespace ClientApplication
 
 
                 String varname151 = "";
-                varname151 = varname151 + "SET @DBName = 'EVALUATOR'";
+                varname151 = varname151 + "SET @DBName = '"+DATABASE+"'";
 
 
                 String varname152 = "";
@@ -883,91 +896,108 @@ namespace ClientApplication
                 Thread.Sleep(200);
                 ClientApplication_BackgroundWorker.ReportProgress(31);
 
-                Thread.Sleep(200);
-                ClientApplication_BackgroundWorker.ReportProgress(32);
 
-                string dbHeader =
-                        varname149 + Environment.NewLine +
-                        varname150 + Environment.NewLine +
-                        varname151 + Environment.NewLine;
+                if (DATABASENAME_CHECKED)
+                {
+                    Thread.Sleep(200);
+                    ClientApplication_BackgroundWorker.ReportProgress(32);
 
-                sql =
-                        // SQL Server Database
+                    string dbHeader =
+                            varname149 + Environment.NewLine +
+                            varname150 + Environment.NewLine +
+                            varname151 + Environment.NewLine;
 
-                        // 1. Implemetation 
-                        header +
-                        dbHeader +
-                        varname152 + Environment.NewLine +
-                        varname153 + Environment.NewLine +
-                        varname154 + Environment.NewLine +
-                        varname155 + Environment.NewLine +
-                        varname156 + Environment.NewLine +
-                        varname157 + Environment.NewLine +
-                        varname158 + Environment.NewLine +
-                        varname159 + Environment.NewLine +
-                        varname160 + Environment.NewLine +
-                        varname161 + Environment.NewLine;
+                    sql =
+                            // SQL Server Database
 
-                Thread.Sleep(200);
-                ClientApplication_BackgroundWorker.ReportProgress(35);
+                            // 1. Implemetation 
+                            header +
+                            dbHeader +
+                            varname152 + Environment.NewLine +
+                            varname153 + Environment.NewLine +
+                            varname154 + Environment.NewLine +
+                            varname155 + Environment.NewLine +
+                            varname156 + Environment.NewLine +
+                            varname157 + Environment.NewLine +
+                            varname158 + Environment.NewLine +
+                            varname159 + Environment.NewLine +
+                            varname160 + Environment.NewLine +
+                            varname161 + Environment.NewLine;
 
-                command = new SqlCommand(sql, connection);
-                command.ExecuteNonQuery();
+                    Thread.Sleep(200);
+                    ClientApplication_BackgroundWorker.ReportProgress(35);
 
-                Thread.Sleep(200);
-                ClientApplication_BackgroundWorker.ReportProgress(40);
+                    command = new SqlCommand(sql, connection);
+                    command.ExecuteNonQuery();
 
-                sql =
-                        // 2. Configuration Options
-                        header +
-                        dbHeader +
-                        varname162 + Environment.NewLine +
-                        varname163 + Environment.NewLine +
-                        varname164 + Environment.NewLine +
-                        varname165 + Environment.NewLine +
-                        varname166 + Environment.NewLine +
-                        varname167 + Environment.NewLine +
-                        varname168 + Environment.NewLine +
-                        varname169 + Environment.NewLine +
-                        varname170 + Environment.NewLine +
-                        varname171 + Environment.NewLine +
-                        varname172 + Environment.NewLine;
+                    Thread.Sleep(200);
+                    ClientApplication_BackgroundWorker.ReportProgress(40);
 
-                Thread.Sleep(200);
-                ClientApplication_BackgroundWorker.ReportProgress(45);
+                    sql =
+                            // 2. Configuration Options
+                            header +
+                            dbHeader +
+                            varname162 + Environment.NewLine +
+                            varname163 + Environment.NewLine +
+                            varname164 + Environment.NewLine +
+                            varname165 + Environment.NewLine +
+                            varname166 + Environment.NewLine +
+                            varname167 + Environment.NewLine +
+                            varname168 + Environment.NewLine +
+                            varname169 + Environment.NewLine +
+                            varname170 + Environment.NewLine +
+                            varname171 + Environment.NewLine +
+                            varname172 + Environment.NewLine;
 
-                command = new SqlCommand(sql, connection);
-                command.ExecuteNonQuery();
+                    Thread.Sleep(200);
+                    ClientApplication_BackgroundWorker.ReportProgress(45);
 
-                Thread.Sleep(200);
-                ClientApplication_BackgroundWorker.ReportProgress(50);
+                    command = new SqlCommand(sql, connection);
+                    command.ExecuteNonQuery();
 
-                sql =
-                        // 3. Maintenance
-                        header +
-                        dbHeader +
-                        varname173 + Environment.NewLine +
-                        varname174 + Environment.NewLine;
+                    Thread.Sleep(200);
+                    ClientApplication_BackgroundWorker.ReportProgress(50);
 
-                Thread.Sleep(200);
-                ClientApplication_BackgroundWorker.ReportProgress(55);
+                    sql =
+                            // 3. Maintenance
+                            header +
+                            dbHeader +
+                            varname173 + Environment.NewLine +
+                            varname174 + Environment.NewLine;
 
-                command = new SqlCommand(sql, connection);
-                command.ExecuteNonQuery();
+                    Thread.Sleep(200);
+                    ClientApplication_BackgroundWorker.ReportProgress(55);
 
-                Thread.Sleep(200);
-                ClientApplication_BackgroundWorker.ReportProgress(60);
+                    command = new SqlCommand(sql, connection);
+                    command.ExecuteNonQuery();
 
-                sql =
-                        // 4. Security
-                        header +
-                        dbHeader +
-                        varname175 + Environment.NewLine +
-                        varname176 + Environment.NewLine +
-                        varname177 + Environment.NewLine;
+                    Thread.Sleep(200);
+                    ClientApplication_BackgroundWorker.ReportProgress(60);
 
-                Thread.Sleep(200);
-                ClientApplication_BackgroundWorker.ReportProgress(65);
+                    sql =
+                            // 4. Security
+                            header +
+                            dbHeader +
+                            varname175 + Environment.NewLine +
+                            varname176 + Environment.NewLine;
+
+                    Thread.Sleep(200);
+                    ClientApplication_BackgroundWorker.ReportProgress(65);
+
+                    command = new SqlCommand(sql, connection);
+                    command.ExecuteNonQuery();
+
+                    Thread.Sleep(200);
+                    ClientApplication_BackgroundWorker.ReportProgress(70);
+
+                    Thread.Sleep(200);
+                    ClientApplication_BackgroundWorker.ReportProgress(71);
+                }
+
+
+                // Retrive all Values to put in XML
+                sql = varname177;
+
 
                 // http://csharp.net-informations.com/xml/xml-from-sql.htm
                 SqlDataAdapter adapter;
@@ -983,8 +1013,7 @@ namespace ClientApplication
                 ds.WriteXml(sw);
                 string result = sw.ToString();
 
-                Thread.Sleep(200);
-                ClientApplication_BackgroundWorker.ReportProgress(70);
+                
 
                 try
                 {
@@ -1080,7 +1109,6 @@ namespace ClientApplication
             if (SERVER_OK)
             {
                 populateDatabaseDropdown();
-                DatabaseName_CheckBox.Enabled = true;
                 Start_Button.Enabled = true;
                 ConnectStatus_PictureBox.Image = global::ClientApplication.Properties.Resources.success;
             }
@@ -1097,12 +1125,14 @@ namespace ClientApplication
                 Database_ComboBox.Enabled = true;
                 populateDatabaseDropdown();
                 Database_TableLayoutPanel.Enabled = true;
+                DATABASENAME_CHECKED = true;
             }
             else
             {
                 Database_ComboBox.Enabled = false;
                 Database_ComboBox.Items.Clear();
                 Database_TableLayoutPanel.Enabled = false;
+                DATABASENAME_CHECKED = false;
             }
         }
 
@@ -1119,11 +1149,9 @@ namespace ClientApplication
             }
         }
 
-
-
-
-
-
-
+        private void Database_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DATABASE = Database_ComboBox.SelectedItem.ToString();
+        }
     }
 }

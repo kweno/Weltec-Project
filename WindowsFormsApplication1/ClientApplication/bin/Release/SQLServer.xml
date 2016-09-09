@@ -70,11 +70,11 @@
   </Table>
   <Table>
     <ProcessInfo>Recovery Model</ProcessInfo>
-    <Text>FULL</Text>
+    <Text>SIMPLE</Text>
   </Table>
   <Table>
     <ProcessInfo>Compatibility Level</ProcessInfo>
-    <Text>100</Text>
+    <Text>130</Text>
   </Table>
   <Table>
     <ProcessInfo>Snapshot Isolation</ProcessInfo>
@@ -86,7 +86,7 @@
   </Table>
   <Table>
     <ProcessInfo>Datafile Growth</ProcessInfo>
-    <Text>Fix in size</Text>
+    <Text>In percent</Text>
   </Table>
   <Table>
     <ProcessInfo>Auto Create Statistics</ProcessInfo>
@@ -102,7 +102,7 @@
   </Table>
   <Table>
     <ProcessInfo>Last Full Backup</ProcessInfo>
-    <Text>6</Text>
+    <Text>8</Text>
   </Table>
   <Table>
     <ProcessInfo>SA Login</ProcessInfo>
