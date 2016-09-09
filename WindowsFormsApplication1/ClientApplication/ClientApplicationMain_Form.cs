@@ -7,6 +7,7 @@ using System.IO;
 using System.Data.Sql;
 using System.Threading;
 using System.Security.Cryptography;
+using System.Drawing;
 
 namespace ClientApplication
 {
@@ -123,8 +124,6 @@ namespace ClientApplication
             Server_ComboBox.Enabled = false;
             DatabaseName_CheckBox.Enabled = false;
             Database_ComboBox.Enabled = false;
-
-            
         }
 
         private void populateServerDropdown()
@@ -195,9 +194,18 @@ namespace ClientApplication
             Start_Button.Enabled = true;
             Start_Button.Enabled = true;
             Server_ComboBox.Enabled = true;
-            //Connect_Button.Enabled = true;
             DatabaseName_CheckBox.Enabled = true;
             Database_ComboBox.Enabled = true;
+
+            RemoveImage(InstanceMainProgress_PictureBox);
+            RemoveImage(InstanceProgress_PictureBox1);
+            RemoveImage(InstanceProgress_PictureBox2);
+            RemoveImage(InstanceProgress_PictureBox3);
+            RemoveImage(DatabaseMainProgress_PictureBox);
+            RemoveImage(DatabaseProgress_PictureBox1);
+            RemoveImage(DatabaseProgress_PictureBox2);
+            RemoveImage(DatabaseProgress_PictureBox3);
+            RemoveImage(DatabaseProgress_PictureBox4);
         }
 
         /// Notification is performed here to the progress bar
@@ -1050,12 +1058,7 @@ namespace ClientApplication
 
         private void CheckServerConnection()
         {
-            if (ConnectStatus_PictureBox.Image != null)
-            {
-                ConnectStatus_PictureBox.Image.Dispose();
-                ConnectStatus_PictureBox.Image = null;
-                ConnectStatus_PictureBox.InitialImage = null;
-            }
+            RemoveImage(ConnectStatus_PictureBox);
 
             if (DatabaseName_CheckBox.Enabled)
             {
@@ -1153,5 +1156,19 @@ namespace ClientApplication
         {
             DATABASE = Database_ComboBox.SelectedItem.ToString();
         }
+
+        private void RemoveImage(PictureBox picBox)
+        {
+            if (picBox.Image != null)
+            {
+                picBox.Image.Dispose();
+                picBox.Image = null;
+                picBox.InitialImage = null;
+            }
+        }
+
+
+
+
     }
 }
