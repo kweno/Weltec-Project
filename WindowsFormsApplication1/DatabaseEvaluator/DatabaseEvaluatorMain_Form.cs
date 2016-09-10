@@ -129,6 +129,316 @@ namespace DatabaseEvaluator
                         + "Select * from [EVALUATOR].[dbo].[ServicePack]" + "\n"
                         + "WHERE [LatestServicePackValue] != @ProductVersion and [SQLServerVersion] = @SQLName";
 
+                String varname1 = "";
+                varname1 = varname1 + "DECLARE @xml xml";
+
+
+                String varname11 = "";
+                //varname11 = varname11 + "SET @xml = N'\n" + decrypted + "'";
+                varname11 = varname11 + "SET @xml = N' " + "\n";
+                varname11 = varname11 + "<NewDataSet> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>HostName</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>DESKTOP-FVFO8GL</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>InstanceName</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>SQL2016N2</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Installation Directory</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>System Drive</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>SQLVersion</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>Microsoft SQL Server 2016 (RTM) Express Edition (64-bit)</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>ProductLevel</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>RTM</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>ProductVersion</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>13.0.1601.5</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Max Degree Of Parallelism</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>0</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Minimum size of server memory (MB)</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>16</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Maximum size of server memory (MB)</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>2147483647</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Trace Flag 2371</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>0</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Trace Flag 1117</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>0</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Trace Flag 1118</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>0</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Fill Factor Values in (%)</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>0</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>SQL Server Authentication Mode</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>Windows Authentication</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>SQL Port</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>SQL Server doesnt use default port</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Datafile Location</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>System Drive</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Logfile Location</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>System Drive</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Recovery Model</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>SIMPLE</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Compatibility Level</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>130</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Snapshot Isolation</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>OFF</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Read Committed Snapshot Isolation</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>0</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Datafile Growth</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>In percent</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Auto Create Statistics</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>1</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Auto Update Statistics</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>1</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>Auto Shrink</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>0</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>SA Login</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>Does not have a blank password</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "  <Table> " + "\n";
+                varname11 = varname11 + "    <ProcessInfo>NT AUTHORITY\\SYSTEM</ProcessInfo> " + "\n";
+                varname11 = varname11 + "    <Text>Does have a access</Text> " + "\n";
+                varname11 = varname11 + "  </Table> " + "\n";
+                varname11 = varname11 + "</NewDataSet>'";
+
+
+                String varname12 = "";
+                varname12 = varname12 + "DECLARE @ExpressionToSearch VARCHAR(200)";
+
+
+                String varname13 = "";
+                varname13 = varname13 + "DECLARE  @ExpressionToFind VARCHAR(200)";
+
+
+                String varname14 = "";
+                varname14 = varname14 + "IF OBJECT_ID('tempdb..#ParameterDetails') IS NOT NULL DROP TABLE #ParameterDetails";
+
+
+                String varname15 = "";
+                varname15 = varname15 + "IF OBJECT_ID('tempdb..#XMLwithOpenXML') IS NOT NULL DROP TABLE #XMLwithOpenXML";
+
+
+                String varname16 = "";
+                varname16 = varname16 + "CREATE TABLE #ParameterDetails( " + "\n";
+                varname16 = varname16 + "	[PassValue] [nvarchar](5) NULL, " + "\n";
+                varname16 = varname16 + "	[ParameterName] [nvarchar](100) NULL, " + "\n";
+                varname16 = varname16 + "	[ClientParameterName] [nvarchar](50) NULL, " + "\n";
+                varname16 = varname16 + "	[BestPracticeValue] [nvarchar](100) NULL, " + "\n";
+                varname16 = varname16 + "	[IssueType] [nvarchar](50) NULL, " + "\n";
+                varname16 = varname16 + "	[IssueSeverity] [nvarchar](15) NULL, " + "\n";
+                varname16 = varname16 + "	[Problem] [nvarchar](max) NULL, " + "\n";
+                varname16 = varname16 + "	[Recommendation] [nvarchar](max) NULL, " + "\n";
+                varname16 = varname16 + "	[Why] [nvarchar](max) NULL, " + "\n";
+                varname16 = varname16 + "	[Link] [nvarchar](max) NULL, " + "\n";
+                varname16 = varname16 + "	[Link2] [nvarchar](max) NULL " + "\n";
+                varname16 = varname16 + ")";
+
+
+                String varname17 = "";
+                varname17 = varname17 + "CREATE TABLE #XMLwithOpenXML( " + "\n";
+                varname17 = varname17 + "	Id INT IDENTITY PRIMARY KEY, " + "\n";
+                varname17 = varname17 + "	XMLData XML, " + "\n";
+                varname17 = varname17 + "	LoadedDateTime DATETIME " + "\n";
+                varname17 = varname17 + ") " + "\n";
+                varname17 = varname17 + " " + "\n";
+                varname17 = varname17 + " " + "\n";
+                varname17 = varname17 + " " + "\n";
+                varname17 = varname17 + " " + "\n";
+                varname17 = varname17 + " " + "\n";
+                varname17 = varname17 + "-- SQL Server Instance Installation Directory";
+
+
+                String varname18 = "";
+                varname18 = varname18 + "DECLARE @InstallationDirectory nvarchar(MAX)";
+
+
+                String varname19 = "";
+                varname19 = varname19 + "SELECT @InstallationDirectory = doc.col.value('Text[1]', 'nvarchar(MAX)') " + "\n";
+                varname19 = varname19 + "FROM @xml.nodes('/NewDataSet/Table') doc(col) " + "\n";
+                varname19 = varname19 + "WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'Installation Directory'";
+
+
+                String varname110 = "";
+                varname110 = varname110 + "SET @ExpressionToFind = 'Not System Drive'";
+
+
+                String varname111 = "";
+                varname111 = varname111 + "SELECT @ExpressionToSearch = @InstallationDirectory";
+
+
+                String varname112 = "";
+                varname112 = varname112 + "IF @ExpressionToSearch = @ExpressionToFind " + "\n";
+                varname112 = varname112 + "    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity], " + "\n";
+                varname112 = varname112 + "									 [Problem],[Recommendation],[Why],[Link],[Link2]) " + "\n";
+                varname112 = varname112 + "    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity], " + "\n";
+                varname112 = varname112 + "									 [Problem],[Recommendation],[Why],[Link],[Link2] " + "\n";
+                varname112 = varname112 + "									 from [EVALUATOR].[dbo].[ParameterDesc] " + "\n";
+                varname112 = varname112 + "									 WHERE ParameterName = 'SQL Server Instance Installation Directory' " + "\n";
+                varname112 = varname112 + "ELSE " + "\n";
+                varname112 = varname112 + "	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity], " + "\n";
+                varname112 = varname112 + "									 [Problem],[Recommendation],[Why],[Link],[Link2]) " + "\n";
+                varname112 = varname112 + "    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity], " + "\n";
+                varname112 = varname112 + "									 [Problem],[Recommendation],[Why],[Link],[Link2] " + "\n";
+                varname112 = varname112 + "									 from [EVALUATOR].[dbo].[ParameterDesc] " + "\n";
+                varname112 = varname112 + "									 WHERE ParameterName = 'SQL Server Instance Installation Directory' " + "\n";
+                varname112 = varname112 + "     " + "\n";
+                varname112 = varname112 + " " + "\n";
+                varname112 = varname112 + " " + "\n";
+                varname112 = varname112 + "-- SQL Server Version and Service Pack";
+
+
+                String varname113 = "";
+                varname113 = varname113 + "DECLARE @ProductVersion nvarchar(20)";
+
+
+                String varname114 = "";
+                varname114 = varname114 + "DECLARE @SQLName nvarchar(50)";
+
+
+                String varname115 = "";
+                varname115 = varname115 + "SELECT @ProductVersion = doc.col.value('Text[1]', 'nvarchar(50)') " + "\n";
+                varname115 = varname115 + "FROM @xml.nodes('/NewDataSet/Table') doc(col) " + "\n";
+                varname115 = varname115 + "WHERE doc.col.value('ProcessInfo[1]', 'varchar(100)') = 'ProductVersion'";
+
+
+                String varname116 = "";
+                varname116 = varname116 + "IF (LEFT(@ProductVersion ,2) = '10') " + "\n";
+                varname116 = varname116 + "   SET @SQLName = 'Microsoft SQL Server 2008 R2' " + "\n";
+                varname116 = varname116 + "ELSE IF (LEFT(@ProductVersion ,2) = '11') " + "\n";
+                varname116 = varname116 + "   SET @SQLName = 'Microsoft SQL Server 2012'";
+
+
+                String varname117 = "";
+                varname117 = varname117 + "IF (Select COUNT(1) from [EVALUATOR].[dbo].[ServicePack]WHERE [LatestServicePackValue] != @ProductVersion and [SQLServerVersion] = @SQLName) > 0 " + "\n";
+                varname117 = varname117 + "    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity], " + "\n";
+                varname117 = varname117 + "									 [Problem],[Recommendation],[Why],[Link],[Link2]) " + "\n";
+                varname117 = varname117 + "    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity], " + "\n";
+                varname117 = varname117 + "									 [Problem],[Recommendation],[Why],[Link],[Link2] " + "\n";
+                varname117 = varname117 + "									 from [EVALUATOR].[dbo].[ParameterDesc] " + "\n";
+                varname117 = varname117 + "									 WHERE ParameterName = 'SQL Server Version and Service Pack' " + "\n";
+                varname117 = varname117 + "ELSE " + "\n";
+                varname117 = varname117 + "	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity], " + "\n";
+                varname117 = varname117 + "									 [Problem],[Recommendation],[Why],[Link],[Link2]) " + "\n";
+                varname117 = varname117 + "    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity], " + "\n";
+                varname117 = varname117 + "									 [Problem],[Recommendation],[Why],[Link],[Link2] " + "\n";
+                varname117 = varname117 + "									 from [EVALUATOR].[dbo].[ParameterDesc] " + "\n";
+                varname117 = varname117 + "									 WHERE ParameterName = 'SQL Server Version and Service Pack' " + "\n";
+                varname117 = varname117 + "								 " + "\n";
+                varname117 = varname117 + "								 " + "\n";
+                varname117 = varname117 + "-- Max Degree Of Parallelism	";
+
+
+                String varname118 = "";
+                varname118 = varname118 + "DECLARE @MaxDegree nvarchar(2)";
+
+
+                String varname119 = "";
+                varname119 = varname119 + "SELECT @MaxDegree = doc.col.value('Text[1]', 'nvarchar(MAX)') " + "\n";
+                varname119 = varname119 + "FROM @xml.nodes('/NewDataSet/Table') doc(col) " + "\n";
+                varname119 = varname119 + "WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'Max Degree Of Parallelism'";
+
+
+                String varname120 = "";
+                varname120 = varname120 + "SET @ExpressionToFind = 'Not Default'";
+
+
+                String varname121 = "";
+                varname121 = varname121 + "SELECT @ExpressionToSearch = @MaxDegree";
+
+
+                String varname122 = "";
+                varname122 = varname122 + "IF @ExpressionToSearch = @ExpressionToFind " + "\n";
+                varname122 = varname122 + "    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity], " + "\n";
+                varname122 = varname122 + "									 [Problem],[Recommendation],[Why],[Link],[Link2]) " + "\n";
+                varname122 = varname122 + "    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity], " + "\n";
+                varname122 = varname122 + "									 [Problem],[Recommendation],[Why],[Link],[Link2] " + "\n";
+                varname122 = varname122 + "									 from [EVALUATOR].[dbo].[ParameterDesc] " + "\n";
+                varname122 = varname122 + "									 WHERE ParameterName = 'Max Degree Of Parallelism' " + "\n";
+                varname122 = varname122 + "ELSE " + "\n";
+                varname122 = varname122 + "	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity], " + "\n";
+                varname122 = varname122 + "									 [Problem],[Recommendation],[Why],[Link],[Link2]) " + "\n";
+                varname122 = varname122 + "    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity], " + "\n";
+                varname122 = varname122 + "									 [Problem],[Recommendation],[Why],[Link],[Link2] " + "\n";
+                varname122 = varname122 + "									 from [EVALUATOR].[dbo].[ParameterDesc] " + "\n";
+                varname122 = varname122 + "									 WHERE ParameterName = 'Max Degree Of Parallelism'";
+
+
+                String varname123 = "";
+                varname123 = varname123 + "SELECT * from #ParameterDetails";
+
+                sql = varname1 + Environment.NewLine +
+                    varname11 + Environment.NewLine +
+                    varname12 + Environment.NewLine +
+                    varname13 + Environment.NewLine +
+                    varname14 + Environment.NewLine +
+                    varname15 + Environment.NewLine +
+                    varname16 + Environment.NewLine +
+                    varname17 + Environment.NewLine +
+                    varname18 + Environment.NewLine +
+                    varname19 + Environment.NewLine +
+                    varname110 + Environment.NewLine +
+                    varname111 + Environment.NewLine +
+                    varname112 + Environment.NewLine +
+                    varname113 + Environment.NewLine +
+                    varname114 + Environment.NewLine +
+                    varname115 + Environment.NewLine +
+                    varname116 + Environment.NewLine +
+                    varname117 + Environment.NewLine +
+                    varname118 + Environment.NewLine +
+                    varname119 + Environment.NewLine +
+                    varname120 + Environment.NewLine +
+                    varname121 + Environment.NewLine +
+                    varname122 + Environment.NewLine +
+                    varname123 + Environment.NewLine;
+
+
+
                 SqlCommand command;
                 SqlDataReader dataReader;
                 var connection = new SqlConnection(connectionString);

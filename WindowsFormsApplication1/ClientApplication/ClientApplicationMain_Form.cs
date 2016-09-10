@@ -1098,7 +1098,7 @@ namespace ClientApplication
                 var majorMinorString = ver.Major + "." + ver.Minor;
                 double majorMinorDouble;
                 if (double.TryParse(majorMinorString, out majorMinorDouble))
-                    //if(10.5 < majorMinorDouble && majorMinorDouble < 11)
+                    //if(10.5 <= majorMinorDouble && majorMinorDouble < 12)
                         SERVER_OK = true;
                     //else
                         //MessageBox.Show("SQL Server Version " + ver.Major + "." + ver.Minor + " not supported", "Information");
