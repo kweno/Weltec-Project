@@ -6,7 +6,7 @@
   </Table>
   <Table>
     <ProcessInfo>InstanceName</ProcessInfo>
-    <Text>SQL2016N</Text>
+    <Text>SQL2016N2</Text>
   </Table>
   <Table>
     <ProcessInfo>Installation Directory</ProcessInfo>
@@ -78,7 +78,7 @@
   </Table>
   <Table>
     <ProcessInfo>Snapshot Isolation</ProcessInfo>
-    <Text>ON</Text>
+    <Text>OFF</Text>
   </Table>
   <Table>
     <ProcessInfo>Read Committed Snapshot Isolation</ProcessInfo>
@@ -99,10 +99,6 @@
   <Table>
     <ProcessInfo>Auto Shrink</ProcessInfo>
     <Text>0</Text>
-  </Table>
-  <Table>
-    <ProcessInfo>Last Full Backup</ProcessInfo>
-    <Text>9</Text>
   </Table>
   <Table>
     <ProcessInfo>SA Login</ProcessInfo>
