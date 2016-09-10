@@ -15,8 +15,6 @@ D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\C
 D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.pdb
 D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe
 D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.pdb
-D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\itextsharp.dll
-D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\itextsharp.xml
 D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.csprojResolveAssemblyReference.cache
 D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.ClientApplicationMain_Form.resources
 D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.Properties.Resources.resources
