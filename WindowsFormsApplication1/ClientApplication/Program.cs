@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -64,5 +65,9 @@ namespace ClientApplication
             splashForm = null;
         }
 
+
+
+
+        
     }
 }

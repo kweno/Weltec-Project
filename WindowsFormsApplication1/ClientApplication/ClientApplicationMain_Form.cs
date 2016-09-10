@@ -1091,8 +1091,18 @@ namespace ClientApplication
             try
             {
                 connection.Open();
+
+                // https://msdn.microsoft.com/en-us/library/system.data.sqlclient.sqlconnection.serverversion(v=vs.110).aspx
+                // https://support.microsoft.com/en-nz/kb/321185
+                var ver = Version.Parse(connection.ServerVersion);
+                var majorMinorString = ver.Major + "." + ver.Minor;
+                double majorMinorDouble;
+                if (double.TryParse(majorMinorString, out majorMinorDouble))
+                    //if(10.5 < majorMinorDouble && majorMinorDouble < 11)
+                        SERVER_OK = true;
+                    //else
+                        //MessageBox.Show("SQL Server Version " + ver.Major + "." + ver.Minor + " not supported", "Information");
                 connection.Close();
-                SERVER_OK = true;
             }
             catch (SqlException exception)
             {
