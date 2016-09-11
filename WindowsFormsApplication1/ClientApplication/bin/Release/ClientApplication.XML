@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ClientApplication</name>
+    </assembly>
+    <members>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.EVALUATOR_KEY">
+            <summary>
+            The Key for Encoding and Decoding
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.SERVER">
+            <summary>
+            The Server-Instance Selected by the user
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.DATABASE">
+            <summary>
+            The Database selected by the user
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.SERVER_OK">
+            <summary>
+            Indicates if the connection to the Server chosen is successful
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.DATABASENAME_CHECKED">
+            <summary>
+            Indicates if the Database checkbox is checked
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.ENCYRPTED">
+            <summary>
+            The encrypted parameters
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.SLEEP">
+            <summary>
+            The delay used for the threads
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.ClientApplication_BackgroundWorker">
+            The backgroundworker object on which the time consuming operation shall be executed
+            http://www.codeproject.com/Articles/99143/BackgroundWorker-Class-Sample-for-Beginners
+            <summary>
+            BackgroundWorker which collects database parameters
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.CheckServerConnection_BackgroundWorker">
+            <summary>
+            BackgroundWorker which checks server connection
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.EncryptStringToBytes_Aes(System.String)">
+            <summary>
+            Does the text encryption
+            </summary>
+            <param name="plainText">The string to be encrypted</param>
+            <returns></returns>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.ByteArrayToFile(System.String,System.Byte[])">
+            <summary>
+            Save a given byte array (for example the encrypted parameters) to a file
+            </summary>
+            <param name="_FileName">File Name where to save byte array</param>
+            <param name="_ByteArray">Byte Array to save to file</param>
+            <returns></returns>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.Start_Button_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event Handler for when Start Button is clicked
+            </summary>
+            <param name="sender">GUI Component that triggered Click</param>
+            <param name="e">Event Arguments</param>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.populateServerDropdown">
+            <summary>
+            Populate the Server-Instance Dropdown
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.populateDatabaseDropdown">
+            <summary>
+            Populate the Database Dropdown
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.ClientApplication_BackgroundWorker_RunWorkerCompleted(System.Object,System.ComponentModel.RunWorkerCompletedEventArgs)">
+            On completed do the appropriate task
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.ClientApplication_BackgroundWorker_ProgressChanged(System.Object,System.ComponentModel.ProgressChangedEventArgs)">
+            Notification is performed here to the progress bar
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:ClientApplication.ClientApplicationMain_Form.ClientApplication_BackgroundWorker_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)" -->
+        <member name="F:ClientApplication.ClientApplicationMain_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:ClientApplication.Program.Main">
+            <summary>
+            The main entry point for the application.
+            http://www.telerik.com/support/kb/winforms/forms-and-dialogs/details/add-splashscreen-to-your-application
+            </summary>
+        </member>
+        <member name="F:ClientApplication.SplashScreen_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ClientApplication.SplashScreen_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ClientApplication.SplashScreen_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:ClientApplication.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.db_logo_tab">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.error">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.header_logo_alpha">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.header_logo_alpha1">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.header_logo_noalpha">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.icon">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.right_arrow_3">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.success">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.telerik_logo_RGB_photoshop">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+    </members>
+</doc>

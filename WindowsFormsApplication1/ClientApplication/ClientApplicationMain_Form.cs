@@ -13,30 +13,72 @@ namespace ClientApplication
 {
     public partial class ClientApplicationMain_Form : Form
     {
+        /// <summary>
+        /// The Key for Encoding and Decoding
+        /// </summary>
         private string EVALUATOR_KEY = "AAECAwQFBgcICQoLDA0ODw==";
+
+        /// <summary>
+        /// The Server-Instance Selected by the user
+        /// </summary>
         private string SERVER = "";
+
+        /// <summary>
+        /// The Database selected by the user
+        /// </summary>
         private string DATABASE = "";
+
+        /// <summary>
+        /// Indicates if the connection to the Server chosen is successful
+        /// </summary>
         private bool SERVER_OK = false;
+
+        /// <summary>
+        /// Indicates if the Database checkbox is checked
+        /// </summary>
         private bool DATABASENAME_CHECKED = false;
+
+        /// <summary>
+        /// The encrypted parameters
+        /// </summary>
         private byte[] ENCYRPTED = null;
+
+        /// <summary>
+        /// The delay used for the threads
+        /// </summary>
         private int SLEEP = 200;
 
         /// The backgroundworker object on which the time consuming operation shall be executed
         /// http://www.codeproject.com/Articles/99143/BackgroundWorker-Class-Sample-for-Beginners
+
+        /// <summary>
+        /// BackgroundWorker which collects database parameters
+        /// </summary>
         BackgroundWorker ClientApplication_BackgroundWorker;
+
+        /// <summary>
+        /// BackgroundWorker which checks server connection
+        /// </summary>
         BackgroundWorker CheckServerConnection_BackgroundWorker;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ClientApplicationMain_Form()
         {
+            // Initializes GUI components
             InitializeComponent();
             populateServerDropdown();
 
+            // Adds event handler for combo box
             Server_ComboBox.TextChanged += new System.EventHandler(Server_ComboBox_TextChanged);
 
+            // Makes the windows form not resizable
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = true;
 
+            // Adds event handler for gathering db parameters
             ClientApplication_BackgroundWorker = new BackgroundWorker();
             ClientApplication_BackgroundWorker.DoWork += new DoWorkEventHandler(ClientApplication_BackgroundWorker_DoWork);
             ClientApplication_BackgroundWorker.ProgressChanged += new ProgressChangedEventHandler(ClientApplication_BackgroundWorker_ProgressChanged);
@@ -44,6 +86,7 @@ namespace ClientApplication
             ClientApplication_BackgroundWorker.WorkerReportsProgress = true;
             ClientApplication_BackgroundWorker.WorkerSupportsCancellation = true;
 
+            // Adds event handler for checking server connection
             CheckServerConnection_BackgroundWorker = new BackgroundWorker();
             CheckServerConnection_BackgroundWorker.DoWork += new DoWorkEventHandler(CheckServerConnection_BackgroundWorker_DoWork);
             CheckServerConnection_BackgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(CheckServerConnection_BackgroundWorker_RunWorkerCompleted);
@@ -51,6 +94,11 @@ namespace ClientApplication
             CheckServerConnection_BackgroundWorker.WorkerSupportsCancellation = true;
         }
 
+        /// <summary>
+        /// Does the text encryption
+        /// </summary>
+        /// <param name="plainText">The string to be encrypted</param>
+        /// <returns></returns>
         // https://dotnetfiddle.net/bFvxp8
         private byte[] EncryptStringToBytes_Aes(string plainText)
         {
@@ -65,7 +113,7 @@ namespace ClientApplication
                 aesAlg.Key = Convert.FromBase64String(EVALUATOR_KEY); ;
                 aesAlg.IV = Convert.FromBase64String(EVALUATOR_KEY); ;
 
-                // Create a decrytor to perform the stream transform.
+                // Create encryptor to perform the stream transform.
                 ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
 
                 // Create the streams used for encryption.
@@ -87,6 +135,12 @@ namespace ClientApplication
             return encrypted;
         }
 
+        /// <summary>
+        /// Save a given byte array (for example the encrypted parameters) to a file
+        /// </summary>
+        /// <param name="_FileName">File Name where to save byte array</param>
+        /// <param name="_ByteArray">Byte Array to save to file</param>
+        /// <returns></returns>
         private bool ByteArrayToFile(string _FileName, byte[] _ByteArray)
         {
             try
@@ -115,6 +169,11 @@ namespace ClientApplication
             return false;
         }
 
+        /// <summary>
+        /// Event Handler for when Start Button is clicked
+        /// </summary>
+        /// <param name="sender">GUI Component that triggered Click</param>
+        /// <param name="e">Event Arguments</param>
         private void Start_Button_Click(object sender, EventArgs e)
         {
             //Start the async operation here
@@ -126,6 +185,9 @@ namespace ClientApplication
             Database_ComboBox.Enabled = false;
         }
 
+        /// <summary>
+        /// Populate the Server-Instance Dropdown
+        /// </summary>
         private void populateServerDropdown()
         {
             // https://msdn.microsoft.com/en-us/library/a6t1z9x2%28v=vs.110%29.aspx
@@ -149,6 +211,9 @@ namespace ClientApplication
             }
         }
 
+        /// <summary>
+        /// Populate the Database Dropdown
+        /// </summary>
         private void populateDatabaseDropdown()
         {
             DATABASE = "";

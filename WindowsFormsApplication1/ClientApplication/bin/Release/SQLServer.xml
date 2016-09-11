@@ -6,7 +6,7 @@
   </Table>
   <Table>
     <ProcessInfo>InstanceName</ProcessInfo>
-    <Text>SQL2016N2</Text>
+    <Text>SQL2016N</Text>
   </Table>
   <Table>
     <ProcessInfo>Installation Directory</ProcessInfo>
@@ -70,11 +70,11 @@
   </Table>
   <Table>
     <ProcessInfo>Recovery Model</ProcessInfo>
-    <Text>SIMPLE</Text>
+    <Text>FULL</Text>
   </Table>
   <Table>
     <ProcessInfo>Compatibility Level</ProcessInfo>
-    <Text>130</Text>
+    <Text>100</Text>
   </Table>
   <Table>
     <ProcessInfo>Snapshot Isolation</ProcessInfo>
@@ -86,7 +86,7 @@
   </Table>
   <Table>
     <ProcessInfo>Datafile Growth</ProcessInfo>
-    <Text>In percent</Text>
+    <Text>Fix in size</Text>
   </Table>
   <Table>
     <ProcessInfo>Auto Create Statistics</ProcessInfo>
@@ -99,6 +99,10 @@
   <Table>
     <ProcessInfo>Auto Shrink</ProcessInfo>
     <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Last Full Backup</ProcessInfo>
+    <Text>3</Text>
   </Table>
   <Table>
     <ProcessInfo>SA Login</ProcessInfo>

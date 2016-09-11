@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DatabaseEvaluator</name>
+    </assembly>
+    <members>
+        <member name="F:DatabaseEvaluator.DatabaseEvaluatorMain_Form.DatabaseEvaluator_BackgroundWorker">
+            The backgroundworker object on which the time consuming operation shall be executed
+            http://www.codeproject.com/Articles/99143/BackgroundWorker-Class-Sample-for-Beginners
+        </member>
+        <member name="F:DatabaseEvaluator.DatabaseEvaluatorMain_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:DatabaseEvaluator.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:DatabaseEvaluator.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:DatabaseEvaluator.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:DatabaseEvaluator.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:DatabaseEvaluator.Properties.Resources.db_logo_tab">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:DatabaseEvaluator.Properties.Resources.header_logo_alpha">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:DatabaseEvaluator.Properties.Resources.header_logo_alpha1">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DatabaseEvaluator.Properties.Resources.header_logo_noalpha">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DatabaseEvaluator.Properties.Resources.icon">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:DatabaseEvaluator.Properties.Resources.right_arrow_3">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DatabaseEvaluator.Properties.Resources.success">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:DatabaseEvaluator.Properties.Resources.telerik_logo_RGB_photoshop">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+    </members>
+</doc>
