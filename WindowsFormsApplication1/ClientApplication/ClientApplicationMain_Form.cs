@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 using System.Drawing;
 
 /// <summary>
-/// The Client Application is responsible for retrieving the SQL parameters from a User Database
+/// The Client Application is responsible for retrieving the SQL parameters
 /// </summary>
 namespace ClientApplication
 {

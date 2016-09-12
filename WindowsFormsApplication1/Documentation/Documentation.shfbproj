@@ -22,8 +22,27 @@
     </DocumentationSources>
     <VisibleItems>Attributes, Internals, Privates, PrivateFields, Protected, SealedProtected, ProtectedInternalAsProtected</VisibleItems>
     <NamespaceSummaries>
-      <NamespaceSummaryItem name="ClientApplication" isDocumented="True" xmlns="">The Client Application is responsible for retrieving the SQL parameters from a User Database</NamespaceSummaryItem>
-<NamespaceSummaryItem name="DatabaseEvaluator" isDocumented="True" xmlns="">The Database Evaluator is responsible for generating a Database Report based on the SQL parameters in the User's Dump File</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="ClientApplication" isDocumented="True">The Client Application is responsible for retrieving the SQL parameters</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="DatabaseEvaluator" isDocumented="True">The Database Evaluator is responsible for generating a Database Report based on the SQL parameters in the User's Dump File</NamespaceSummaryItem>
+    </NamespaceSummaries>
+    <SaveComponentCacheCapacity>100</SaveComponentCacheCapacity>
+    <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
+    <HelpFileFormat>HtmlHelp1</HelpFileFormat>
+    <IndentHtml>False</IndentHtml>
+    <KeepLogFile>True</KeepLogFile>
+    <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
+    <CleanIntermediates>True</CleanIntermediates>
+    <HelpFileVersion>1.0.0.0</HelpFileVersion>
+    <MaximumGroupParts>2</MaximumGroupParts>
+    <NamespaceGrouping>False</NamespaceGrouping>
+    <SyntaxFilters>Standard</SyntaxFilters>
+    <SdkLinkTarget>Blank</SdkLinkTarget>
+    <RootNamespaceContainer>False</RootNamespaceContainer>
+    <PresentationStyle>VS2013</PresentationStyle>
+    <Preliminary>False</Preliminary>
+    <NamingMethod>Guid</NamingMethod>
+    <HelpTitle>A Sandcastle Documented Class Library</HelpTitle>
+    <ContentPlacement>AboveNamespaces</ContentPlacement>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
