@@ -9,18 +9,25 @@ using System.Windows.Forms;
 
 namespace ClientApplication
 {
+    /// <summary>
+    /// The Class first called when the application is started
+    /// </summary>
     static class Program
     {
+        /// <summary>
+        /// Splash Form to be displayed while the application is readied for use
+        /// </summary>
         public static SplashScreen_Form splashForm = null;
 
         /// <summary>
         /// The main entry point for the application.
-        /// http://www.telerik.com/support/kb/winforms/forms-and-dialogs/details/add-splashscreen-to-your-application
         /// </summary>
+        // http://www.telerik.com/support/kb/winforms/forms-and-dialogs/details/add-splashscreen-to-your-application
         [STAThread]
         static void Main()
         {
             // http://stackoverflow.com/questions/1207105/restrict-multiple-instances-of-an-application
+            // Prevents multiple instances of this application from running
             Process[] result = Process.GetProcessesByName("ClientApplication");
             if (result.Length > 1)
             {
@@ -52,6 +59,9 @@ namespace ClientApplication
             Application.Run(mainForm);
         }
 
+        /// <summary>
+        /// Closes the Splash Screen when the Main Screen loads
+        /// </summary>
         static void mainForm_Load(object sender, EventArgs e)
         {
             //close splash

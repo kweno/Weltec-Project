@@ -4,6 +4,11 @@
         <name>ClientApplication</name>
     </assembly>
     <members>
+        <member name="T:ClientApplication.ClientApplicationMain_Form">
+            <summary>
+            Main Screen of the Application
+            </summary>
+        </member>
         <member name="F:ClientApplication.ClientApplicationMain_Form.EVALUATOR_KEY">
             <summary>
             The Key for Encoding and Decoding
@@ -53,7 +58,9 @@
         </member>
         <member name="M:ClientApplication.ClientApplicationMain_Form.#ctor">
             <summary>
-            Constructor
+            Main Form Constructor
+            Sets some properties of the main screen and its components
+            Adds event handlers
             </summary>
         </member>
         <member name="M:ClientApplication.ClientApplicationMain_Form.EncryptStringToBytes_Aes(System.String)">
@@ -89,12 +96,79 @@
             </summary>
         </member>
         <member name="M:ClientApplication.ClientApplicationMain_Form.ClientApplication_BackgroundWorker_RunWorkerCompleted(System.Object,System.ComponentModel.RunWorkerCompletedEventArgs)">
-            On completed do the appropriate task
+            <summary>
+            Event Handler for when the Background Worker responsible for getting sql parameters finishes
+            It will handle saving of the encrypted parameters
+            </summary>
         </member>
         <member name="M:ClientApplication.ClientApplicationMain_Form.ClientApplication_BackgroundWorker_ProgressChanged(System.Object,System.ComponentModel.ProgressChangedEventArgs)">
-            Notification is performed here to the progress bar
+            <summary>
+            Event Handler for when the Background Worker responsible for getting sql parameters progresses
+            It will handle updating the Progress Table GUI
+            </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:ClientApplication.ClientApplicationMain_Form.ClientApplication_BackgroundWorker_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)" -->
+        <member name="M:ClientApplication.ClientApplicationMain_Form.ClientApplication_BackgroundWorker_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Event Handler for the Background Worker Ongoing Actions
+            It will handle the actual retrieving of SQL Parameters
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.Server_ComboBox_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event Handler for when the Server Combo Box changed is value
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.Server_ComboBox_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Event Handler for when a Key in the Keyboard is pressed while inside the Server Combo Box
+            For now used to capture the Server-Instance value the user entered when Enter is pressed in the keyboard
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.CheckServerConnection">
+            <summary>
+            Checks if the Server-Instance value provided by the user is valid
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.CheckServerConnection_BackgroundWorker_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Event Handler for the CheckServerConnection_BackgroundWorker 
+            Does the actual check if the connection to the chosen Server-Instance is valid
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.CheckServerConnection_BackgroundWorker_RunWorkerCompleted(System.Object,System.ComponentModel.RunWorkerCompletedEventArgs)">
+            <summary>
+            Event Handler for the CheckServerConnection_BackgroundWorker 
+            Performs UI update after the Server Connection Check is done
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.DatabaseName_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event Handler for the Database Name Checkbox
+            Fired when the Checkbox is checked or unchecked
+            Enables Disables the Database portion of the Progress Table
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.Server_ComboBox_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event Handler for the Server Combobox
+            Fired when the user types in the Server Combobox
+            Disables other form elements while the user is typing
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.Database_ComboBox_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event Handler for the Database Combobox
+            Fired when the value of the combo box changes
+            Sets the value of the Database variable
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.RemoveImage(System.Windows.Forms.PictureBox)">
+            <summary>
+            Removes the image set for a given Picture Box
+            Useful for resetting the UI
+            </summary>
+            <param name="picBox">The PictureBox to be modified</param>
+        </member>
         <member name="F:ClientApplication.ClientApplicationMain_Form.components">
             <summary>
             Required designer variable.
@@ -112,10 +186,60 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:ClientApplication.Program">
+            <summary>
+            The Class first called when the application is started
+            </summary>
+        </member>
+        <member name="F:ClientApplication.Program.splashForm">
+            <summary>
+            Splash Form to be displayed while the application is readied for use
+            </summary>
+        </member>
         <member name="M:ClientApplication.Program.Main">
             <summary>
             The main entry point for the application.
-            http://www.telerik.com/support/kb/winforms/forms-and-dialogs/details/add-splashscreen-to-your-application
+            </summary>
+        </member>
+        <member name="M:ClientApplication.Program.mainForm_Load(System.Object,System.EventArgs)">
+            <summary>
+            Closes the Splash Screen when the Main Screen loads
+            </summary>
+        </member>
+        <member name="T:ClientApplication.SplashScreen_Form">
+            <summary>
+            Splash Screen used while the Main Form is still loading
+            </summary>
+        </member>
+        <member name="F:ClientApplication.SplashScreen_Form.WM_NCLBUTTONDOWN">
+            <summary>
+            Used for dragging the splash screen
+            </summary>
+        </member>
+        <member name="F:ClientApplication.SplashScreen_Form.HT_CAPTION">
+            <summary>
+            Used for dragging the splash screen
+            </summary>
+        </member>
+        <member name="M:ClientApplication.SplashScreen_Form.SendMessage(System.IntPtr,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Used for dragging the splash screen
+            </summary>
+        </member>
+        <member name="M:ClientApplication.SplashScreen_Form.ReleaseCapture">
+            <summary>
+            Used for dragging the splash screen
+            </summary>
+        </member>
+        <member name="M:ClientApplication.SplashScreen_Form.SplashScreen_Form_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Allows the splash screen to be draggable
+            </summary>
+        </member>
+        <member name="M:ClientApplication.SplashScreen_Form.#ctor">
+            <summary>
+            Constructor for the Splash Screen
+            Sets the properties of the splash screen and adds event handlers
             </summary>
         </member>
         <member name="F:ClientApplication.SplashScreen_Form.components">

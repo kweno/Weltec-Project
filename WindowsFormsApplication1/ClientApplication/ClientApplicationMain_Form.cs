@@ -9,8 +9,14 @@ using System.Threading;
 using System.Security.Cryptography;
 using System.Drawing;
 
+/// <summary>
+/// The Client Application is responsible for retrieving the SQL parameters from a User Database
+/// </summary>
 namespace ClientApplication
 {
+    /// <summary>
+    /// Main Screen of the Application
+    /// </summary>
     public partial class ClientApplicationMain_Form : Form
     {
         /// <summary>
@@ -62,7 +68,9 @@ namespace ClientApplication
         BackgroundWorker CheckServerConnection_BackgroundWorker;
 
         /// <summary>
-        /// Constructor
+        /// Main Form Constructor
+        /// Sets some properties of the main screen and its components
+        /// Adds event handlers
         /// </summary>
         public ClientApplicationMain_Form()
         {
@@ -245,9 +253,14 @@ namespace ClientApplication
             }
         }
 
-        /// On completed do the appropriate task
+        // On completed do the appropriate task
+        /// <summary>
+        /// Event Handler for when the Background Worker responsible for getting sql parameters finishes
+        /// It will handle saving of the encrypted parameters
+        /// </summary>
         void ClientApplication_BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            // Save the encrypted dump file to specified location
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.FileName = "SQLServer.dbe";
             saveFileDialog1.Filter = "DBE File|*.dbe";
@@ -256,6 +269,7 @@ namespace ClientApplication
             // http://stackoverflow.com/questions/6397235/write-bytes-to-file
             ByteArrayToFile(saveFileDialog1.FileName, ENCYRPTED);
 
+            // Reset GUI appearance after completion
             Start_Button.Enabled = true;
             Start_Button.Enabled = true;
             Server_ComboBox.Enabled = true;
@@ -273,7 +287,11 @@ namespace ClientApplication
             RemoveImage(DatabaseProgress_PictureBox4);
         }
 
-        /// Notification is performed here to the progress bar
+        // Notification is performed here to the progress bar
+        /// <summary>
+        /// Event Handler for when the Background Worker responsible for getting sql parameters progresses
+        /// It will handle updating the Progress Table GUI
+        /// </summary>
         void ClientApplication_BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             //Here you play with the main UI thread
@@ -351,8 +369,12 @@ namespace ClientApplication
             }
         }
 
-        /// Time consuming operations go here </br>
-        /// i.e. Database operations,Reporting
+        // Time consuming operations go here 
+        // i.e. Database operations,Reporting
+        /// <summary>
+        /// Event Handler for the Background Worker Ongoing Actions
+        /// It will handle the actual retrieving of SQL Parameters
+        /// </summary>
         void ClientApplication_BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             try
@@ -1082,11 +1104,10 @@ namespace ClientApplication
 
                 // http://stackoverflow.com/questions/963870/dataset-writexml-to-string
                 StringWriter sw = new StringWriter();
-                ds.WriteXml(@"SQLServer.xml"); // COMMENT OUT THIS LINE AFTER TESTING
+                ds.WriteXml(@"SQLServer.xml"); // TO DO: COMMENT OUT THIS LINE AFTER TESTING
                 ds.WriteXml(sw);
                 string result = sw.ToString();
 
-                
 
                 try
                 {
@@ -1108,11 +1129,18 @@ namespace ClientApplication
             }
         }
 
+        /// <summary>
+        /// Event Handler for when the Server Combo Box changed is value
+        /// </summary>
         private void Server_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             CheckServerConnection();
         }
 
+        /// <summary>
+        /// Event Handler for when a Key in the Keyboard is pressed while inside the Server Combo Box
+        /// For now used to capture the Server-Instance value the user entered when Enter is pressed in the keyboard
+        /// </summary>
         private void Server_ComboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -1121,6 +1149,9 @@ namespace ClientApplication
             }
         }
 
+        /// <summary>
+        /// Checks if the Server-Instance value provided by the user is valid
+        /// </summary>
         private void CheckServerConnection()
         {
             RemoveImage(ConnectStatus_PictureBox);
@@ -1138,12 +1169,17 @@ namespace ClientApplication
 
             SERVER = Server_ComboBox.Text;
 
+            // Use a background worker to check server connection
             CheckServerConnection_BackgroundWorker.RunWorkerAsync();
 
             Server_ComboBox.Enabled = false;
             Instance_TableLayoutPanel.Enabled = false;
         }
 
+        /// <summary>
+        /// Event Handler for the CheckServerConnection_BackgroundWorker 
+        /// Does the actual check if the connection to the chosen Server-Instance is valid
+        /// </summary>
         private void CheckServerConnection_BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             SERVER_OK = false;
@@ -1157,16 +1193,17 @@ namespace ClientApplication
             {
                 connection.Open();
 
+                // Check if the SQL Server version is supported
                 // https://msdn.microsoft.com/en-us/library/system.data.sqlclient.sqlconnection.serverversion(v=vs.110).aspx
                 // https://support.microsoft.com/en-nz/kb/321185
                 var ver = Version.Parse(connection.ServerVersion);
                 var majorMinorString = ver.Major + "." + ver.Minor;
                 double majorMinorDouble;
                 if (double.TryParse(majorMinorString, out majorMinorDouble))
-                    //if(10.5 <= majorMinorDouble && majorMinorDouble < 12)
+                    //if(10.5 <= majorMinorDouble && majorMinorDouble < 12) // TO DO: UNCOMMENT IN THE FINAL RELEASE
                         SERVER_OK = true;
-                    //else
-                        //MessageBox.Show("SQL Server Version " + ver.Major + "." + ver.Minor + " not supported", "Information");
+                    //else // TO DO: UNCOMMENT IN THE FINAL RELEASE
+                        //MessageBox.Show("SQL Server Version " + ver.Major + "." + ver.Minor + " not supported", "Information"); // TO DO: UNCOMMENT IN THE FINAL RELEASE
                 connection.Close();
             }
             catch (SqlException exception)
@@ -1176,6 +1213,10 @@ namespace ClientApplication
             CheckServerConnection_BackgroundWorker.ReportProgress(100);
         }
 
+        /// <summary>
+        /// Event Handler for the CheckServerConnection_BackgroundWorker 
+        /// Performs UI update after the Server Connection Check is done
+        /// </summary>
         private void CheckServerConnection_BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             // http://stackoverflow.com/questions/312936/windows-forms-progressbar-easiest-way-to-start-stop-marquee
@@ -1196,6 +1237,11 @@ namespace ClientApplication
             }
         }
 
+        /// <summary>
+        /// Event Handler for the Database Name Checkbox
+        /// Fired when the Checkbox is checked or unchecked
+        /// Enables Disables the Database portion of the Progress Table
+        /// </summary>
         private void DatabaseName_CheckedChanged(object sender, EventArgs e)
         {
             if (DatabaseName_CheckBox.Checked)
@@ -1214,6 +1260,11 @@ namespace ClientApplication
             }
         }
 
+        /// <summary>
+        /// Event Handler for the Server Combobox
+        /// Fired when the user types in the Server Combobox
+        /// Disables other form elements while the user is typing
+        /// </summary>
         private void Server_ComboBox_TextChanged(Object sender, EventArgs e)
         {
             if (DatabaseName_CheckBox.Enabled)
@@ -1227,11 +1278,21 @@ namespace ClientApplication
             }
         }
 
+        /// <summary>
+        /// Event Handler for the Database Combobox
+        /// Fired when the value of the combo box changes
+        /// Sets the value of the Database variable
+        /// </summary>
         private void Database_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             DATABASE = Database_ComboBox.SelectedItem.ToString();
         }
 
+        /// <summary>
+        /// Removes the image set for a given Picture Box
+        /// Useful for resetting the UI
+        /// </summary>
+        /// <param name="picBox">The PictureBox to be modified</param>
         private void RemoveImage(PictureBox picBox)
         {
             if (picBox.Image != null)
