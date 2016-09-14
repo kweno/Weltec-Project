@@ -1,0 +1,2 @@
+1. Close button to stop the applcation at anytime.
+2. Pause button to pause the execution.
