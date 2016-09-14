@@ -5,8 +5,9 @@
     </assembly>
     <members>
         <member name="F:DatabaseEvaluator.DatabaseEvaluatorMain_Form.DatabaseEvaluator_BackgroundWorker">
-            The backgroundworker object on which the time consuming operation shall be executed
-            http://www.codeproject.com/Articles/99143/BackgroundWorker-Class-Sample-for-Beginners
+            <summary>
+            BackgroundWorker which does the Evaluation
+            </summary>
         </member>
         <member name="F:DatabaseEvaluator.DatabaseEvaluatorMain_Form.components">
             <summary>
