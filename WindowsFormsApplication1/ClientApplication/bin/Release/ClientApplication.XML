@@ -169,6 +169,11 @@
             </summary>
             <param name="picBox">The PictureBox to be modified</param>
         </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.Close_Button_Click(System.Object,System.EventArgs)">
+            <summary>
+            Closes the Application
+            </summary>
+        </member>
         <member name="F:ClientApplication.ClientApplicationMain_Form.components">
             <summary>
             Required designer variable.

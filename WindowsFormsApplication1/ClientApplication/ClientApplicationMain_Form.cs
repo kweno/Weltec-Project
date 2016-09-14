@@ -1303,8 +1303,14 @@ namespace ClientApplication
             }
         }
 
-
-
-
+        /// <summary>
+        /// Closes the Application
+        /// </summary>
+        private void Close_Button_Click(object sender, EventArgs e)
+        {
+            System.Environment.Exit(0);
+            //Close();
+            Application.Exit();
+        }
     }
 }

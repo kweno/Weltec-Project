@@ -67,6 +67,7 @@ namespace ClientApplication
             this.InstanceMainProgress_Label = new System.Windows.Forms.Label();
             this.InstanceProgress_PictureBox1 = new System.Windows.Forms.PictureBox();
             this.InstanceProgress_Label1 = new System.Windows.Forms.Label();
+            this.Close_Button = new System.Windows.Forms.Button();
             this.Main_Panel.SuspendLayout();
             this.Selection_GroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ConnectStatus_PictureBox)).BeginInit();
@@ -88,7 +89,7 @@ namespace ClientApplication
             // Start_Button
             // 
             this.Start_Button.Enabled = false;
-            this.Start_Button.Location = new System.Drawing.Point(404, 569);
+            this.Start_Button.Location = new System.Drawing.Point(323, 543);
             this.Start_Button.Name = "Start_Button";
             this.Start_Button.Size = new System.Drawing.Size(75, 23);
             this.Start_Button.TabIndex = 0;
@@ -98,24 +99,24 @@ namespace ClientApplication
             // 
             // Main_Panel
             // 
-            this.Main_Panel.Controls.Add(this.Global_ProgressBar);
             this.Main_Panel.Controls.Add(this.Selection_GroupBox);
             this.Main_Panel.Controls.Add(this.Logo_PictureBox);
             this.Main_Panel.Controls.Add(this.Progress_GroupBox);
             this.Main_Panel.Location = new System.Drawing.Point(13, 13);
             this.Main_Panel.Name = "Main_Panel";
-            this.Main_Panel.Size = new System.Drawing.Size(480, 553);
+            this.Main_Panel.Size = new System.Drawing.Size(480, 524);
             this.Main_Panel.TabIndex = 1;
             // 
             // Global_ProgressBar
             // 
-            this.Global_ProgressBar.Location = new System.Drawing.Point(16, 521);
+            this.Global_ProgressBar.Location = new System.Drawing.Point(214, 45);
             this.Global_ProgressBar.Name = "Global_ProgressBar";
-            this.Global_ProgressBar.Size = new System.Drawing.Size(450, 23);
+            this.Global_ProgressBar.Size = new System.Drawing.Size(202, 5);
             this.Global_ProgressBar.TabIndex = 2;
             // 
             // Selection_GroupBox
             // 
+            this.Selection_GroupBox.Controls.Add(this.Global_ProgressBar);
             this.Selection_GroupBox.Controls.Add(this.ConnectStatus_PictureBox);
             this.Selection_GroupBox.Controls.Add(this.ServerName_Label);
             this.Selection_GroupBox.Controls.Add(this.DatabaseName_CheckBox);
@@ -123,7 +124,7 @@ namespace ClientApplication
             this.Selection_GroupBox.Controls.Add(this.Database_ComboBox);
             this.Selection_GroupBox.Location = new System.Drawing.Point(16, 170);
             this.Selection_GroupBox.Name = "Selection_GroupBox";
-            this.Selection_GroupBox.Size = new System.Drawing.Size(450, 89);
+            this.Selection_GroupBox.Size = new System.Drawing.Size(450, 94);
             this.Selection_GroupBox.TabIndex = 12;
             this.Selection_GroupBox.TabStop = false;
             this.Selection_GroupBox.Text = "Selection";
@@ -150,7 +151,7 @@ namespace ClientApplication
             // 
             this.DatabaseName_CheckBox.AutoSize = true;
             this.DatabaseName_CheckBox.Enabled = false;
-            this.DatabaseName_CheckBox.Location = new System.Drawing.Point(15, 55);
+            this.DatabaseName_CheckBox.Location = new System.Drawing.Point(15, 61);
             this.DatabaseName_CheckBox.Name = "DatabaseName_CheckBox";
             this.DatabaseName_CheckBox.Size = new System.Drawing.Size(106, 17);
             this.DatabaseName_CheckBox.TabIndex = 11;
@@ -173,7 +174,7 @@ namespace ClientApplication
             this.Database_ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Database_ComboBox.Enabled = false;
             this.Database_ComboBox.FormattingEnabled = true;
-            this.Database_ComboBox.Location = new System.Drawing.Point(214, 53);
+            this.Database_ComboBox.Location = new System.Drawing.Point(214, 59);
             this.Database_ComboBox.Name = "Database_ComboBox";
             this.Database_ComboBox.Size = new System.Drawing.Size(202, 21);
             this.Database_ComboBox.TabIndex = 9;
@@ -193,7 +194,7 @@ namespace ClientApplication
             // 
             this.Progress_GroupBox.Controls.Add(this.Database_TableLayoutPanel);
             this.Progress_GroupBox.Controls.Add(this.Instance_TableLayoutPanel);
-            this.Progress_GroupBox.Location = new System.Drawing.Point(16, 269);
+            this.Progress_GroupBox.Location = new System.Drawing.Point(16, 270);
             this.Progress_GroupBox.Name = "Progress_GroupBox";
             this.Progress_GroupBox.Size = new System.Drawing.Size(450, 244);
             this.Progress_GroupBox.TabIndex = 7;
@@ -444,11 +445,22 @@ namespace ClientApplication
             this.InstanceProgress_Label1.Text = "   • Installation";
             this.InstanceProgress_Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // Close_Button
+            // 
+            this.Close_Button.Location = new System.Drawing.Point(404, 543);
+            this.Close_Button.Name = "Close_Button";
+            this.Close_Button.Size = new System.Drawing.Size(75, 23);
+            this.Close_Button.TabIndex = 2;
+            this.Close_Button.Text = "Close";
+            this.Close_Button.UseVisualStyleBackColor = true;
+            this.Close_Button.Click += new System.EventHandler(this.Close_Button_Click);
+            // 
             // ClientApplicationMain_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 605);
+            this.ClientSize = new System.Drawing.Size(505, 581);
+            this.Controls.Add(this.Close_Button);
             this.Controls.Add(this.Main_Panel);
             this.Controls.Add(this.Start_Button);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -510,6 +522,7 @@ namespace ClientApplication
         private TableLayoutPanel Instance_TableLayoutPanel;
         private PictureBox ConnectStatus_PictureBox;
         private ProgressBar Global_ProgressBar;
+        private Button Close_Button;
     }
 }
 
