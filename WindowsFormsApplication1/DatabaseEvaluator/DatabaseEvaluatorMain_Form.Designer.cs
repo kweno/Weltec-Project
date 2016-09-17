@@ -43,6 +43,7 @@ namespace DatabaseEvaluator
             this.Browse_Button = new System.Windows.Forms.Button();
             this.PathToXML_Label = new System.Windows.Forms.Label();
             this.Logo_PictureBox = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.Main_Panel.SuspendLayout();
             this.FindFile_GroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo_PictureBox)).BeginInit();
@@ -60,6 +61,7 @@ namespace DatabaseEvaluator
             // 
             // Main_Panel
             // 
+            this.Main_Panel.Controls.Add(this.button1);
             this.Main_Panel.Controls.Add(this.Global_ProgressBar);
             this.Main_Panel.Controls.Add(this.FindFile_GroupBox);
             this.Main_Panel.Controls.Add(this.Logo_PictureBox);
@@ -125,6 +127,16 @@ namespace DatabaseEvaluator
             this.Logo_PictureBox.TabIndex = 0;
             this.Logo_PictureBox.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(391, 50);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // DatabaseEvaluatorMain_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -153,6 +165,7 @@ namespace DatabaseEvaluator
         private Button Browse_Button;
         private TextBox PathToXML_TextBox;
         private ProgressBar Global_ProgressBar;
+        private Button button1;
     }
 }
 

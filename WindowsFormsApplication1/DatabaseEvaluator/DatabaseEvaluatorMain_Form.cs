@@ -16,7 +16,7 @@ namespace DatabaseEvaluator
         private string INSTANCE = "DESKTOP-FVFO8GL\\SQL2016N";
         private string EVALUATOR_KEY = "AAECAwQFBgcICQoLDA0ODw==";
         private string PARAMETER_VALUES = "";
-        
+
         /// <summary>
         /// BackgroundWorker which does the Evaluation
         /// </summary>
@@ -41,93 +41,141 @@ namespace DatabaseEvaluator
 
         private void DatabaseEvaluator_BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            MessageBox.Show(PARAMETER_VALUES);
-
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.FileName = "SQLServer.pdf";
-            saveFileDialog1.Filter = "PDF File|*.pdf";
-            saveFileDialog1.Title = "Save a PDF File";
-            saveFileDialog1.ShowDialog();
-
-            // http://www.codeproject.com/Articles/686994/Create-Read-Advance-PDF-Report-using-iTextSharp-in
-            FileStream fs = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
-            Document doc = new Document();
-            PdfWriter pdfwriter = PdfWriter.GetInstance(doc, fs);
-            doc.Open();
-
-            // http://stackoverflow.com/questions/17087154/itextsharp-how-to-place-text-at-the-middle-of-a-page
-            //Create a single column table
-            var t = new PdfPTable(1);
-
-            //Tell it to fill the page horizontally
-            t.WidthPercentage = 100;
-
-            //Create a single cell
-            var c = new PdfPCell();
-            c.Border = Rectangle.NO_BORDER;
-
-            //Tell the cell to vertically align in the middle
-            c.VerticalAlignment = Element.ALIGN_MIDDLE;
-
-            //Tell the cell to fill the page vertically
-            c.MinimumHeight = doc.PageSize.Height - (doc.BottomMargin + doc.TopMargin);
-
-            //Create a test paragraph
-            var p = new Paragraph("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam iaculis sem diam, quis accumsan ipsum venenatis ac. Pellentesque nec gravida tortor. Suspendisse dapibus quis quam sed sollicitudin.");
-
-            //Add it a couple of times
-            c.AddElement(p);
-            c.AddElement(p);
-
-            //Add the cell to the paragraph
-            t.AddCell(c);
-
-            //Add the table to the document
-            doc.Add(t);
-
-            var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
-            var whiteBoldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, new BaseColor(255, 255, 255));
-            var darkBlue = new BaseColor(79, 129, 188);
-            var lightBlue = new BaseColor(219, 229, 241);
-            doc.Add(new Paragraph("SQL Server", boldFont));
-            doc.Add(new Paragraph(" "));
-
-            // http://www.mikesdotnetting.com/article/86/itextsharp-introducing-tables
-            for (int i = 0; i < 20; i++)
+            try
             {
-                PdfPTable table = new PdfPTable(4);
-                PdfPCell header_cell = new PdfPCell(new Phrase("Issue 1: Install SQL 2008 R2 SP2 CU11", whiteBoldFont));
-                header_cell.Colspan = 4;
-                header_cell.BackgroundColor = darkBlue;
-                table.AddCell(header_cell);
-                PdfPCell issueTypeHeader_cell = new PdfPCell(new Phrase("Issue Type", boldFont));
-                issueTypeHeader_cell.BackgroundColor = lightBlue;
-                table.AddCell(issueTypeHeader_cell);
-                PdfPCell issueType_cell = new PdfPCell(new Phrase("Health"));
-                issueType_cell.BackgroundColor = lightBlue;
-                table.AddCell(issueType_cell);
-                PdfPCell issueSeverityHeader_cell = new PdfPCell(new Phrase("Issue Severity", boldFont));
-                issueSeverityHeader_cell.BackgroundColor = lightBlue;
-                table.AddCell(issueSeverityHeader_cell);
-                PdfPCell issueSeverity_cell = new PdfPCell(new Phrase("Critical"));
-                issueSeverity_cell.BackgroundColor = lightBlue;
-                table.AddCell(issueSeverity_cell);
-                PdfPCell summary_cell = new PdfPCell(new Phrase("Currently Installed version of SQL Sserver is SQL server 2008 R2 SP1 (10.50)", boldFont));
-                summary_cell.Colspan = 4;
-                table.AddCell(summary_cell);
-                PdfPCell comments_cell = new PdfPCell(new Phrase("This version is unsupported. We recommend installing the latest update of SQL Server, which is SQL server 2008 R2 SP2 CU11 http://support.microsoft.com/kb/2926028"));
-                comments_cell.Colspan = 4;
-                table.AddCell(comments_cell);
-                doc.Add(table);
-                doc.Add(new Paragraph(" "));
-            }
-            doc.Close();
+                MessageBox.Show(PARAMETER_VALUES);
 
-            Global_ProgressBar.Style = ProgressBarStyle.Continuous;
-            Global_ProgressBar.MarqueeAnimationSpeed = 0;
-            PathToXML_TextBox.Enabled = true;
-            Browse_Button.Enabled = true;
-            Start_Button.Enabled = true;
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.FileName = "SQLServer.pdf";
+                saveFileDialog1.Filter = "PDF File|*.pdf";
+                saveFileDialog1.Title = "Save a PDF File";
+                saveFileDialog1.ShowDialog();
+
+                // http://www.codeproject.com/Articles/686994/Create-Read-Advance-PDF-Report-using-iTextSharp-in
+                FileStream fs = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write, FileShare.None);
+                Document doc = new Document();
+                PdfWriter pdfwriter = PdfWriter.GetInstance(doc, fs);
+                doc.Open();
+
+
+
+
+                // http://stackoverflow.com/questions/11854726/adding-absolute-positioned-text
+                PdfContentByte cb = pdfwriter.DirectContent;
+                cb.BeginText();
+                BaseFont f_cn = BaseFont.CreateFont("c:\\windows\\fonts\\calibri.ttf", BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+                cb.SetFontAndSize(f_cn, 10);
+                cb.SetTextMatrix(180, 290);  //(xPos, yPos)
+                cb.ShowText("Created By: SQL Server Team");
+                cb.SetTextMatrix(180, 280);  //(xPos, yPos)
+                cb.ShowText("Date: " + DateTime.Now.ToShortDateString());
+                Image logo = Image.GetInstance("header_logo.png");
+                logo.ScalePercent(75f);
+                logo.SetAbsolutePosition(100,500);
+                cb.AddImage(logo);
+                cb.EndText();
+
+
+
+                // Add a new page to the pdf file
+                // http://stackoverflow.com/questions/9236931/set-page-margins-with-itextsharp
+                doc.SetMargins(60f, 60f, 60f, 60f);
+                doc.NewPage();
+
+
+
+                // http://www.mikesdotnetting.com/article/83/lists-with-itextsharp
+                var overviewFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLDOBLIQUE, 16);
+                var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                // https://mlichtenberg.wordpress.com/2011/04/13/using-c-and-itextsharp-to-create-a-pdf/
+                List goals = new List(List.UNORDERED, 20f);
+                goals.SetListSymbol("\u2022");
+                goals.IndentationLeft = 30f;
+                goals.Add(new ListItem("Assess risks and evaluate health of the SQL Server environment."));
+                goals.Add(new ListItem(25, "Identify key areas where the environment deviates from Microsoft best practices and"
+                                + " configuration guidance."));
+                goals.Add(new ListItem(25, "Establish assessment results that can generate a remediation plan used to complete"
+                                + " improvements to the health of the environment and to resolve or mitigate risks."));
+                List phases = new List(List.UNORDERED, 20f);
+                phases.SetListSymbol("\u2022");
+                phases.IndentationLeft = 30f;
+                phases.Add(new ListItem(25, "Environmental Assessment:   The SQL Server Team collects data from the environment"
+                                                + " focusing on key known areas."));
+                phases.Add(new ListItem(25, "Analysis and Reporting:   The SQL Server Team analyzes the results to compare against best practices,"
+                                + " identify risks and health related problems, and prepares a findings report."));
+                phases.Add(new ListItem(25, "Remediation Planning:   Once problems and risks have been discovered, a full remediation action"
+                                + " plan should be established to assist in the effort to remediate and stabilize the environment."));
+                Paragraph paragraph = new Paragraph("Database Evaluation Overview", overviewFont);
+                doc.Add(paragraph);
+                doc.Add(new Paragraph(" "));
+                doc.Add(new Paragraph(" "));
+                doc.Add(new Paragraph("Program Goals", boldFont));
+                doc.Add(new Paragraph(" "));
+                doc.Add(goals);
+                doc.Add(new Paragraph(" "));
+                doc.Add(new Paragraph(" "));
+                doc.Add(new Paragraph("Program Phases", boldFont));
+                doc.Add(new Paragraph(" "));
+                doc.Add(phases);
+
+                
+
+
+                doc.NewPage();
+
+
+
+                
+                var whiteBoldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, new BaseColor(255, 255, 255));
+                var darkBlue = new BaseColor(79, 129, 188);
+                var lightBlue = new BaseColor(219, 229, 241);
+                doc.Add(new Paragraph("SQL Server", boldFont));
+                doc.Add(new Paragraph(" "));
+
+
+
+                // http://www.mikesdotnetting.com/article/86/itextsharp-introducing-tables
+                for (int i = 0; i < 20; i++)
+                {
+                    PdfPTable table = new PdfPTable(4);
+                    table.WidthPercentage = 90;
+                    PdfPCell header_cell = new PdfPCell(new Phrase("Issue 1: Install SQL 2008 R2 SP2 CU11", whiteBoldFont));
+                    header_cell.Colspan = 4;
+                    header_cell.BackgroundColor = darkBlue;
+                    table.AddCell(header_cell);
+                    PdfPCell issueTypeHeader_cell = new PdfPCell(new Phrase("Issue Type", boldFont));
+                    issueTypeHeader_cell.BackgroundColor = lightBlue;
+                    table.AddCell(issueTypeHeader_cell);
+                    PdfPCell issueType_cell = new PdfPCell(new Phrase("Health"));
+                    issueType_cell.BackgroundColor = lightBlue;
+                    table.AddCell(issueType_cell);
+                    PdfPCell issueSeverityHeader_cell = new PdfPCell(new Phrase("Issue Severity", boldFont));
+                    issueSeverityHeader_cell.BackgroundColor = lightBlue;
+                    table.AddCell(issueSeverityHeader_cell);
+                    PdfPCell issueSeverity_cell = new PdfPCell(new Phrase("Critical"));
+                    issueSeverity_cell.BackgroundColor = lightBlue;
+                    table.AddCell(issueSeverity_cell);
+                    PdfPCell summary_cell = new PdfPCell(new Phrase("Currently Installed version of SQL Sserver is SQL server 2008 R2 SP1 (10.50)", boldFont));
+                    summary_cell.Colspan = 4;
+                    table.AddCell(summary_cell);
+                    PdfPCell comments_cell = new PdfPCell(new Phrase("This version is unsupported. We recommend installing the latest update of SQL Server, which is SQL server 2008 R2 SP2 CU11 http://support.microsoft.com/kb/2926028"));
+                    comments_cell.Colspan = 4;
+                    table.AddCell(comments_cell);
+                    doc.Add(table);
+                    doc.Add(new Paragraph(" "));
+                }
+                doc.Close();
+
+                Global_ProgressBar.Style = ProgressBarStyle.Continuous;
+                Global_ProgressBar.MarqueeAnimationSpeed = 0;
+                PathToXML_TextBox.Enabled = true;
+                Browse_Button.Enabled = true;
+                Start_Button.Enabled = true;
+            }
+            catch (IOException exception)
+            {
+                MessageBox.Show("File Permissions Error.");
+            }
         }
 
         private void DatabaseEvaluator_BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -545,8 +593,8 @@ namespace DatabaseEvaluator
             // with the specified key and IV.
             using (AesCryptoServiceProvider aesAlg = new AesCryptoServiceProvider())
             {
-                aesAlg.Key = Convert.FromBase64String(EVALUATOR_KEY); 
-                aesAlg.IV = Convert.FromBase64String(EVALUATOR_KEY); 
+                aesAlg.Key = Convert.FromBase64String(EVALUATOR_KEY);
+                aesAlg.IV = Convert.FromBase64String(EVALUATOR_KEY);
 
                 // Create a decrytor to perform the stream transform.
                 ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
@@ -578,15 +626,10 @@ namespace DatabaseEvaluator
             Browse_Button.Enabled = false;
             Start_Button.Enabled = false;
 
-            try
-            {
-                // Use a background worker to check server connection
-                DatabaseEvaluator_BackgroundWorker.RunWorkerAsync();
-            }
-            catch (IOException exception)
-            {
-                MessageBox.Show("File Permissions Error.");
-            }
+
+            // Use a background worker to check server connection
+            DatabaseEvaluator_BackgroundWorker.RunWorkerAsync();
+
         }
 
         private void Browse_Button_Click(object sender, EventArgs e)
@@ -604,8 +647,9 @@ namespace DatabaseEvaluator
             }
         }
 
-
-
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DatabaseEvaluator_BackgroundWorker_RunWorkerCompleted(sender, null);
+        }
     }
 }
