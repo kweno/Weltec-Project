@@ -69,9 +69,9 @@ namespace DatabaseEvaluator
                 cb.ShowText("Created By: SQL Server Team");
                 cb.SetTextMatrix(180, 280);  //(xPos, yPos)
                 cb.ShowText("Date: " + DateTime.Now.ToShortDateString());
-                Image logo = Image.GetInstance("header_logo.png");
+                var logo = Image.GetInstance(Properties.Resources.header_logo, System.Drawing.Imaging.ImageFormat.Png);
                 logo.ScalePercent(75f);
-                logo.SetAbsolutePosition(100,500);
+                logo.SetAbsolutePosition(100, 500);
                 cb.AddImage(logo);
                 cb.EndText();
 
@@ -118,21 +118,360 @@ namespace DatabaseEvaluator
                 doc.Add(new Paragraph(" "));
                 doc.Add(phases);
 
-                
+
+                doc.NewPage();
+
+
+
+
+                paragraph = new Paragraph("Scorecard", overviewFont);
+                doc.Add(paragraph);
+                doc.Add(new Paragraph(" "));
+                doc.Add(new Paragraph("The scorecards for the Evaluation Report are provided below. These show the state of the system with"
+                                        + " respect to health(current issues) and risk(potential for future issues)."));
+                doc.Add(new Paragraph(" "));
+
+                var whiteBoldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, new BaseColor(255, 255, 255));
+                var darkBlue = new BaseColor(79, 129, 188);
+                var lightBlue = new BaseColor(219, 229, 241);
+                var red = new BaseColor(255, 0, 0);
+                var orange = new BaseColor(255, 153, 0);
+                var yellow = new BaseColor(255, 255, 102);
+                var green = new BaseColor(155, 187, 89);
+
+                PdfPTable severity_table = new PdfPTable(1);
+                severity_table.WidthPercentage = 40;
+                PdfPCell level_cell = new PdfPCell(new Phrase("Issue Severity Levels", whiteBoldFont));
+                level_cell.BackgroundColor = darkBlue;
+                level_cell.FixedHeight = 20f;
+                severity_table.AddCell(level_cell);
+                PdfPCell critical_cell = new PdfPCell(new Phrase("Critical"));
+                critical_cell.BackgroundColor = red;
+                severity_table.AddCell(critical_cell);
+                PdfPCell high_cell = new PdfPCell(new Phrase("High"));
+                high_cell.BackgroundColor = orange;
+                severity_table.AddCell(high_cell);
+                PdfPCell medium_cell = new PdfPCell(new Phrase("Medium"));
+                medium_cell.BackgroundColor = yellow;
+                severity_table.AddCell(medium_cell);
+                PdfPCell low_cell = new PdfPCell(new Phrase("Low"));
+                low_cell.BackgroundColor = lightBlue;
+                severity_table.AddCell(low_cell);
+                PdfPCell noissues_cell = new PdfPCell(new Phrase("No Issues"));
+                noissues_cell.BackgroundColor = green;
+                severity_table.AddCell(noissues_cell);
+                doc.Add(severity_table);
+                doc.Add(new Paragraph(" "));
+
+                doc.Add(new Paragraph("The following legend will be used throughout the rest of this document: "));
+                doc.Add(new Paragraph(" "));
+                PdfPTable scorecard_table = new PdfPTable(2);
+                scorecard_table.DefaultCell.Border = Rectangle.NO_BORDER;
+                float[] scorecard_widths = new float[] { 50f, 500f };
+                scorecard_table.SetWidths(scorecard_widths);
+                scorecard_table.WidthPercentage = 95;  
+                              
+                var success = Image.GetInstance(Properties.Resources.success, System.Drawing.Imaging.ImageFormat.Png);
+                success.ScalePercent(2f);
+                var success_cell = new PdfPCell(success);
+                success_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                success_cell.PaddingTop = 3f;
+                success_cell.Border = Rectangle.NO_BORDER;
+                scorecard_table.AddCell(success_cell);
+                Phrase scorecard_phrase = new Phrase("Indicates that there are no issues in this item");
+                PdfPCell scorecard_cell = new PdfPCell(scorecard_phrase);
+                scorecard_cell.PaddingLeft = 20f;
+                scorecard_cell.Border = Rectangle.NO_BORDER;
+                scorecard_table.AddCell(scorecard_cell);
+
+                var error = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+                error.ScalePercent(2f);
+                var error_cell = new PdfPCell(error);
+                error_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                error_cell.PaddingTop = 3f;
+                error_cell.Border = Rectangle.NO_BORDER;
+                scorecard_table.AddCell(error_cell);
+                scorecard_phrase = new Phrase("Indicates that there are issues in this item");
+                scorecard_cell = new PdfPCell(scorecard_phrase);
+                scorecard_cell.PaddingLeft = 20f;
+                scorecard_cell.Border = Rectangle.NO_BORDER;
+                scorecard_table.AddCell(scorecard_cell);
+
+                doc.Add(scorecard_table);
+
+                doc.NewPage();
+
+
+
+                paragraph = new Paragraph("Consolidated Scorecard", overviewFont);
+                doc.Add(paragraph);
+                doc.Add(new Paragraph(" "));
+                doc.Add(new Paragraph("This scorecard gives an executive level summary of the issues discovered."));
+                doc.Add(new Paragraph(" "));
+
+                PdfPTable server_table = new PdfPTable(2);
+                float[] widths = new float[] { 900f, 200f };
+                server_table.SetWidths(widths);
+                server_table.WidthPercentage = 95;
+
+                PdfPCell server_header_cell = new PdfPCell(new Phrase("SQL Server Instance", whiteBoldFont));
+                server_header_cell.Colspan = 2;
+                server_header_cell.BackgroundColor = darkBlue;
+                server_header_cell.FixedHeight = 20f;
+                server_table.AddCell(server_header_cell);
+
+                PdfPCell server_main_cell = new PdfPCell(new Phrase("Installation"));
+                server_main_cell.Colspan = 2;
+                server_table.AddCell(server_main_cell);
+                Phrase server_data_phrase = new Phrase("SQL Server Software Installation Drive");
+                PdfPCell server_data_cell = new PdfPCell(server_data_phrase);
+                server_data_cell.PaddingLeft = 20f;
+                server_table.AddCell(server_data_cell);
+                var server_status = Image.GetInstance(Properties.Resources.success, System.Drawing.Imaging.ImageFormat.Png);
+                server_status.ScalePercent(2f);
+                server_data_cell = new PdfPCell(server_status);
+                server_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                server_data_cell.PaddingTop = 3f;
+                server_table.AddCell(server_data_cell);
+                server_data_cell = new PdfPCell(new Phrase("SQL Server Version and Service Pack"));
+                server_data_cell.PaddingLeft = 20f;
+                server_table.AddCell(server_data_cell);
+                server_status = Image.GetInstance(Properties.Resources.success, System.Drawing.Imaging.ImageFormat.Png);
+                server_status.ScalePercent(2f);
+                server_data_cell = new PdfPCell(server_status);
+                server_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                server_data_cell.PaddingTop = 3f;
+                server_table.AddCell(server_data_cell);
+
+                server_main_cell = new PdfPCell(new Phrase("Configuration"));
+                server_main_cell.Colspan = 2;
+                server_table.AddCell(server_main_cell);
+                server_data_cell = new PdfPCell(new Phrase("Max Degree Of Parallelism"));
+                server_data_cell.PaddingLeft = 20f;
+                server_table.AddCell(server_data_cell);
+                server_status = Image.GetInstance(Properties.Resources.success, System.Drawing.Imaging.ImageFormat.Png);
+                server_status.ScalePercent(2f);
+                server_data_cell = new PdfPCell(server_status);
+                server_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                server_data_cell.PaddingTop = 3f;
+                server_table.AddCell(server_data_cell);
+                server_data_cell = new PdfPCell(new Phrase("Memory"));
+                server_data_cell.PaddingLeft = 20f;
+                server_table.AddCell(server_data_cell);
+                server_status = Image.GetInstance(Properties.Resources.success, System.Drawing.Imaging.ImageFormat.Png);
+                server_status.ScalePercent(2f);
+                server_data_cell = new PdfPCell(server_status);
+                server_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                server_data_cell.PaddingTop = 3f;
+                server_table.AddCell(server_data_cell);
+                server_data_cell = new PdfPCell(new Phrase("Enable Traceflag 2371, 1117 and 1118"));
+                server_data_cell.PaddingLeft = 20f;
+                server_table.AddCell(server_data_cell);
+                server_status = Image.GetInstance(Properties.Resources.success, System.Drawing.Imaging.ImageFormat.Png);
+                server_status.ScalePercent(2f);
+                server_data_cell = new PdfPCell(server_status);
+                server_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                server_data_cell.PaddingTop = 3f;
+                server_table.AddCell(server_data_cell);
+                server_data_cell = new PdfPCell(new Phrase("Default Index Fill Factor"));
+                server_data_cell.PaddingLeft = 20f;
+                server_table.AddCell(server_data_cell);
+                server_status = Image.GetInstance(Properties.Resources.success, System.Drawing.Imaging.ImageFormat.Png);
+                server_status.ScalePercent(2f);
+                server_data_cell = new PdfPCell(server_status);
+                server_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                server_data_cell.PaddingTop = 3f;
+                server_table.AddCell(server_data_cell);
+
+                server_main_cell = new PdfPCell(new Phrase("Security"));
+                server_main_cell.Colspan = 2;
+                server_table.AddCell(server_main_cell);
+                server_data_cell = new PdfPCell(new Phrase("Server Authentication"));
+                server_data_cell.PaddingLeft = 20f;
+                server_table.AddCell(server_data_cell);
+                server_status = Image.GetInstance(Properties.Resources.success, System.Drawing.Imaging.ImageFormat.Png);
+                server_status.ScalePercent(2f);
+                server_data_cell = new PdfPCell(server_status);
+                server_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                server_data_cell.PaddingTop = 3f;
+                server_table.AddCell(server_data_cell);
+                server_data_cell = new PdfPCell(new Phrase("SQL Server Network Port"));
+                server_data_cell.PaddingLeft = 20f;
+                server_table.AddCell(server_data_cell);
+                server_status = Image.GetInstance(Properties.Resources.success, System.Drawing.Imaging.ImageFormat.Png);
+                server_status.ScalePercent(2f);
+                server_data_cell = new PdfPCell(server_status);
+                server_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                server_data_cell.PaddingTop = 3f;
+                server_table.AddCell(server_data_cell);
+
+                doc.Add(server_table);
+                doc.Add(new Paragraph(" "));
+
+
+                PdfPTable database_table = new PdfPTable(2);
+                database_table.SetWidths(widths);
+                database_table.WidthPercentage = 95;
+
+                PdfPCell database_header_cell = new PdfPCell(new Phrase("SQL Server Database", whiteBoldFont));
+                database_header_cell.Colspan = 2;
+                database_header_cell.BackgroundColor = darkBlue;
+                database_header_cell.FixedHeight = 20f;
+                database_table.AddCell(database_header_cell);
+
+                PdfPCell database_main_cell = new PdfPCell(new Phrase("Implemetation"));
+                database_main_cell.Colspan = 2;
+                database_table.AddCell(database_main_cell);
+                Phrase database_data_phrase = new Phrase("SQL *.MDF, *.NDF and *.LDF Log File Placement");
+                PdfPCell database_data_cell = new PdfPCell(database_data_phrase);
+                database_data_cell.PaddingLeft = 20f;
+                database_table.AddCell(database_data_cell);
+                var database_status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+                database_status.ScalePercent(2f);
+                database_data_cell = new PdfPCell(database_status);
+                database_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                database_data_cell.PaddingTop = 3f;
+                database_table.AddCell(database_data_cell);
+
+                database_main_cell = new PdfPCell(new Phrase("Configuration Options"));
+                database_main_cell.Colspan = 2;
+                database_table.AddCell(database_main_cell);
+                database_data_cell = new PdfPCell(new Phrase("Recovery Model"));
+                database_data_cell.PaddingLeft = 20f;
+                database_table.AddCell(database_data_cell);
+                database_status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+                database_status.ScalePercent(2f);
+                database_data_cell = new PdfPCell(database_status);
+                database_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                database_data_cell.PaddingTop = 3f;
+                database_table.AddCell(database_data_cell);
+                database_data_cell = new PdfPCell(new Phrase("Compatibility Level"));
+                database_data_cell.PaddingLeft = 20f;
+                database_table.AddCell(database_data_cell);
+                database_status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+                database_status.ScalePercent(2f);
+                database_data_cell = new PdfPCell(database_status);
+                database_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                database_data_cell.PaddingTop = 3f;
+                database_table.AddCell(database_data_cell);
+                database_data_cell = new PdfPCell(new Phrase("Is RCSI Enabled (Read Committed Snapshot Isolation)"));
+                database_data_cell.PaddingLeft = 20f;
+                database_table.AddCell(database_data_cell);
+                database_status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+                database_status.ScalePercent(2f);
+                database_data_cell = new PdfPCell(database_status);
+                database_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                database_data_cell.PaddingTop = 3f;
+                database_table.AddCell(database_data_cell);
+                database_data_cell = new PdfPCell(new Phrase("Do All Tables have Clustered Indexes"));
+                database_data_cell.PaddingLeft = 20f;
+                database_table.AddCell(database_data_cell);
+                database_status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+                database_status.ScalePercent(2f);
+                database_data_cell = new PdfPCell(database_status);
+                database_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                database_data_cell.PaddingTop = 3f;
+                database_table.AddCell(database_data_cell);
+                database_data_cell = new PdfPCell(new Phrase("Database Auto growth"));
+                database_data_cell.PaddingLeft = 20f;
+                database_table.AddCell(database_data_cell);
+                database_status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+                database_status.ScalePercent(2f);
+                database_data_cell = new PdfPCell(database_status);
+                database_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                database_data_cell.PaddingTop = 3f;
+                database_table.AddCell(database_data_cell);
+                database_data_cell = new PdfPCell(new Phrase("Auto Create Statistics"));
+                database_data_cell.PaddingLeft = 20f;
+                database_table.AddCell(database_data_cell);
+                database_status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+                database_status.ScalePercent(2f);
+                database_data_cell = new PdfPCell(database_status);
+                database_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                database_data_cell.PaddingTop = 3f;
+                database_table.AddCell(database_data_cell);
+                database_data_cell = new PdfPCell(new Phrase("Auto Shrink"));
+                database_data_cell.PaddingLeft = 20f;
+                database_table.AddCell(database_data_cell);
+                database_status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+                database_status.ScalePercent(2f);
+                database_data_cell = new PdfPCell(database_status);
+                database_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                database_data_cell.PaddingTop = 3f;
+                database_table.AddCell(database_data_cell);
+                database_data_cell = new PdfPCell(new Phrase("Auto Update Statistics"));
+                database_data_cell.PaddingLeft = 20f;
+                database_table.AddCell(database_data_cell);
+                database_status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+                database_status.ScalePercent(2f);
+                database_data_cell = new PdfPCell(database_status);
+                database_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                database_data_cell.PaddingTop = 3f;
+                database_table.AddCell(database_data_cell);
+
+                database_main_cell = new PdfPCell(new Phrase("Maintenance"));
+                database_main_cell.Colspan = 2;
+                database_table.AddCell(database_main_cell);
+                database_data_cell = new PdfPCell(new Phrase("Daily Index Rebuild"));
+                database_data_cell.PaddingLeft = 20f;
+                database_table.AddCell(database_data_cell);
+                database_status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+                database_status.ScalePercent(2f);
+                database_data_cell = new PdfPCell(database_status);
+                database_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                database_data_cell.PaddingTop = 3f;
+                database_table.AddCell(database_data_cell);
+                database_data_cell = new PdfPCell(new Phrase("Daily Database Full backup"));
+                database_data_cell.PaddingLeft = 20f;
+                database_table.AddCell(database_data_cell);
+                database_status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+                database_status.ScalePercent(2f);
+                database_data_cell = new PdfPCell(database_status);
+                database_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                database_data_cell.PaddingTop = 3f;
+                database_table.AddCell(database_data_cell);
+
+                database_main_cell = new PdfPCell(new Phrase("Security"));
+                database_main_cell.Colspan = 2;
+                database_table.AddCell(database_main_cell);
+                database_data_cell = new PdfPCell(new Phrase("Blank SQL 'SA' Password"));
+                database_data_cell.PaddingLeft = 20f;
+                database_table.AddCell(database_data_cell);
+                database_status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+                database_status.ScalePercent(2f);
+                database_data_cell = new PdfPCell(database_status);
+                database_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                database_data_cell.PaddingTop = 3f;
+                database_table.AddCell(database_data_cell);
+                database_data_cell = new PdfPCell(new Phrase("Blank Server Administrator"));
+                database_data_cell.PaddingLeft = 20f;
+                database_table.AddCell(database_data_cell);
+                database_status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+                database_status.ScalePercent(2f);
+                database_data_cell = new PdfPCell(database_status);
+                database_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                database_data_cell.PaddingTop = 3f;
+                database_table.AddCell(database_data_cell);
+                database_data_cell = new PdfPCell(new Phrase("Domain Accounts used for SQL Services"));
+                database_data_cell.PaddingLeft = 20f;
+                database_table.AddCell(database_data_cell);
+                database_status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+                database_status.ScalePercent(2f);
+                database_data_cell = new PdfPCell(database_status);
+                database_data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                database_data_cell.PaddingTop = 3f;
+                database_table.AddCell(database_data_cell);
+
+                doc.Add(database_table);
+                doc.Add(new Paragraph(" "));
 
 
                 doc.NewPage();
 
 
 
-                
-                var whiteBoldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, new BaseColor(255, 255, 255));
-                var darkBlue = new BaseColor(79, 129, 188);
-                var lightBlue = new BaseColor(219, 229, 241);
                 doc.Add(new Paragraph("SQL Server", boldFont));
                 doc.Add(new Paragraph(" "));
-
-
 
                 // http://www.mikesdotnetting.com/article/86/itextsharp-introducing-tables
                 for (int i = 0; i < 20; i++)
@@ -153,7 +492,7 @@ namespace DatabaseEvaluator
                     issueSeverityHeader_cell.BackgroundColor = lightBlue;
                     table.AddCell(issueSeverityHeader_cell);
                     PdfPCell issueSeverity_cell = new PdfPCell(new Phrase("Critical"));
-                    issueSeverity_cell.BackgroundColor = lightBlue;
+                    issueSeverity_cell.BackgroundColor = red;
                     table.AddCell(issueSeverity_cell);
                     PdfPCell summary_cell = new PdfPCell(new Phrase("Currently Installed version of SQL Sserver is SQL server 2008 R2 SP1 (10.50)", boldFont));
                     summary_cell.Colspan = 4;

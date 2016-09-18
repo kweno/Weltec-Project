@@ -116,6 +116,8 @@
     <None Include="Resources\telerik_logo_RGB_photoshop.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Release\header_logo.PNG" />
+    <None Include="bin\Release\error.png" />
     <Content Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
