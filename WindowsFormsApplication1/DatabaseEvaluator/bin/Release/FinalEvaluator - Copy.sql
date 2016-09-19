@@ -1,5 +1,6 @@
 DECLARE @ExpressionToSearch VARCHAR(200)
 DECLARE  @ExpressionToFind VARCHAR(200)
+DECLARE @xml XML
 
 IF OBJECT_ID('tempdb..#ParameterDetails') IS NOT NULL DROP TABLE #ParameterDetails
 
@@ -27,22 +28,124 @@ CREATE TABLE #ServerDetails(
 
 
 
-IF OBJECT_ID('tempdb..#XMLwithOpenXML') IS NOT NULL DROP TABLE #XMLwithOpenXML
-
-CREATE TABLE #XMLwithOpenXML(
-	Id INT IDENTITY PRIMARY KEY,
-	XMLData XML,
-	LoadedDateTime DATETIME
-)
-
-
-INSERT INTO #XMLwithOpenXML(XMLData, LoadedDateTime)
-SELECT CONVERT(XML, BulkColumn) AS BulkColumn, GETDATE() 
-FROM OPENROWSET(BULK 'C:\XML\SQLServer.xml', SINGLE_BLOB) AS x;
-
-
-DECLARE @xml xml
-SELECT @xml = XMLData FROM #XMLwithOpenXML
+SET @xml = N'<NewDataSet>
+  <Table>
+    <ProcessInfo>HostName</ProcessInfo>
+    <Text>WIN-5BUL46G8J35</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>InstanceName</ProcessInfo>
+    <Text>SQL2008R2</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Installation Directory</ProcessInfo>
+    <Text>System Drive</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>SQLVersion</ProcessInfo>
+    <Text>Microsoft SQL Server 2008 R2 (RTM) Enterprise Evaluation Edition (64-bit)</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>ProductLevel</ProcessInfo>
+    <Text>RTM</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>ProductVersion</ProcessInfo>
+    <Text>10.50.1600.1</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Max Degree Of Parallelism</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Minimum size of server memory (MB)</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Maximum size of server memory (MB)</ProcessInfo>
+    <Text>2147483647</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Trace Flag 2371</ProcessInfo>
+    <Text>1</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Trace Flag 1117</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Trace Flag 1118</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Fill Factor Values in (%)</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>SQL Server Authentication Mode</ProcessInfo>
+    <Text>Windows and SQL Server Authentication</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>SQL Port</ProcessInfo>
+    <Text>1433</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Datafile Location</ProcessInfo>
+    <Text>System Drive</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Logfile Location</ProcessInfo>
+    <Text>System Drive</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Recovery Model</ProcessInfo>
+    <Text>SIMPLE</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Compatibility Level</ProcessInfo>
+    <Text>100</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Snapshot Isolation</ProcessInfo>
+    <Text>OFF</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Read Committed Snapshot Isolation</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Datafile Growth</ProcessInfo>
+    <Text>Fix in size</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Auto Create Statistics</ProcessInfo>
+    <Text>1</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Auto Update Statistics</ProcessInfo>
+    <Text>1</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Auto Shrink</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Old Statistics Found</ProcessInfo>
+    <Text>2357</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Last Full Backup</ProcessInfo>
+    <Text>6</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>SA Login</ProcessInfo>
+    <Text>Does not have a blank password</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>NT AUTHORITY\SYSTEM</ProcessInfo>
+    <Text>Does have a access</Text>
+  </Table>
+</NewDataSet>'
 
 
 

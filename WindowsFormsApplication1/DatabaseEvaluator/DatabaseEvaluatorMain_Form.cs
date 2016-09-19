@@ -13,8 +13,8 @@ namespace DatabaseEvaluator
 {
     public partial class DatabaseEvaluatorMain_Form : Form
     {
-        private string INSTANCE = "B105-01";
-        //private string INSTANCE = "DESKTOP-FVFO8GL\\SQL2016N";
+        //private string INSTANCE = "B105-01";
+        private string INSTANCE = "DESKTOP-FVFO8GL\\SQL2016N";
         private string EVALUATOR_KEY = "AAECAwQFBgcICQoLDA0ODw==";
         private string PARAMETER_VALUES = "";
 
@@ -327,7 +327,7 @@ namespace DatabaseEvaluator
                     {
                         PARAMETER_VALUES += dataReader.GetValue(0) + " " + dataReader.GetValue(1)
                             + "\n";
-
+                        // http://www.mikesdotnetting.com/article/86/itextsharp-introducing-tables
                         PdfPTable table = new PdfPTable(4);
                         table.WidthPercentage = 90;
                         PdfPCell header_cell = new PdfPCell(new Phrase("Issue: " + dataReader.GetValue(1), whiteBoldFont));
@@ -337,21 +337,28 @@ namespace DatabaseEvaluator
                         PdfPCell issueTypeHeader_cell = new PdfPCell(new Phrase("Issue Type", boldFont));
                         issueTypeHeader_cell.BackgroundColor = lightBlue;
                         table.AddCell(issueTypeHeader_cell);
-                        PdfPCell issueType_cell = new PdfPCell(new Phrase("Health"));
+                        PdfPCell issueType_cell = new PdfPCell(new Phrase(dataReader.GetValue(4) + ""));
                         issueType_cell.BackgroundColor = lightBlue;
                         table.AddCell(issueType_cell);
                         PdfPCell issueSeverityHeader_cell = new PdfPCell(new Phrase("Issue Severity", boldFont));
                         issueSeverityHeader_cell.BackgroundColor = lightBlue;
                         table.AddCell(issueSeverityHeader_cell);
-                        PdfPCell issueSeverity_cell = new PdfPCell(new Phrase("Critical"));
-                        issueSeverity_cell.BackgroundColor = red;
-                        table.AddCell(issueSeverity_cell);
 
-                        addNewEvaluation("Problem", "I have a big problem", table, out table);
-                        addNewEvaluation("Recommendation", "I recommend you to solve your problem", table, out table);
-                        addNewEvaluation("Why", "You know why...", table, out table);
-                        addNewEvaluation("Reference 1", "A link to the past", table, out table);
-                        addNewEvaluation("Reference 2", "Wayward sword", table, out table);
+                        var severity = dataReader.GetValue(5) + "";
+                        if ("high".Equals(severity.ToLower()))
+                            table.AddCell(high_cell);
+                        if ("medium".Equals(severity.ToLower()))
+                            table.AddCell(medium_cell);
+                        if ("low".Equals(severity.ToLower()))
+                            table.AddCell(low_cell);
+                        if ("noissues".Equals(severity.ToLower()))
+                            table.AddCell(noissues_cell);
+
+                        addNewEvaluation("Problem", dataReader.GetValue(6) + "", table, out table);
+                        addNewEvaluation("Recommendation", dataReader.GetValue(7) + "", table, out table);
+                        addNewEvaluation("Why", dataReader.GetValue(8) + "", table, out table);
+                        addNewEvaluation("Reference 1", dataReader.GetValue(9) + "", table, out table);
+                        addNewEvaluation("Reference 2", dataReader.GetValue(10) + "", table, out table);
 
                         doc.Add(table);
                         doc.Add(new Paragraph(" "));
@@ -368,38 +375,6 @@ namespace DatabaseEvaluator
                 }
 
 
-
-                // http://www.mikesdotnetting.com/article/86/itextsharp-introducing-tables
-                for (int i = 0; i < 20; i++)
-                {
-                    PdfPTable table = new PdfPTable(4);
-                    table.WidthPercentage = 90;
-                    PdfPCell header_cell = new PdfPCell(new Phrase("Issue 1: Install SQL 2008 R2 SP2 CU11", whiteBoldFont));
-                    header_cell.Colspan = 4;
-                    header_cell.BackgroundColor = darkBlue;
-                    table.AddCell(header_cell);
-                    PdfPCell issueTypeHeader_cell = new PdfPCell(new Phrase("Issue Type", boldFont));
-                    issueTypeHeader_cell.BackgroundColor = lightBlue;
-                    table.AddCell(issueTypeHeader_cell);
-                    PdfPCell issueType_cell = new PdfPCell(new Phrase("Health"));
-                    issueType_cell.BackgroundColor = lightBlue;
-                    table.AddCell(issueType_cell);                    
-                    PdfPCell issueSeverityHeader_cell = new PdfPCell(new Phrase("Issue Severity", boldFont));
-                    issueSeverityHeader_cell.BackgroundColor = lightBlue;
-                    table.AddCell(issueSeverityHeader_cell);
-                    PdfPCell issueSeverity_cell = new PdfPCell(new Phrase("Critical"));
-                    issueSeverity_cell.BackgroundColor = red;
-                    table.AddCell(issueSeverity_cell);
-
-                    addNewEvaluation("Problem", "I have a big problem", table, out table);
-                    addNewEvaluation("Recommendation", "I recommend you to solve your problem", table, out table);
-                    addNewEvaluation("Why", "You know why...", table, out table);
-                    addNewEvaluation("Reference 1", "A link to the past", table, out table);
-                    addNewEvaluation("Reference 2", "Wayward sword", table, out table);
-
-                    doc.Add(table);
-                    doc.Add(new Paragraph(" "));
-                }
                 doc.Close();
 
                 Global_ProgressBar.Style = ProgressBarStyle.Continuous;
@@ -476,6 +451,8 @@ namespace DatabaseEvaluator
 
             Console.WriteLine(decrypted);
             //MessageBox.Show(decrypted);
+
+            System.IO.File.WriteAllText(@"C:\XML\SQLServer.xml", decrypted);
 
             DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
 
