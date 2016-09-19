@@ -309,13 +309,63 @@ namespace DatabaseEvaluator
                     }
                     dataReader.Close();
                     command.Dispose();
-                    connection.Close();
+                    MessageBox.Show(PARAMETER_VALUES);
                 }
                 catch (Exception exception)
                 {
                     MessageBox.Show("Can not open connection ! ");
                 }
 
+                script = "SELECT * from #ParameterDetails ORDER BY PassValue,IssueSeverity, ParameterName";
+
+                try
+                {
+
+                    command = new SqlCommand(script, connection);
+                    dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        PARAMETER_VALUES += dataReader.GetValue(0) + " " + dataReader.GetValue(1)
+                            + "\n";
+
+                        PdfPTable table = new PdfPTable(4);
+                        table.WidthPercentage = 90;
+                        PdfPCell header_cell = new PdfPCell(new Phrase("Issue: " + dataReader.GetValue(1), whiteBoldFont));
+                        header_cell.Colspan = 4;
+                        header_cell.BackgroundColor = darkBlue;
+                        table.AddCell(header_cell);
+                        PdfPCell issueTypeHeader_cell = new PdfPCell(new Phrase("Issue Type", boldFont));
+                        issueTypeHeader_cell.BackgroundColor = lightBlue;
+                        table.AddCell(issueTypeHeader_cell);
+                        PdfPCell issueType_cell = new PdfPCell(new Phrase("Health"));
+                        issueType_cell.BackgroundColor = lightBlue;
+                        table.AddCell(issueType_cell);
+                        PdfPCell issueSeverityHeader_cell = new PdfPCell(new Phrase("Issue Severity", boldFont));
+                        issueSeverityHeader_cell.BackgroundColor = lightBlue;
+                        table.AddCell(issueSeverityHeader_cell);
+                        PdfPCell issueSeverity_cell = new PdfPCell(new Phrase("Critical"));
+                        issueSeverity_cell.BackgroundColor = red;
+                        table.AddCell(issueSeverity_cell);
+
+                        addNewEvaluation("Problem", "I have a big problem", table, out table);
+                        addNewEvaluation("Recommendation", "I recommend you to solve your problem", table, out table);
+                        addNewEvaluation("Why", "You know why...", table, out table);
+                        addNewEvaluation("Reference 1", "A link to the past", table, out table);
+                        addNewEvaluation("Reference 2", "Wayward sword", table, out table);
+
+                        doc.Add(table);
+                        doc.Add(new Paragraph(" "));
+
+                    }
+                    MessageBox.Show(PARAMETER_VALUES);
+                    dataReader.Close();
+                    command.Dispose();
+                    connection.Close();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("Can not open connection ! ");
+                }
 
 
 
