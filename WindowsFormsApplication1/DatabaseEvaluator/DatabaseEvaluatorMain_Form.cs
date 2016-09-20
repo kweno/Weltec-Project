@@ -13,8 +13,8 @@ namespace DatabaseEvaluator
 {
     public partial class DatabaseEvaluatorMain_Form : Form
     {
-        private string INSTANCE = "B105-01";
-        //private string INSTANCE = "DESKTOP-FVFO8GL\\SQL2016N";
+        //private string INSTANCE = "B105-01";
+        private string INSTANCE = "DESKTOP-FVFO8GL\\SQL2016N";
         private string EVALUATOR_KEY = "AAECAwQFBgcICQoLDA0ODw==";
         private string PARAMETER_VALUES = "";
 
@@ -30,6 +30,23 @@ namespace DatabaseEvaluator
 
         public DatabaseEvaluatorMain_Form()
         {
+            int counter = 0;
+            string line;
+
+            // Read the file and display it line by line.
+            System.IO.StreamReader file =
+               new System.IO.StreamReader("instance.txt");
+            while ((line = file.ReadLine()) != null)
+            {
+                INSTANCE = line;
+                counter++;
+            }
+
+            file.Close();
+
+            // Suspend the screen.
+            Console.ReadLine();
+
             InitializeComponent();
 
             // Adds event handler for checking server connection
