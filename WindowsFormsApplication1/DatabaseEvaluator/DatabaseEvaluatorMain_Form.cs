@@ -228,6 +228,41 @@ namespace DatabaseEvaluator
 
                 doc.Add(legend_table);
 
+                // SERVER DETAILS
+                string script = File.ReadAllText(@"FinalEvaluator.sql");
+                var connectionString = "Data Source=" + INSTANCE + ";" +
+                                        "Integrated Security=SSPI;";
+                SqlCommand command;
+                SqlDataReader dataReader;
+                var connection = new SqlConnection(connectionString);
+                connection.Open();
+
+                command = new SqlCommand(script, connection);
+                command.ExecuteNonQuery();
+
+                script = "SELECT * FROM [#ServerDetails]";
+
+                try
+                {
+
+                    command = new SqlCommand(script, connection);
+                    dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        PARAMETER_VALUES += dataReader.GetValue(0) + " " + dataReader.GetValue(1)
+                            + "\n";
+                    }
+                    dataReader.Close();
+                    command.Dispose();
+                    MessageBox.Show(PARAMETER_VALUES);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("Can not open connection ! ");
+                }
+
+
+
                 doc.NewPage();
 
 
@@ -299,40 +334,7 @@ namespace DatabaseEvaluator
                 // 5TH PAGE
                 doc.Add(new Paragraph("SQL Server", boldFont));
                 doc.Add(new Paragraph(" "));
-
-
-                string script = File.ReadAllText(@"FinalEvaluator.sql");
-                var connectionString = "Data Source=" + INSTANCE + ";" +
-                                        "Integrated Security=SSPI;";
-                SqlCommand command;
-                SqlDataReader dataReader;
-                var connection = new SqlConnection(connectionString);
-                connection.Open();
-
-                command = new SqlCommand(script, connection);
-                command.ExecuteNonQuery();
-
-                script = "SELECT * FROM [#ServerDetails]";
-
-                try
-                {
                     
-                    command = new SqlCommand(script, connection);
-                    dataReader = command.ExecuteReader();
-                    while (dataReader.Read())
-                    {
-                        PARAMETER_VALUES += dataReader.GetValue(0) + " " + dataReader.GetValue(1)
-                            + "\n";
-                    }
-                    dataReader.Close();
-                    command.Dispose();
-                    MessageBox.Show(PARAMETER_VALUES);
-                }
-                catch (Exception exception)
-                {
-                    MessageBox.Show("Can not open connection ! ");
-                }
-
                 script = "SELECT * from #ParameterDetails ORDER BY PassValue,IssueSeverity, ParameterName";
 
                 try
@@ -936,6 +938,16 @@ namespace DatabaseEvaluator
         private void button1_Click(object sender, EventArgs e)
         {
             DatabaseEvaluator_BackgroundWorker_RunWorkerCompleted(sender, null);
+        }
+
+        /// <summary>
+        /// Closes the Application
+        /// </summary>
+        private void Close_Button_Click(object sender, EventArgs e)
+        {
+            System.Environment.Exit(0);
+            //Close();
+            Application.Exit();
         }
     }
 }

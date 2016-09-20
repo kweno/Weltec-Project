@@ -37,13 +37,14 @@ namespace DatabaseEvaluator
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DatabaseEvaluatorMain_Form));
             this.Start_Button = new System.Windows.Forms.Button();
             this.Main_Panel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.Global_ProgressBar = new System.Windows.Forms.ProgressBar();
             this.FindFile_GroupBox = new System.Windows.Forms.GroupBox();
             this.PathToXML_TextBox = new System.Windows.Forms.TextBox();
             this.Browse_Button = new System.Windows.Forms.Button();
             this.PathToXML_Label = new System.Windows.Forms.Label();
             this.Logo_PictureBox = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Close_Button = new System.Windows.Forms.Button();
             this.Main_Panel.SuspendLayout();
             this.FindFile_GroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Logo_PictureBox)).BeginInit();
@@ -51,7 +52,7 @@ namespace DatabaseEvaluator
             // 
             // Start_Button
             // 
-            this.Start_Button.Location = new System.Drawing.Point(404, 312);
+            this.Start_Button.Location = new System.Drawing.Point(318, 314);
             this.Start_Button.Name = "Start_Button";
             this.Start_Button.Size = new System.Drawing.Size(75, 23);
             this.Start_Button.TabIndex = 0;
@@ -69,6 +70,16 @@ namespace DatabaseEvaluator
             this.Main_Panel.Name = "Main_Panel";
             this.Main_Panel.Size = new System.Drawing.Size(480, 295);
             this.Main_Panel.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(391, 50);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Global_ProgressBar
             // 
@@ -127,21 +138,22 @@ namespace DatabaseEvaluator
             this.Logo_PictureBox.TabIndex = 0;
             this.Logo_PictureBox.TabStop = false;
             // 
-            // button1
+            // Close_Button
             // 
-            this.button1.Location = new System.Drawing.Point(391, 50);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Close_Button.Location = new System.Drawing.Point(404, 314);
+            this.Close_Button.Name = "Close_Button";
+            this.Close_Button.Size = new System.Drawing.Size(75, 23);
+            this.Close_Button.TabIndex = 2;
+            this.Close_Button.Text = "Close";
+            this.Close_Button.UseVisualStyleBackColor = true;
+            this.Close_Button.Click += new System.EventHandler(this.Close_Button_Click);
             // 
             // DatabaseEvaluatorMain_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(505, 347);
+            this.Controls.Add(this.Close_Button);
             this.Controls.Add(this.Main_Panel);
             this.Controls.Add(this.Start_Button);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -166,6 +178,7 @@ namespace DatabaseEvaluator
         private TextBox PathToXML_TextBox;
         private ProgressBar Global_ProgressBar;
         private Button button1;
+        private Button Close_Button;
     }
 }
 
