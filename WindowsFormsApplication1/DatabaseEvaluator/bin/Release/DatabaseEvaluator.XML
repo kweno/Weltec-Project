@@ -9,6 +9,11 @@
             BackgroundWorker which does the Evaluation
             </summary>
         </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.Close_Button_Click(System.Object,System.EventArgs)">
+            <summary>
+            Closes the Application
+            </summary>
+        </member>
         <member name="F:DatabaseEvaluator.DatabaseEvaluatorMain_Form.components">
             <summary>
             Required designer variable.

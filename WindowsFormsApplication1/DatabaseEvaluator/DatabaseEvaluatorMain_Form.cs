@@ -151,13 +151,59 @@ namespace DatabaseEvaluator
 
 
                 // CREATE 3RD PAGE
+
+                // SERVER DETAILS
+                string script = File.ReadAllText(@"FinalEvaluator.sql");
+                var connectionString = "Data Source=" + INSTANCE + ";" +
+                                        "Integrated Security=SSPI;";
+                SqlCommand command;
+                SqlDataReader dataReader;
+                var connection = new SqlConnection(connectionString);
+                connection.Open();
+
+                command = new SqlCommand(script, connection);
+                command.ExecuteNonQuery();
+
+                script = "SELECT * FROM [#ServerDetails]";
+
+                try
+                {
+                    command = new SqlCommand(script, connection);
+                    dataReader = command.ExecuteReader();
+
+                    doc.Add(new Paragraph(" "));
+                    paragraph = new Paragraph("Server Details", overviewFont);
+                    doc.Add(paragraph);
+                    doc.Add(new Paragraph(" "));
+
+                    PdfPTable server_details_table = null;
+                    addServerDetailsTable(out server_details_table);
+
+                    while (dataReader.Read())
+                    {
+                        PARAMETER_VALUES += dataReader.GetValue(0) + " " + dataReader.GetValue(1)
+                            + "\n";
+                        addNewItemToServerDetailsTable(dataReader.GetValue(0) + " ", dataReader.GetValue(1) + " ", server_details_table, out server_details_table);
+                    }
+                    doc.Add(server_details_table);
+                    doc.Add(new Paragraph(" "));
+                    dataReader.Close();
+                    command.Dispose();
+                    MessageBox.Show(PARAMETER_VALUES);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("Can not open connection ! ");
+                }
+
+
+                // SCORECARD
                 paragraph = new Paragraph("Scorecard", overviewFont);
                 doc.Add(paragraph);
                 doc.Add(new Paragraph(" "));
                 doc.Add(new Paragraph("The scorecards for the Evaluation Report are provided below. These show the state of the system with"
                                         + " respect to health(current issues) and risk(potential for future issues)."));
                 doc.Add(new Paragraph(" "));
-
 
                 var darkBlue = new BaseColor(79, 129, 188);
                 var lightBlue = new BaseColor(219, 229, 241);
@@ -228,38 +274,7 @@ namespace DatabaseEvaluator
 
                 doc.Add(legend_table);
 
-                // SERVER DETAILS
-                string script = File.ReadAllText(@"FinalEvaluator.sql");
-                var connectionString = "Data Source=" + INSTANCE + ";" +
-                                        "Integrated Security=SSPI;";
-                SqlCommand command;
-                SqlDataReader dataReader;
-                var connection = new SqlConnection(connectionString);
-                connection.Open();
-
-                command = new SqlCommand(script, connection);
-                command.ExecuteNonQuery();
-
-                script = "SELECT * FROM [#ServerDetails]";
-
-                try
-                {
-
-                    command = new SqlCommand(script, connection);
-                    dataReader = command.ExecuteReader();
-                    while (dataReader.Read())
-                    {
-                        PARAMETER_VALUES += dataReader.GetValue(0) + " " + dataReader.GetValue(1)
-                            + "\n";
-                    }
-                    dataReader.Close();
-                    command.Dispose();
-                    MessageBox.Show(PARAMETER_VALUES);
-                }
-                catch (Exception exception)
-                {
-                    MessageBox.Show("Can not open connection ! ");
-                }
+                
 
 
 
@@ -430,6 +445,25 @@ namespace DatabaseEvaluator
             header_cell.BackgroundColor = darkBlue;
             header_cell.FixedHeight = 20f;
             table.AddCell(header_cell);
+        }
+
+        private void addServerDetailsTable(out PdfPTable table)
+        {
+            table = new PdfPTable(2);
+            float[] widths = new float[] { 300f, 500f };
+            table.SetWidths(widths);
+            //table.WidthPercentage = 70;
+        }
+
+        private void addNewItemToServerDetailsTable(string itemName, string itemValue, PdfPTable temp_table, out PdfPTable table)
+        {
+            table = temp_table;
+            Phrase data_phrase = new Phrase(itemName);
+            PdfPCell data_cell = new PdfPCell(data_phrase);
+            table.AddCell(data_cell);
+            data_phrase = new Phrase(itemValue);
+            data_cell = new PdfPCell(data_phrase);
+            table.AddCell(data_cell);
         }
 
         private void addNewHeaderTable(string headerName, PdfPTable temp_table, out PdfPTable table)
