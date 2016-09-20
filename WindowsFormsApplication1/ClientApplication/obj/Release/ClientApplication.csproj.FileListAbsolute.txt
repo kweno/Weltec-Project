@@ -9,3 +9,7 @@ D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\C
 D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.exe
 D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.pdb
 D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.XML
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe.config
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.XML
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.exe
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\obj\Release\ClientApplication.pdb

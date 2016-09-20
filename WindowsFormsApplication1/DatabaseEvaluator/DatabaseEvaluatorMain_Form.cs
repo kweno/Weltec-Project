@@ -13,8 +13,8 @@ namespace DatabaseEvaluator
 {
     public partial class DatabaseEvaluatorMain_Form : Form
     {
-        //private string INSTANCE = "B105-01";
-        private string INSTANCE = "DESKTOP-FVFO8GL\\SQL2016N";
+        private string INSTANCE = "B105-01";
+        //private string INSTANCE = "DESKTOP-FVFO8GL\\SQL2016N";
         private string EVALUATOR_KEY = "AAECAwQFBgcICQoLDA0ODw==";
         private string PARAMETER_VALUES = "";
 
@@ -337,14 +337,14 @@ namespace DatabaseEvaluator
                         PdfPCell issueTypeHeader_cell = new PdfPCell(new Phrase("Issue Type", boldFont));
                         issueTypeHeader_cell.BackgroundColor = lightBlue;
                         table.AddCell(issueTypeHeader_cell);
-                        PdfPCell issueType_cell = new PdfPCell(new Phrase(dataReader.GetValue(4) + ""));
+                        PdfPCell issueType_cell = new PdfPCell(new Phrase(dataReader.GetValue(4) + " "));
                         issueType_cell.BackgroundColor = lightBlue;
                         table.AddCell(issueType_cell);
                         PdfPCell issueSeverityHeader_cell = new PdfPCell(new Phrase("Issue Severity", boldFont));
                         issueSeverityHeader_cell.BackgroundColor = lightBlue;
                         table.AddCell(issueSeverityHeader_cell);
 
-                        var severity = dataReader.GetValue(5) + "";
+                        var severity = dataReader.GetValue(5) +  "";
                         if ("high".Equals(severity.ToLower()))
                             table.AddCell(high_cell);
                         if ("medium".Equals(severity.ToLower()))
@@ -354,11 +354,11 @@ namespace DatabaseEvaluator
                         if ("noissues".Equals(severity.ToLower()))
                             table.AddCell(noissues_cell);
 
-                        addNewEvaluation("Problem", dataReader.GetValue(6) + "", table, out table);
-                        addNewEvaluation("Recommendation", dataReader.GetValue(7) + "", table, out table);
-                        addNewEvaluation("Why", dataReader.GetValue(8) + "", table, out table);
-                        addNewEvaluation("Reference 1", dataReader.GetValue(9) + "", table, out table);
-                        addNewEvaluation("Reference 2", dataReader.GetValue(10) + "", table, out table);
+                        addNewEvaluation("Problem", dataReader.GetValue(6) + " ", table, out table);
+                        addNewEvaluation("Recommendation", dataReader.GetValue(7) + " ", table, out table);
+                        addNewEvaluation("Why", dataReader.GetValue(8) + " ", table, out table);
+                        addNewEvaluation("Reference 1", dataReader.GetValue(9) + " ", table, out table);
+                        addNewEvaluation("Reference 2", dataReader.GetValue(10) + " ", table, out table);
 
                         doc.Add(table);
                         doc.Add(new Paragraph(" "));
@@ -452,6 +452,10 @@ namespace DatabaseEvaluator
             Console.WriteLine(decrypted);
             //MessageBox.Show(decrypted);
 
+            if (!Directory.Exists(@"C:\XML"))
+            {
+                Directory.CreateDirectory(@"C:\XML");
+            }
             System.IO.File.WriteAllText(@"C:\XML\SQLServer.xml", decrypted);
 
             DataTable servers = SqlDataSourceEnumerator.Instance.GetDataSources();
