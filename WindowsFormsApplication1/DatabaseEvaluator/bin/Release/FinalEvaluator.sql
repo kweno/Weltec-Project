@@ -398,27 +398,30 @@ SELECT @SQLData = doc.col.value('Text[1]', 'nvarchar(MAX)')
 FROM @xml.nodes('/NewDataSet/Table') doc(col)
 WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'Datafile Location'
 
+IF @SQLData IS NOT NULL
 
-SET @ExpressionToFind = 'Not System Drive'
+BEGIN
 
-SELECT @ExpressionToSearch = @SQLData
+		SET @ExpressionToFind = 'Not System Drive'
 
-IF @ExpressionToSearch = @ExpressionToFind
-    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2])  
-    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Database Data File Configuration'
-ELSE
-	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2]) 
-    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Database Data File Configuration'
+		SELECT @ExpressionToSearch = @SQLData
+
+		IF @ExpressionToSearch = @ExpressionToFind
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2])  
+			SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Database Data File Configuration'
+		ELSE
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2]) 
+			SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Database Data File Configuration'
 									 
-									 
+END								 
 -- Logfile Location
 
 DECLARE @SQLLog nvarchar(20)
@@ -427,26 +430,30 @@ SELECT @SQLLog = doc.col.value('Text[1]', 'nvarchar(MAX)')
 FROM @xml.nodes('/NewDataSet/Table') doc(col)
 WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'Logfile Location'
 
+IF @SQLLog IS NOT NULL 
 
-SET @ExpressionToFind = 'Not System Drive'
+BEGIN 
 
-SELECT @ExpressionToSearch = @SQLLog
+		SET @ExpressionToFind = 'Not System Drive'
 
-IF @ExpressionToSearch = @ExpressionToFind
-    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2])  
-    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Database Log File Configuration'
-ELSE
-	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2]) 
-    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Database Log File Configuration'
-									 
+		SELECT @ExpressionToSearch = @SQLLog
+
+		IF @ExpressionToSearch = @ExpressionToFind
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2])  
+			SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Database Log File Configuration'
+		ELSE
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2]) 
+			SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Database Log File Configuration'
+
+END									 
 									 
 -- Recovery Model
 
@@ -456,27 +463,30 @@ SELECT @DBRecovery = doc.col.value('Text[1]', 'nvarchar(MAX)')
 FROM @xml.nodes('/NewDataSet/Table') doc(col)
 WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'Recovery Model'
 
+IF @DBRecovery IS NOT NULL
 
-SET @ExpressionToFind = 'FULL'
+BEGIN
 
-SELECT @ExpressionToSearch = @DBRecovery
+		SET @ExpressionToFind = 'FULL'
 
-IF @ExpressionToSearch = @ExpressionToFind
-    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2])  
-    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Recovery Model'
-ELSE
-	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2]) 
-    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Recovery Model'
+		SELECT @ExpressionToSearch = @DBRecovery
+
+		IF @ExpressionToSearch = @ExpressionToFind
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2])  
+			SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Recovery Model'
+		ELSE
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2]) 
+			SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Recovery Model'
 									 
-									 
+END 									 
 
 -- Compatibility Level
 
@@ -486,27 +496,30 @@ SELECT @DBComp = doc.col.value('Text[1]', 'nvarchar(MAX)')
 FROM @xml.nodes('/NewDataSet/Table') doc(col)
 WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'Compatibility Level'
 
+IF @DBComp IS NOT NULL 
 
-SET @ExpressionToFind = '100 or 110'
+BEGIN 
 
-SELECT @ExpressionToSearch = @DBComp
+		SET @ExpressionToFind = '100 or 110'
 
-IF @ExpressionToSearch != @ExpressionToFind
-    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2])  
-    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Compatibility Level'
-ELSE
-	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2]) 
-    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Compatibility Level'
+		SELECT @ExpressionToSearch = @DBComp
+
+		IF @ExpressionToSearch != @ExpressionToFind
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2])  
+			SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Compatibility Level'
+		ELSE
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2]) 
+			SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Compatibility Level'
 									 
-									 
+END 									 
 
 
 -- Snapshot Isolation
@@ -517,26 +530,30 @@ SELECT @DBIso = doc.col.value('Text[1]', 'nvarchar(MAX)')
 FROM @xml.nodes('/NewDataSet/Table') doc(col)
 WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'Snapshot Isolation'
 
+IF @DBIso IS NOT NULL
 
-SET @ExpressionToFind = 'ON'
+BEGIN
 
-SELECT @ExpressionToSearch = @DBIso
+		SET @ExpressionToFind = 'ON'
 
-IF @ExpressionToSearch = @ExpressionToFind
-    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2])  
-    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Snapshot Isolation'
-ELSE
-	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2]) 
-    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Snapshot Isolation'
-									 
+		SELECT @ExpressionToSearch = @DBIso
+
+		IF @ExpressionToSearch = @ExpressionToFind
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2])  
+			SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Snapshot Isolation'
+		ELSE
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2]) 
+			SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Snapshot Isolation'
+
+END									 
 
 										 
 -- Read Committed Snapshot 
@@ -547,27 +564,30 @@ SELECT @DBSnap = doc.col.value('Text[1]', 'nvarchar(MAX)')
 FROM @xml.nodes('/NewDataSet/Table') doc(col)
 WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'Snapshot Isolation'
 
+IF @DBSnap IS NOT NULL
 
-SET @ExpressionToFind = '1'
+BEGIN
 
-SELECT @ExpressionToSearch = @DBSnap
+		SET @ExpressionToFind = '1'
 
-IF @ExpressionToSearch = @ExpressionToFind
-    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2])  
-    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Read Committed Snapshot'
-ELSE
-	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2]) 
-    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Read Committed Snapshot'
+		SELECT @ExpressionToSearch = @DBSnap
+
+		IF @ExpressionToSearch = @ExpressionToFind
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2])  
+			SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Read Committed Snapshot'
+		ELSE
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2]) 
+			SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Read Committed Snapshot'
 									 
-									 
+END									 
 										 
 -- Database Auto growth 
 
@@ -577,27 +597,30 @@ SELECT @DBGrowth = doc.col.value('Text[1]', 'nvarchar(MAX)')
 FROM @xml.nodes('/NewDataSet/Table') doc(col)
 WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'Datafile Growth'
 
+IF @DBGrowth IS NOT NULL
 
-SET @ExpressionToFind = 'Fix in size'
+BEGIN
 
-SELECT @ExpressionToSearch = @DBGrowth
+		SET @ExpressionToFind = 'Fix in size'
 
-IF @ExpressionToSearch = @ExpressionToFind
-    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2])  
-    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Database Auto growth'
-ELSE
-	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2]) 
-    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Database Auto growth'
+		SELECT @ExpressionToSearch = @DBGrowth
+
+		IF @ExpressionToSearch = @ExpressionToFind
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2])  
+			SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Database Auto growth'
+		ELSE
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2]) 
+			SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Database Auto growth'
 									 
-									 
+END									 
 										 
 -- Auto Create Statistics
 
@@ -607,26 +630,31 @@ SELECT @DBCreateStat = doc.col.value('Text[1]', 'nvarchar(MAX)')
 FROM @xml.nodes('/NewDataSet/Table') doc(col)
 WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'Auto Create Statistics'
 
+IF @DBCreateStat IS NOT NULL
 
-SET @ExpressionToFind = '1'
+BEGIN
 
-SELECT @ExpressionToSearch = @DBCreateStat
+		SET @ExpressionToFind = '1'
 
-IF @ExpressionToSearch = @ExpressionToFind
-    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2])  
-    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Auto Create Statistics'
-ELSE
-	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2]) 
-    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Auto Create Statistics'
-									 
+		SELECT @ExpressionToSearch = @DBCreateStat
+
+		IF @ExpressionToSearch = @ExpressionToFind
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2])  
+			SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Auto Create Statistics'
+		ELSE
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2]) 
+			SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Auto Create Statistics'
+
+
+END								 
 									 
 -- Auto Update Statistics
 
@@ -636,28 +664,31 @@ SELECT @DBUpdateStat = doc.col.value('Text[1]', 'nvarchar(MAX)')
 FROM @xml.nodes('/NewDataSet/Table') doc(col)
 WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'Auto Update Statistics'
 
+IF @DBUpdateStat IS NOT NULL
 
-SET @ExpressionToFind = '1'
+BEGIN
 
-SELECT @ExpressionToSearch = @DBUpdateStat
+		SET @ExpressionToFind = '1'
 
-IF @ExpressionToSearch = @ExpressionToFind
-    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2])  
-    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Auto Update Statistics'
-ELSE
-	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2]) 
-    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Auto Update Statistics'
+		SELECT @ExpressionToSearch = @DBUpdateStat
+
+		IF @ExpressionToSearch = @ExpressionToFind
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2])  
+			SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Auto Update Statistics'
+		ELSE
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2]) 
+			SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Auto Update Statistics'
 									 
 					
-									 
+END 									 
 -- Auto Shrink
 
 DECLARE @DBAutoShrink nvarchar(2)
@@ -666,27 +697,30 @@ SELECT @DBAutoShrink = doc.col.value('Text[1]', 'nvarchar(MAX)')
 FROM @xml.nodes('/NewDataSet/Table') doc(col)
 WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'Auto Shrink'
 
+IF @DBAutoShrink IS NOT NULL
 
-SET @ExpressionToFind = '0'
+BEGIN
 
-SELECT @ExpressionToSearch = @DBAutoShrink
+		SET @ExpressionToFind = '0'
 
-IF @ExpressionToSearch = @ExpressionToFind
-    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2])  
-    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Auto Shrink'
-ELSE
-	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2]) 
-    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Auto Shrink'
-									 
-									 
+		SELECT @ExpressionToSearch = @DBAutoShrink
+
+		IF @ExpressionToSearch = @ExpressionToFind
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2])  
+			SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Auto Shrink'
+		ELSE
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2]) 
+			SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Auto Shrink'
+											 
+END									 
 									 
 -- Daily Index Rebuild - Index Optimizations
 
@@ -696,28 +730,31 @@ SELECT @DBIndex = doc.col.value('Text[1]', 'nvarchar(MAX)')
 FROM @xml.nodes('/NewDataSet/Table') doc(col)
 WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'Old Statistics Found'
 
+IF @DBIndex IS NOT NULL
 
-SET @ExpressionToFind = '0'
+BEGIN
 
-SELECT @ExpressionToSearch = @DBIndex
+		SET @ExpressionToFind = '0'
 
-IF @ExpressionToSearch = @ExpressionToFind
-    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2])  
-    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Daily Index Rebuild - Index Optimizations'
-ELSE
-	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2]) 
-    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Daily Index Rebuild - Index Optimizations'
+		SELECT @ExpressionToSearch = @DBIndex
+
+		IF @ExpressionToSearch = @ExpressionToFind
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2])  
+			SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Daily Index Rebuild - Index Optimizations'
+		ELSE
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2]) 
+			SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Daily Index Rebuild - Index Optimizations'
 									 
 									 
-									 
+END 									 
 -- Daily database Full backupns
 
 DECLARE @DBBackup nvarchar(10)
@@ -726,27 +763,30 @@ SELECT @DBBackup = doc.col.value('Text[1]', 'nvarchar(MAX)')
 FROM @xml.nodes('/NewDataSet/Table') doc(col)
 WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'Last Full Backup'
 
+IF @DBBackup IS NOT NULL
 
-SET @ExpressionToFind = '0'
+BEGIN
 
-SELECT @ExpressionToSearch = @DBBackup
+		SET @ExpressionToFind = '0'
 
-IF @ExpressionToSearch = @ExpressionToFind
-    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2])  
-    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Daily database Full backup'
-ELSE
-	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2]) 
-    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Daily database Full backup'
+		SELECT @ExpressionToSearch = @DBBackup
+
+		IF @ExpressionToSearch = @ExpressionToFind
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2])  
+			SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Daily database Full backup'
+		ELSE
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2]) 
+			SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Daily database Full backup'
 									 
-									 
+END									 
 									 
 -- Blank SQL SA Password
 
@@ -756,27 +796,30 @@ SELECT @SAPwd = doc.col.value('Text[1]', 'nvarchar(MAX)')
 FROM @xml.nodes('/NewDataSet/Table') doc(col)
 WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'SA Login'
 
+IF @SAPwd IS NOT NULL
 
-SET @ExpressionToFind = 'Does not have a blank password'
+BEGIN
 
-SELECT @ExpressionToSearch = @SAPwd
+		SET @ExpressionToFind = 'Does not have a blank password'
 
-IF @ExpressionToSearch = @ExpressionToFind
-    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2])  
-    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Blank SQL SA Password'
-ELSE
-	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2]) 
-    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'Blank SQL SA Password'
+		SELECT @ExpressionToSearch = @SAPwd
+
+		IF @ExpressionToSearch = @ExpressionToFind
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2])  
+			SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Blank SQL SA Password'
+		ELSE
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2]) 
+			SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'Blank SQL SA Password'
 					
-									 
+END									 
 									 
 -- NT AUTHORITY\SYSTEM Administrator
 
@@ -786,25 +829,31 @@ SELECT @SYSTEMAuth = doc.col.value('Text[1]', 'nvarchar(MAX)')
 FROM @xml.nodes('/NewDataSet/Table') doc(col)
 WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'NT AUTHORITY\SYSTEM'
 
+IF @SYSTEMAuth IS NOT NULL
 
-SET @ExpressionToFind = 'Does not have a access'
+BEGIN
 
-SELECT @ExpressionToSearch = @SYSTEMAuth
+		SET @ExpressionToFind = 'Does not have a access'
 
-IF @ExpressionToSearch = @ExpressionToFind
-    INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2])  
-    SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'NT AUTHORITY\SYSTEM Administrator'
-ELSE
-	INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2]) 
-    SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
-									 [Problem],[Recommendation],[Why],[Link],[Link2] 
-									 from [EVALUATOR].[dbo].[ParameterDesc] 
-									 WHERE ParameterName = 'NT AUTHORITY\SYSTEM Administrator'
+		SELECT @ExpressionToSearch = @SYSTEMAuth
+
+		IF @ExpressionToSearch = @ExpressionToFind
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2])  
+			SELECT 'True',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'NT AUTHORITY\SYSTEM Administrator'
+		ELSE
+			INSERT INTO [#ParameterDetails] ([PassValue],[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2]) 
+			SELECT 'False',[ParameterName],[ClientParameterName],[BestPracticeValue],[IssueType],[IssueSeverity],
+											 [Problem],[Recommendation],[Why],[Link],[Link2] 
+											 from [EVALUATOR].[dbo].[ParameterDesc] 
+											 WHERE ParameterName = 'NT AUTHORITY\SYSTEM Administrator'
+											 
+									 
+END	
 									 
 									 
 									 
