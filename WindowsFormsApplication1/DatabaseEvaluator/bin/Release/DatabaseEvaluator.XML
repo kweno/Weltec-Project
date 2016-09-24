@@ -4,10 +4,116 @@
         <name>DatabaseEvaluator</name>
     </assembly>
     <members>
+        <member name="T:DatabaseEvaluator.DatabaseEvaluatorMain_Form">
+            <summary>
+            Main Form for the Evaluator
+            </summary>
+        </member>
+        <member name="F:DatabaseEvaluator.DatabaseEvaluatorMain_Form.INSTANCE">
+            <summary>
+            Server Instance Value
+            </summary>
+        </member>
+        <member name="F:DatabaseEvaluator.DatabaseEvaluatorMain_Form.EVALUATOR_KEY">
+            <summary>
+            Key for Decryption
+            </summary>
+        </member>
+        <member name="F:DatabaseEvaluator.DatabaseEvaluatorMain_Form.FILE_NAME">
+            <summary>
+            File name of dump file
+            </summary>
+        </member>
         <member name="F:DatabaseEvaluator.DatabaseEvaluatorMain_Form.DatabaseEvaluator_BackgroundWorker">
             <summary>
             BackgroundWorker which does the Evaluation
             </summary>
+        </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.DatabaseEvaluator_BackgroundWorker_RunWorkerCompleted(System.Object,System.ComponentModel.RunWorkerCompletedEventArgs)">
+            <summary>
+            Event Handler for when creating the PDF report is finished
+            </summary>
+        </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.addNewEvaluation(System.String,System.String,iTextSharp.text.pdf.PdfPTable,iTextSharp.text.pdf.PdfPTable@)">
+            <summary>
+            Method for building the PDF Report
+            Used for the tables in the last page
+            </summary>
+            <param name="header">Heading</param>
+            <param name="details">Details for the Heading</param>
+            <param name="temp_table">Table where to add the header and details</param>
+            <param name="table">The Resulting table after adding the header and details</param>
+        </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.addNewTable(System.String,iTextSharp.text.pdf.PdfPTable@)">
+            <summary>
+            Method for building the PDF Report
+            Used in the 4th Page Consolidated Scorecard
+            </summary>
+            <param name="tableName">Name of the table</param>
+            <param name="table">The resulting table</param>
+        </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.addServerDetailsTable(iTextSharp.text.pdf.PdfPTable@)">
+            <summary>
+            Method for building the PDF Report
+            Creates the Server Details Table
+            </summary>
+            <param name="table">The resulting table</param>
+        </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.addNewItemToServerDetailsTable(System.String,System.String,iTextSharp.text.pdf.PdfPTable,iTextSharp.text.pdf.PdfPTable@)">
+            <summary>
+            Method for building the PDF Report
+            Builds the Server Details Table
+            </summary>
+            <param name="itemName">Item Name</param>
+            <param name="itemValue">Item Value</param>
+            <param name="temp_table">Table to be modified</param>
+            <param name="table">Resulting Table</param>
+        </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.addNewHeaderTable(System.String,iTextSharp.text.pdf.PdfPTable,iTextSharp.text.pdf.PdfPTable@)">
+            <summary>
+            Method for building the PDF Report
+            Used in the 4th Page, Scorecard
+            </summary>
+            <param name="headerName">Header Name to add</param>
+            <param name="temp_table">Table to be used</param>
+            <param name="table">Resulting Table</param>
+        </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.addNewItemTable(System.String,iTextSharp.text.pdf.PdfPTable,System.Boolean,iTextSharp.text.pdf.PdfPTable@)">
+            <summary>
+            Method for building the PDF Report
+            Used in the 4th Page, Scorecard 
+            </summary>
+            <param name="itemName">Item name to be added</param>
+            <param name="temp_table">Table to be used</param>
+            <param name="pass">Pass or Fail</param>
+            <param name="table">Resulting Table</param>
+        </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.DatabaseEvaluator_BackgroundWorker_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Event Handler for creating the PDF Report
+            </summary>
+        </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.DecryptStringFromBytes_Aes(System.Byte[])">
+            <summary>
+            Decrypt text from dump file
+            </summary>
+            <param name="cipherText">Encrypted text</param>
+            <returns>Decoded Text</returns>
+        </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.Start_Button_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event Handler for Start Button
+            </summary>
+        </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.Browse_Button_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event Handler for Browse Button
+            </summary>        
         </member>
         <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.Close_Button_Click(System.Object,System.EventArgs)">
             <summary>
@@ -29,6 +135,11 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:DatabaseEvaluator.Program">
+            <summary>
+            The Class first called when the application is started 
             </summary>
         </member>
         <member name="M:DatabaseEvaluator.Program.Main">

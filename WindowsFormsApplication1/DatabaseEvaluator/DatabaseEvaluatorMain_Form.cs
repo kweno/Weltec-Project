@@ -11,14 +11,29 @@ using System.Data.Sql;
 
 namespace DatabaseEvaluator
 {
+    /// <summary>
+    /// Main Form for the Evaluator
+    /// </summary>
     public partial class DatabaseEvaluatorMain_Form : Form
     {
         //private string INSTANCE = "B105-01";
         //private string INSTANCE = "DESKTOP-FVFO8GL\\SQL2016N";
+
+        /// <summary>
+        /// Server Instance Value
+        /// </summary>
         private string INSTANCE = "";
+
+        /// <summary>
+        /// Key for Decryption
+        /// </summary>
         private string EVALUATOR_KEY = "AAECAwQFBgcICQoLDA0ODw==";
+
+        /// <summary>
+        /// File name of dump file
+        /// </summary>
         private string FILE_NAME = "";
-        private string PARAMETER_VALUES = "";
+        
 
         private Font whiteBoldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, new BaseColor(255, 255, 255));
         private BaseColor darkBlue = new BaseColor(79, 129, 188);
@@ -30,14 +45,20 @@ namespace DatabaseEvaluator
         // http://www.codeproject.com/Articles/99143/BackgroundWorker-Class-Sample-for-Beginners
         BackgroundWorker DatabaseEvaluator_BackgroundWorker;
 
+        // comment out after testing
+        private string PARAMETER_VALUES = "";
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public DatabaseEvaluatorMain_Form()
         {
             int counter = 0;
             string line;
 
             // Read the file and display it line by line.
-            System.IO.StreamReader file =
-               new System.IO.StreamReader("instance.txt");
+            // Get instance to be used, text file needs to be edited every time application is run on a different machine
+            System.IO.StreamReader file = new System.IO.StreamReader("instance.txt");
             while ((line = file.ReadLine()) != null)
             {
                 INSTANCE = line;
@@ -59,6 +80,9 @@ namespace DatabaseEvaluator
             this.MinimizeBox = true;
         }
 
+        /// <summary>
+        /// Event Handler for when creating the PDF report is finished
+        /// </summary>
         private void DatabaseEvaluator_BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
                 Global_ProgressBar.Style = ProgressBarStyle.Continuous;
@@ -68,6 +92,14 @@ namespace DatabaseEvaluator
                 Start_Button.Enabled = true;
         }
 
+        /// <summary>
+        /// Method for building the PDF Report
+        /// Used for the tables in the last page
+        /// </summary>
+        /// <param name="header">Heading</param>
+        /// <param name="details">Details for the Heading</param>
+        /// <param name="temp_table">Table where to add the header and details</param>
+        /// <param name="table">The Resulting table after adding the header and details</param>
         private void addNewEvaluation(string header, string details, PdfPTable temp_table, out PdfPTable table)
         {
             table = temp_table;
@@ -79,6 +111,12 @@ namespace DatabaseEvaluator
             table.AddCell(details_cell);
         }
 
+        /// <summary>
+        /// Method for building the PDF Report
+        /// Used in the 4th Page Consolidated Scorecard
+        /// </summary>
+        /// <param name="tableName">Name of the table</param>
+        /// <param name="table">The resulting table</param>
         private void addNewTable(string tableName, out PdfPTable table)
         {
             table = new PdfPTable(2);
@@ -92,6 +130,11 @@ namespace DatabaseEvaluator
             table.AddCell(header_cell);
         }
 
+        /// <summary>
+        /// Method for building the PDF Report
+        /// Creates the Server Details Table
+        /// </summary>
+        /// <param name="table">The resulting table</param>
         private void addServerDetailsTable(out PdfPTable table)
         {
             table = new PdfPTable(2);
@@ -100,6 +143,14 @@ namespace DatabaseEvaluator
             //table.WidthPercentage = 70;
         }
 
+        /// <summary>
+        /// Method for building the PDF Report
+        /// Builds the Server Details Table
+        /// </summary>
+        /// <param name="itemName">Item Name</param>
+        /// <param name="itemValue">Item Value</param>
+        /// <param name="temp_table">Table to be modified</param>
+        /// <param name="table">Resulting Table</param>
         private void addNewItemToServerDetailsTable(string itemName, string itemValue, PdfPTable temp_table, out PdfPTable table)
         {
             table = temp_table;
@@ -111,6 +162,13 @@ namespace DatabaseEvaluator
             table.AddCell(data_cell);
         }
 
+        /// <summary>
+        /// Method for building the PDF Report
+        /// Used in the 4th Page, Scorecard
+        /// </summary>
+        /// <param name="headerName">Header Name to add</param>
+        /// <param name="temp_table">Table to be used</param>
+        /// <param name="table">Resulting Table</param>
         private void addNewHeaderTable(string headerName, PdfPTable temp_table, out PdfPTable table)
         {
             table = temp_table;
@@ -119,6 +177,14 @@ namespace DatabaseEvaluator
             table.AddCell(database_main_cell);
         }
 
+        /// <summary>
+        /// Method for building the PDF Report
+        /// Used in the 4th Page, Scorecard 
+        /// </summary>
+        /// <param name="itemName">Item name to be added</param>
+        /// <param name="temp_table">Table to be used</param>
+        /// <param name="pass">Pass or Fail</param>
+        /// <param name="table">Resulting Table</param>
         private void addNewItemTable(string itemName, PdfPTable temp_table, bool pass, out PdfPTable table)
         {
             table = temp_table;
@@ -138,7 +204,9 @@ namespace DatabaseEvaluator
             table.AddCell(data_cell);
         }
 
-
+        /// <summary>
+        /// Event Handler for creating the PDF Report
+        /// </summary>
         private void DatabaseEvaluator_BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             try
@@ -241,7 +309,16 @@ namespace DatabaseEvaluator
                 SqlCommand command;
                 SqlDataReader dataReader;
                 var connection = new SqlConnection(connectionString);
-                connection.Open();
+
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
+                
 
                 command = new SqlCommand(script, connection);
                 command.ExecuteNonQuery();
@@ -263,15 +340,18 @@ namespace DatabaseEvaluator
 
                     while (dataReader.Read())
                     {
-                        PARAMETER_VALUES += dataReader.GetValue(0) + " " + dataReader.GetValue(1)
-                            + "\n";
+                        // comment out after testing
+                        PARAMETER_VALUES += dataReader.GetValue(0) + " " + dataReader.GetValue(1) + "\n";
+                        //
                         addNewItemToServerDetailsTable(dataReader.GetValue(0) + " ", dataReader.GetValue(1) + " ", server_details_table, out server_details_table);
                     }
                     doc.Add(server_details_table);
                     doc.Add(new Paragraph(" "));
                     dataReader.Close();
                     command.Dispose();
+                    // comment out after testing
                     MessageBox.Show(PARAMETER_VALUES);
+                    //
                 }
                 catch (Exception exception)
                 {
@@ -444,8 +524,9 @@ namespace DatabaseEvaluator
                     dataReader = command.ExecuteReader();
                     while (dataReader.Read())
                     {
-                        PARAMETER_VALUES += dataReader.GetValue(0) + " " + dataReader.GetValue(1)
-                            + "\n";
+                        // Comment out after testing
+                        PARAMETER_VALUES += dataReader.GetValue(0) + " " + dataReader.GetValue(1) + "\n";
+                        //
                         // http://www.mikesdotnetting.com/article/86/itextsharp-introducing-tables
                         PdfPTable table = new PdfPTable(4);
                         table.WidthPercentage = 90;
@@ -483,7 +564,9 @@ namespace DatabaseEvaluator
                         doc.Add(new Paragraph(" "));
 
                     }
+                    // Comment out after testing
                     MessageBox.Show(PARAMETER_VALUES);
+                    //
                     dataReader.Close();
                     command.Dispose();
                     connection.Close();
@@ -510,6 +593,11 @@ namespace DatabaseEvaluator
         }
 
         // https://dotnetfiddle.net/bFvxp8
+        /// <summary>
+        /// Decrypt text from dump file
+        /// </summary>
+        /// <param name="cipherText">Encrypted text</param>
+        /// <returns>Decoded Text</returns>
         private string DecryptStringFromBytes_Aes(byte[] cipherText)
         {
             // Check arguments.
@@ -548,6 +636,9 @@ namespace DatabaseEvaluator
             return plaintext;
         }
 
+        /// <summary>
+        /// Event Handler for Start Button
+        /// </summary>
         private void Start_Button_Click(object sender, EventArgs e)
         {
             FILE_NAME = "";
@@ -578,13 +669,16 @@ namespace DatabaseEvaluator
             DatabaseEvaluator_BackgroundWorker.RunWorkerAsync();
         }
 
+        /// <summary>
+        /// Event Handler for Browse Button
+        /// </summary>        
         private void Browse_Button_Click(object sender, EventArgs e)
         {
             // http://stackoverflow.com/questions/4999734/how-to-add-browse-file-button-to-windows-form-using-c-sharp
             OpenFileDialog fdlg = new OpenFileDialog();
-            fdlg.Title = "Browse for XML file";
+            fdlg.Title = "Browse for DBE file";
             fdlg.InitialDirectory = @"c:\";
-            fdlg.Filter = "All files (*.*)|*.*";
+            fdlg.Filter = "DBE Files (*.dbe)|*.dbe";
             fdlg.FilterIndex = 1;
             fdlg.RestoreDirectory = true;
             if (fdlg.ShowDialog() == DialogResult.OK)

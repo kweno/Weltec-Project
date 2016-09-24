@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace DatabaseEvaluator
 {
+    /// <summary>
+    /// The Class first called when the application is started 
+    /// </summary>
     static class Program
     {
         /// <summary>
