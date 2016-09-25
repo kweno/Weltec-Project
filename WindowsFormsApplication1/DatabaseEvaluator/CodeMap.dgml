@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DirectedGraph DataVirtualized="True" Layout="Sugiyama" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
   <Nodes>
-    <Node Id="(@1 Namespace=DatabaseEvaluator Type=DatabaseEvaluatorMain_Form)" Category="CodeSchema_Class" Bounds="-19.65,29.5,218.18,25" CodeSchemaProperty_IsPublic="True" CommonLabel="DatabaseEvaluatorMain_Form" DelayedChildNodesState="NotFetched" Group="Collapsed" Icon="CodeSchema_Class" Label="DatabaseEvaluatorMain_Form" SourceLocation="(Assembly=file:///Z:/Local/patrick.cura2/Weltec-Project/WindowsFormsApplication1/DatabaseEvaluator/DatabaseEvaluatorMain_Form.Designer.cs StartLineNumber=8 StartCharacterOffset=18 EndLineNumber=8 EndCharacterOffset=44)" UseManualLocation="True" />
-    <Node Id="@2" Category="CodeSchema_Assembly" Bounds="-59.6499999999999,-50.5,298.18,145" CommonLabel="DatabaseEvaluator" DelayedChildNodesState="Incomplete" Group="Expanded" Label="DatabaseEvaluator.exe" />
-    <Node Id="@3" Category="CodeSchema_Namespace" Bounds="-39.65,-10.5,258.18,85" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" CommonLabel="DatabaseEvaluator" DelayedChildNodesState="Incomplete" Group="Expanded" Label="DatabaseEvaluator" />
+    <Node Id="(@1 Namespace=DatabaseEvaluator Type=DatabaseEvaluatorMain_Form)" Category="CodeSchema_Class" Bounds="40,80,218.18,25" CodeSchemaProperty_IsPublic="True" CommonLabel="DatabaseEvaluatorMain_Form" DelayedChildNodesState="NotFetched" Group="Collapsed" Icon="CodeSchema_Class" Label="DatabaseEvaluatorMain_Form" SourceLocation="(Assembly=file:///Z:/Local/patrick.cura2/Weltec-Project/WindowsFormsApplication1/DatabaseEvaluator/DatabaseEvaluatorMain_Form.Designer.cs StartLineNumber=8 StartCharacterOffset=18 EndLineNumber=8 EndCharacterOffset=44)" />
+    <Node Id="@2" Category="CodeSchema_Assembly" Bounds="0,0,298.18,145" CommonLabel="DatabaseEvaluator" DelayedChildNodesState="Incomplete" DelayedCrossGroupLinksState="NotFetched" Group="Expanded" Label="DatabaseEvaluator.exe" />
+    <Node Id="@3" Category="CodeSchema_Namespace" Bounds="20,40,258.18,85" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" CommonLabel="DatabaseEvaluator" DelayedChildNodesState="Incomplete" Group="Expanded" Label="DatabaseEvaluator" />
   </Nodes>
   <Links>
     <Link Source="@2" Target="@3" Category="Contains" FetchingParent="@2" />
@@ -27,11 +27,12 @@
     <Property Id="DataVirtualized" Label="Data Virtualized" Description="If true, the graph can contain nodes and links that represent data for virtualized nodes/links (i.e. not actually created in the graph)." DataType="System.Boolean" />
     <Property Id="DefaultAction" Label="DefaultAction" Description="DefaultAction" DataType="System.String" />
     <Property Id="DelayedChildNodesState" Label="Delayed Child Nodes State" Description="Unspecified if the delayed child nodes state is not specified. NotFetched if the group contains child nodes that are not fetched into the graph yet. Fetched if the group has all its delayed child nodes already fetched." DataType="Microsoft.VisualStudio.GraphModel.DelayedDataState" />
+    <Property Id="DelayedCrossGroupLinksState" Label="Delayed Cross-Group Links State" Description="Unspecified if the delayed cross-group links state is not specified. NotFetched if delayed cross-group links on this node are not fetched into the graph yet. Fetched if all delayed cross-group links have already fetched." DataType="Microsoft.VisualStudio.GraphModel.DelayedDataState" />
     <Property Id="Expression" DataType="System.String" />
     <Property Id="FetchingParent" DataType="Microsoft.VisualStudio.GraphModel.GraphNodeId" />
     <Property Id="Group" Label="Group" Description="Display the node as a group" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
     <Property Id="GroupLabel" DataType="System.String" />
-    <Property Id="Icon" Label="Icon" DataType="System.String" />
+    <Property Id="Icon" Label="Icon" Description="Icon" DataType="System.String" />
     <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
     <Property Id="IsContainment" DataType="System.Boolean" />
     <Property Id="IsEnabled" DataType="System.Boolean" />
@@ -41,7 +42,6 @@
     <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
     <Property Id="SourceLocation" Label="Start Line Number" DataType="Microsoft.VisualStudio.GraphModel.CodeSchema.SourceLocation" />
     <Property Id="TargetType" DataType="System.Type" />
-    <Property Id="UseManualLocation" DataType="System.Boolean" />
     <Property Id="Value" DataType="System.String" />
     <Property Id="ValueLabel" DataType="System.String" />
     <Property Id="Visibility" Label="Visibility" Description="Defines whether a node in the graph is visible or not" DataType="System.Windows.Visibility" />
@@ -275,6 +275,7 @@
     </Style>
   </Styles>
   <Paths>
-    <Path Id="c4fd8ec1-3836-448a-b3aa-62b5716b86f5.OutputPathUri" Value="file:///Z:/Local/patrick.cura2/Weltec-Project/WindowsFormsApplication1/DatabaseEvaluator/bin/Release/DatabaseEvaluator.exe" />
+    <Path Id="c4fd8ec1-3836-448a-b3aa-62b5716b86f5.OutputPath" Value="D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\DatabaseEvaluator.exe" />
+    <Path Id="c4fd8ec1-3836-448a-b3aa-62b5716b86f5.OutputPathUri" Value="file:///D:/LaptopBackup/Desktop/School/Project/Weltec-Project/WindowsFormsApplication1/DatabaseEvaluator/bin/Release/DatabaseEvaluator.exe" />
   </Paths>
 </DirectedGraph>
