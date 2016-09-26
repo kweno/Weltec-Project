@@ -341,7 +341,7 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>ClientApplication.exe</td><td>{14F5A872-9475-4A9F-B256-3754E8D5E112}</td><td>INSTALLDIR</td><td>2</td><td/><td>clientapplication.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ClientApplication.exe</td><td>{CC65A205-D2E7-47CD-B7AF-EB912B61A226}</td><td>INSTALLDIR</td><td>2</td><td/><td>clientapplication.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{66591B40-2A9C-4B9A-8CAC-ED475D6E6F33}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
@@ -553,7 +553,7 @@
 		<row><td>LicenseAgreement</td><td>DlgLine</td><td>Line</td><td>48</td><td>234</td><td>326</td><td>0</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>LicenseAgreement</td><td>DlgTitle</td><td>Text</td><td>13</td><td>6</td><td>292</td><td>25</td><td>65539</td><td/><td>##IDS__IsLicenseDlg_LicenseAgreement##</td><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>LicenseAgreement</td><td>ISPrintButton</td><td>PushButton</td><td>301</td><td>188</td><td>65</td><td>17</td><td>3</td><td/><td>##IDS_PRINT_BUTTON##</td><td>Agree</td><td/><td>0</td><td/><td/><td/></row>
-		<row><td>LicenseAgreement</td><td>Memo</td><td>ScrollableText</td><td>8</td><td>55</td><td>358</td><td>130</td><td>7</td><td/><td/><td/><td/><td>0</td><td/><td>&lt;ISProductFolder&gt;\Redist\0409\Eula.rtf</td><td/></row>
+		<row><td>LicenseAgreement</td><td>Memo</td><td>ScrollableText</td><td>8</td><td>55</td><td>358</td><td>130</td><td>7</td><td/><td/><td/><td/><td>0</td><td/><td>&lt;VSSolutionFolder&gt;\License Agreement.rtf</td><td/></row>
 		<row><td>LicenseAgreement</td><td>Next</td><td>PushButton</td><td>230</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_NEXT##</td><td>Cancel</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>MaintenanceType</td><td>Back</td><td>PushButton</td><td>164</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_BACK##</td><td>Next</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>MaintenanceType</td><td>Banner</td><td>Bitmap</td><td>0</td><td>0</td><td>374</td><td>44</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td>NewBinary1</td></row>
@@ -1882,7 +1882,7 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>clientapplication.exe</td><td>ClientApplication.exe</td><td>CLIENT~1.EXE|ClientApplication.exe</td><td>0</td><td/><td/><td/><td>1</td><td>D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>1</td><td/></row>
+		<row><td>clientapplication.exe</td><td>ClientApplication.exe</td><td>CLIENT~1.EXE|ClientApplication.exe</td><td>0</td><td/><td/><td/><td>1</td><td>Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2024,7 +2024,7 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>ClientApplication.exe</td><td/><td/><td>_469B0B6D_EAF3_4DE2_B2DA_C8E6CFBDE65D_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ClientApplication.exe</td><td/><td/><td>_4284DBB5_5083_4DD4_8E70_1481432D009A_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_0704C7AB_03E9_4B86_92BA_11399B47150B_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
@@ -3429,6 +3429,7 @@
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1033</td><td>This setup was built with an evaluation version of InstallShield and can only be launched from setup.exe.</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.exe</td><td>0</td><td/><td>-618367279</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME10</td><td>1033</td><td>LAUNCH~1.EXE|Launch ClientApplication.exe</td><td>0</td><td/><td>-995852427</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME11</td><td>1033</td><td>LAUNCH~1.EXE|Launch ClientApplication.exe</td><td>0</td><td/><td>-727448718</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.vshost.exe</td><td>0</td><td/><td>-618367279</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.exe</td><td>0</td><td/><td>-618342543</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME4</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.vshost.exe</td><td>0</td><td/><td>-618342543</td></row>
@@ -3846,6 +3847,7 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;VSSolutionFolder&gt;\DatabaseEvaluator\Resources\icon.ico</td><td>0</td></row>
+		<row><td>ClientApplication._747BF74F8B1449E093F3B8F0C1BD37C1.exe</td><td/><td>Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
 		<row><td>ClientApplication._BBE641784E384E21818CFD917A4E3055.exe</td><td/><td>D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
 		<row><td>ClientApplication._EC70F1A913DE49C287E523699F5C7449.exe</td><td/><td>D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
 		<row><td>WindowsFormsApplic_1AB4AAFCE6414E14905750EBFBAA4E03.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
@@ -4446,8 +4448,6 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
 		<row><td>ClientApplication.exe</td><td>ClientApplication.exe</td><td/><td>databa_1_database_evaluator_client</td><td>2</td></row>
-		<row><td>FileKey1</td><td>ClientApplication.exe</td><td/><td>weltec</td><td>2</td></row>
-		<row><td>FileKey2</td><td>ClientApplication.exe</td><td/><td>databa_1_database_evaluator_client</td><td>2</td></row>
 	</table>
 
 	<table name="RemoveIniFile">
@@ -4533,8 +4533,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>ClientApplication.exe</td><td>databa_1_database_evaluator_client</td><td>##IDS_SHORTCUT_DISPLAY_NAME10##</td><td>ClientApplication.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>ClientApplication._EC70F1A913DE49C287E523699F5C7449.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>ClientApplication.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME10##</td><td>ClientApplication.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>ClientApplication._BBE641784E384E21818CFD917A4E3055.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>ClientApplication.exe</td><td>databa_1_database_evaluator_client</td><td>##IDS_SHORTCUT_DISPLAY_NAME11##</td><td>ClientApplication.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>ClientApplication._747BF74F8B1449E093F3B8F0C1BD37C1.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">
