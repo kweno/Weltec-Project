@@ -48,6 +48,12 @@ namespace DatabaseEvaluator
         // comment out after testing
         private string PARAMETER_VALUES = "";
 
+        private PdfPCell critical_cell = new PdfPCell(new Phrase("Critical"));
+        private PdfPCell high_cell = new PdfPCell(new Phrase("High"));
+        private PdfPCell medium_cell = new PdfPCell(new Phrase("Medium"));
+        private PdfPCell low_cell = new PdfPCell(new Phrase("Low"));
+        private PdfPCell noissues_cell = new PdfPCell(new Phrase("No Issues"));
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -132,6 +138,25 @@ namespace DatabaseEvaluator
 
         /// <summary>
         /// Method for building the PDF Report
+        /// Used in the 4th Page Consolidated Scorecard
+        /// </summary>
+        /// <param name="tableName">Name of the table</param>
+        /// <param name="table">The resulting table</param>
+        private void addNewTableDynamic(string tableName, out PdfPTable table)
+        {
+            table = new PdfPTable(4);
+            float[] widths = new float[] { 13f, 20f, 57f, 10f };
+            table.SetWidths(widths);
+            table.WidthPercentage = 95;
+            PdfPCell header_cell = new PdfPCell(new Phrase(tableName, whiteBoldFont));
+            header_cell.Colspan = 4;
+            header_cell.BackgroundColor = darkBlue;
+            header_cell.FixedHeight = 20f;
+            table.AddCell(header_cell);
+        }
+
+        /// <summary>
+        /// Method for building the PDF Report
         /// Creates the Server Details Table
         /// </summary>
         /// <param name="table">The resulting table</param>
@@ -185,7 +210,7 @@ namespace DatabaseEvaluator
         /// <param name="temp_table">Table to be used</param>
         /// <param name="pass">Pass or Fail</param>
         /// <param name="table">Resulting Table</param>
-        private void addNewItemTable(string itemName, PdfPTable temp_table, bool pass, out PdfPTable table)
+        private void addNewItemTable(string itemName, PdfPTable temp_table, string pass, out PdfPTable table)
         {
             table = temp_table;
             Phrase data_phrase = new Phrase(itemName);
@@ -193,7 +218,47 @@ namespace DatabaseEvaluator
             data_cell.PaddingLeft = 20f;
             table.AddCell(data_cell);
             Image status = null;
-            if (pass)
+            if ("True".Equals(pass))
+                status = Image.GetInstance(Properties.Resources.success, System.Drawing.Imaging.ImageFormat.Png);
+            else
+                status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
+            status.ScalePercent(2f);
+            data_cell = new PdfPCell(status);
+            data_cell.HorizontalAlignment = Element.ALIGN_CENTER;
+            data_cell.PaddingTop = 3f;
+            table.AddCell(data_cell);
+        }
+
+        /// <summary>
+        /// Method for building the PDF Report
+        /// Used in the 4th Page, Scorecard 
+        /// </summary>
+        /// <param name="severity">Severity of the Item</param>
+        /// <param name="categoryName">Category of the Item</param>
+        /// <param name="itemName">Item name to be added</param>
+        /// <param name="temp_table">Table to be used</param>
+        /// <param name="pass">Pass or Fail</param>
+        /// <param name="table">Resulting Table</param>
+        private void addNewItemTableDynamic(string severity, string categoryName, string itemName, PdfPTable temp_table, string pass, out PdfPTable table)
+        {
+            table = temp_table;
+            if ("high".Equals(severity.ToLower()))
+                table.AddCell(high_cell);
+            if ("medium".Equals(severity.ToLower()))
+                table.AddCell(medium_cell);
+            if ("low".Equals(severity.ToLower()))
+                table.AddCell(low_cell);
+            if ("noissues".Equals(severity.ToLower()))
+                table.AddCell(noissues_cell);
+            //data_cell.PaddingLeft = 20f;
+            Phrase data_phrase = new Phrase(categoryName);
+            PdfPCell data_cell = new PdfPCell(data_phrase);
+            table.AddCell(data_cell);
+            data_phrase = new Phrase(itemName);
+            data_cell = new PdfPCell(data_phrase);
+            table.AddCell(data_cell);
+            Image status = null;
+            if ("True".Equals(pass))
                 status = Image.GetInstance(Properties.Resources.success, System.Drawing.Imaging.ImageFormat.Png);
             else
                 status = Image.GetInstance(Properties.Resources.error, System.Drawing.Imaging.ImageFormat.Png);
@@ -384,19 +449,19 @@ namespace DatabaseEvaluator
                 level_cell.BackgroundColor = darkBlue;
                 level_cell.FixedHeight = 20f;
                 severity_table.AddCell(level_cell);
-                PdfPCell critical_cell = new PdfPCell(new Phrase("Critical"));
+                critical_cell = new PdfPCell(new Phrase("Critical"));
                 critical_cell.BackgroundColor = red;
                 severity_table.AddCell(critical_cell);
-                PdfPCell high_cell = new PdfPCell(new Phrase("High"));
+                high_cell = new PdfPCell(new Phrase("High"));
                 high_cell.BackgroundColor = orange;
                 severity_table.AddCell(high_cell);
-                PdfPCell medium_cell = new PdfPCell(new Phrase("Medium"));
+                medium_cell = new PdfPCell(new Phrase("Medium"));
                 medium_cell.BackgroundColor = yellow;
                 severity_table.AddCell(medium_cell);
-                PdfPCell low_cell = new PdfPCell(new Phrase("Low"));
+                low_cell = new PdfPCell(new Phrase("Low"));
                 low_cell.BackgroundColor = lightBlue;
                 severity_table.AddCell(low_cell);
-                PdfPCell noissues_cell = new PdfPCell(new Phrase("No Issues"));
+                noissues_cell = new PdfPCell(new Phrase("No Issues"));
                 noissues_cell.BackgroundColor = green;
                 severity_table.AddCell(noissues_cell);
                 doc.Add(severity_table);
@@ -455,6 +520,38 @@ namespace DatabaseEvaluator
                 doc.Add(new Paragraph("This scorecard gives an executive level summary of the issues discovered."));
                 doc.Add(new Paragraph(" "));
 
+
+                // 4TH PAGE INSTANCE
+                PdfPTable scorecard_results_table = null;
+                addNewTableDynamic("SQL Parameters", out scorecard_results_table);
+
+
+                script = "SELECT IssueSeverity, IssueType as [Category], ParameterName as [Parameter Name],  PassValue from #ParameterDetails ORDER BY PassValue,IssueSeverity, ParameterName";
+
+                try
+                {
+                    command = new SqlCommand(script, connection);
+                    dataReader = command.ExecuteReader();
+                    while (dataReader.Read())
+                    {
+                        addNewItemTableDynamic(dataReader.GetValue(0) + "", dataReader.GetValue(1) + "", dataReader.GetValue(2) + "", scorecard_results_table, dataReader.GetValue(3) + "", out scorecard_results_table);
+                    }
+                    dataReader.Close();
+                    command.Dispose();
+                }
+                catch (Exception exception)
+                {
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        MessageBox.Show("Can not open connection ! ");
+                    });
+                }
+
+                doc.Add(scorecard_results_table);
+                doc.Add(new Paragraph(" "));
+
+
+                /*
                 // 4TH PAGE INSTANCE
                 PdfPTable server_table = null;
                 addNewTable("SQL Server Instance", out server_table);
@@ -505,7 +602,7 @@ namespace DatabaseEvaluator
 
                 doc.Add(database_table);
                 doc.Add(new Paragraph(" "));
-
+                */
 
 
                 doc.NewPage();

@@ -2,11 +2,11 @@
 <NewDataSet>
   <Table>
     <ProcessInfo>HostName</ProcessInfo>
-    <Text>DESKTOP-FVFO8GL</Text>
+    <Text>B105-02</Text>
   </Table>
   <Table>
     <ProcessInfo>InstanceName</ProcessInfo>
-    <Text>SQL2016N</Text>
+    <Text>SQL1</Text>
   </Table>
   <Table>
     <ProcessInfo>Installation Directory</ProcessInfo>
@@ -54,10 +54,62 @@
   </Table>
   <Table>
     <ProcessInfo>SQL Server Authentication Mode</ProcessInfo>
-    <Text>Windows Authentication</Text>
+    <Text>Windows and SQL Server Authentication</Text>
   </Table>
   <Table>
     <ProcessInfo>SQL Port</ProcessInfo>
     <Text>SQL Server doesn't use default port</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Datafile Location</ProcessInfo>
+    <Text>System Drive</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Logfile Location</ProcessInfo>
+    <Text>System Drive</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Recovery Model</ProcessInfo>
+    <Text>FULL</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Compatibility Level</ProcessInfo>
+    <Text>100</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Snapshot Isolation</ProcessInfo>
+    <Text>OFF</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Read Committed Snapshot Isolation</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Datafile Growth</ProcessInfo>
+    <Text>Fix in size</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Auto Create Statistics</ProcessInfo>
+    <Text>1</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Auto Update Statistics</ProcessInfo>
+    <Text>1</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Auto Shrink</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Last Full Backup</ProcessInfo>
+    <Text>12</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>SA Login</ProcessInfo>
+    <Text>Does not have a blank password</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>NT AUTHORITY\SYSTEM</ProcessInfo>
+    <Text>Does have a access</Text>
   </Table>
 </NewDataSet>

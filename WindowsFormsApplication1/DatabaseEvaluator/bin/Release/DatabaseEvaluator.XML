@@ -57,6 +57,14 @@
             <param name="tableName">Name of the table</param>
             <param name="table">The resulting table</param>
         </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.addNewTableDynamic(System.String,iTextSharp.text.pdf.PdfPTable@)">
+            <summary>
+            Method for building the PDF Report
+            Used in the 4th Page Consolidated Scorecard
+            </summary>
+            <param name="tableName">Name of the table</param>
+            <param name="table">The resulting table</param>
+        </member>
         <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.addServerDetailsTable(iTextSharp.text.pdf.PdfPTable@)">
             <summary>
             Method for building the PDF Report
@@ -83,11 +91,23 @@
             <param name="temp_table">Table to be used</param>
             <param name="table">Resulting Table</param>
         </member>
-        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.addNewItemTable(System.String,iTextSharp.text.pdf.PdfPTable,System.Boolean,iTextSharp.text.pdf.PdfPTable@)">
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.addNewItemTable(System.String,iTextSharp.text.pdf.PdfPTable,System.String,iTextSharp.text.pdf.PdfPTable@)">
             <summary>
             Method for building the PDF Report
             Used in the 4th Page, Scorecard 
             </summary>
+            <param name="itemName">Item name to be added</param>
+            <param name="temp_table">Table to be used</param>
+            <param name="pass">Pass or Fail</param>
+            <param name="table">Resulting Table</param>
+        </member>
+        <member name="M:DatabaseEvaluator.DatabaseEvaluatorMain_Form.addNewItemTableDynamic(System.String,System.String,System.String,iTextSharp.text.pdf.PdfPTable,System.String,iTextSharp.text.pdf.PdfPTable@)">
+            <summary>
+            Method for building the PDF Report
+            Used in the 4th Page, Scorecard 
+            </summary>
+            <param name="severity">Severity of the Item</param>
+            <param name="categoryName">Category of the Item</param>
             <param name="itemName">Item name to be added</param>
             <param name="temp_table">Table to be used</param>
             <param name="pass">Pass or Fail</param>
