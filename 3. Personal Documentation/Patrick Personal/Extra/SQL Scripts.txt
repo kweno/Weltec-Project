@@ -316,4 +316,9 @@ INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('NT AUTHORITY\SYSTEM','Doe
 ELSE
 INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('NT AUTHORITY\SYSTEM','Does have a access')
 
-SELECT * FROM [#Values]
+
+
+SELECT * from #ParameterDetails ORDER BY PassValue,IssueSeverity, ParameterName
+
+SELECT IssueType as [Category], ParameterName as [Parameter Name], PassValue from #ParameterDetails ORDER BY PassValue,IssueSeverity, ParameterName
+
