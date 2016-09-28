@@ -303,13 +303,13 @@ namespace DatabaseEvaluator
                 cb.BeginText();
                 BaseFont f_cn = BaseFont.CreateFont("c:\\windows\\fonts\\calibri.ttf", BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
                 cb.SetFontAndSize(f_cn, 10);
-                cb.SetTextMatrix(180, 290);  //(xPos, yPos)
+                cb.SetTextMatrix(455, 30);  //(xPos, yPos)
                 cb.ShowText("Created By: SQL Server Team");
-                cb.SetTextMatrix(180, 280);  //(xPos, yPos)
+                cb.SetTextMatrix(455, 20);  //(xPos, yPos)
                 cb.ShowText("Date: " + DateTime.Now.ToShortDateString());
                 var logo = Image.GetInstance(Properties.Resources.header_logo, System.Drawing.Imaging.ImageFormat.Png);
                 logo.ScalePercent(75f);
-                logo.SetAbsolutePosition(100, 500);
+                logo.SetAbsolutePosition(130, 500);
                 cb.AddImage(logo);
                 cb.EndText();
 
