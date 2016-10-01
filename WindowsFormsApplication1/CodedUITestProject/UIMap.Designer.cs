@@ -30,6 +30,46 @@ namespace CodedUITestProject
     {
         
         /// <summary>
+        /// CheckDatabaseName - Use 'CheckDatabaseNameParams' to pass parameters into this method.
+        /// </summary>
+        public void CheckDatabaseName()
+        {
+            #region Variable Declarations
+            WinEdit uINameEdit = this.UIReleaseWindow.UIItemWindow.UIClientApplicationexeListItem.UINameEdit;
+            WinComboBox uIServer_ComboBoxComboBox = this.UIDatabaseEvaluatorWindow.UIServer_ComboBoxWindow.UIServer_ComboBoxComboBox;
+            WinCheckBox uIDatabaseNameCheckBox = this.UIDatabaseEvaluatorWindow.UIDatabaseNameWindow.UIDatabaseNameCheckBox;
+            #endregion
+
+            // Double-Click 'Name' text box
+            Mouse.DoubleClick(uINameEdit, new Point(105, 6));
+
+            // Wait for 30 seconds for user delay between actions; Select 'DESKTOP-FVFO8GL\SQL2016N' in 'Server_ComboBox' combo box
+            Playback.Wait(30000);
+            uIServer_ComboBoxComboBox.SelectedItem = this.CheckDatabaseNameParams.UIServer_ComboBoxComboBoxSelectedItem;
+
+            // Wait for 5 seconds for user delay between actions; Select 'Database Name:' check box
+            Playback.Wait(5000);
+            uIDatabaseNameCheckBox.Checked = this.CheckDatabaseNameParams.UIDatabaseNameCheckBoxChecked;
+        }
+        
+        /// <summary>
+        /// Closing
+        /// </summary>
+        public void Closing()
+        {
+            #region Variable Declarations
+            WinEdit uINameEdit = this.UIReleaseWindow.UIItemWindow.UIClientApplicationexeListItem.UINameEdit;
+            WinButton uICloseButton = this.UIDatabaseEvaluatorWindow.UICloseWindow.UICloseButton;
+            #endregion
+
+            // Double-Click 'Name' text box
+            Mouse.DoubleClick(uINameEdit, new Point(110, 14));
+
+            // Click 'Close' button
+            Mouse.Click(uICloseButton, new Point(45, 19));
+        }
+        
+        /// <summary>
         /// SelectItemFromDropdown - Use 'SelectItemFromDropdownParams' to pass parameters into this method.
         /// </summary>
         public void SelectItemFromDropdown()
@@ -42,26 +82,24 @@ namespace CodedUITestProject
             // Double-Click 'Name' text box
             Mouse.DoubleClick(uINameEdit, new Point(105, 11));
 
-            System.Threading.Thread.Sleep(60000);
-
-            // Select 'DESKTOP-FVFO8GL\SQL2016N' in 'Server_ComboBox' combo box
+            // Wait for 30 seconds for user delay between actions; Select 'DESKTOP-FVFO8GL\SQL2016N' in 'Server_ComboBox' combo box
+            Playback.Wait(30000);
             uIServer_ComboBoxComboBox.SelectedItem = this.SelectItemFromDropdownParams.UIServer_ComboBoxComboBoxSelectedItem;
         }
         
-        /// <summary>
-        /// AssertDropdownValue - Use 'AssertDropdownValueExpectedValues' to pass parameters into this method.
-        /// </summary>
-        public void AssertDropdownValue()
+        #region Properties
+        public virtual CheckDatabaseNameParams CheckDatabaseNameParams
         {
-            #region Variable Declarations
-            WinEdit uIItemEdit = this.UIDatabaseEvaluatorWindow.UIItemWindow.UIItemEdit;
-            #endregion
-
-            // Verify that the 'Text' property of text box equals 'DESKTOP-FVFO8GL\SQL2016N'
-            Assert.AreEqual(this.AssertDropdownValueExpectedValues.UIItemEditText, uIItemEdit.Text);
+            get
+            {
+                if ((this.mCheckDatabaseNameParams == null))
+                {
+                    this.mCheckDatabaseNameParams = new CheckDatabaseNameParams();
+                }
+                return this.mCheckDatabaseNameParams;
+            }
         }
         
-        #region Properties
         public virtual SelectItemFromDropdownParams SelectItemFromDropdownParams
         {
             get
@@ -71,18 +109,6 @@ namespace CodedUITestProject
                     this.mSelectItemFromDropdownParams = new SelectItemFromDropdownParams();
                 }
                 return this.mSelectItemFromDropdownParams;
-            }
-        }
-        
-        public virtual AssertDropdownValueExpectedValues AssertDropdownValueExpectedValues
-        {
-            get
-            {
-                if ((this.mAssertDropdownValueExpectedValues == null))
-                {
-                    this.mAssertDropdownValueExpectedValues = new AssertDropdownValueExpectedValues();
-                }
-                return this.mAssertDropdownValueExpectedValues;
             }
         }
         
@@ -109,16 +135,64 @@ namespace CodedUITestProject
                 return this.mUIDatabaseEvaluatorWindow;
             }
         }
+        
+        public UIItemWindow2 UIItemWindow
+        {
+            get
+            {
+                if ((this.mUIItemWindow == null))
+                {
+                    this.mUIItemWindow = new UIItemWindow2();
+                }
+                return this.mUIItemWindow;
+            }
+        }
+        
+        public UIRunningapplicationsWindow UIRunningapplicationsWindow
+        {
+            get
+            {
+                if ((this.mUIRunningapplicationsWindow == null))
+                {
+                    this.mUIRunningapplicationsWindow = new UIRunningapplicationsWindow();
+                }
+                return this.mUIRunningapplicationsWindow;
+            }
+        }
         #endregion
         
         #region Fields
-        private SelectItemFromDropdownParams mSelectItemFromDropdownParams;
+        private CheckDatabaseNameParams mCheckDatabaseNameParams;
         
-        private AssertDropdownValueExpectedValues mAssertDropdownValueExpectedValues;
+        private SelectItemFromDropdownParams mSelectItemFromDropdownParams;
         
         private UIReleaseWindow mUIReleaseWindow;
         
         private UIDatabaseEvaluatorWindow mUIDatabaseEvaluatorWindow;
+        
+        private UIItemWindow2 mUIItemWindow;
+        
+        private UIRunningapplicationsWindow mUIRunningapplicationsWindow;
+        #endregion
+    }
+    
+    /// <summary>
+    /// Parameters to be passed into 'CheckDatabaseName'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class CheckDatabaseNameParams
+    {
+        
+        #region Fields
+        /// <summary>
+        /// Wait for 30 seconds for user delay between actions; Select 'DESKTOP-FVFO8GL\SQL2016N' in 'Server_ComboBox' combo box
+        /// </summary>
+        public string UIServer_ComboBoxComboBoxSelectedItem = "DESKTOP-FVFO8GL\\SQL2016N";
+        
+        /// <summary>
+        /// Wait for 5 seconds for user delay between actions; Select 'Database Name:' check box
+        /// </summary>
+        public bool UIDatabaseNameCheckBoxChecked = true;
         #endregion
     }
     
@@ -131,24 +205,9 @@ namespace CodedUITestProject
         
         #region Fields
         /// <summary>
-        /// Select 'DESKTOP-FVFO8GL\SQL2016N' in 'Server_ComboBox' combo box
+        /// Wait for 30 seconds for user delay between actions; Select 'DESKTOP-FVFO8GL\SQL2016N' in 'Server_ComboBox' combo box
         /// </summary>
         public string UIServer_ComboBoxComboBoxSelectedItem = "DESKTOP-FVFO8GL\\SQL2016N";
-        #endregion
-    }
-    
-    /// <summary>
-    /// Parameters to be passed into 'AssertDropdownValue'
-    /// </summary>
-    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
-    public class AssertDropdownValueExpectedValues
-    {
-        
-        #region Fields
-        /// <summary>
-        /// Verify that the 'Text' property of text box equals 'DESKTOP-FVFO8GL\SQL2016N'
-        /// </summary>
-        public string UIItemEditText = "DESKTOP-FVFO8GL\\SQL2016N";
         #endregion
     }
     
@@ -290,12 +349,54 @@ namespace CodedUITestProject
                 return this.mUIItemWindow;
             }
         }
+        
+        public UIDatabaseNameWindow UIDatabaseNameWindow
+        {
+            get
+            {
+                if ((this.mUIDatabaseNameWindow == null))
+                {
+                    this.mUIDatabaseNameWindow = new UIDatabaseNameWindow(this);
+                }
+                return this.mUIDatabaseNameWindow;
+            }
+        }
+        
+        public UIDatabase_TableLayoutWindow UIDatabase_TableLayoutWindow
+        {
+            get
+            {
+                if ((this.mUIDatabase_TableLayoutWindow == null))
+                {
+                    this.mUIDatabase_TableLayoutWindow = new UIDatabase_TableLayoutWindow(this);
+                }
+                return this.mUIDatabase_TableLayoutWindow;
+            }
+        }
+        
+        public UICloseWindow UICloseWindow
+        {
+            get
+            {
+                if ((this.mUICloseWindow == null))
+                {
+                    this.mUICloseWindow = new UICloseWindow(this);
+                }
+                return this.mUICloseWindow;
+            }
+        }
         #endregion
         
         #region Fields
         private UIServer_ComboBoxWindow mUIServer_ComboBoxWindow;
         
         private UIItemWindow1 mUIItemWindow;
+        
+        private UIDatabaseNameWindow mUIDatabaseNameWindow;
+        
+        private UIDatabase_TableLayoutWindow mUIDatabase_TableLayoutWindow;
+        
+        private UICloseWindow mUICloseWindow;
         #endregion
     }
     
@@ -366,6 +467,212 @@ namespace CodedUITestProject
         
         #region Fields
         private WinEdit mUIItemEdit;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class UIDatabaseNameWindow : WinWindow
+    {
+        
+        public UIDatabaseNameWindow(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "DatabaseName_CheckBox";
+            this.WindowTitles.Add("Database Evaluator");
+            #endregion
+        }
+        
+        #region Properties
+        public WinCheckBox UIDatabaseNameCheckBox
+        {
+            get
+            {
+                if ((this.mUIDatabaseNameCheckBox == null))
+                {
+                    this.mUIDatabaseNameCheckBox = new WinCheckBox(this);
+                    #region Search Criteria
+                    this.mUIDatabaseNameCheckBox.SearchProperties[WinCheckBox.PropertyNames.Name] = "Database Name:";
+                    this.mUIDatabaseNameCheckBox.WindowTitles.Add("Database Evaluator");
+                    #endregion
+                }
+                return this.mUIDatabaseNameCheckBox;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinCheckBox mUIDatabaseNameCheckBox;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class UIDatabase_TableLayoutWindow : WinWindow
+    {
+        
+        public UIDatabase_TableLayoutWindow(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "Database_TableLayoutPanel";
+            this.WindowTitles.Add("Database Evaluator");
+            #endregion
+        }
+        
+        #region Properties
+        public WinClient UIDatabase_TableLayoutClient
+        {
+            get
+            {
+                if ((this.mUIDatabase_TableLayoutClient == null))
+                {
+                    this.mUIDatabase_TableLayoutClient = new WinClient(this);
+                    #region Search Criteria
+                    this.mUIDatabase_TableLayoutClient.WindowTitles.Add("Database Evaluator");
+                    #endregion
+                }
+                return this.mUIDatabase_TableLayoutClient;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinClient mUIDatabase_TableLayoutClient;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class UICloseWindow : WinWindow
+    {
+        
+        public UICloseWindow(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[WinWindow.PropertyNames.ControlName] = "Close_Button";
+            this.WindowTitles.Add("Database Evaluator");
+            #endregion
+        }
+        
+        #region Properties
+        public WinButton UICloseButton
+        {
+            get
+            {
+                if ((this.mUICloseButton == null))
+                {
+                    this.mUICloseButton = new WinButton(this);
+                    #region Search Criteria
+                    this.mUICloseButton.SearchProperties[WinButton.PropertyNames.Name] = "Close";
+                    this.mUICloseButton.WindowTitles.Add("Database Evaluator");
+                    #endregion
+                }
+                return this.mUICloseButton;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinButton mUICloseButton;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class UIItemWindow2 : WinWindow
+    {
+        
+        public UIItemWindow2()
+        {
+            #region Search Criteria
+            this.SearchProperties[WinWindow.PropertyNames.AccessibleName] = "Desktop";
+            this.SearchProperties[WinWindow.PropertyNames.ClassName] = "#32769";
+            #endregion
+        }
+        
+        #region Properties
+        public WinClient UISplashScreen_FormClient
+        {
+            get
+            {
+                if ((this.mUISplashScreen_FormClient == null))
+                {
+                    this.mUISplashScreen_FormClient = new WinClient(this);
+                }
+                return this.mUISplashScreen_FormClient;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinClient mUISplashScreen_FormClient;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class UIRunningapplicationsWindow : WinWindow
+    {
+        
+        public UIRunningapplicationsWindow()
+        {
+            #region Search Criteria
+            this.SearchProperties[WinWindow.PropertyNames.Name] = "Running applications";
+            this.SearchProperties[WinWindow.PropertyNames.ClassName] = "MSTaskSwWClass";
+            this.WindowTitles.Add("Running applications");
+            #endregion
+        }
+        
+        #region Properties
+        public UIRunningapplicationsClient UIRunningapplicationsClient
+        {
+            get
+            {
+                if ((this.mUIRunningapplicationsClient == null))
+                {
+                    this.mUIRunningapplicationsClient = new UIRunningapplicationsClient(this);
+                }
+                return this.mUIRunningapplicationsClient;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private UIRunningapplicationsClient mUIRunningapplicationsClient;
+        #endregion
+    }
+    
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class UIRunningapplicationsClient : WinClient
+    {
+        
+        public UIRunningapplicationsClient(UITestControl searchLimitContainer) : 
+                base(searchLimitContainer)
+        {
+            #region Search Criteria
+            this.SearchProperties[WinControl.PropertyNames.Name] = "Running applications";
+            this.WindowTitles.Add("Running applications");
+            #endregion
+        }
+        
+        #region Properties
+        public WinToolBar UIRunningapplicationsToolBar
+        {
+            get
+            {
+                if ((this.mUIRunningapplicationsToolBar == null))
+                {
+                    this.mUIRunningapplicationsToolBar = new WinToolBar(this);
+                    #region Search Criteria
+                    this.mUIRunningapplicationsToolBar.SearchProperties[WinToolBar.PropertyNames.Name] = "Running applications";
+                    this.mUIRunningapplicationsToolBar.WindowTitles.Add("Running applications");
+                    #endregion
+                }
+                return this.mUIRunningapplicationsToolBar;
+            }
+        }
+        #endregion
+        
+        #region Fields
+        private WinToolBar mUIRunningapplicationsToolBar;
         #endregion
     }
 }
