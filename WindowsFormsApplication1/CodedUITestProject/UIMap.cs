@@ -80,6 +80,43 @@
         }
 
         private AssertDropdownValueExpectedValues mAssertDropdownValueExpectedValues;
+
+        /// <summary>
+        /// CheckDatabaseName - Use 'CheckDatabaseNameParams' to pass parameters into this method.
+        /// </summary>
+        public void CheckDatabaseName()
+        {
+            #region Variable Declarations
+            WinEdit uINameEdit = this.UIReleaseWindow.UIItemWindow.UIClientApplicationexeListItem.UINameEdit;
+            WinComboBox uIServer_ComboBoxComboBox = this.UIDatabaseEvaluatorWindow.UIServer_ComboBoxWindow.UIServer_ComboBoxComboBox;
+            WinCheckBox uIDatabaseNameCheckBox = this.UIDatabaseEvaluatorWindow.UIDatabaseNameWindow.UIDatabaseNameCheckBox;
+            #endregion
+
+            // Double-Click 'Name' text box
+            Mouse.DoubleClick(uINameEdit, new Point(105, 6));
+
+            // Wait for 30 seconds for user delay between actions; Select 'DESKTOP-FVFO8GL\SQL2016N' in 'Server_ComboBox' combo box
+            Playback.Wait(30000);
+            uIServer_ComboBoxComboBox.SelectedIndex = 0;
+
+            // Wait for 5 seconds for user delay between actions; Select 'Database Name:' check box
+            Playback.Wait(5000);
+            uIDatabaseNameCheckBox.Checked = this.CheckDatabaseNameParams.UIDatabaseNameCheckBoxChecked;
+        }
+
+        public virtual CheckDatabaseNameParams CheckDatabaseNameParams
+        {
+            get
+            {
+                if ((this.mCheckDatabaseNameParams == null))
+                {
+                    this.mCheckDatabaseNameParams = new CheckDatabaseNameParams();
+                }
+                return this.mCheckDatabaseNameParams;
+            }
+        }
+
+        private CheckDatabaseNameParams mCheckDatabaseNameParams;
     }
     /// <summary>
     /// Parameters to be passed into 'AssertCheckDatabaseProgressTable'
@@ -107,6 +144,25 @@
         /// Verify that the 'Text' property of text box equals 'DESKTOP-FVFO8GL\SQL2016N'
         /// </summary>
         public string UIItemEditText = "DESKTOP-FVFO8GL\\SQL2016N";
+        #endregion
+    }
+    /// <summary>
+    /// Parameters to be passed into 'CheckDatabaseName'
+    /// </summary>
+    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
+    public class CheckDatabaseNameParams
+    {
+
+        #region Fields
+        /// <summary>
+        /// Wait for 30 seconds for user delay between actions; Select 'DESKTOP-FVFO8GL\SQL2016N' in 'Server_ComboBox' combo box
+        /// </summary>
+        public string UIServer_ComboBoxComboBoxSelectedItem = "DESKTOP-FVFO8GL\\SQL2016N";
+
+        /// <summary>
+        /// Wait for 5 seconds for user delay between actions; Select 'Database Name:' check box
+        /// </summary>
+        public bool UIDatabaseNameCheckBoxChecked = true;
         #endregion
     }
 }

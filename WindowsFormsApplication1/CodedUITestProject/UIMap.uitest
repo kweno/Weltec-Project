@@ -45,33 +45,6 @@
       <ParameterName />
       <ModifierKeys>None</ModifierKeys>
       <IsGlobalHotkey>false</IsGlobalHotkey>
-      <Location X="105" Y="6" />
-      <WheelDirection>0</WheelDirection>
-      <ActionType>DoubleClick</ActionType>
-      <MouseButton>Left</MouseButton>
-    </MouseAction>
-    <SetValueAction UIObjectName="UIMap.UIDatabaseEvaluatorWindow.UIServer_ComboBoxWindow.UIServer_ComboBoxComboBox" ThinkTime="30000">
-      <ParameterName />
-      <Value Encoded="false">DESKTOP-FVFO8GL\SQL2016N</Value>
-      <Type>String</Type>
-    </SetValueAction>
-    <SetStateAction UIObjectName="UIMap.UIDatabaseEvaluatorWindow.UIDatabaseNameWindow.UIDatabaseNameCheckBox" ThinkTime="5000">
-      <ParameterName />
-      <State>Checked</State>
-    </SetStateAction>
-    <TestStepMarkerAction Comment="" MarkerInformation="CheckDatabaseName">
-      <ParameterName />
-      <StepId>-1</StepId>
-      <Direction>Start</Direction>
-      <Outcome />
-      <Disabled>false</Disabled>
-      <WorkItemId>0</WorkItemId>
-      <MarkerRegionType>Action</MarkerRegionType>
-    </TestStepMarkerAction>
-    <MouseAction UIObjectName="UIMap.UIReleaseWindow.UIItemWindow.UIClientApplicationexeListItem.UINameEdit">
-      <ParameterName />
-      <ModifierKeys>None</ModifierKeys>
-      <IsGlobalHotkey>false</IsGlobalHotkey>
       <Location X="110" Y="14" />
       <WheelDirection>0</WheelDirection>
       <ActionType>DoubleClick</ActionType>
