@@ -46,37 +46,7 @@ namespace CodedUITestProject
             Mouse.Click(uICloseButton, new Point(45, 19));
         }
         
-        /// <summary>
-        /// SelectItemFromDropdown - Use 'SelectItemFromDropdownParams' to pass parameters into this method.
-        /// </summary>
-        public void SelectItemFromDropdown()
-        {
-            #region Variable Declarations
-            WinEdit uINameEdit = this.UIReleaseWindow.UIItemWindow.UIClientApplicationexeListItem.UINameEdit;
-            WinComboBox uIServer_ComboBoxComboBox = this.UIDatabaseEvaluatorWindow.UIServer_ComboBoxWindow.UIServer_ComboBoxComboBox;
-            #endregion
-
-            // Double-Click 'Name' text box
-            Mouse.DoubleClick(uINameEdit, new Point(105, 11));
-
-            // Wait for 30 seconds for user delay between actions; Select 'DESKTOP-FVFO8GL\SQL2016N' in 'Server_ComboBox' combo box
-            Playback.Wait(30000);
-            uIServer_ComboBoxComboBox.SelectedItem = this.SelectItemFromDropdownParams.UIServer_ComboBoxComboBoxSelectedItem;
-        }
-        
         #region Properties
-        public virtual SelectItemFromDropdownParams SelectItemFromDropdownParams
-        {
-            get
-            {
-                if ((this.mSelectItemFromDropdownParams == null))
-                {
-                    this.mSelectItemFromDropdownParams = new SelectItemFromDropdownParams();
-                }
-                return this.mSelectItemFromDropdownParams;
-            }
-        }
-        
         public UIReleaseWindow UIReleaseWindow
         {
             get
@@ -127,8 +97,6 @@ namespace CodedUITestProject
         #endregion
         
         #region Fields
-        private SelectItemFromDropdownParams mSelectItemFromDropdownParams;
-        
         private UIReleaseWindow mUIReleaseWindow;
         
         private UIDatabaseEvaluatorWindow mUIDatabaseEvaluatorWindow;
@@ -136,21 +104,6 @@ namespace CodedUITestProject
         private UIItemWindow2 mUIItemWindow;
         
         private UIRunningapplicationsWindow mUIRunningapplicationsWindow;
-        #endregion
-    }
-    
-    /// <summary>
-    /// Parameters to be passed into 'SelectItemFromDropdown'
-    /// </summary>
-    [GeneratedCode("Coded UITest Builder", "14.0.23107.0")]
-    public class SelectItemFromDropdownParams
-    {
-        
-        #region Fields
-        /// <summary>
-        /// Wait for 30 seconds for user delay between actions; Select 'DESKTOP-FVFO8GL\SQL2016N' in 'Server_ComboBox' combo box
-        /// </summary>
-        public string UIServer_ComboBoxComboBoxSelectedItem = "DESKTOP-FVFO8GL\\SQL2016N";
         #endregion
     }
     
