@@ -37,7 +37,6 @@ namespace DatabaseEvaluator
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DatabaseEvaluatorMain_Form));
             this.Start_Button = new System.Windows.Forms.Button();
             this.Main_Panel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.Global_ProgressBar = new System.Windows.Forms.ProgressBar();
             this.FindFile_GroupBox = new System.Windows.Forms.GroupBox();
             this.PathToXML_TextBox = new System.Windows.Forms.TextBox();
@@ -62,7 +61,6 @@ namespace DatabaseEvaluator
             // 
             // Main_Panel
             // 
-            this.Main_Panel.Controls.Add(this.button1);
             this.Main_Panel.Controls.Add(this.Global_ProgressBar);
             this.Main_Panel.Controls.Add(this.FindFile_GroupBox);
             this.Main_Panel.Controls.Add(this.Logo_PictureBox);
@@ -70,16 +68,6 @@ namespace DatabaseEvaluator
             this.Main_Panel.Name = "Main_Panel";
             this.Main_Panel.Size = new System.Drawing.Size(480, 295);
             this.Main_Panel.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(391, 50);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Global_ProgressBar
             // 
@@ -177,7 +165,6 @@ namespace DatabaseEvaluator
         private Button Browse_Button;
         private TextBox PathToXML_TextBox;
         private ProgressBar Global_ProgressBar;
-        private Button button1;
         private Button Close_Button;
     }
 }
