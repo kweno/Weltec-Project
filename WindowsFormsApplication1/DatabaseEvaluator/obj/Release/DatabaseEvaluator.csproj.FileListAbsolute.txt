@@ -10,18 +10,6 @@ D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\D
 D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.exe
 D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.pdb
 D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\DatabaseEvaluator.XML
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\DatabaseEvaluator.XML
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.csprojResolveAssemblyReference.cache
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.DatabaseEvaluatorMain_Form.resources
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.Properties.Resources.resources
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.csproj.GenerateResource.Cache
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.exe
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.pdb
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\DatabaseEvaluator.exe.config
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\DatabaseEvaluator.exe
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\DatabaseEvaluator.pdb
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\itextsharp.dll
-Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\itextsharp.xml
 Z:\Local\patrick.cura2\New folder\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\DatabaseEvaluator.exe.config
 Z:\Local\patrick.cura2\New folder\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\DatabaseEvaluator.XML
 Z:\Local\patrick.cura2\New folder\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.exe
@@ -34,3 +22,15 @@ Z:\Local\patrick.cura2\New folder\Weltec-Project\WindowsFormsApplication1\Databa
 Z:\Local\patrick.cura2\New folder\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.DatabaseEvaluatorMain_Form.resources
 Z:\Local\patrick.cura2\New folder\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.Properties.Resources.resources
 Z:\Local\patrick.cura2\New folder\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.csproj.GenerateResource.Cache
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\DatabaseEvaluator.exe.config
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\DatabaseEvaluator.XML
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\DatabaseEvaluator.exe
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\DatabaseEvaluator.pdb
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\itextsharp.dll
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\bin\Release\itextsharp.xml
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.csprojResolveAssemblyReference.cache
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.DatabaseEvaluatorMain_Form.resources
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.Properties.Resources.resources
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.csproj.GenerateResource.Cache
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.exe
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\DatabaseEvaluator\obj\Release\DatabaseEvaluator.pdb
