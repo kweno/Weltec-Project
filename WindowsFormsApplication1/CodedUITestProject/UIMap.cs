@@ -61,8 +61,9 @@
             #endregion
 
             // Verify that the 'Text' property of text box equals 'DESKTOP-FVFO8GL\SQL2016N'
+            Playback.Wait(2000);
             //Assert.AreEqual(this.AssertDropdownValueExpectedValues.UIItemEditText, uIItemEdit.Text);
-            Assert.AreEqual(uIDatabaseNameCheckBox.Enabled, true);
+            Assert.AreEqual(true, uIDatabaseNameCheckBox.Enabled);
 
 
             // Click 'Close' button
