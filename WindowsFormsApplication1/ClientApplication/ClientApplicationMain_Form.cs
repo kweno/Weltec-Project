@@ -234,12 +234,29 @@ namespace ClientApplication
             using (var con = new SqlConnection(connectionString))
             {
                 con.Open();
-                DataTable databases = con.GetSchema("Databases");
-                foreach (DataRow database in databases.Rows)
-                {
-                    string databaseName = database.Field<String>("database_name");
-                    Database_ComboBox.Items.Add(databaseName);
+
+                SqlCommand command;
+                SqlDataReader dataReader;
+
+                var script = "select name from  sys.sysdatabases where [dbid] > 4";
+
+                command = new SqlCommand(script, con);
+                dataReader = command.ExecuteReader();
+
+                while (dataReader.Read())
+                {                  
+                    Database_ComboBox.Items.Add(dataReader.GetValue(0));
                 }
+                dataReader.Close();
+                command.Dispose();
+
+                // Old implementation
+                //DataTable databases = con.GetSchema("Databases");
+                //foreach (DataRow database in databases.Rows)
+                //{
+                //    string databaseName = database.Field<String>("database_name");
+                //    Database_ComboBox.Items.Add(databaseName);
+                //}
             }
             if (Database_ComboBox.Items.Count > 0)
             {

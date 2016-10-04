@@ -341,7 +341,7 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>ClientApplication.exe</td><td>{853A3793-4DE7-49D0-972C-BE86235DD24E}</td><td>INSTALLDIR</td><td>2</td><td/><td>clientapplication.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ClientApplication.exe</td><td>{DC48E1C0-9545-4A9A-A6EF-D4A5A705581F}</td><td>INSTALLDIR</td><td>2</td><td/><td>clientapplication.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{66591B40-2A9C-4B9A-8CAC-ED475D6E6F33}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
@@ -2024,7 +2024,7 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>ClientApplication.exe</td><td/><td/><td>_19E46A8D_8DAC_4ED3_9293_27C42C6AD96D_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ClientApplication.exe</td><td/><td/><td>_48E976FA_5749_4A1F_9C74_5B905D92F2A9_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_0704C7AB_03E9_4B86_92BA_11399B47150B_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
@@ -3433,6 +3433,7 @@
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME12</td><td>1033</td><td>LAUNCH~1.EXE|Launch ClientApplication.exe</td><td>0</td><td/><td>623154444</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME13</td><td>1033</td><td>LAUNCH~1.EXE|Launch ClientApplication.exe</td><td>0</td><td/><td>623154508</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME14</td><td>1033</td><td>LAUNCH~1.EXE|Launch ClientApplication.exe</td><td>0</td><td/><td>623151533</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME15</td><td>1033</td><td>LAUNCH~1.EXE|Launch ClientApplication.exe</td><td>0</td><td/><td>623137581</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.vshost.exe</td><td>0</td><td/><td>-618367279</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.exe</td><td>0</td><td/><td>-618342543</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME4</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.vshost.exe</td><td>0</td><td/><td>-618342543</td></row>
@@ -3853,6 +3854,7 @@
 		<row><td>ClientApplication._14D0A42D4161450D801E72822C3C0A4B.exe</td><td/><td>Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
 		<row><td>ClientApplication._523004AB0AC14BBAAEBC23EC07D0F93A.exe</td><td/><td>Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
 		<row><td>ClientApplication._747BF74F8B1449E093F3B8F0C1BD37C1.exe</td><td/><td>Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
+		<row><td>ClientApplication._A36F228F05C7428A80AC970006EC9133.exe</td><td/><td>Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
 		<row><td>ClientApplication._BBE641784E384E21818CFD917A4E3055.exe</td><td/><td>D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
 		<row><td>ClientApplication._D8CAE369A1764306B703D51CF458D917.exe</td><td/><td>Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
 		<row><td>ClientApplication._EC70F1A913DE49C287E523699F5C7449.exe</td><td/><td>D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
@@ -4538,7 +4540,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>ClientApplication.exe</td><td>databa_1_database_evaluator_client</td><td>##IDS_SHORTCUT_DISPLAY_NAME14##</td><td>ClientApplication.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>ClientApplication._D8CAE369A1764306B703D51CF458D917.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>ClientApplication.exe</td><td>databa_1_database_evaluator_client</td><td>##IDS_SHORTCUT_DISPLAY_NAME15##</td><td>ClientApplication.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>ClientApplication._A36F228F05C7428A80AC970006EC9133.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">
