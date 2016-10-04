@@ -339,7 +339,7 @@ FROM @xml.nodes('/NewDataSet/Table') doc(col)
 WHERE doc.col.value('ProcessInfo[1]', 'varchar(MAX)') = 'SQL Server Authentication Mode'
 
 
-SET @ExpressionToFind = 'Windows'
+SET @ExpressionToFind = 'Windows Authentication'
 
 SELECT @ExpressionToSearch = @SQLAuth
 
