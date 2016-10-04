@@ -6,22 +6,23 @@
   </Table>
   <Table>
     <ProcessInfo>InstanceName</ProcessInfo>
+    <Text>SE2008R2DB</Text>
   </Table>
   <Table>
     <ProcessInfo>Installation Directory</ProcessInfo>
-    <Text>System Drive</Text>
+    <Text>Doesn't use system drive</Text>
   </Table>
   <Table>
     <ProcessInfo>SQLVersion</ProcessInfo>
-    <Text>Microsoft SQL Server 2016 (RTM) Express Edition (64-bit)</Text>
+    <Text>Microsoft SQL Server 2008 R2 (SP2) Express Edition</Text>
   </Table>
   <Table>
     <ProcessInfo>ProductLevel</ProcessInfo>
-    <Text>RTM</Text>
+    <Text>SP2</Text>
   </Table>
   <Table>
     <ProcessInfo>ProductVersion</ProcessInfo>
-    <Text>13.0.1601.5</Text>
+    <Text>10.50.4000.0</Text>
   </Table>
   <Table>
     <ProcessInfo>Max Degree Of Parallelism</ProcessInfo>
@@ -29,7 +30,7 @@
   </Table>
   <Table>
     <ProcessInfo>Minimum size of server memory (MB)</ProcessInfo>
-    <Text>16</Text>
+    <Text>0</Text>
   </Table>
   <Table>
     <ProcessInfo>Maximum size of server memory (MB)</ProcessInfo>
@@ -58,57 +59,5 @@
   <Table>
     <ProcessInfo>SQL Port</ProcessInfo>
     <Text>SQL Server doesn't use default port</Text>
-  </Table>
-  <Table>
-    <ProcessInfo>Datafile Location</ProcessInfo>
-    <Text>System Drive</Text>
-  </Table>
-  <Table>
-    <ProcessInfo>Logfile Location</ProcessInfo>
-    <Text>System Drive</Text>
-  </Table>
-  <Table>
-    <ProcessInfo>Recovery Model</ProcessInfo>
-    <Text>FULL</Text>
-  </Table>
-  <Table>
-    <ProcessInfo>Compatibility Level</ProcessInfo>
-    <Text>100</Text>
-  </Table>
-  <Table>
-    <ProcessInfo>Snapshot Isolation</ProcessInfo>
-    <Text>OFF</Text>
-  </Table>
-  <Table>
-    <ProcessInfo>Read Committed Snapshot Isolation</ProcessInfo>
-    <Text>0</Text>
-  </Table>
-  <Table>
-    <ProcessInfo>Datafile Growth</ProcessInfo>
-    <Text>Fix in size</Text>
-  </Table>
-  <Table>
-    <ProcessInfo>Auto Create Statistics</ProcessInfo>
-    <Text>1</Text>
-  </Table>
-  <Table>
-    <ProcessInfo>Auto Update Statistics</ProcessInfo>
-    <Text>1</Text>
-  </Table>
-  <Table>
-    <ProcessInfo>Auto Shrink</ProcessInfo>
-    <Text>0</Text>
-  </Table>
-  <Table>
-    <ProcessInfo>Last Full Backup</ProcessInfo>
-    <Text>18</Text>
-  </Table>
-  <Table>
-    <ProcessInfo>SA Login</ProcessInfo>
-    <Text>Does not have a blank password</Text>
-  </Table>
-  <Table>
-    <ProcessInfo>NT AUTHORITY\SYSTEM</ProcessInfo>
-    <Text>Does have a access</Text>
   </Table>
 </NewDataSet>

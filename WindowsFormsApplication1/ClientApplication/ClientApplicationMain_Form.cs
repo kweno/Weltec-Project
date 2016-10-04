@@ -290,8 +290,11 @@ namespace ClientApplication
             Start_Button.Enabled = true;
             Start_Button.Enabled = true;
             Server_ComboBox.Enabled = true;
-            DatabaseName_CheckBox.Enabled = true;
-            Database_ComboBox.Enabled = true;
+            if (Database_ComboBox.Items.Count != 0)
+            {
+                DatabaseName_CheckBox.Enabled = true;
+                Database_ComboBox.Enabled = true;
+            }
 
             RemoveImage(InstanceMainProgress_PictureBox);
             RemoveImage(InstanceProgress_PictureBox1);
