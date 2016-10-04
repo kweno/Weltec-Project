@@ -2,11 +2,10 @@
 <NewDataSet>
   <Table>
     <ProcessInfo>HostName</ProcessInfo>
-    <Text>B105-02</Text>
+    <Text>B105-05</Text>
   </Table>
   <Table>
     <ProcessInfo>InstanceName</ProcessInfo>
-    <Text>SQL1</Text>
   </Table>
   <Table>
     <ProcessInfo>Installation Directory</ProcessInfo>
@@ -54,7 +53,7 @@
   </Table>
   <Table>
     <ProcessInfo>SQL Server Authentication Mode</ProcessInfo>
-    <Text>Windows and SQL Server Authentication</Text>
+    <Text>Windows Authentication</Text>
   </Table>
   <Table>
     <ProcessInfo>SQL Port</ProcessInfo>
@@ -102,7 +101,7 @@
   </Table>
   <Table>
     <ProcessInfo>Last Full Backup</ProcessInfo>
-    <Text>12</Text>
+    <Text>18</Text>
   </Table>
   <Table>
     <ProcessInfo>SA Login</ProcessInfo>

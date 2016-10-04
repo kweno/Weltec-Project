@@ -1200,10 +1200,10 @@ namespace ClientApplication
                 var majorMinorString = ver.Major + "." + ver.Minor;
                 double majorMinorDouble;
                 if (double.TryParse(majorMinorString, out majorMinorDouble))
-                    //if(10.5 <= majorMinorDouble && majorMinorDouble < 12) // TO DO: UNCOMMENT IN THE FINAL RELEASE
+                    if(10.5 <= majorMinorDouble && majorMinorDouble < 12) // TO DO: UNCOMMENT IN THE FINAL RELEASE
                         SERVER_OK = true;
-                    //else // TO DO: UNCOMMENT IN THE FINAL RELEASE
-                        //MessageBox.Show("SQL Server Version " + ver.Major + "." + ver.Minor + " not supported", "Information"); // TO DO: UNCOMMENT IN THE FINAL RELEASE
+                    else // TO DO: UNCOMMENT IN THE FINAL RELEASE
+                        MessageBox.Show("SQL Server Version " + ver.Major + "." + ver.Minor + " not supported", "Information"); // TO DO: UNCOMMENT IN THE FINAL RELEASE
                 connection.Close();
             }
             catch (SqlException exception)

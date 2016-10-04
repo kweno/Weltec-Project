@@ -415,7 +415,7 @@ namespace DatabaseEvaluator
                     dataReader.Close();
                     command.Dispose();
                     // comment out after testing
-                    MessageBox.Show(PARAMETER_VALUES);
+                    //MessageBox.Show(PARAMETER_VALUES);
                     //
                 }
                 catch (Exception exception)
@@ -662,7 +662,7 @@ namespace DatabaseEvaluator
 
                     }
                     // Comment out after testing
-                    MessageBox.Show(PARAMETER_VALUES);
+                    //MessageBox.Show(PARAMETER_VALUES);
                     //
                     dataReader.Close();
                     command.Dispose();
