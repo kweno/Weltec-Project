@@ -1,9 +1,9 @@
 1. Project Proposal
-2. Project Plans
+2. Project Plan
 3. Methodology and Technique Document
-4. DSDM Documents
-5. Requirement & Analysis Document
-6. System Analysis & Design Document
+4. Requirement & Analysis Document
+5. System Analysis & Design Document
+6. DSDM Documents
 7. Research Log
 9. Task And Milestone Signoffs
 10. Acceptance Approval and Change Controls
@@ -13,7 +13,7 @@
 14. Project Progress Report
 15. Close Out Reports
 16. CVs
-17. Test Plan, case, result and report
+17. Test plan, case, result and report
 18. Time Sheet
 19. Traning Document
 20. Individual Report 
