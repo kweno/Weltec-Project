@@ -3,21 +3,21 @@
 3. Methodology and Technique Document
 4. Requirement & Analysis Document
 5. System Analysis & Design Document
-6. DSDM Documents
-7. Research Log
-9. Task And Milestone Signoffs
-10. Acceptance Approval and Change Controls
-11. Team Meetings
-12. Advisor Meetings
-13. Project Diary
-14. Project Progress Report
-15. Close Out Reports
+6. Project Progress Report
+7. Task And Milestone Signoffs
+8. Close Out Reports
+9. DSDM Documents
+10. Test plan, case, result and report
+11. Research Log
+12. Acceptance Approval and Change Controls
+13. Team Meetings
+14. Advisor Meetings
+15. Project Diary
 16. CVs
-17. Test plan, case, result and report
-18. Time Sheet
-19. Traning Document
-20. Individual Report 
-21. Individual Log
-22. Final PDF Report - SAMPLE
+17. Time Sheet
+18. Traning Document
+19. Individual Report 
+20. Individual Log
+21. Final PDF Report - SAMPLE
 
 
