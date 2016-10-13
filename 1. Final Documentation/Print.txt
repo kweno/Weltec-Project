@@ -48,7 +48,7 @@ Note : Print each sheet for xls files.
 ³       References.xlsx     
          
 10. Acceptance Approval and Change Controls
-³       Change Control Form.doc
+³       Change Control Form 30-09-16.doc
                
 14. Project Diary
 ³       Project Dairy v1.0
@@ -85,7 +85,7 @@ Note : Print each sheet for xls files.
 ³               
 24. Time Sheet
 ³       link.txt
-³       Project Time Sheet.xlsx.xlsx
+³       Project Time Sheet.xlsx
 ³       
 25. Traning Document
 ³       Client Application Test Materials.docx
