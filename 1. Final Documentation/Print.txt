@@ -91,4 +91,5 @@ Note : Print each sheet for xls files.
 ³       Client Application Test Materials.docx
 ³       Training and User Manual v1.0.docx
 ³       
-     
+26. Final Sample Report
+	SQLServer.pdf - Colour     
