@@ -1,24 +1,24 @@
 Note : Print each sheet for xls files.
 
 1. Project Proposal
-³       Client Briefing Document v1.0.docx
-³       Project Proposal v1.8.docx
-³       Scope Statement v1.0.docx
-³       Team Contract v1.0.docx
+³       Client Briefing Document v1.0.docx 		- printed
+³       Project Proposal v1.8.docx			- printed
+³       Scope Statement v1.0.docx			- printed
+³       Team Contract v1.0.docx				- printed
 ³  
 2. Project Plans
-³       Project Gantt Chart v1.2
-³       Project Communication Plan v1.0.docx
-³       Project Management Plan v1.0.docx
-³       Project Plan V1.2.mpp
+³       Project Gantt Chart v1.2			- printed
+³       Project Communication Plan v1.0.docx		- printed
+³       Project Management Plan v1.0.docx		- printed
+³       Project Plan V1.2.mp				- printed
 ³   
 3. Methodology and Technique Document
 ³       Methodology and Technique Document v1.0.docx
 ³       
 4. DSDM Documents
 	1. Pre-Project
-³   ³       Delivery Approach Definition v1.0.docx
-³   ³       Project Roles Summary v1.0.docx
+³   ³       Delivery Approach Definition v1.0.docx	- printed
+³   ³       Project Roles Summary v1.0.docx		- printed
 ³   ³       Terms Of Reference v1.0.docx
 ³   ³       
 	2. Fesability
