@@ -37,7 +37,11 @@ Note : Print each sheet for xls files.
 ³       Database Evaluator Guide v1.0
 ³       
 26. Final Sample Report
-	SQLServer.pdf - Colour    
+	SQLServer.pdf - Colour  
+
+27. Individual Report and Log
+	Everything
+	  
 
 CONTENT INDEXING - colour
 DSDM INDEXING 
