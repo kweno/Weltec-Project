@@ -1,61 +1,24 @@
 Note : Print each sheet for xls files.
 
-1. Project Proposal
-³       Client Briefing Document v1.0.docx 		- printed
-³       Project Proposal v1.8.docx			- printed
-³       Scope Statement v1.0.docx			- printed
-³       Team Contract v1.0.docx				- printed
-³  
-2. Project Plans
-³       Project Gantt Chart v1.2			- printed
-³       Project Communication Plan v1.0.docx		- printed
-³       Project Management Plan v1.0.docx		- printed
-³       Project Plan V1.2.mp				- printed
-³   
+ 
 3. Methodology and Technique Document
 ³       Methodology and Technique Document v1.0.docx
 ³       
 4. DSDM Documents
-	1. Pre-Project
-³   ³       Delivery Approach Definition v1.0.docx	- printed
-³   ³       Project Roles Summary v1.0.docx		- printed
-³   ³       Terms Of Reference v1.0.docx
-³   ³       
-	2. Fesability
-³   ³       Feasibility Assessment v1.0.docx
-³   ³       Outline Plan v1.0.docx
-³   ³       
-	3. Foundations
-³   ³       Business Foundations v1.0.docx
-³   ³       Management Foundations v1.0.docx
-³   ³       Prioritised Requirements List v1.0.docx -- Matt
-³   ³       System Architecture Definition v1.0.docx
-³   ³           
+	4. Exploration
+	     Issue Register
+	     Risk Log
+	5. Engineering
+	     Issue Register
+	     Risk Log
 	6. Deployment
-	    Bug List of System Test v1.0
-³           System Test Report v1.0.docx
-³           System Test Results v1.0.xlsx
-³           Test case (System Test) v1.0.xlsx
 ³           Test Plan v1.2.docx
-³           
-5. Requirement & Analysis Document
-³       Requirement Analysis Document v1.1.docx
-      
-6. System Analysis & Design Document
-³       System Analysis and Design v1.0.docx
-³       
+                 
 7. Research Log
 ³       References.xlsx     
-         
-10. Acceptance Approval and Change Controls
-³       Change Control Form 30-09-16.doc
-               
+                  
 14. Project Diary
 ³       Project Dairy v1.0
-
-16. Version Control & Templates
-³       Document Template.docx
-³       Version Control Strategy.docx
 ³       
 20. CVs
 ³       Changming Wu CV.pdf
@@ -64,32 +27,14 @@ Note : Print each sheet for xls files.
 ³       Kwinno Pineda CV.pdf
 ³       Patrick Cura CV.pdf
 ³       
-22. Test Plan
-³   ³   Client Application Test Materials.docx
-³   ³   Client Application Test Plan v1.0.docx
-  
-³   Kwinno
-³   ³       15-08-16 - 26-08-16 Iteration2 Exploration.xlsx
-³   ³       29-08-16 - 2-09-16 Iteration3 Exploration.xlsx
-³   ³       8-08-16 - 12-08-16 Iteration1 Exploration.xlsx
-³   ³       
-³   Patrick
-³           8_07_to_13_Tests.xlsx
-³           8_14_to_20_Tests.xlsx
-³           8_21_to_27_Tests.xlsx
-³           8_28_to_9_3_Tests.xlsx
-³           9_04_to_9_10_Tests.xlsx
-³           9_11_to_9_17_Tests.xlsx
-³           9_18_to_9_24_Tests.xlsx
-³           backup.xlsx
+
 ³               
 24. Time Sheet
 ³       link.txt
 ³       Project Time Sheet.xlsx
 ³       
 25. Traning Document
-³       Client Application Test Materials.docx
-³       Training and User Manual v1.0.docx
+³       Database Evaluator Guide v1.0
 ³       
 26. Final Sample Report
 	SQLServer.pdf - Colour     
