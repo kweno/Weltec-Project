@@ -1,47 +1,94 @@
 Note : Print each sheet for xls files.
 
- 
+1. Project Proposal
+³       Client Briefing Document v1.0.docx 		- printed
+³       Project Proposal v1.8.docx			- printed
+³       Scope Statement v1.0.docx			- printed
+³       Team Contract v1.0.docx				- printed
+³  
+2. Project Plans
+³       Project Gantt Chart v1.2			- printed
+³       Project Communication Plan v1.0.docx		- printed
+³       Project Management Plan v1.0.docx		- printed
+³       Project Plan V1.2.mp				- printed
+³   
 3. Methodology and Technique Document
 ³       Methodology and Technique Document v1.0.docx
 ³       
 4. DSDM Documents
-	4. Exploration
-	     Issue Register
-	     Risk Log
-	5. Engineering
-	     Issue Register
-	     Risk Log
+	1. Pre-Project
+³   ³       Delivery Approach Definition v1.0.docx	- printed
+³   ³       Project Roles Summary v1.0.docx		- printed
+³   ³       Terms Of Reference v1.0.docx		- printed
+³   ³       
+	2. Fesability
+³   ³       Feasibility Assessment v1.0.docx		- printed
+³   ³       Outline Plan v1.0.docx			- printed
+³   ³       
+	3. Foundations
+³   ³       Business Foundations v1.0.docx		- printed
+³   ³       Management Foundations v1.0.docx		- printed
+³   ³       Prioritised Requirements List v1.0.docx -- Matt - printed
+³   ³       System Architecture Definition v1.0.docx	- printed
+³   ³           
 	6. Deployment
-³           Test Plan v1.2.docx
-                 
-7. Research Log
+	    Bug List of System Test v1.0		- printed
+³           System Test Report v1.0.docx		- printed
+³           System Test Results v1.0.xlsx		- database evaluator wont fit in a page to wide- not printed - other was printed
+³           Test case (System Test) v1.0.xlsx		- printed
+³           Test Plan v1.2.docx				- only 1.1 available - not yet printed
+³           
+5. Requirement & Analysis Document
+³       Requirement Analysis Document v1.1.docx		- printed
+      
+6. System Analysis & Design Document
+³       System Analysis and Design v1.0.docx		- printed
+³       
+7. Research Log						- Hardik not printed yet changed bg to white will cost more black ink
 ³       References.xlsx     
-                  
-14. Project Diary
+         
+10. Acceptance Approval and Change Controls
+³       Change Control Form 30-09-16.doc		- printed
+               
+14. Project Diary					- change bg of the cell
 ³       Project Dairy v1.0
+
+16. Version Control & Templates				- document nothing to print out inside the doc
+³       Document Template.docx
+³       Version Control Strategy.docx
 ³       
 20. CVs
-³       Changming Wu CV.pdf
+³       Changming Wu CV.pdf	
 ³       CV Template.docx
 ³       Hardik Kansara CV.pdf
 ³       Kwinno Pineda CV.pdf
 ³       Patrick Cura CV.pdf
 ³       
-
+22. Test Plan
+³   ³   Client Application Test Materials.docx
+³   ³   Client Application Test Plan v1.0.docx
+  
+³   Kwinno
+³   ³       15-08-16 - 26-08-16 Iteration2 Exploration.xlsx
+³   ³       29-08-16 - 2-09-16 Iteration3 Exploration.xlsx
+³   ³       8-08-16 - 12-08-16 Iteration1 Exploration.xlsx
+³   ³       
+³   Patrick
+³           8_07_to_13_Tests.xlsx
+³           8_14_to_20_Tests.xlsx
+³           8_21_to_27_Tests.xlsx
+³           8_28_to_9_3_Tests.xlsx
+³           9_04_to_9_10_Tests.xlsx
+³           9_11_to_9_17_Tests.xlsx
+³           9_18_to_9_24_Tests.xlsx
+³           backup.xlsx
 ³               
 24. Time Sheet
 ³       link.txt
 ³       Project Time Sheet.xlsx
 ³       
 25. Traning Document
-³       Database Evaluator Guide v1.0
+³       Client Application Test Materials.docx		- printed
+³       Training and User Manual v1.0.docx		- printed
 ³       
-26. Final Sample Report
-	SQLServer.pdf - Colour  
-
-27. Individual Report and Log
-	Everything
-	  
-
-CONTENT INDEXING - colour
-DSDM INDEXING 
+     
