@@ -24,8 +24,7 @@
       }
     },
     "publishType": "local",
-    "publishPath": "@PROJECT_PATH@",
-    "path": "@PROJECT_PATH@"
+    "publishPath": "@PROJECT_PATH@"
   },
   "pages": {
     "index.html": {
