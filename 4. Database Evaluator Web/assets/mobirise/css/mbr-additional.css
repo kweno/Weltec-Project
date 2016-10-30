@@ -485,6 +485,10 @@ h6,
   text-align: left;
   font-size: 36px;
 }
+#msg-box6-1 .mbr-section-title,
+#msg-box6-1 .lead p {
+  color: #fff;
+}
 #header5-2 .mbr-section-title {
   color: #000;
   text-align: left;
