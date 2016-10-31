@@ -247,7 +247,7 @@
               "src": "@THEME_PATH@/components/_images/desert.jpg"
             },
             "video": {
-              "src": "https://youtu.be/a7vp0IJx4Zc",
+              "src": "https://www.youtube.com/watch?v=0rQcJDAZkA8&feature=youtu.be",
               "aspectratio": "16:9",
               "autoplay": false,
               "loop": false,
