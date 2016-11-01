@@ -110,8 +110,8 @@ h6,
   border-color: #a07e49 !important;
 }
 .btn-secondary {
-  background-color: #bfcecb;
-  border-color: #bfcecb;
+  background-color: #ffffff;
+  border-color: #ffffff;
   color: #ffffff;
 }
 .btn-secondary:hover,
@@ -120,14 +120,14 @@ h6,
 .btn-secondary:active,
 .btn-secondary.active {
   color: #ffffff;
-  background-color: #94ada8;
-  border-color: #94ada8;
+  background-color: #d4d4d4;
+  border-color: #d4d4d4;
 }
 .btn-secondary.disabled,
 .btn-secondary:disabled {
   color: #ffffff !important;
-  background-color: #94ada8 !important;
-  border-color: #94ada8 !important;
+  background-color: #d4d4d4 !important;
+  border-color: #d4d4d4 !important;
 }
 .btn-info {
   background-color: #7e9b9f;
@@ -231,8 +231,8 @@ h6,
 }
 .btn-secondary-outline {
   background: none;
-  border-color: #85a29c;
-  color: #85a29c;
+  border-color: #ffffff;
+  color: #ffffff;
 }
 .btn-secondary-outline:hover,
 .btn-secondary-outline:focus,
@@ -240,14 +240,14 @@ h6,
 .btn-secondary-outline:active,
 .btn-secondary-outline.active {
   color: #ffffff;
-  background-color: #bfcecb;
-  border-color: #bfcecb;
+  background-color: #ffffff;
+  border-color: #ffffff;
 }
 .btn-secondary-outline.disabled,
 .btn-secondary-outline:disabled {
   color: #ffffff !important;
-  background-color: #bfcecb !important;
-  border-color: #bfcecb !important;
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
 }
 .btn-info-outline {
   background: none;
@@ -408,9 +408,6 @@ h6,
 .mbr-gallery-filter li:hover {
   color: #c0a375;
 }
-.scrollToTop_wraper {
-  opacity: 0 !important;
-}
 #menu-0 .hide-buttons .nav-btn {
   display: none !important;
 }
@@ -489,6 +486,13 @@ h6,
 #msg-box6-1 .lead p {
   color: #fff;
 }
+#features4-1 .card-subtitle {
+  color: #bcbcbc;
+}
+#features4-1 .iconbox {
+  background-color: #f2f2f2;
+  border-color: #f2f2f2;
+}
 #header5-2 .mbr-section-title {
   color: #000;
   text-align: left;
@@ -500,9 +504,20 @@ h6,
 #header3-0 .mbr-section-subtitle {
   text-align: center;
 }
+#header3-0 H3 {
+  text-align: right;
+  color: #232323;
+}
 #content5-3 .mbr-section-title,
 #content5-3 p {
   color: #fff;
+}
+#content5-3 .mbr-section-title {
+  text-align: center;
+  color: #000000;
+}
+#content5-3 P {
+  color: #000000;
 }
 #content7-4 P {
   font-size: 18px;
@@ -511,19 +526,45 @@ h6,
 #header3-4 .mbr-section-subtitle {
   text-align: center;
 }
+#header3-4 H3 {
+  text-align: right;
+}
 #msg-box5-3 H3 {
   font-size: 46px;
 }
-#msg-box2-7 .mbr-section-title {
-  color: #fff;
-  font-size: 36px;
-}
-#msg-box2-7 .mbr-section-subtitle {
-  color: #a0a0a0;
-}
-#msg-box1-1 H3 {
+#msg-box5-3 P {
   text-align: left;
+}
+#header3-3 .mbr-section-title,
+#header3-3 .mbr-section-subtitle {
+  text-align: center;
+}
+#features7-2 .card-subtitle {
+  color: #bcbcbc;
+}
+#features7-2 .iconbox {
+  background-color: #000000;
+  border-color: #000000;
+}
+#features7-2 P {
+  font-size: 17px;
+}
+#header3-0 .mbr-section-title,
+#header3-0 .mbr-section-subtitle {
+  text-align: center;
 }
 #features1-2 .striped .mbr-cards-col:nth-child(2n+1) {
   background-color: #2e2e2e;
+}
+#testimonials3-4 .mbr-section-title {
+  color: #efefef;
+}
+#testimonials3-4 .mbr-author-name {
+  color: #ccc;
+}
+#testimonials3-4 .card-footer > div {
+  color: #000000;
+}
+#testimonials3-4 .card-block P {
+  text-align: center;
 }
