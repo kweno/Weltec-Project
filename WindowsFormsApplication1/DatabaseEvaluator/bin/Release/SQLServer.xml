@@ -1,0 +1,115 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <Table>
+    <ProcessInfo>HostName</ProcessInfo>
+    <Text>DESKTOP-FVFO8GL</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>InstanceName</ProcessInfo>
+    <Text>SQL2016N</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Installation Directory</ProcessInfo>
+    <Text>System Drive</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>SQLVersion</ProcessInfo>
+    <Text>Microsoft SQL Server 2016 (RTM) Express Edition (64-bit)</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>ProductLevel</ProcessInfo>
+    <Text>RTM</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>ProductVersion</ProcessInfo>
+    <Text>13.0.1601.5</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Max Degree Of Parallelism</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Minimum size of server memory (MB)</ProcessInfo>
+    <Text>16</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Maximum size of server memory (MB)</ProcessInfo>
+    <Text>2147483647</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Trace Flag 2371</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Trace Flag 1117</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Trace Flag 1118</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Fill Factor Values in (%)</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>SQL Server Authentication Mode</ProcessInfo>
+    <Text>Windows Authentication</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>SQL Port</ProcessInfo>
+    <Text>SQL Server doesn't use default port</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Datafile Location</ProcessInfo>
+    <Text>System Drive</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Logfile Location</ProcessInfo>
+    <Text>System Drive</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Recovery Model</ProcessInfo>
+    <Text>SIMPLE</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Compatibility Level</ProcessInfo>
+    <Text>130</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Snapshot Isolation</ProcessInfo>
+    <Text>ON</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Read Committed Snapshot Isolation</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Datafile Growth</ProcessInfo>
+    <Text>In percent</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Auto Create Statistics</ProcessInfo>
+    <Text>1</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Auto Update Statistics</ProcessInfo>
+    <Text>1</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Auto Shrink</ProcessInfo>
+    <Text>0</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>Last Full Backup</ProcessInfo>
+    <Text>5</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>SA Login</ProcessInfo>
+    <Text>Does not have a blank password</Text>
+  </Table>
+  <Table>
+    <ProcessInfo>NT AUTHORITY\SYSTEM</ProcessInfo>
+    <Text>Does have a access</Text>
+  </Table>
+</NewDataSet>

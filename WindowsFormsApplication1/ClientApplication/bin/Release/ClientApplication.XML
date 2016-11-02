@@ -1,0 +1,329 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ClientApplication</name>
+    </assembly>
+    <members>
+        <member name="T:ClientApplication.ClientApplicationMain_Form">
+            <summary>
+            Main Screen of the Application
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.EVALUATOR_KEY">
+            <summary>
+            The Key for Encoding and Decoding
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.SERVER">
+            <summary>
+            The Server-Instance Selected by the user
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.DATABASE">
+            <summary>
+            The Database selected by the user
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.SERVER_OK">
+            <summary>
+            Indicates if the connection to the Server chosen is successful
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.DATABASENAME_CHECKED">
+            <summary>
+            Indicates if the Database checkbox is checked
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.ENCYRPTED">
+            <summary>
+            The encrypted parameters
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.SLEEP">
+            <summary>
+            The delay used for the threads
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.ClientApplication_BackgroundWorker">
+            The backgroundworker object on which the time consuming operation shall be executed
+            http://www.codeproject.com/Articles/99143/BackgroundWorker-Class-Sample-for-Beginners
+            <summary>
+            BackgroundWorker which collects database parameters
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.CheckServerConnection_BackgroundWorker">
+            <summary>
+            BackgroundWorker which checks server connection
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.#ctor">
+            <summary>
+            Main Form Constructor
+            Sets some properties of the main screen and its components
+            Adds event handlers
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.EncryptStringToBytes_Aes(System.String)">
+            <summary>
+            Does the text encryption
+            </summary>
+            <param name="plainText">The string to be encrypted</param>
+            <returns></returns>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.ByteArrayToFile(System.String,System.Byte[])">
+            <summary>
+            Save a given byte array (for example the encrypted parameters) to a file
+            </summary>
+            <param name="_FileName">File Name where to save byte array</param>
+            <param name="_ByteArray">Byte Array to save to file</param>
+            <returns></returns>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.Start_Button_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event Handler for when Start Button is clicked
+            </summary>
+            <param name="sender">GUI Component that triggered Click</param>
+            <param name="e">Event Arguments</param>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.populateServerDropdown">
+            <summary>
+            Populate the Server-Instance Dropdown
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.populateDatabaseDropdown">
+            <summary>
+            Populate the Database Dropdown
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.ClientApplication_BackgroundWorker_RunWorkerCompleted(System.Object,System.ComponentModel.RunWorkerCompletedEventArgs)">
+            <summary>
+            Event Handler for when the Background Worker responsible for getting sql parameters finishes
+            It will handle saving of the encrypted parameters
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.ClientApplication_BackgroundWorker_ProgressChanged(System.Object,System.ComponentModel.ProgressChangedEventArgs)">
+            <summary>
+            Event Handler for when the Background Worker responsible for getting sql parameters progresses
+            It will handle updating the Progress Table GUI
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.ClientApplication_BackgroundWorker_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Event Handler for the Background Worker Ongoing Actions
+            It will handle the actual retrieving of SQL Parameters
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.Server_ComboBox_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event Handler for when the Server Combo Box changed is value
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.Server_ComboBox_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Event Handler for when a Key in the Keyboard is pressed while inside the Server Combo Box
+            For now used to capture the Server-Instance value the user entered when Enter is pressed in the keyboard
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.CheckServerConnection">
+            <summary>
+            Checks if the Server-Instance value provided by the user is valid
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.CheckServerConnection_BackgroundWorker_DoWork(System.Object,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Event Handler for the CheckServerConnection_BackgroundWorker 
+            Does the actual check if the connection to the chosen Server-Instance is valid
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.CheckServerConnection_BackgroundWorker_RunWorkerCompleted(System.Object,System.ComponentModel.RunWorkerCompletedEventArgs)">
+            <summary>
+            Event Handler for the CheckServerConnection_BackgroundWorker 
+            Performs UI update after the Server Connection Check is done
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.DatabaseName_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event Handler for the Database Name Checkbox
+            Fired when the Checkbox is checked or unchecked
+            Enables Disables the Database portion of the Progress Table
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.Server_ComboBox_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event Handler for the Server Combobox
+            Fired when the user types in the Server Combobox
+            Disables other form elements while the user is typing
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.Database_ComboBox_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Event Handler for the Database Combobox
+            Fired when the value of the combo box changes
+            Sets the value of the Database variable
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.RemoveImage(System.Windows.Forms.PictureBox)">
+            <summary>
+            Removes the image set for a given Picture Box
+            Useful for resetting the UI
+            </summary>
+            <param name="picBox">The PictureBox to be modified</param>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.Close_Button_Click(System.Object,System.EventArgs)">
+            <summary>
+            Closes the Application
+            </summary>
+        </member>
+        <member name="F:ClientApplication.ClientApplicationMain_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ClientApplication.ClientApplicationMain_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:ClientApplication.Program">
+            <summary>
+            The Class first called when the application is started
+            </summary>
+        </member>
+        <member name="F:ClientApplication.Program.splashForm">
+            <summary>
+            Splash Form to be displayed while the application is readied for use
+            </summary>
+        </member>
+        <member name="M:ClientApplication.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="M:ClientApplication.Program.mainForm_Load(System.Object,System.EventArgs)">
+            <summary>
+            Closes the Splash Screen when the Main Screen loads
+            </summary>
+        </member>
+        <member name="T:ClientApplication.SplashScreen_Form">
+            <summary>
+            Splash Screen used while the Main Form is still loading
+            </summary>
+        </member>
+        <member name="F:ClientApplication.SplashScreen_Form.WM_NCLBUTTONDOWN">
+            <summary>
+            Used for dragging the splash screen
+            </summary>
+        </member>
+        <member name="F:ClientApplication.SplashScreen_Form.HT_CAPTION">
+            <summary>
+            Used for dragging the splash screen
+            </summary>
+        </member>
+        <member name="M:ClientApplication.SplashScreen_Form.SendMessage(System.IntPtr,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Used for dragging the splash screen
+            </summary>
+        </member>
+        <member name="M:ClientApplication.SplashScreen_Form.ReleaseCapture">
+            <summary>
+            Used for dragging the splash screen
+            </summary>
+        </member>
+        <member name="M:ClientApplication.SplashScreen_Form.SplashScreen_Form_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Allows the splash screen to be draggable
+            </summary>
+        </member>
+        <member name="M:ClientApplication.SplashScreen_Form.#ctor">
+            <summary>
+            Constructor for the Splash Screen
+            Sets the properties of the splash screen and adds event handlers
+            </summary>
+        </member>
+        <member name="F:ClientApplication.SplashScreen_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ClientApplication.SplashScreen_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ClientApplication.SplashScreen_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:ClientApplication.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.db_logo_tab">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.error">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.header_logo_alpha">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.header_logo_alpha1">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.header_logo_noalpha">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.icon">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.right_arrow_3">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.success">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ClientApplication.Properties.Resources.telerik_logo_RGB_photoshop">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+    </members>
+</doc>

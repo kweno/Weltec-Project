@@ -1,0 +1,22 @@
+To Do:
+
+1. Client Application
+   - Create Splash Screen
+   - Create Main Screen
+     - Logo
+     - Dropdown for List of Servers
+     - Dropdown for List of DBs
+     - Progress Table 
+       - Icons to use
+       - Logic behind processing and what to display
+     - Start Button 
+       - Logic behind the getting db parameters event
+     - Generation of XML / dump file from db parameters
+     - Encrypt XML / dump file
+
+2. Database Evaluator
+   - Create Choose File field
+   - Read contents of XML / dump file
+   - Generate PDF report from db parameters
+
+* Get DB Scripts and Queries from Hardik

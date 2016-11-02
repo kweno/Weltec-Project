@@ -1,0 +1,7 @@
+icon in exe file
+double click no two apps
+connect button - remove, dynamic check
+disable after running
+minimize button
+get 1st script from hardik
+disable compatibility with newer versions

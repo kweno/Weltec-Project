@@ -1,0 +1,9 @@
+Technologies to be used:
+
+Client Application and Database Evaluator
+
+- Microsoft Visual Studio 2015 Enterprise Edition
+- InstallShield Limited Edition for Visual Studio
+- Microsoft .NET Framework 4.5.2
+- SQL Server Express
+- SQL Server Management Studio

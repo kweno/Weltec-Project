@@ -1,0 +1,34 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/~$oject Proposal - Part 2.docx
+/~$oject Proposal.docx
+/~$ans and Procedures.docx
+/~WRL0003.tmp
+*.cache
+/WindowsFormsApplication1/WindowsFormsApplication1/bin/Release/SQLServer.pdf
+/WindowsFormsApplication1/WindowsFormsApplication1/bin/Release/SQLServer.xml
+/WindowsFormsApplication1/WindowsFormsApplication1/obj/Release/TempPE/Properties.Resources.Designer.cs.dll
+/Time Sheet/~$Patrick.xlsx
+Time Sheet/~$Project Time Sheet.xlsx
+*.~vsdx
+/~$oject Proposal V1.8.docx
+*.xlsx#
+*.docx#
+*.cache
+*.CACHE
+/WindowsFormsApplication1/WindowsFormsApplication1/obj/x86/Release/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+/WindowsFormsApplication1/WindowsFormsApplication1/obj/x86/Release/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+/WindowsFormsApplication1/WindowsFormsApplication1/obj/x86/Release/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+/WindowsFormsApplication1/WindowsFormsApplication1/obj/x64/Release/WindowsFormsApplication1.Properties.Resources.resources
+/WindowsFormsApplication1/WindowsFormsApplication1/obj/x64/Release/WindowsFormsApplication1.csproj.FileListAbsolute.txt
+/WindowsFormsApplication1/WindowsFormsApplication1/bin/x64/Release/WindowsFormsApplication1.vshost.exe.config
+/WindowsFormsApplication1/WindowsFormsApplication1/bin/x64/Release/WindowsFormsApplication1.exe.config
+/WindowsFormsApplication1/WindowsFormsApplication1/bin/x64/Release/itextsharp.xml
+/WindowsFormsApplication1/WindowsFormsApplication1/obj/Release/WindowsFormsApplication1.exe
+/WindowsFormsApplication1/WindowsFormsApplication1/obj/Release/WindowsFormsApplication1.Properties.Resources.resources
+/WindowsFormsApplication1/WindowsFormsApplication1/obj/Release/ClientApplication.csproj.FileListAbsolute.txt
+/WindowsFormsApplication1/WindowsFormsApplication1/obj/Release/WindowsFormsApplication1.ClientApplicationMain_Form.resources
+/Diagrams/~$ient Application Class Diagrams.docx
+/WindowsFormsApplication1/DatabaseEvaluator/obj/Release

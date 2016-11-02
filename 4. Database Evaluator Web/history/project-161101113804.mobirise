@@ -1,0 +1,708 @@
+{
+  "settings": {
+    "currentPage": "index.html",
+    "versionFirst": "3.8.3",
+    "uniqCompNum": 0,
+    "versionPublish": "3.8.3",
+    "name": "SQL Evaluator",
+    "theme": {
+      "name": "mobirise3",
+      "title": "Mobirise 3",
+      "styling": {
+        "primaryColor": "#c0a375",
+        "secondaryColor": "#bfcecb",
+        "successColor": "#90a878",
+        "infoColor": "#7e9b9f",
+        "warningColor": "#f3c649",
+        "dangerColor": "#f28281",
+        "titleFont": "Montserrat",
+        "subtitleFont": "Lora",
+        "textFont": "Ubuntu",
+        "isRoundedButtons": false,
+        "isAnimatedOnScroll": true,
+        "isScrollToTopButton": false
+      }
+    },
+    "publishType": "local",
+    "publishPath": "@PROJECT_PATH@",
+    "path": "@PROJECT_PATH@",
+    "screenshot": "screenshot.png",
+    "favicon": "",
+    "noImageResize": ""
+  },
+  "pages": {
+    "index.html": {
+      "settings": {
+        "main": true,
+        "title": "",
+        "meta_descr": "",
+        "header_custom": "",
+        "footer_custom": "",
+        "html_before": ""
+      },
+      "components": [
+        {
+          "_styles": {
+            ".hide-buttons .nav-btn": {
+              "display": "none !important"
+            },
+            ".navbar-caption": {
+              "color": "#ffffff"
+            },
+            ".navbar-toggler": {
+              "color": "#ffffff"
+            },
+            ".link, .dropdown-item": {
+              "color": "#ffffff"
+            },
+            ".link": {
+              "font-size": "0.75rem"
+            },
+            ".dropdown-item, .nav-dropdown-sm .link": {
+              "font-size": "0.812rem"
+            },
+            ".link:hover, .dropdown-item:hover, .link:focus, .dropdown-item:focus": {
+              "color": "@primaryColor"
+            },
+            ".link[aria-expanded=\"true\"], .dropdown-menu": {
+              "background": "#0e0e0e"
+            },
+            ".nav-dropdown-sm .link:focus, .nav-dropdown-sm .link:hover, .nav-dropdown-sm .dropdown-item:focus, .nav-dropdown-sm .dropdown-item:hover": {
+              "background": "#202020!important"
+            },
+            ".navbar, .nav-dropdown-sm, .nav-dropdown-sm .link[aria-expanded=\"true\"], .nav-dropdown-sm .dropdown-menu": {
+              "background": "#282828"
+            },
+            ".bg-color.transparent .link": {
+              "color": "#ffffff",
+              "transition": "none"
+            },
+            ".bg-color.transparent.opened .link": {
+              "transition": "color .2s ease-in-out"
+            },
+            ".bg-color.transparent.opened .link:hover, .bg-color.transparent.opened .link:focus": {
+              "color": "@primaryColor"
+            },
+            ".link[aria-expanded=\"true\"], .dropdown-item[aria-expanded=\"true\"]": {
+              "color": "#c0a375!important"
+            },
+            "&.mbr-navbar--stuck .mbr-navbar__section": {
+              "background": "#2c2c2c"
+            },
+            ".mbr-navbar__section": {},
+            ".mbr-navbar__hamburger": {
+              "color": "#ffffff"
+            },
+            ".close-icon::before, .close-icon::after": {
+              "background-color": "#ffffff"
+            }
+          },
+          "_name": "menu",
+          "_anchor": "menu-0",
+          "_params": {
+            "bgColor": "#282828",
+            "fontSize": 0.75,
+            "fontName": {},
+            "fontColor": "#ffffff",
+            "fontHoverColor": "@primaryColor",
+            "transparent": true,
+            "sticky": true,
+            "logo": true,
+            "showBrand": true,
+            "collapsed": true,
+            "hideButtons": false
+          },
+          "logo": {
+            "image": {
+              "active": true,
+              "src": "assets/images/header-logo-alpha-samp-204x128-53.png",
+              "height": 128,
+              "alt": "SQL Evaluator Logo",
+              "link": "index.html",
+              "title": "",
+              "linkInNewWindow": false
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-menu",
+              "link": "https://mobirise.com",
+              "size": 0
+            }
+          },
+          "brand": "<a class=\"navbar-caption\" data-app-btn=\"true\" data-app-selector=\".navbar-caption\" href=\"https://mobirise.com\" data-app-placeholder=\"Type Brand Name\" data-toolbar=\"-mbrBtnMove,-mbrBtnAdd,-mbrBtnRemove,mbrColor\"></a>",
+          "items": "<li class=\"nav-item\"><a data-app-btn=\"true\" class=\"nav-link link\" href=\"http://sqlstriker.com/?page_id=37\" aria-expanded=\"true\">HELP</a></li><li class=\"nav-item nav-btn\"><a data-app-btn=\"true\" data-button=\"\" data-app-selector=\".btn\" class=\"nav-link btn btn-white btn-white-outline\" href=\"http://sqlstriker.com/?page_id=66\">DOWNLOAD</a></li>"
+        },
+        {
+          "_name": "footer1",
+          "_anchor": "footer1-2",
+          "_params": {
+            "paddingTop": 2,
+            "paddingBottom": 2,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#323232",
+            "bgColorRadio": true,
+            "overlay": true,
+            "overlayOpacity": 0.8,
+            "overlayColor": "#444444"
+          },
+          "text": "Copyright (c) 2016 Mobirise."
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "header2",
+          "_styles": {
+            "P": {
+              "text-align": "left"
+            },
+            "H3": {
+              "text-align": "left",
+              "font-size": "36px"
+            }
+          },
+          "_anchor": "header2-0",
+          "_params": {
+            "parallax": true,
+            "bgImageRadio": true,
+            "bgImage": "assets/images/sql2-2000x1124-43-2000x1124-21.png",
+            "bgColor": "#2e2e2e",
+            "bgColorRadio": false,
+            "bgVideo": {
+              "url": "https://www.youtube.com/watch?v=uNCr7NdOJgw"
+            },
+            "bgVideoRadio": false,
+            "overlay": true,
+            "overlayOpacity": "0.4",
+            "overlayColor": "#000",
+            "inverse": false,
+            "showTitle": true,
+            "showText": true,
+            "showButtons": true,
+            "showArrow": true
+          },
+          "media": {
+            "image": {
+              "width": 1400,
+              "src": "@PROJECT_PATH@/assets/images/header-logo-cropped-1400x506-97.png",
+              "link": "",
+              "alt": "",
+              "title": "",
+              "linkInNewWindow": false
+            },
+            "video": {
+              "src": "https://www.youtube.com/embed/Tq7p44IA-1U",
+              "aspectratio": "16:9",
+              "autoplay": false,
+              "loop": false
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-header2",
+              "linkInNewWindow": false,
+              "name": "wordpress",
+              "family": "socicon",
+              "link": "",
+              "size": "1",
+              "active": true,
+              "newWindow": false
+            }
+          },
+          "title": "SQL \u001bEVALUATOR",
+          "text": "The Database Evaluator Project was designed for small and medium size enterprises who do not have that much funds to hire a full time administrator to evaluate the integrity of their SQL Server Databases. <br><br>Project is composed of:<br> <br><b>Client Application</b> that produces a file containing information about the user’s SQL Server parameters<br><br><b>Product Website</b> where the file generated by the Client Application is uploaded for evaluation.<br><br><b>Database Evaluator</b> which produces an evaluation report from the user’s parameter file.",
+          "buttons": "<a data-app-btn=\"true\" class=\"btn btn-primary\" href=\"http://sqlstriker.com/?page_id=518\" data-toolbar=\"-mbrBtnMove\">Download Sample Evaluation Report</a>"
+        },
+        {
+          "_inherit": "msg-box5",
+          "_styles": {
+            ".mbr-section-title, .lead p": {
+              "color": "#fff"
+            }
+          },
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "msg-box6",
+          "_anchor": "msg-box6-1",
+          "_params": {
+            "paddingTop": "6",
+            "paddingBottom": "6",
+            "parallax": true,
+            "bgImageRadio": true,
+            "bgImage": "assets/images/wallpaper-process-2000x995-4-2000x995-96.png",
+            "bgColor": "#fff",
+            "bgColorRadio": false,
+            "bgVideo": {
+              "url": "https://www.youtube.com/watch?v=uNCr7NdOJgw"
+            },
+            "bgVideoRadio": false,
+            "overlay": true,
+            "overlayOpacity": "0.6",
+            "overlayColor": "#000000",
+            "inverse": true,
+            "showTitle": true,
+            "showText": true,
+            "showButtons": false
+          },
+          "media": {
+            "image": {
+              "width": 1400,
+              "src": "@THEME_PATH@/components/_images/desert.jpg"
+            },
+            "video": {
+              "src": "https://youtu.be/a7vp0IJx4Zc",
+              "aspectratio": "16:9",
+              "autoplay": false,
+              "loop": false,
+              "active": true
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-msg-box5",
+              "link": "",
+              "size": 0
+            }
+          },
+          "title": "How to use the Software",
+          "text": "This video shows the user how to use the software and the website that have been develop in this project.",
+          "buttons": "<a data-app-btn=\"true\" class=\"btn btn-primary\" href=\"https://mobirise.com\">MORE</a>"
+        },
+        {
+          "_inherit": "header1",
+          "_styles": {
+            ".mbr-section-title": {
+              "color": "#000",
+              "text-align": "left"
+            },
+            ".mbr-section-lead": {
+              "color": "#9c9a9a"
+            }
+          },
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "header5",
+          "_anchor": "header5-2",
+          "_params": {
+            "parallax": true,
+            "bgImageRadio": true,
+            "showArrow": true,
+            "bgImage": "assets/images/artsystems-logo-on-black-2000x652-72-2000x652-31.png",
+            "bgColor": "#c1c1c1",
+            "bgColorRadio": false,
+            "bgVideo": {
+              "url": "https://www.youtube.com/watch?v=uNCr7NdOJgw"
+            },
+            "bgVideoRadio": false,
+            "overlay": true,
+            "overlayOpacity": "0.2",
+            "overlayColor": "#000",
+            "contentAlign": "left",
+            "showTitle": true,
+            "showText": true,
+            "showButtons": true
+          },
+          "title": "CLIENT APPLICATION",
+          "text": "is an application wherein needs to download and run on the users computer in order to help them regarding their problem about database issues, by running the software  it will generate and encryted file for the user to upload in the UPLOAD Page.<br>",
+          "buttons": "<a data-app-btn=\"true\" class=\"btn btn-lg btn-primary\" href=\"http://sqlstriker.com/?page_id=66\" data-toolbar=\"-mbrBtnMove\">DOWNLOAD NOW</a>"
+        },
+        {
+          "_styles": {
+            ".mbr-section-title, .mbr-section-subtitle": {
+              "text-align": "center"
+            }
+          },
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "header3",
+          "_anchor": "header3-0",
+          "_params": {
+            "paddingTop": 1,
+            "paddingBottom": 1,
+            "bgColor": "#fff",
+            "showMeta": true
+          },
+          "title": "Background of the Project",
+          "meta": "By Database Team posted July 20, 2016"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "content1",
+          "_anchor": "content1-2",
+          "_params": {
+            "paddingTop": 1,
+            "paddingBottom": 1,
+            "bgColor": "#fff"
+          },
+          "text": "<p>Secure and efficient database implementation following best practice is one of the challenges for organizations and database administrators. Also, evaluating SQL Server configurations is a time consuming process and involves a lot of manual labor. Furthermore, it is very difficult for database administrators to check and create an inventory of all database parameters especially for large environments.&nbsp;</p><p><br></p><p><br></p><p>With the stated challenges, the group created a database evaluator tool that diagnoses and checks the basic implementation parameters of SQL Server Instances and Databases. The product created is targeted for SQL Server Versions 2008 R2 and 2012.</p>"
+        },
+        {
+          "_styles": {
+            ".mbr-section-title, p": {
+              "color": "#fff"
+            }
+          },
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "content5",
+          "_anchor": "content5-3",
+          "_params": {
+            "paddingTop": 3,
+            "paddingBottom": 3,
+            "bgImageRadio": true,
+            "parallax": true,
+            "bgImage": "assets/images/database-26313202-2000x1500-19-2000x1500-16.jpg",
+            "bgColor": "#fff",
+            "bgColorRadio": false,
+            "bgVideo": {
+              "url": "https://www.youtube.com/watch?v=uNCr7NdOJgw"
+            },
+            "bgVideoRadio": false,
+            "overlay": true,
+            "overlayOpacity": 0.5,
+            "overlayColor": "#000",
+            "showTitle": true,
+            "showCaption": true
+          },
+          "title": "Components of the Project",
+          "caption": "<p>The project involved the creation of <b>&nbsp;two applications and one Website</b>&nbsp;working hand in hand to deliver a SQL Server Evaluation report to the user.</p>"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "content7",
+          "_styles": {
+            "P": {
+              "font-size": "18px"
+            }
+          },
+          "_anchor": "content7-4",
+          "_params": {
+            "paddingTop": "3",
+            "paddingBottom": "3",
+            "bgColor": "#ffffff"
+          },
+          "text1": "<p><b>Client Application</b></p><p><br></p><p>Client Application gathers all the SQL Parameters from a SQL Server instance chosen by the user. The data gathered is put into a dump file which is encrypted for security purposes.</p>",
+          "text2": "<p><b>Product Website</b></p><p><br></p><p>This is where a user can upload the dump files produced by the Client Application.</p>",
+          "text3": "<p><b>Database Evaluator</b></p><p><br></p><p>The Database Evaluator itself which the Project Team runs to do the evaluation for them. This application decrypts the dump file and produces an evaluation report based on the parameter values in the dump file.</p>"
+        },
+        {
+          "_styles": {
+            ".mbr-section-title, .mbr-section-subtitle": {
+              "text-align": "center"
+            }
+          },
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "header3",
+          "_anchor": "header3-4",
+          "_params": {
+            "paddingTop": 1,
+            "paddingBottom": 1,
+            "bgColor": "#c1c1c1",
+            "showMeta": true
+          },
+          "title": "DYNAMIC SYSTEM DEVELOPMENT METHOD ATERN (DSDM)",
+          "meta": "By Database Team posted July 20, 2016"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "msg-box5",
+          "_styles": {
+            "H3": {
+              "font-size": "46px"
+            }
+          },
+          "_anchor": "msg-box5-3",
+          "_params": {
+            "paddingTop": "2",
+            "paddingBottom": "2",
+            "parallax": true,
+            "bgImageRadio": false,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#fff",
+            "bgColorRadio": true,
+            "bgVideo": {
+              "url": "https://www.youtube.com/watch?v=uNCr7NdOJgw"
+            },
+            "bgVideoRadio": false,
+            "overlay": false,
+            "overlayOpacity": 0.5,
+            "overlayColor": "#fff",
+            "inverse": false,
+            "showTitle": true,
+            "showText": true,
+            "showButtons": false
+          },
+          "media": {
+            "image": {
+              "active": true,
+              "width": 1400,
+              "src": "assets/images/atern-hb-figure-6a-the-atern-lifecycle-process-1400x1115-36-1400x1115-92.png",
+              "link": "",
+              "alt": "",
+              "title": "",
+              "linkInNewWindow": false
+            },
+            "video": {
+              "src": "https://www.youtube.com/embed/Tq7p44IA-1U",
+              "aspectratio": "16:9",
+              "autoplay": false,
+              "loop": false
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-msg-box5",
+              "link": "",
+              "size": 0
+            }
+          },
+          "title": "METHODOLOGY",
+          "text": "The team followed the DSDM methodology to build the project to completion. It first involved looking into the tool requirements and estimating if the project can be completed on time. Then after planning, the applications involved were developed through a number of iterations. In the final phases, the applications were comprehensively tested by the Test Manager and all bugs were logged and fixed.",
+          "buttons": "<a data-app-btn=\"true\" class=\"btn btn-primary\" href=\"https://mobirise.com\" data-toolbar=\"-mbrBtnMove\">MORE</a>"
+        },
+        {
+          "_styles": {
+            ".mbr-section-title": {
+              "color": "#fff",
+              "font-size": "36px"
+            },
+            ".mbr-section-subtitle": {
+              "color": "#a0a0a0"
+            }
+          },
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "msg-box2",
+          "_anchor": "msg-box2-7",
+          "_params": {
+            "paddingTop": 3,
+            "paddingBottom": 3,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#2e2e2e",
+            "bgColorRadio": true,
+            "bgVideo": {
+              "url": "https://www.youtube.com/watch?v=uNCr7NdOJgw"
+            },
+            "bgVideoRadio": false,
+            "overlay": false,
+            "overlayOpacity": 0.5,
+            "overlayColor": "#222",
+            "inverse": true,
+            "showButtons": false,
+            "showTitle": true,
+            "showText": true
+          },
+          "button": "<a data-app-btn=\"true\" class=\"btn btn-primary\" href=\"https://mobirise.com\">VIEW VIDEO TUTORIAL</a>",
+          "title": "ADVANTAGES AND CHALLENGES",
+          "text": "At the start, the Project team did not have a very good progress control.<div>The project was occasionally behind the planned schedule and a lot of changes were made on the documents needed. However, through the effort of all team members, we caught the schedule on the nick of time.</div>"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "msg-box1",
+          "_styles": {
+            "H3": {
+              "text-align": "left"
+            }
+          },
+          "_anchor": "msg-box1-1",
+          "_params": {
+            "paddingTop": 3,
+            "paddingBottom": 3,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#F2F2F2",
+            "bgColorRadio": true,
+            "bgVideo": {
+              "url": "https://www.youtube.com/watch?v=uNCr7NdOJgw"
+            },
+            "bgVideoRadio": false,
+            "overlay": false,
+            "overlayOpacity": 0.5,
+            "overlayColor": "#222",
+            "inverse": false,
+            "showButtons": false,
+            "showText": true,
+            "showTitle": true
+          },
+          "button": "<a data-app-btn=\"true\" class=\"btn btn-primary\" href=\"https://mobirise.com\" data-toolbar=\"-mbrBtnMove\">SEE LIVE DEMO</a>",
+          "text": "HERE ARE THE LISTED DEVELOPER OF THE SOFTWARE.",
+          "title": "PROJECT TEAM"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "features1",
+          "_styles": {
+            ".striped .mbr-cards-col:nth-child(2n+1)": {
+              "background-color": "#2e2e2e"
+            }
+          },
+          "_anchor": "features1-2",
+          "_params": {
+            "columnsColor": "#2e2e2e",
+            "paddingTop": 2,
+            "paddingBottom": 2,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#fff",
+            "bgColorRadio": true,
+            "bgVideo": {
+              "url": "https://www.youtube.com/watch?v=uNCr7NdOJgw"
+            },
+            "bgVideoRadio": false,
+            "overlay": false,
+            "overlayOpacity": 0.5,
+            "overlayColor": "#222",
+            "columns": 4,
+            "showImages": true,
+            "showTitles": true,
+            "showSubtitles": true,
+            "ShowTexts": true,
+            "showButtons": false
+          },
+          "media1": {
+            "image": {
+              "src": "assets/images/har-600x450-12-600x450-8.jpg",
+              "class": "card-img-top",
+              "width": 600,
+              "active": true,
+              "link": "",
+              "alt": "",
+              "title": "",
+              "linkInNewWindow": false
+            }
+          },
+          "title1": "HARDIK KANSARA",
+          "subtitle1": "DATABASE SPECIALIST",
+          "caption1": "Worked with Web Developer and C# Developer to handle the database evaluation guidelines and the database queries.",
+          "button1": "<a data-app-btn=\"true\" href=\"https://nz.linkedin.com/in/hardik-kansara-1b240b52\" class=\"btn btn-primary\" data-toolbar=\"-mbrBtnMove\" target=\"_blank\">About Me</a>",
+          "media2": {
+            "image": {
+              "src": "assets/images/kwi-600x600-86-600x600-23.jpg",
+              "class": "card-img-top",
+              "width": 600,
+              "active": true,
+              "link": "",
+              "alt": "",
+              "title": "",
+              "linkInNewWindow": false
+            }
+          },
+          "title2": "KWINNO PINEDA",
+          "subtitle2": "WEB DEVELOPER AND DESIGNER",
+          "caption2": "Developed a website that the customers can download the client application and upload dump files.",
+          "button2": "<a data-app-btn=\"true\" href=\"https://mobirise.com\" class=\"btn btn-primary\">MORE</a>",
+          "media3": {
+            "image": {
+              "src": "assets/images/patt-600x600-88-600x600-31.jpg",
+              "class": "card-img-top",
+              "width": 600,
+              "active": true,
+              "link": "",
+              "alt": "",
+              "title": "",
+              "linkInNewWindow": false
+            }
+          },
+          "title3": "PATRICK CURA",
+          "subtitle3": "SOFTWARE DEVELOPER",
+          "caption3": "Developed the client application and database evaluator. Worked with Web Developer and Database Specialist to integrate website, client application and database.",
+          "button3": "<a data-app-btn=\"true\" href=\"https://mobirise.com\" class=\"btn btn-primary\">MORE</a>",
+          "media4": {
+            "image": {
+              "src": "assets/images/matt-600x600-77-600x600-60.jpg",
+              "class": "card-img-top",
+              "width": 600,
+              "active": true,
+              "link": "",
+              "alt": "",
+              "title": "",
+              "linkInNewWindow": false
+            }
+          },
+          "title4": "CHANGMING WU",
+          "subtitle4": "PROJECT MANAGER",
+          "caption4": "Monitored project progress. Provided supportive reports of the project.<br>Planned, deployed and managed the testing effort for any given engagement/release.<br>",
+          "button4": "<a data-app-btn=\"true\" href=\"https://mobirise.com\" class=\"btn btn-primary\">MORE</a>",
+          "media5": {
+            "image": {
+              "src": "@THEME_PATH@/components/_images/gallery/windows-books.jpg",
+              "class": "card-img-top",
+              "width": 600,
+              "active": true
+            }
+          },
+          "title5": "Trendy Website Blocks",
+          "subtitle5": "Choose from the large selection of blocks",
+          "caption5": "Choose from the large selection of latest pre-made blocks - jumbotrons, hero images, parallax scrolling, video backgrounds, hamburger menu, sticky header and more.",
+          "button5": "<a data-app-btn=\"true\" href=\"https://mobirise.com\" class=\"btn btn-primary\">MORE</a>",
+          "media6": {
+            "image": {
+              "src": "@THEME_PATH@/components/_images/gallery/room-laptop.jpg",
+              "class": "card-img-top",
+              "width": 600,
+              "active": true
+            }
+          },
+          "title6": "Host Anywhere",
+          "subtitle6": "Don't limit yourself to just one platform",
+          "caption6": "Publish your website to a local drive, FTP or host on Amazon S3, Google Drive, Github. Don't limit yourself to just one platform or service provider.",
+          "button6": "<a data-app-btn=\"true\" href=\"https://mobirise.com\" class=\"btn btn-primary\">MORE</a>"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "contacts1",
+          "_anchor": "contacts1-3",
+          "_params": {
+            "paddingTop": 3,
+            "paddingBottom": 3,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#2e2e2e",
+            "bgColorRadio": true,
+            "overlay": true,
+            "overlayOpacity": 0.8,
+            "overlayColor": "#3C3C3C"
+          },
+          "logo": {
+            "image": {
+              "src": "assets/images/header-logo-alpha-samp-128x80-21.png",
+              "width": 128,
+              "active": true,
+              "link": "http://sqlstriker.com",
+              "alt": "",
+              "title": "",
+              "linkInNewWindow": false
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-contacts1",
+              "link": "",
+              "size": 0
+            }
+          },
+          "text1": "<strong>Address</strong><br>21 Kensington Ave, Petone, Wellington 5012<br>",
+          "text2": "<strong>Contacts</strong><br>\nEmail: hardik.kansara001@student.weltec.ac.nz<br>patrick.cura001@student.weltec.ac.nz<br>changmin.wu001@student.weltec.ac.nz<br>kwinno.pineda001@student.weltec.ac.nz<br><br>\nPhone:&nbsp;<br>Patrick: +64212953418<br>Hardik: &nbsp;+64211811046<br>Kwinno:+64212968600<br>Changmin: +64211887191<br><br>",
+          "text3": "<strong>Links</strong><br><a href=\"http://sqlstriker.com\">SQL Evaluator</a><br><a href=\"http://sqlstriker.com/?page_id=518\">Downlad Sample PDF Report</a><br><a href=\"http://sqlstriker.com/?page_id=66\">Download Client Application</a>"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,324 @@
+DECLARE @ExpressionToSearch VARCHAR(200)
+DECLARE  @ExpressionToFind VARCHAR(200)
+DECLARE @rc int
+DECLARE @dir nvarchar(4000)
+
+IF OBJECT_ID('tempdb..#Values') IS NOT NULL DROP TABLE #Values
+
+CREATE TABLE [dbo].[#Values]
+( [ProcessInfo] VARCHAR(50) NULL,
+ [Text] VARCHAR(MAX) NULL) ;
+ 
+
+
+------------- SQL Server Instance 
+
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('HostName',HOST_NAME())
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('InstanceName',CONVERT(VARCHAR(MAX),SERVERPROPERTY('InstanceName')))
+
+
+-- SQL Server Instance Installation Directory
+
+exec @rc = master.dbo.xp_instance_regread
+      N'HKEY_LOCAL_MACHINE',
+      N'Software\Microsoft\MSSQLServer\Setup',
+      N'SQLPath', 
+      @dir output, 'no_output'
+
+SET @ExpressionToFind = 'C:\Program Files\'
+
+SELECT @ExpressionToSearch = @dir
+
+IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Installation Directory','System Drive')
+ELSE
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Installation Directory','Doesn''t use system drive')
+
+
+-- SQL Server Version and Service Pack
+
+INSERT INTO [#Values] ([ProcessInfo], [Text])
+    SELECT 'SQLVersion', SUBSTRING(@@VERSION, 1, CHARINDEX('-', @@VERSION) - 1)
+        + CONVERT(VARCHAR(100), SERVERPROPERTY('edition'))
+    AS 'Server Version';
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductLevel',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductLevel')))
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('ProductVersion',CONVERT(VARCHAR(MAX),SERVERPROPERTY('ProductVersion')))
+
+
+
+
+-- Max DOP
+
+IF OBJECT_ID('tempdb..#MaxDOP') IS NOT NULL DROP TABLE #MaxDOP
+
+CREATE TABLE [dbo].[#MaxDOP] (NAME VARCHAR(255), minimum INT, maximum INT, config_value INT, run_value INT)
+
+EXEC [sp_configure] 'show advanced options', 1;
+RECONFIGURE;
+
+INSERT INTO [#MaxDOP]
+EXEC [sp_configure] 'max degree of parallelism'
+
+EXEC [sp_configure] 'show advanced options', 0;
+RECONFIGURE;
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) SELECT 'Max Degree Of Parallelism',run_value FROM #MaxDOP WHERE name='max degree of parallelism'
+
+
+-- Memory
+
+INSERT INTO [#Values] ([ProcessInfo], [Text])
+SELECT [description], CONVERT(VARCHAR(50),value_in_use) FROM sys.configurations
+WHERE name like '%server memory%'
+
+
+-- Trace Flags
+
+-- Command will create the temporary table in tempdb
+
+IF OBJECT_ID('tempdb..#TmpErrorLog') IS NOT NULL DROP TABLE #TmpErrorLog
+
+CREATE TABLE [dbo].[#TmpErrorLog]
+([LogDate] DATETIME NULL,
+ [ProcessInfo] VARCHAR(20) NULL,
+ [Text] VARCHAR(MAX) NULL ) ;
+
+-- Command will insert the errorlog data into temporary table
+INSERT INTO #TmpErrorLog ([LogDate], [ProcessInfo], [Text])
+EXEC [master].[dbo].[xp_readerrorlog] 0, 1, N'DBCC TRACEON';
+
+-- retrieves the data from temporary table
+
+SET @ExpressionToFind = 'DBCC TRACEON 2371'
+
+SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog
+
+IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 2371','1')
+ELSE
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 2371','0')
+
+
+SET @ExpressionToFind = 'DBCC TRACEON 1117'
+
+SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog
+
+IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1117','1')
+ELSE
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1117','0')
+
+
+SET @ExpressionToFind = 'DBCC TRACEON 1118'
+
+SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLog
+
+IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1118','1')
+ELSE
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Trace Flag 1118','0')
+
+
+-- Default index fill factor
+
+IF OBJECT_ID('tempdb..#Fill') IS NOT NULL DROP TABLE #Fill
+
+CREATE TABLE [dbo].[#Fill] (NAME VARCHAR(255), minimum INT, maximum INT, config_value INT, run_value INT)
+
+EXEC [sp_configure] 'show advanced options', 1;
+RECONFIGURE;
+
+INSERT INTO [#Fill]
+EXEC [sp_configure] 'fill factor (%)'
+
+EXEC [sp_configure] 'show advanced options', 0;
+RECONFIGURE;
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) SELECT 'Fill Factor Values in (%)',run_value FROM #Fill WHERE name='fill factor (%)'
+
+
+-- Server authentication
+
+INSERT INTO [#Values] ([ProcessInfo], [Text])
+SELECT 'SQL Server Authentication Mode', CASE SERVERPROPERTY('IsIntegratedSecurityOnly')   
+WHEN 1 THEN 'Windows Authentication'   
+WHEN 0 THEN 'Windows and SQL Server Authentication'   
+END as [Authentication Mode]  
+
+
+-- SQL Server Network Port
+
+IF OBJECT_ID('tempdb..#TmpErrorLogNetworkPort') IS NOT NULL DROP TABLE #TmpErrorLogNetworkPort
+
+CREATE TABLE [dbo].[#TmpErrorLogNetworkPort]
+([LogDate] DATETIME NULL,
+ [ProcessInfo] VARCHAR(20) NULL,
+ [Text] VARCHAR(MAX) NULL ) ;
+
+-- Command will insert the errorlog data into temporary table
+INSERT INTO #TmpErrorLogNetworkPort ([LogDate], [ProcessInfo], [Text])
+EXEC [master].[dbo].[xp_readerrorlog] 0, 1, N'Server is listening on';
+
+-- retrieves the data from temporary table
+SET @ExpressionToFind = '1433'
+
+SELECT @ExpressionToSearch = [Text] FROM #TmpErrorLogNetworkPort where text like '%any%' and text like '%<ipv4>%' and text like '%1433%' and ProcessInfo = 'Server'
+
+IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('SQL Port','1433')
+ELSE
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('SQL Port','SQL Server doesn''t use default port')
+
+
+
+----- SQL Server Database 
+
+-- DataFiles 
+
+DECLARE @DBName VARCHAR(200);
+declare @sql varchar(200);
+
+SET @DBName = 'EVALUATOR'
+
+SELECT @sql = 'USE [' + @DBName + ']' 
+
+EXEC sp_sqlexec @Sql
+
+IF OBJECT_ID('tempdb..#DataFile') IS NOT NULL DROP TABLE #DataFile
+
+CREATE TABLE [dbo].[#DataFile] 
+	([name] VARCHAR(200) NULL,
+	[fileid] int NULL, 
+	[filename] VARCHAR(max) NULL,
+	[filegroup] VARCHAR(50) NULL,
+	[size] VARCHAR(50) NULL,
+	[maxsize] VARCHAR(50) NULL,
+	[growth] VARCHAR(50) NULL,
+	[usage] VARCHAR(50) NULL) ;
+
+-- Command will insert the errorlog data into temporary table
+
+INSERT INTO #DataFile ([name], [fileid], [filename], [filegroup], [size], [maxsize], [growth], [usage])
+EXEC [sp_helpfile]
+
+SET @ExpressionToFind = 'C:\Program Files\'
+
+SELECT @ExpressionToSearch = [filename] FROM #DataFile where [filename] like '%.mdf'
+
+IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Location','System Drive')
+ELSE
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Location','Datafile doesn''t use system drive')
+
+
+SELECT @ExpressionToSearch = [filename] FROM #DataFile where [filename] like '%.ldf'
+
+IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Logfile Location','System Drive')
+ELSE
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Logfile Location','Logfile doesn''t use system drive')
+
+
+-- Recovery Model
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) 
+SELECT 'Recovery Model' , recovery_model_desc FROM sys.databases WHERE name = @DBName
+
+
+-- Compatibility Level
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) 
+SELECT 'Compatibility Level' , [compatibility_level] FROM sys.databases WHERE name = @DBName
+
+-- Read Committed Snapshot Isolation
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) 
+SELECT 'Snapshot Isolation', [snapshot_isolation_state_desc] FROM sys.databases WHERE name = @DBName
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) 
+SELECT 'Read Committed Snapshot Isolation', [is_read_committed_snapshot_on] FROM sys.databases WHERE name = @DBName
+
+-- Database Auto growth
+
+SET @ExpressionToFind = 'KB'
+
+SELECT @ExpressionToSearch = CASE is_percent_growth WHEN 1 THEN CONVERT(VARCHAR(10),growth) +'%' ELSE Convert(VARCHAR(10),growth*8) +' KB' END 
+FROM sys.master_files 
+WHERE  name = @DBName and [physical_name] like '%.mdf'
+
+print @ExpressionToSearch
+
+
+IF @ExpressionToSearch LIKE '%' + @ExpressionToFind + '%'
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Growth','Fix in size')
+ELSE
+    INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('Datafile Growth','In percent')
+
+-- Auto Create Statistics
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) 
+SELECT 'Auto Create Statistics' , [is_auto_create_stats_on] FROM sys.databases WHERE name = @DBName
+
+-- Auto Update Statistics
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) 
+SELECT 'Auto Update Statistics' , [is_auto_update_stats_on] FROM sys.databases WHERE name = @DBName
+
+-- Auto Shrink
+
+INSERT INTO [#Values] ([ProcessInfo], [Text]) 
+SELECT 'Auto Shrink' , [is_auto_shrink_on] FROM sys.databases WHERE name = @DBName
+
+
+-- Daily Index Rebuild
+
+INSERT INTO [#Values] ([ProcessInfo], [Text])
+SELECT TOP 1 'Old Statistics Found'
+,DATEDIFF(d, (STATS_DATE(i.OBJECT_ID, index_id)), Getdate()) as Days_Since_Last
+FROM sys.indexes i
+INNER JOIN sys.objects o ON i.object_id = o.object_id
+INNER JOIN sys.schemas sc ON o.schema_id = sc.schema_id
+WHERE i.name IS NOT NULL
+AND o.type = 'U'
+ORDER BY (STATS_DATE(i.OBJECT_ID, index_id)) ASC 
+
+-- Daily database Full backup
+
+INSERT INTO [#Values] ([ProcessInfo], [Text])
+SELECT 'Last Full Backup', DATEDIFF(d, MAX(Backup_Finish_Date), Getdate()) as Days_Since_Last
+FROM MSDB.dbo.BackupSet
+WHERE Type = 'd'
+GROUP BY Database_Name
+
+-- Blank SQL 'SA' Password
+
+IF NOT EXISTS
+(
+SELECT name,* FROM sys.sql_logins 
+WHERE name = 'sa' AND (PWDCOMPARE('', password_hash) = 1 OR PWDCOMPARE('', password_hash, 1) = 1)
+)
+INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('SA Login','Does not have a blank password')
+ELSE
+INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('SA Login','Does have a blank password')
+
+
+-- NT AUTHORITY\SYSTEM Administrator
+
+IF NOT EXISTS
+(
+SELECT name,* FROM master..syslogins WHERE name = 'NT AUTHORITY\SYSTEM' AND hasaccess = 1
+)
+INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('NT AUTHORITY\SYSTEM','Does not have a access')
+ELSE
+INSERT INTO [#Values] ([ProcessInfo], [Text]) VALUES ('NT AUTHORITY\SYSTEM','Does have a access')
+
+
+
+SELECT * from #ParameterDetails ORDER BY PassValue,IssueSeverity, ParameterName
+
+SELECT IssueType as [Category], ParameterName as [Parameter Name], PassValue from #ParameterDetails ORDER BY PassValue,IssueSeverity, ParameterName
+

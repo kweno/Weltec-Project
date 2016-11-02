@@ -1,0 +1,28 @@
+2.1 Hardware and software requirements
+A complete list of the hardware and software requirements can be found here:
+Basically the following is required :
+- CPU
+o Minimum
+? x86 Processor: 1.0 GHz
+? x64 Processor: 1.4 GHz
+o Recommended
+? 2.0 GHz or faster
+- Memory
+o Minimum:
+? All other editions: 2 GB
+o Recommended:
+? All other editions: At least 4 GB and should be increased as database size increases to ensure optimal performance.
+- Laste pack of JDK
+JDK is a requirement for SQL Developer tool as well as for Oracle to connect using JDBC drivers.
+- The supported storage types for data files are:
+o Local Disk (Oracle Software Installation)
+o Shared Storage (Oracle Base + Oracle Datafiles)
+- NTFS based disk set
+We recommend that you run Oracle on computers with the NTFS file format. Installing Oracle on a computer with FAT32 file system is supported but not recommended as it is less secure than the NTFS file system.
+- Disk space
+Oracle requires a minimum of 40 GB of available hard-disk space.
+- Disk layout
+We suggest and request the following disk layout :
+o G:\DATA
+o I:\TEMPDB
+o J:\BACKUP

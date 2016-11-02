@@ -1,0 +1,48 @@
+Note : Print each sheet for xls files.
+
+ 
+3. Methodology and Technique Document
+³       Methodology and Technique Document v1.0.docx
+³       
+4. DSDM Documents
+	4. Exploration
+	     Issue Register
+	     Risk Log
+	5. Engineering
+	     Issue Register
+	     Risk Log
+	6. Deployment
+³           Test Plan v1.2.docx
+                 
+7. Research Log
+³       References.xlsx     
+                  
+14. Project Diary
+³       Project Dairy v1.0
+³       
+20. CVs
+³       Changming Wu CV.pdf
+³       CV Template.docx
+³       Hardik Kansara CV.pdf
+³       Kwinno Pineda CV.pdf
+³       Patrick Cura CV.pdf
+³       
+
+³               
+24. Time Sheet
+³       link.txt
+³       Project Time Sheet.xlsx
+³       
+25. Traning Document
+³       Database Evaluator Guide v1.0
+³       
+26. Final Sample Report
+	SQLServer.pdf - Colour  
+
+27. Individual Report and Log
+	Everything
+	  
+
+CONTENT INDEXING - colour
+DSDM INDEXING 
+Title Page - colour

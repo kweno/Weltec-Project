@@ -1,0 +1,15 @@
+D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\CodedUITestProject\bin\Release\CodedUITestProject.dll
+D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\CodedUITestProject\bin\Release\CodedUITestProject.pdb
+D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\CodedUITestProject\obj\Release\CodedUITestProject.csprojResolveAssemblyReference.cache
+D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\CodedUITestProject\obj\Release\CodedUITestProject.dll
+D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\CodedUITestProject\obj\Release\CodedUITestProject.pdb
+Z:\Local\patrick.cura2\New folder\Weltec-Project\WindowsFormsApplication1\CodedUITestProject\bin\Release\CodedUITestProject.dll
+Z:\Local\patrick.cura2\New folder\Weltec-Project\WindowsFormsApplication1\CodedUITestProject\bin\Release\CodedUITestProject.pdb
+Z:\Local\patrick.cura2\New folder\Weltec-Project\WindowsFormsApplication1\CodedUITestProject\obj\Release\CodedUITestProject.csprojResolveAssemblyReference.cache
+Z:\Local\patrick.cura2\New folder\Weltec-Project\WindowsFormsApplication1\CodedUITestProject\obj\Release\CodedUITestProject.dll
+Z:\Local\patrick.cura2\New folder\Weltec-Project\WindowsFormsApplication1\CodedUITestProject\obj\Release\CodedUITestProject.pdb
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\CodedUITestProject\bin\Release\CodedUITestProject.dll
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\CodedUITestProject\bin\Release\CodedUITestProject.pdb
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\CodedUITestProject\obj\Release\CodedUITestProject.csprojResolveAssemblyReference.cache
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\CodedUITestProject\obj\Release\CodedUITestProject.dll
+Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\CodedUITestProject\obj\Release\CodedUITestProject.pdb

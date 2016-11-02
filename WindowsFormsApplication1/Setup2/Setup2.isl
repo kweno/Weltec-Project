@@ -52,7 +52,7 @@
 	<summary>
 		<codepage>1252</codepage>
 		<title>Installation Database</title>
-		<subject></subject>
+		<subject>Database Evaluator Client</subject>
 		<author>##ID_STRING4##</author>
 		<keywords>Installer,MSI,Database</keywords>
 		<comments>Contact:  Your local administrator</comments>
@@ -225,6 +225,7 @@
 	<table name="AppSearch">
 		<col key="yes" def="s72">Property</col>
 		<col key="yes" def="s72">Signature_</col>
+		<row><td>DOTNETVERSION45FULL</td><td>DotNet45Full</td></row>
 	</table>
 
 	<table name="BBControl">
@@ -262,6 +263,7 @@
 		<row><td>NewBinary16</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\InstallFirstUse.ico</td></row>
 		<row><td>NewBinary17</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\InstallPartial.ico</td></row>
 		<row><td>NewBinary18</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\InstallStateMenu.ico</td></row>
+		<row><td>NewBinary19</td><td/><td>&lt;ISProductFolder&gt;\redist\Language independent\i386\SerialNumCAHelper.dll</td></row>
 		<row><td>NewBinary2</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\New.ibd</td></row>
 		<row><td>NewBinary3</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\Up.ibd</td></row>
 		<row><td>NewBinary4</td><td/><td>&lt;ISProductFolder&gt;\Redist\Language Independent\OS Independent\WarningIcon.ibd</td></row>
@@ -339,9 +341,8 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
+		<row><td>ClientApplication.exe</td><td>{DC48E1C0-9545-4A9A-A6EF-D4A5A705581F}</td><td>INSTALLDIR</td><td>2</td><td/><td>clientapplication.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{66591B40-2A9C-4B9A-8CAC-ED475D6E6F33}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>WindowsFormsApplication1.exe</td><td>{D3209BB4-E211-42F5-95B6-24B1E8572B03}</td><td>INSTALLDIR</td><td>2</td><td/><td>windowsformsapplication1.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>WindowsFormsApplication1.vshost.exe</td><td>{8A7B42FF-AC11-4C41-9291-09F63F4BE81A}</td><td>INSTALLDIR</td><td>2</td><td/><td>windowsformsapplication1.vsh</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -552,7 +553,7 @@
 		<row><td>LicenseAgreement</td><td>DlgLine</td><td>Line</td><td>48</td><td>234</td><td>326</td><td>0</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>LicenseAgreement</td><td>DlgTitle</td><td>Text</td><td>13</td><td>6</td><td>292</td><td>25</td><td>65539</td><td/><td>##IDS__IsLicenseDlg_LicenseAgreement##</td><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>LicenseAgreement</td><td>ISPrintButton</td><td>PushButton</td><td>301</td><td>188</td><td>65</td><td>17</td><td>3</td><td/><td>##IDS_PRINT_BUTTON##</td><td>Agree</td><td/><td>0</td><td/><td/><td/></row>
-		<row><td>LicenseAgreement</td><td>Memo</td><td>ScrollableText</td><td>8</td><td>55</td><td>358</td><td>130</td><td>7</td><td/><td/><td/><td/><td>0</td><td/><td>&lt;ISProductFolder&gt;\Redist\0409\Eula.rtf</td><td/></row>
+		<row><td>LicenseAgreement</td><td>Memo</td><td>ScrollableText</td><td>8</td><td>55</td><td>358</td><td>130</td><td>7</td><td/><td/><td/><td/><td>0</td><td/><td>&lt;VSSolutionFolder&gt;\License Agreement.rtf</td><td/></row>
 		<row><td>LicenseAgreement</td><td>Next</td><td>PushButton</td><td>230</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_NEXT##</td><td>Cancel</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>MaintenanceType</td><td>Back</td><td>PushButton</td><td>164</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_BACK##</td><td>Next</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>MaintenanceType</td><td>Banner</td><td>Bitmap</td><td>0</td><td>0</td><td>374</td><td>44</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td>NewBinary1</td></row>
@@ -939,7 +940,7 @@
 		<row><td>InstallWelcome</td><td>Back</td><td>NewDialog</td><td>SplashBitmap</td><td>Display_IsBitmapDlg</td><td>0</td></row>
 		<row><td>InstallWelcome</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>0</td></row>
 		<row><td>InstallWelcome</td><td>Next</td><td>NewDialog</td><td>ReadyToInstall</td><td>1</td><td>0</td></row>
-		<row><td>LicenseAgreement</td><td>Back</td><td>NewDialog</td><td>InstallWelcome</td><td>1</td><td>0</td></row>
+		<row><td>LicenseAgreement</td><td>Back</td><td>NewDialog</td><td>InstallWelcome</td><td>NOT Installed</td><td>0</td></row>
 		<row><td>LicenseAgreement</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>0</td></row>
 		<row><td>LicenseAgreement</td><td>ISPrintButton</td><td>DoAction</td><td>ISPrint</td><td>1</td><td>0</td></row>
 		<row><td>LicenseAgreement</td><td>Next</td><td>NewDialog</td><td>ReadyToInstall</td><td>AgreeToLicense = "Yes"</td><td>0</td></row>
@@ -1011,8 +1012,9 @@
 		<row><td>SetupCompleteError</td><td>Finish</td><td>DoAction</td><td>ShowMsiLog</td><td>MsiLogFileLocation And (ISSHOWMSILOG="1")</td><td>3</td></row>
 		<row><td>SetupCompleteError</td><td>Finish</td><td>EndDialog</td><td>Exit</td><td>1</td><td>2</td></row>
 		<row><td>SetupCompleteSuccess</td><td>OK</td><td>DoAction</td><td>CleanUp</td><td>ISSCRIPTRUNNING="1"</td><td>1</td></row>
-		<row><td>SetupCompleteSuccess</td><td>OK</td><td>DoAction</td><td>ShowMsiLog</td><td>MsiLogFileLocation And (ISSHOWMSILOG="1") And NOT ISENABLEDWUSFINISHDIALOG</td><td>6</td></row>
-		<row><td>SetupCompleteSuccess</td><td>OK</td><td>EndDialog</td><td>Exit</td><td>1</td><td>2</td></row>
+		<row><td>SetupCompleteSuccess</td><td>OK</td><td>DoAction</td><td>LaunchProgramFileFromSetupCompleteSuccess</td><td>LAUNCHPROGRAM And PROGRAMFILETOLAUNCHATEND &lt;&gt; "" And NOT Installed</td><td>2</td></row>
+		<row><td>SetupCompleteSuccess</td><td>OK</td><td>DoAction</td><td>ShowMsiLog</td><td>MsiLogFileLocation And (ISSHOWMSILOG="1") And NOT ISENABLEDWUSFINISHDIALOG</td><td>7</td></row>
+		<row><td>SetupCompleteSuccess</td><td>OK</td><td>EndDialog</td><td>Exit</td><td>1</td><td>3</td></row>
 		<row><td>SetupError</td><td>A</td><td>EndDialog</td><td>ErrorAbort</td><td>1</td><td>0</td></row>
 		<row><td>SetupError</td><td>C</td><td>EndDialog</td><td>ErrorCancel</td><td>1</td><td>0</td></row>
 		<row><td>SetupError</td><td>I</td><td>EndDialog</td><td>ErrorIgnore</td><td>1</td><td>0</td></row>
@@ -1050,9 +1052,8 @@
 	<table name="CreateFolder">
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>INSTALLDIR</td><td>ClientApplication.exe</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT</td></row>
-		<row><td>INSTALLDIR</td><td>WindowsFormsApplication1.exe</td></row>
-		<row><td>INSTALLDIR</td><td>WindowsFormsApplication1.vshost.exe</td></row>
 	</table>
 
 	<table name="CustomAction">
@@ -1069,6 +1070,7 @@
 		<row><td>ISSelfRegisterFiles</td><td>3073</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterFiles</td><td/><td/></row>
 		<row><td>ISSelfRegisterFinalize</td><td>1</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterFinalize</td><td/><td/></row>
 		<row><td>ISUnSelfRegisterFiles</td><td>3073</td><td>ISSELFREG.DLL</td><td>ISUnSelfRegisterFiles</td><td/><td/></row>
+		<row><td>LaunchProgramFileFromSetupCompleteSuccess</td><td>1</td><td>NewBinary19</td><td>LaunchProgram</td><td/><td/></row>
 		<row><td>SetARPINSTALLLOCATION</td><td>51</td><td>ARPINSTALLLOCATION</td><td>[INSTALLDIR]</td><td/><td/></row>
 		<row><td>SetAllUsersProfileNT</td><td>51</td><td>ALLUSERSPROFILE</td><td>[%SystemRoot]\Profiles\All Users</td><td/><td/></row>
 		<row><td>ShowMsiLog</td><td>226</td><td>SystemFolder</td><td>[SystemFolder]notepad.exe "[MsiLogFileLocation]"</td><td/><td>Shows Property-driven MSI Log</td></row>
@@ -1144,7 +1146,7 @@
 		<row><td>GlobalAssemblyCache</td><td>TARGETDIR</td><td>.:Global~1|GlobalAssemblyCache</td><td/><td>0</td><td/></row>
 		<row><td>INSTALLDIR</td><td>ISMyProductDir</td><td>.</td><td/><td>0</td><td/></row>
 		<row><td>ISCommonFilesFolder</td><td>CommonFilesFolder</td><td>Instal~1|InstallShield</td><td/><td>0</td><td/></row>
-		<row><td>ISMyProductDir</td><td>WELTEC_PROJECT</td><td>DATABA~1|Database Evaluator</td><td/><td>0</td><td/></row>
+		<row><td>ISMyProductDir</td><td>WELTEC_PROJECT</td><td>DATABA~1|Database Evaluator Client</td><td/><td>0</td><td/></row>
 		<row><td>ISYourDataBaseDir</td><td>INSTALLDIR</td><td>Database</td><td/><td>0</td><td/></row>
 		<row><td>LocalAppDataFolder</td><td>TARGETDIR</td><td>.:LocalA~1|LocalAppData</td><td/><td>0</td><td/></row>
 		<row><td>MyPicturesFolder</td><td>TARGETDIR</td><td>.:MyPict~1|MyPictures</td><td/><td>0</td><td/></row>
@@ -1169,7 +1171,9 @@
 		<row><td>WELTEC_PROJECT</td><td>ProgramFilesFolder</td><td>WELTEC~1|Weltec Project</td><td/><td>0</td><td/></row>
 		<row><td>WindowsFolder</td><td>TARGETDIR</td><td>.:Windows</td><td/><td>0</td><td/></row>
 		<row><td>WindowsVolume</td><td>TARGETDIR</td><td>.:WinRoot</td><td/><td>0</td><td/></row>
+		<row><td>databa_1_database_evaluator_client</td><td>weltec</td><td>DATABA~1|Database Evaluator Client</td><td/><td>1</td><td/></row>
 		<row><td>setup2</td><td>yourco_1_your_company_name</td><td>Setup2</td><td/><td>1</td><td/></row>
+		<row><td>weltec</td><td>ProgramMenuFolder</td><td>WelTec</td><td/><td>1</td><td/></row>
 		<row><td>yourco_1_your_company_name</td><td>ProgramMenuFolder</td><td>YOURCO~1|Your Company Name</td><td/><td>1</td><td/></row>
 	</table>
 
@@ -1862,9 +1866,8 @@
 	<table name="FeatureComponents">
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>AlwaysInstall</td><td>ClientApplication.exe</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
-		<row><td>AlwaysInstall</td><td>WindowsFormsApplication1.exe</td></row>
-		<row><td>AlwaysInstall</td><td>WindowsFormsApplication1.vshost.exe</td></row>
 	</table>
 
 	<table name="File">
@@ -1879,12 +1882,7 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>windowsformsapplication1.exe</td><td>WindowsFormsApplication1.exe</td><td>WINDOW~1.EXE|WindowsFormsApplication1.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe</td><td>1</td><td/></row>
-		<row><td>windowsformsapplication1.exe1</td><td>ISX_DEFAULTCOMPONENT</td><td>WINDOW~1.CON|WindowsFormsApplication1.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config</td><td>1</td><td/></row>
-		<row><td>windowsformsapplication1.pdb</td><td>ISX_DEFAULTCOMPONENT</td><td>WINDOW~1.PDB|WindowsFormsApplication1.pdb</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb</td><td>1</td><td/></row>
-		<row><td>windowsformsapplication1.vsh</td><td>WindowsFormsApplication1.vshost.exe</td><td>WINDOW~1.EXE|WindowsFormsApplication1.vshost.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.vshost.exe</td><td>1</td><td/></row>
-		<row><td>windowsformsapplication1.vsh1</td><td>ISX_DEFAULTCOMPONENT</td><td>WINDOW~1.CON|WindowsFormsApplication1.vshost.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.vshost.exe.config</td><td>1</td><td/></row>
-		<row><td>windowsformsapplication1.vsh2</td><td>ISX_DEFAULTCOMPONENT</td><td>WINDOW~1.MAN|WindowsFormsApplication1.vshost.exe.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\student\Desktop\Weltec Project\Weltec-Project\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.vshost.exe.manifest</td><td>1</td><td/></row>
+		<row><td>clientapplication.exe</td><td>ClientApplication.exe</td><td>CLIENT~1.EXE|ClientApplication.exe</td><td>0</td><td/><td/><td/><td>1</td><td>Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2026,9 +2024,8 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
+		<row><td>ClientApplication.exe</td><td/><td/><td>_48E976FA_5749_4A1F_9C74_5B905D92F2A9_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_0704C7AB_03E9_4B86_92BA_11399B47150B_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>WindowsFormsApplication1.exe</td><td/><td/><td>_37A09E6E_93B3_4374_8DA1_3CADC951A693_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>WindowsFormsApplication1.vshost.exe</td><td/><td/><td>_5923CE9D_C729_41BA_8D1D_1D44C87E4D67_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2617,9 +2614,10 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>Your Company Name</td><td>0</td><td/><td>-349926192</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>WelTec</td><td>0</td><td/><td>-995858667</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-752598546</td></row>
+		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-995823819</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_OS</td><td>1033</td><td>The operating system is not adequate for running [ProductName].</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-752598546</td></row>
@@ -3430,11 +3428,20 @@
 		<row><td>IDS_SETUPEXE_EXPIRE_MSG</td><td>1033</td><td>This setup works until %s. The setup will now exit.</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1033</td><td>This setup was built with an evaluation version of InstallShield and can only be launched from setup.exe.</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.exe</td><td>0</td><td/><td>-618367279</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME10</td><td>1033</td><td>LAUNCH~1.EXE|Launch ClientApplication.exe</td><td>0</td><td/><td>-995852427</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME11</td><td>1033</td><td>LAUNCH~1.EXE|Launch ClientApplication.exe</td><td>0</td><td/><td>-727448718</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME12</td><td>1033</td><td>LAUNCH~1.EXE|Launch ClientApplication.exe</td><td>0</td><td/><td>623154444</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME13</td><td>1033</td><td>LAUNCH~1.EXE|Launch ClientApplication.exe</td><td>0</td><td/><td>623154508</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME14</td><td>1033</td><td>LAUNCH~1.EXE|Launch ClientApplication.exe</td><td>0</td><td/><td>623151533</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME15</td><td>1033</td><td>LAUNCH~1.EXE|Launch ClientApplication.exe</td><td>0</td><td/><td>623137581</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.vshost.exe</td><td>0</td><td/><td>-618367279</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.exe</td><td>0</td><td/><td>-618342543</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME4</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.vshost.exe</td><td>0</td><td/><td>-618342543</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME5</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.exe</td><td>0</td><td/><td>-349924048</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME6</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.vshost.exe</td><td>0</td><td/><td>-349924048</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME7</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.exe</td><td>0</td><td/><td>1671713106</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME8</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.vshost.exe</td><td>0</td><td/><td>1671713106</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME9</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.exe</td><td>0</td><td/><td>1671719346</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1033</td><td>From the list of servers below, select the database server you would like to target.</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1033</td><td>From the list of catalog names below, select the database catalog you would like to target.</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1033</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>-752598546</td></row>
@@ -3724,10 +3731,12 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-752598546</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td/><td>0</td><td/><td>-752598546</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>http://www.YourCompanyName.com</td><td>0</td><td/><td>-349926192</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>https://github.com/patrickcura1989/Weltec-Project</td><td>0</td><td/><td>-995823851</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.exe</td><td>0</td><td/><td>-618387438</td></row>
-		<row><td>ID_STRING4</td><td>1033</td><td>Your Company Name</td><td>0</td><td/><td>-349926192</td></row>
+		<row><td>ID_STRING4</td><td>1033</td><td>WelTec</td><td>0</td><td/><td>-995858667</td></row>
 		<row><td>ID_STRING5</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.exe</td><td>0</td><td/><td>-349917904</td></row>
+		<row><td>ID_STRING6</td><td>1033</td><td>LAUNCH~1.EXE|Launch WindowsFormsApplication1.exe</td><td>0</td><td/><td>1671721394</td></row>
+		<row><td>ID_STRING7</td><td>1033</td><td>LAUNCH~1.EXE|Launch ClientApplication.exe</td><td>0</td><td/><td>-995846283</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-752598546</td></row>
 	</table>
 
@@ -3841,12 +3850,21 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
-		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
+		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;VSSolutionFolder&gt;\ClientApplication\icon.ico</td><td>0</td></row>
+		<row><td>ClientApplication._14D0A42D4161450D801E72822C3C0A4B.exe</td><td/><td>Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
+		<row><td>ClientApplication._523004AB0AC14BBAAEBC23EC07D0F93A.exe</td><td/><td>Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
+		<row><td>ClientApplication._747BF74F8B1449E093F3B8F0C1BD37C1.exe</td><td/><td>Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
+		<row><td>ClientApplication._A36F228F05C7428A80AC970006EC9133.exe</td><td/><td>Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
+		<row><td>ClientApplication._BBE641784E384E21818CFD917A4E3055.exe</td><td/><td>D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
+		<row><td>ClientApplication._D8CAE369A1764306B703D51CF458D917.exe</td><td/><td>Z:\Local\patrick.cura2\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
+		<row><td>ClientApplication._EC70F1A913DE49C287E523699F5C7449.exe</td><td/><td>D:\LaptopBackup\Desktop\School\Project\Weltec-Project\WindowsFormsApplication1\ClientApplication\bin\Release\ClientApplication.exe</td><td>0</td></row>
 		<row><td>WindowsFormsApplic_1AB4AAFCE6414E14905750EBFBAA4E03.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>WindowsFormsApplic_247E6B310D904086A9C749A9FCF1CA9E.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>WindowsFormsApplic_253E6CFF325044289657EE1970EE97E3.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>WindowsFormsApplic_4B691A21BEF0474B9868B4A961C679AF.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>WindowsFormsApplic_A2F247DC874C4D2AB6E6C7BCF6B5F7CC.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>WindowsFormsApplic_D555316E71EA44B4B6F590FC53C9967D.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>WindowsFormsApplic_E55B908D512748CE8BCE56EA7C390E00.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>WindowsFormsApplic_EC7EE64A6BBE484A9A7C749624A2BEBF.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>WindowsFormsApplic_EF4B204E66B74A4E913A1EA5F8BBEA05.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>WindowsFormsApplic_F461E5598EC0460CB62B4BBDA6D92CCA.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
@@ -4040,6 +4058,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 	<table name="LaunchCondition">
 		<col key="yes" def="s255">Condition</col>
 		<col def="l255">Description</col>
+		<row><td>DOTNETVERSION45FULL&gt;="#1"</td><td>##IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL##</td></row>
 	</table>
 
 	<table name="ListBox">
@@ -4326,7 +4345,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>IS_SQLSERVER_SERVER</td><td/><td/></row>
 		<row><td>IS_SQLSERVER_USERNAME</td><td>sa</td><td/></row>
 		<row><td>InstallChoice</td><td>AR</td><td/></row>
-		<row><td>LAUNCHPROGRAM</td><td>1</td><td/></row>
+		<row><td>LAUNCHPROGRAMCOMPCODE</td><td>{14F5A872-9475-4A9F-B256-3754E8D5E112}</td><td/></row>
+		<row><td>LAUNCHPROGRAMFILEKEY</td><td>clientapplication.exe</td><td/></row>
 		<row><td>LAUNCHREADME</td><td>1</td><td/></row>
 		<row><td>Manufacturer</td><td>##COMPANY_NAME##</td><td/></row>
 		<row><td>PIDKEY</td><td/><td/></row>
@@ -4354,8 +4374,9 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>PROGMSG_IIS_ROLLBACKAPPPOOLS</td><td>##IDS_PROGMSG_IIS_ROLLBACKAPPPOOLS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKVROOTS</td><td>##IDS_PROGMSG_IIS_ROLLBACKVROOTS##</td><td/></row>
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
+		<row><td>PROGRAMFILETOLAUNCHATEND</td><td>[INSTALLDIR]ClientApplication.exe</td><td/></row>
 		<row><td>ProductCode</td><td>{B0AD76A1-3E86-48A8-8468-8D0914729EEE}</td><td/></row>
-		<row><td>ProductName</td><td>Setup2</td><td/></row>
+		<row><td>ProductName</td><td>Database Evaluator Client</td><td/></row>
 		<row><td>ProductVersion</td><td>1.00.0000</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
@@ -4368,7 +4389,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>RestartManagerOption</td><td>CloseRestart</td><td/></row>
 		<row><td>SERIALNUMBER</td><td/><td/></row>
 		<row><td>SERIALNUMVALSUCCESSRETVAL</td><td>1</td><td/></row>
-		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;USERNAME;COMPANYNAME;ISX_SERIALNUM;SUPPORTDIR</td><td/></row>
+		<row><td>SHOWLAUNCHPROGRAM</td><td>0</td><td/></row>
+		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;USERNAME;COMPANYNAME;ISX_SERIALNUM;SUPPORTDIR;DOTNETVERSION45FULL</td><td/></row>
 		<row><td>SelectedSetupType</td><td>##IDS__DisplayName_Typical##</td><td/></row>
 		<row><td>SetupType</td><td>Typical</td><td/></row>
 		<row><td>UpgradeCode</td><td>{EFB18F8C-23CA-4882-B754-641380059715}</td><td/></row>
@@ -4413,6 +4435,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="s255">Key</col>
 		<col def="S255">Name</col>
 		<col def="I2">Type</col>
+		<row><td>DotNet45Full</td><td>2</td><td>SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full</td><td>Version</td><td>2</td></row>
 	</table>
 
 	<table name="Registry">
@@ -4431,8 +4454,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="L255">FileName</col>
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
-		<row><td>WindowsFormsApplication1.exe</td><td>WindowsFormsApplication1.exe</td><td/><td>setup2</td><td>2</td></row>
-		<row><td>WindowsFormsApplication1.vshost.exe</td><td>WindowsFormsApplication1.vshost.exe</td><td/><td>setup2</td><td>2</td></row>
+		<row><td>ClientApplication.exe</td><td>ClientApplication.exe</td><td/><td>databa_1_database_evaluator_client</td><td>2</td></row>
 	</table>
 
 	<table name="RemoveIniFile">
@@ -4518,9 +4540,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>WindowsFormsApplication1.exe</td><td>setup2</td><td>##IDS_SHORTCUT_DISPLAY_NAME5##</td><td>WindowsFormsApplication1.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>WindowsFormsApplic_EF4B204E66B74A4E913A1EA5F8BBEA05.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>WindowsFormsApplication1.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME5##</td><td>WindowsFormsApplication1.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>WindowsFormsApplic_1AB4AAFCE6414E14905750EBFBAA4E03.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>WindowsFormsApplication1.vshost.exe</td><td>setup2</td><td>##IDS_SHORTCUT_DISPLAY_NAME6##</td><td>WindowsFormsApplication1.vshost.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>WindowsFormsApplic_247E6B310D904086A9C749A9FCF1CA9E.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>ClientApplication.exe</td><td>databa_1_database_evaluator_client</td><td>##IDS_SHORTCUT_DISPLAY_NAME15##</td><td>ClientApplication.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>ClientApplication._A36F228F05C7428A80AC970006EC9133.exe</td><td>1</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">
